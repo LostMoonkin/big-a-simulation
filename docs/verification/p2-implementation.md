@@ -99,4 +99,6 @@ node tools/sim-runner/p2-batch.mjs --manifest tests/scenarios/p2/diagnostic-mani
 
 `npm.cmd run verify:p2 -- --out artifacts/verification/p2/self-candidate-03` 在同一候选实际通过统计硬边界、40 股与26钱包初始化/公开边界、导出实际 preset、A16/A17/一次入场/320批恢复四组。完整注册种子、最终 P1 回归与最终小测量三组为 `not_run`；默认浏览器小结果当前状态为 `incomplete`，该组为 `fail`，正在由 Web 独立完成真实候选操作，不能抄用过期结果。命令整体退出 1，受测经济 hash 同上。8 个待提交 `.mjs` 的 `node --check` 与 `git diff --check` 通过；此处不扩张测试或重录既有 P1 黄金。
 
+runner 检查点 `7367dbd` 冻结后，实际执行 `npm.cmd run benchmark -- --out artifacts/verification/p2/benchmark-candidate-03`，退出 0，来源首末仍为 `9ac1c663...aa19`。真实 4,000 批预热为 117,645.83ms；五个日推进样本 483.58/481.38/499.21/463.78/426.00ms；五次导出最大 759.21ms，恢复最大 973.85ms；快照编码 13,780,092 字节，批次边界 Node RSS 最大观测 519,409,664 字节。与 Web 候选驱动和独立 P2 检查同时运行，故这些仅为该环境的诊断观测；五个样本的 p95 数值等于样本最大值，不估计稳定总体尾部，预收取消标志的 0.128ms 不等同浏览器在途取消延迟。新结果及完整原始样本已追加检查点 `candidateBenchmark`；未重跑汇总自检来追认其先前 `not_run`，不签收 P5。
+
 当前 P2-AC3–AC8 的最终交付证据未齐，独立第1轮验收正在核对；阶段任务保持未签收。

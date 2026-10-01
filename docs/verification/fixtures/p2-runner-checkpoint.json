@@ -1579,5 +1579,76 @@
       "corruptRestoreRetainedCurrentWorld": 3,
       "coreCancelledAtBoundary": true
     }
+  },
+  "candidateBenchmark": {
+    "status": "pass",
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "economicSourceAtEnd": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "sourceStable": true,
+    "scope": "One40-stock Node world: actual warmup/day/export/restore/core cancellation diagnostics; no P5 browser, UI latency or memory acceptance.",
+    "independentAcceptance": "pending",
+    "warmup": {
+      "milliseconds": 117645.826,
+      "batches": 4000,
+      "calls": 63
+    },
+    "dayMilliseconds": {
+      "samples": [
+        483.5767000000051,
+        481.3787000000011,
+        499.2051999999967,
+        463.783500000005,
+        426.00210000001243
+      ],
+      "maximum": 499.2051999999967,
+      "p95": 499.2051999999967
+    },
+    "exportMilliseconds": {
+      "samples": [
+        759.2085999999981,
+        602.3846000000049,
+        613.6223000000027,
+        615.2922000000108,
+        617.2455000000045
+      ],
+      "maximum": 759.2085999999981,
+      "p95": 759.2085999999981
+    },
+    "restoreMilliseconds": {
+      "samples": [
+        973.8540999999968,
+        828.8272999999899,
+        805.8974000000017,
+        755.0263000000123,
+        813.2359999999899
+      ],
+      "maximum": 973.8540999999968,
+      "p95": 973.8540999999968
+    },
+    "coreCancellationMilliseconds": 0.12769999998272397,
+    "encodedSnapshotBytes": 13780092,
+    "peakObservedNodeRssBytes": 519409664,
+    "limitations": [
+      "Five samples report all values and maximum; they do not estimate stable population tails.",
+      "Node RSS sampled at batch boundaries; not peak UI+Worker memory.",
+      "Core accepts an already received cancellation flag; actual in-flight browser cancellation belongs to browser evidence.",
+      "40-stock timing does not sign P5 200-stock budgets."
+    ],
+    "runPath": "artifacts/verification/p2/benchmark-candidate-03",
+    "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-benchmark.mjs --out artifacts/verification/p2/benchmark-candidate-03",
+    "headAtExecution": "7367dbd72f4d5aef313f548ebb2db7ed0d0a2b27",
+    "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "recordedAt": "2026-10-01T23:01:44.590Z",
+    "resultsHash": "ae28bc491f13b901383bfe7fd5a415f07a53ff615fb240456c7524573383b7ab",
+    "environment": {
+      "node": "v26.7.0",
+      "platform": "win32",
+      "architecture": "x64",
+      "os": "Windows 11 Pro",
+      "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+      "logicalProcessors": 16,
+      "memoryBytes": 33409036288
+    },
+    "backgroundWork": "Actual Web candidate browser driver and independent P2 verification were active in this session; diagnostic timings, not isolated P5 acceptance."
   }
 }
