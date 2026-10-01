@@ -1,7 +1,7 @@
 # P6 — 可复现静态发布与交付
 
 状态：未开始。输入为 P5 已验收的 RC；输出为静态发布包、可访问预览及完整运行资料。
-关联：[路线图](../README.md) · [实施计划](./plan.md) · [任务](./tasks.md) · [引擎研究](../../docs/research/engine-feasibility.md)。
+关联：[路线图](../README.md) · [实施计划](./plan.md) · [任务](./tasks.md) · [引擎研究](../../research/engine-feasibility.md)。
 
 ## Goal
 

@@ -1,6 +1,6 @@
 # 分阶段实施与交付规格
 
-版本：1.0；日期：2026-10-01。基于玩法设计 0.2。**本目录交付的是实施规格与计划，各阶段业务实施与验收尚未完成。** 工程准备已建立React/Vite页面、TypeScript工作区、Git与设计算术工具；页面已提供固定示例数据驱动的[UI 预览](../docs/design/ui-design.md)，尚无交易模拟器。现有可运行命令见[项目README](../README.md)，工程初始化和 UI 预览不代表P0或P1通过。
+版本：1.0；日期：2026-10-01。基于玩法设计 0.2。**本目录交付的是实施规格与计划，各阶段业务实施与验收尚未完成。** 工程准备已建立React/Vite页面、TypeScript工作区、Git与设计算术工具；页面已提供固定示例数据驱动的[UI 预览](../design/ui-design.md)，尚无交易模拟器。现有可运行命令见[项目README](../../README.md)，工程初始化和 UI 预览不代表P0或P1通过。
 
 ## 目标与使用方式
 
@@ -10,8 +10,8 @@
 
 - 共享实施安排：[总实施计划](implementation-plan.md)。
 - 需求、设计场景和阶段对应：[验收追踪矩阵](acceptance-matrix.md)。
-- 行为依据：[玩法设计](../docs/design/gameplay-market-model.md)、[精确规则](../docs/design/market-model-rules.md)、[模型验证](../docs/design/model-validation.md)。
-- 术语依据：[领域词汇](../CONTEXT.md)；引擎依据：[技术研究](../docs/research/engine-feasibility.md)。
+- 行为依据：[玩法设计](../design/gameplay-market-model.md)、[精确规则](../design/market-model-rules.md)、[模型验证](../design/model-validation.md)。
+- 术语依据：[领域词汇](../../CONTEXT.md)；引擎依据：[技术研究](../research/engine-feasibility.md)。
 
 本目录安排交付，不暗中改写金融规则。P0需要关闭的模型空白必须先形成有版本的设计修订；之后下游规格引用冻结版本。若阶段计划与冻结规则冲突，应先修订冲突文档及对应验收，不允许在代码里临时另定一套价格或资金规则。
 

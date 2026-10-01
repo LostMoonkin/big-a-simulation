@@ -2,7 +2,7 @@
 
 状态：未开始。依赖 P1 签收；原型功能、模拟和 UI 均尚未实现。
 
-关联：[阶段总览](../README.md) · [实施计划](./plan.md) · [Tickets](./tasks.md) · [玩法设计](../../docs/design/gameplay-market-model.md) · [模型验证](../../docs/design/model-validation.md)
+关联：[阶段总览](../README.md) · [实施计划](./plan.md) · [Tickets](./tasks.md) · [玩法设计](../../design/gameplay-market-model.md) · [模型验证](../../design/model-validation.md)
 
 ## Goal
 

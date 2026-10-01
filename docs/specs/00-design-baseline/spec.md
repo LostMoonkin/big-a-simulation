@@ -1,6 +1,6 @@
 # P0 设计与工程基线
 
-状态：未开始。规格版本：1.0。前置：[玩法设计0.2](../../docs/design/gameplay-market-model.md)及其研究。实施细节见[plan](plan.md)，具体任务见[tasks](tasks.md)。
+状态：未开始。规格版本：1.0。前置：[玩法设计0.2](../../design/gameplay-market-model.md)及其研究。实施细节见[plan](plan.md)，具体任务见[tasks](tasks.md)。
 
 ## Goal
 
@@ -20,7 +20,7 @@
 
 ## Constraints
 
-- 以[精确规则](../../docs/design/market-model-rules.md)为起点；需改变时更新规则版本和受影响案例，不在实施spec内静默覆盖。
+- 以[精确规则](../../design/market-model-rules.md)为起点；需改变时更新规则版本和受影响案例，不在实施spec内静默覆盖。
 - 价格仍由有资源支持的有效委托形成，NPC只读公开信息和自身账户；不能按故事阶段直接给价格加涨跌幅。
 - 首版正式规模、250日预热/赛季、跨季连续性、技术分析边界与后置范围保持[总览](../README.md)所列。
 - 工程选择以现有技术研究为依据；新引入依赖应有官方资料、锁定版本、许可和针对当前需求的能力验证。

@@ -4,11 +4,11 @@
 
 ## 开始任务
 
-- 实现功能或修复行为前，先读 [阶段总览](specs/README.md)，定位当期阶段，再读该阶段的 `spec.md`、`plan.md` 和相关 `tasks.md`。
-- 涉及目录、模块边界、运行接口或交付方式时，读 [总实施计划](specs/implementation-plan.md)；实际目录、依赖和可运行命令以仓库及各级 `package.json` 为准。
+- 实现功能或修复行为前，先读 [阶段总览](docs/specs/README.md)，定位当期阶段，再读该阶段的 `spec.md`、`plan.md` 和相关 `tasks.md`。
+- 涉及目录、模块边界、运行接口或交付方式时，读 [总实施计划](docs/specs/implementation-plan.md)；实际目录、依赖和可运行命令以仓库及各级 `package.json` 为准。
 - 涉及产品术语时，读 [CONTEXT.md](CONTEXT.md)；涉及玩法取舍时，读 [玩法设计](docs/design/gameplay-market-model.md)。
-- 涉及撮合、资金、股份、时钟、事件或存档行为时，读 [精确规则](docs/design/market-model-rules.md)；涉及验证口径时，读 [模型验证](docs/design/model-validation.md) 和 [验收矩阵](specs/acceptance-matrix.md)。
-- 涉及尚未定案的市场机制、数值或快照合同时，读 [P0 规格](specs/00-design-baseline/spec.md) 和对应计划；先补齐受影响的规则与验收口径，再实现依赖它的行为。工程骨架不代表 P0 已通过。
+- 涉及撮合、资金、股份、时钟、事件或存档行为时，读 [精确规则](docs/design/market-model-rules.md)；涉及验证口径时，读 [模型验证](docs/design/model-validation.md) 和 [验收矩阵](docs/specs/acceptance-matrix.md)。
+- 涉及尚未定案的市场机制、数值或快照合同时，读 [P0 规格](docs/specs/00-design-baseline/spec.md) 和对应计划；先补齐受影响的规则与验收口径，再实现依赖它的行为。工程骨架不代表 P0 已通过。
 
 ## 实现原则
 

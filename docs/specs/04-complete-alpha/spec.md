@@ -28,7 +28,7 @@
 
 ## Constraints
 
-- 采用 P0 冻结的规则/参数/内容口径，并遵守[主设计](../../docs/design/gameplay-market-model.md)、[精确规则](../../docs/design/market-model-rules.md)、[验证方案](../../docs/design/model-validation.md)。
+- 采用 P0 冻结的规则/参数/内容口径，并遵守[主设计](../../design/gameplay-market-model.md)、[精确规则](../../design/market-model-rules.md)、[验证方案](../../design/model-validation.md)。
 - 只扩大世界与正式内容，不另写一种 200 股价格算法；26 钱包及其真实预算继续约束成交。
 - IndexedDB 写入具有事务边界，保存只接收已完成批次或核心确认的公开窗口暂停点的完整快照；保存阶段标记，恢复不重复公布事件。最新有效检查点和备份不能因一次失败写入全部丢失。
 - 保存格式、规则版本及内容版本可识别。首版无可验证迁移器时明确拒绝不兼容存档，不能自动覆盖、部分载入或悄悄重建世界。

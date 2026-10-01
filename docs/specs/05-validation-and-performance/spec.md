@@ -1,7 +1,7 @@
 # P5 — 验证、平衡与性能：交付候选版
 
 状态：未开始。输入为 P4 的 200 股 Alpha；输出为有可复核证据的候选版（RC）。
-关联：[路线图](../README.md) · [实施计划](./plan.md) · [任务](./tasks.md) · [模型验证](../../docs/design/model-validation.md)。
+关联：[路线图](../README.md) · [实施计划](./plan.md) · [任务](./tasks.md) · [模型验证](../../design/model-validation.md)。
 
 ## Goal
 

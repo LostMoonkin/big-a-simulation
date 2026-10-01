@@ -27,7 +27,7 @@
 
 ## Constraints
 
-- 权威口径为 P0 冻结规则，以及[主设计](../../docs/design/gameplay-market-model.md)、[精确规则](../../docs/design/market-model-rules.md)、[验证方案](../../docs/design/model-validation.md)。存在未闭合冲突时先回到 P0 更新合同。
+- 权威口径为 P0 冻结规则，以及[主设计](../../design/gameplay-market-model.md)、[精确规则](../../design/market-model-rules.md)、[验证方案](../../design/model-validation.md)。存在未闭合冲突时先回到 P0 更新合同。
 - 8 个代表模板必须覆盖一次性与持续经营、环境传导、注意力与证伪、预期到期更新及两市政策差异；覆盖不足时先调整正式模板划分，不能私自增加第 25 个模板。
 - 价格仍仅由真实资源支持的委托清算产生；政策、热度、指标和形态不能直接修改成交价。
 - NPC 与可执行策略只能使用当时公开信息及自身私有状态，诊断专用隐藏字段不得进入正常玩家的公共视图。完整离线存档保留恢复所需私有世界状态，不等同于公共视图，也不承诺防止玩家自行检查本地存档。

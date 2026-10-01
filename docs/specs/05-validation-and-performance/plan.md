@@ -6,7 +6,7 @@
 
 1. P4 的 200 股 Alpha 可完成 250 日赛季、继续、保存/恢复、导入/导出；P1–P4 对应规则检查已通过。
 2. P0 已关闭双市场特色、价格保护、确定性数值协议、40 股配额、依赖版本、默认新局种子/完整预热快照方案及基准设备；P3 的差异模型已实现，不能在 P5 临时填补核心设计。
-3. 读取 [验证方案](../../docs/design/model-validation.md)、[规则](../../docs/design/market-model-rules.md)、[引擎研究](../../docs/research/engine-feasibility.md)，以当前版本冻结场景含义。A13/A14 如因 P0 价格保护决策更新，保留 ID 并记录前后差异。
+3. 读取 [验证方案](../../design/model-validation.md)、[规则](../../design/market-model-rules.md)、[引擎研究](../../research/engine-feasibility.md)，以当前版本冻结场景含义。A13/A14 如因 P0 价格保护决策更新，保留 ID 并记录前后差异。
 4. 规划路径 `packages/sim-core`、`apps/web`、`tools/sim-runner`、`tests/scenarios`、`artifacts/verification/p5/<run-id>` 尚未存在；由前序阶段建立实现路径，本阶段产生实际证据。此处没有可直接运行的 npm 命令。
 
 ## 实施顺序与成果

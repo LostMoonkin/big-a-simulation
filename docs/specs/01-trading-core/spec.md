@@ -2,7 +2,7 @@
 
 状态：未开始。依赖 P0 设计冻结；当前仓库没有本阶段的 TypeScript 实现。
 
-关联：[阶段总览](../README.md) · [实施计划](./plan.md) · [Tickets](./tasks.md) · [精确规则](../../docs/design/market-model-rules.md) · [验收场景](../../docs/design/model-validation.md)
+关联：[阶段总览](../README.md) · [实施计划](./plan.md) · [Tickets](./tasks.md) · [精确规则](../../design/market-model-rules.md) · [验收场景](../../design/model-validation.md)
 
 ## Goal
 

@@ -2,7 +2,7 @@
 
 浏览器端单人金融策略游戏，以经营配置、事件判断、短线交易和资金执行为核心。正式目标是两个虚构市场、每市100只股票。
 
-目前已完成工程初始化及黑色交易终端 UI 预览：行情与自选、日/小时 K 线、资产组合、公开资讯和委托预览。默认红涨绿跌，可在右上角外观设置中切换预设或自定义两种颜色，设置保存在当前浏览器。行情、账户和资讯均为固定虚构示例，交易模拟尚未实现；P0设计合同和各阶段验收仍按 [specs](specs/README.md)推进。
+目前已完成工程初始化及黑色交易终端 UI 预览：行情与自选、日/小时 K 线、资产组合、公开资讯和委托预览。默认红涨绿跌，可在右上角外观设置中切换预设或自定义两种颜色，设置保存在当前浏览器。行情、账户和资讯均为固定虚构示例，交易模拟尚未实现；P0设计合同和各阶段验收仍按 [specs](docs/specs/README.md)推进。
 
 UI 的布局、交互与接入边界见 [界面设计](docs/design/ui-design.md)，本次检查见 [UI 核验记录](docs/verification/ui-preview.md)。自选仅保留于本次会话；外观偏好不是游戏存档。
 
@@ -38,7 +38,7 @@ docs/design/               玩法、精确规则和模型验证
 docs/research/             可行性与技术研究
 docs/adr/                  重要设计决策
 docs/verification/         已实际执行的工程核验记录
-specs/                     P0–P6的规格、计划、任务与验收矩阵
+docs/specs/                P0–P6的规格、计划、任务与验收矩阵
 AGENTS.md                  后续开发的协作与实现约定
 CONTEXT.md                 领域词汇
 ```
@@ -48,8 +48,8 @@ CONTEXT.md                 领域词汇
 ## 开发入口
 
 - [协作约定](AGENTS.md)：在开发过程中不做过度设计，适度测试，最小化实现。
-- [阶段总览](specs/README.md)与[P0任务](specs/00-design-baseline/tasks.md)：先关闭影响实施的模型合同。
-- [总实施计划](specs/implementation-plan.md)：共享边界、未来命令和证据要求。
-- [验收矩阵](specs/acceptance-matrix.md)：从需求追踪到任务和验收场景。
+- [阶段总览](docs/specs/README.md)与[P0任务](docs/specs/00-design-baseline/tasks.md)：先关闭影响实施的模型合同。
+- [总实施计划](docs/specs/implementation-plan.md)：共享边界、未来命令和证据要求。
+- [验收矩阵](docs/specs/acceptance-matrix.md)：从需求追踪到任务和验收场景。
 
 初始化采用[Vite官方入门](https://vite.dev/guide/)与[npm workspaces](https://docs.npmjs.com/cli/v11/using-npm/workspaces/)约定；Node维护状态参见[官方发布表](https://nodejs.org/en/about/previous-releases)。项目实际验证范围记录在`docs/verification/`，官方兼容说明不代替本项目实测。

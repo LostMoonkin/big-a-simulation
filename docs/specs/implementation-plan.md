@@ -1,6 +1,6 @@
 # 总实施计划
 
-版本：1.0；状态：规划。配合[阶段总览](README.md)使用。工程初始化已建立`apps/web/`、`packages/sim-core/`占位和基础npm命令，详见[项目README](../README.md)。本文的市场API、CLI、阶段验证及发布包仍是计划产物；工程骨架不代表模型实现或P0验收通过。
+版本：1.0；状态：规划。配合[阶段总览](README.md)使用。工程初始化已建立`apps/web/`、`packages/sim-core/`占位和基础npm命令，详见[项目README](../../README.md)。本文的市场API、CLI、阶段验证及发布包仍是计划产物；工程骨架不代表模型实现或P0验收通过。
 
 ## 1. 实施顺序与并行安排
 
