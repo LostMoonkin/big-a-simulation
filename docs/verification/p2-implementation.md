@@ -101,4 +101,21 @@ node tools/sim-runner/p2-batch.mjs --manifest tests/scenarios/p2/diagnostic-mani
 
 runner 检查点 `7367dbd` 冻结后，实际执行 `npm.cmd run benchmark -- --out artifacts/verification/p2/benchmark-candidate-03`，退出 0，来源首末仍为 `9ac1c663...aa19`。真实 4,000 批预热为 117,645.83ms；五个日推进样本 483.58/481.38/499.21/463.78/426.00ms；五次导出最大 759.21ms，恢复最大 973.85ms；快照编码 13,780,092 字节，批次边界 Node RSS 最大观测 519,409,664 字节。与 Web 候选驱动和独立 P2 检查同时运行，故这些仅为该环境的诊断观测；五个样本的 p95 数值等于样本最大值，不估计稳定总体尾部，预收取消标志的 0.128ms 不等同浏览器在途取消延迟。新结果及完整原始样本已追加检查点 `candidateBenchmark`；未重跑汇总自检来追认其先前 `not_run`，不签收 P5。
 
+## 冻结来源的真实 P1 重绑与浏览器文件子检查
+
+P1 的当前完整源 hash 为 `a8aaf4b15f02e20905e954c1b543a802d057f2ede3b126090a5c220defa2edeb`。复用 Web 当前 `4173` 静态构建，不重建或覆盖其浏览器会话；独立临时 `5173` 开发服务只供既有 P1 协议。实际执行：
+
+```powershell
+node tools/sim-runner/browser-probe.mjs http://127.0.0.1:5173/p1-probe.html "C:/Program Files/Google/Chrome/Application/chrome.exe" artifacts/verification/p2/p1-browser-candidate-dev
+node tools/sim-runner/browser-probe.mjs http://127.0.0.1:4173/p1-probe.html "C:/Program Files/Google/Chrome/Application/chrome.exe" artifacts/verification/p2/p1-browser-candidate-static
+node tools/sim-runner/record-browser.mjs artifacts/verification/p2/p1-browser-candidate-dev/results.json artifacts/verification/p2/p1-browser-candidate-static/results.json
+npm.cmd run verify:p1 -- --out artifacts/verification/p2/p1-regression
+```
+
+真实 Chrome `154.0.8037.93` 两端各 8 项检查、31 个完整生产回放通过；重放和四个安全存档与刚执行的 Node 全字段及原黄金一致。重复请求、非法版本请求和控制台错误检查按既有 probe 执行。旧 P1 browser 小证据先保存至 `p1-browser-candidate-binding` 并核对原 hash `6da89b60d7bf9352fa42aa94fa887db201c8e3e44b8d82faf93363c02e3c0f7a`，再绑定实际新源。
+
+完整 `verify:p1` 退出 0、九组全部 pass，包含注册 1–2,000 种子×原簿/倒序/拆单三变体、27 固定场景、命令/坏档、恢复、Node 黄金、存档回放、CLI 与实际浏览器证据。原 `p1-golden.json` 前后文件 hash 同为 `b9c5f389067e6f4eec919a11657ea4eee6c9116d4e0963a3b32be78cf913132c`，没有重录黄金。受测 HEAD、完整源首末身份、结果与真实运行环境已追加检查点 `candidateP1Regression`；本次关闭此前“浏览器来源过期”回归缺项，不将 P1 合同通过称为自主经济通过。
+
+Web 新实际下载的 `browser-candidate-final/qualified-checkpoint.json` 已用生产核心独立恢复核对：`world-v2-style-cash`、259/15 settled，完整 checksum `29a785c87635635ff5a0aa8eb88a5d78ae23a05919220fad3b20aa5d626083ae`；A007 计划已填 489/剩余7,815、冻结46,561,610分，499 股甲新股锁至 tick4160，已有真实 A002 持仓10股。Web 自动调用同 runner 得到 320 批 Node 继续至279/15的 `97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd`，首末经济同当前候选。AC6固定隐藏经营输入也在261/0 publicDecision、清算0批暂停，保持既有公开历史与账本且恢复不重复。这里只核对已产生的真实子结果，不重复长跑；完整 Chrome 60 日、原会话/重开/Node三方对照及最后浏览器检查仍由 [Web 报告](p2-browser.md) 签录，固定经营输入依然不计自然经济覆盖。
+
 当前 P2-AC3–AC8 的最终交付证据未齐，独立第1轮验收正在核对；阶段任务保持未签收。

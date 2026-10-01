@@ -279,7 +279,8 @@
     "registered100And10Long": "not_run",
     "finalEconomicCandidate": "short diagnostic fail; full100+10 not_run",
     "finalWindowsChrome60And20": "pending",
-    "independentP2Acceptance": "round1 in_progress; not_signed"
+    "independentP2Acceptance": "round1 in_progress; not_signed",
+    "completeP1Regression": "pass; current real Chrome dev/static rebound; golden unchanged"
   },
   "candidateDiagnostic": {
     "status": "fail",
@@ -1650,5 +1651,261 @@
       "memoryBytes": 33409036288
     },
     "backgroundWork": "Actual Web candidate browser driver and independent P2 verification were active in this session; diagnostic timings, not isolated P5 acceptance."
+  },
+  "candidateBrowserContinuation": {
+    "status": "pass",
+    "initialChecksum": "29a785c87635635ff5a0aa8eb88a5d78ae23a05919220fad3b20aa5d626083ae",
+    "finalChecksum": "97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd",
+    "phase": "settled",
+    "clock": {
+      "batch": 15,
+      "worldDay": 279
+    },
+    "targetClock": {
+      "worldDay": 279,
+      "batch": 15
+    },
+    "days": 20,
+    "completedBatches": 320,
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "economicSourceAtEnd": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "runPath": "artifacts/verification/p2/browser-candidate-final/node-20-days",
+    "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-golden.mjs --input D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\qualified-checkpoint.json --days 20 --out D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\node-20-days",
+    "headAtExecution": "a4b018a7dea277c6418be3b2a2c8350d19fecdb3",
+    "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "resultsHash": "81240c1b47893af8798408cb153419277016f4e2a9d8049273f9cecb62b1ef5d",
+    "inputOrigin": "Actual new Chrome world-v2-style-cash downloaded file; Web owns full UI/triple-checksum evidence",
+    "inputSha256": "0ec247a8177592600c93d2d6997ec7daaab0b2e5decbfad11203c8f0269ec8b6"
+  },
+  "candidateMajorFixture": {
+    "status": "pass",
+    "scope": "fixed-hidden-input-only",
+    "independentAcceptance": "pending",
+    "naturalEconomicEvidence": false,
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "economicSourceAtEnd": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "initialChecksum": "29a785c87635635ff5a0aa8eb88a5d78ae23a05919220fad3b20aa5d626083ae",
+    "baseChecksum": "bea47f1ad8235aa85da9ef90b757c38aca0505995e86662cdc7ff5474b504b6b",
+    "baseClock": {
+      "batch": 15,
+      "worldDay": 260
+    },
+    "actualAdvanceBatchesToBase": 16,
+    "inputChecksum": "ed0387d522ecbbe4829f6baa08e2fc114a6bee004b650905f975c8327ccdf52f",
+    "patch": {
+      "field": "stocks[A002].actualOperatingIndexQ",
+      "before": {
+        "$bigint": "100793643002"
+      },
+      "after": {
+        "$bigint": "120952371602"
+      }
+    },
+    "priorPublicProjectionUnchanged": true,
+    "pausedChecksum": "8d49b50a713a6e31ab4d7265cb087a3bc0c0fcbce3aa8b03eb74ab14bafd15e4",
+    "phase": "publicDecision",
+    "clock": {
+      "batch": 0,
+      "worldDay": 261
+    },
+    "forecastBefore": {
+      "$bigint": "100979626414"
+    },
+    "forecastAfter": {
+      "$bigint": "128292756599"
+    },
+    "npcClearingBatchesAfterBase": 0,
+    "balancesOrdersMatchUntradedControlPreparation": true,
+    "historicalPricesUnchanged": true,
+    "repeatedAndRestoredPreparationDuplicates": 0,
+    "fixtureStatement": "AC6 fixture only: start from an actual browser-downloaded world with a real A002 holding; advance through the production core to its next report boundary, then change only the still-unpublished operating index. Do not count this controlled input as natural seed, NPC economy, liquidity or 60-day evidence.",
+    "runPath": "artifacts/verification/p2/browser-candidate-final/fixed-report-node",
+    "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-major-fixture.mjs --input D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\qualified-checkpoint.json --out D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\fixed-report-node",
+    "headAtExecution": "a4b018a7dea277c6418be3b2a2c8350d19fecdb3",
+    "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "resultsHash": "408c6877aaa723fdea924ecc2ea4a1c2edf5f5b5990601225678e5c20a5a831b",
+    "inputOrigin": "Actual new Chrome world-v2-style-cash downloaded file; Web owns full UI/triple-checksum evidence",
+    "inputSha256": "0ec247a8177592600c93d2d6997ec7daaab0b2e5decbfad11203c8f0269ec8b6"
+  },
+  "candidateP1Regression": {
+    "status": "pass",
+    "independentAcceptance": "pending",
+    "runPath": "artifacts/verification/p2/p1-regression",
+    "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\verify.mjs --out artifacts/verification/p2/p1-regression",
+    "headAtExecution": "a4b018a7dea277c6418be3b2a2c8350d19fecdb3",
+    "sourceAtStart": "a8aaf4b15f02e20905e954c1b543a802d057f2ede3b126090a5c220defa2edeb",
+    "sourceHash": "a8aaf4b15f02e20905e954c1b543a802d057f2ede3b126090a5c220defa2edeb",
+    "sourceAtEnd": "a8aaf4b15f02e20905e954c1b543a802d057f2ede3b126090a5c220defa2edeb",
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "resultsHash": "ac26e1d5fcc0d53520695eca5c2cc8743951efafb1449dd0224893ab28492da8",
+    "groups": [
+      {
+        "id": "auction-reference",
+        "status": "pass"
+      },
+      {
+        "id": "fixed-core-replays",
+        "status": "pass"
+      },
+      {
+        "id": "funded-random-core",
+        "status": "pass"
+      },
+      {
+        "id": "command-and-snapshot-boundaries",
+        "status": "pass"
+      },
+      {
+        "id": "resume-and-granularity",
+        "status": "pass"
+      },
+      {
+        "id": "recorded-node-golden",
+        "status": "pass"
+      },
+      {
+        "id": "saved-snapshot-replays",
+        "status": "pass"
+      },
+      {
+        "id": "cli-success-and-failure",
+        "status": "pass"
+      },
+      {
+        "id": "actual-browser-evidence",
+        "status": "pass"
+      }
+    ],
+    "seedManifestHash": "49c2f41e0c2a1a2893a1fea21f5f4668cd3607dd5caea4c29d1e879afc826b2f",
+    "rulesHash": "53314d8ec347d36390a80a3b35836fd30e825b0a234acd3c15262ea3b41be2da",
+    "goldenRerecorded": false,
+    "goldenSha256Before": "b9c5f389067e6f4eec919a11657ea4eee6c9116d4e0963a3b32be78cf913132c",
+    "goldenSha256After": "b9c5f389067e6f4eec919a11657ea4eee6c9116d4e0963a3b32be78cf913132c",
+    "browserEvidence": {
+      "path": "docs/verification/fixtures/p1-browser.json",
+      "sha256": "47f6c56c4a3157683e323f17d4049a79802be35f75ef1ddfa7e6143fcfea066e",
+      "sourceHash": "a8aaf4b15f02e20905e954c1b543a802d057f2ede3b126090a5c220defa2edeb",
+      "recordCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\record-browser.mjs artifacts/verification/p2/p1-browser-candidate-dev/results.json artifacts/verification/p2/p1-browser-candidate-static/results.json",
+      "environments": [
+        {
+          "status": "pass",
+          "url": "http://127.0.0.1:5173/p1-probe.html",
+          "browserVersion": "154.0.8037.93",
+          "browserExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+          "runtime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs",
+          "nodeVersion": "v26.7.0",
+          "recordedAt": "2026-10-01T23:07:50.059Z",
+          "actualCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\browser-probe.mjs http://127.0.0.1:5173/p1-probe.html \"C:/Program Files/Google/Chrome/Application/chrome.exe\" artifacts/verification/p2/p1-browser-candidate-dev",
+          "checks": [
+            {
+              "id": "actual-worker",
+              "description": "Dedicated Worker ran production TradingCore",
+              "status": "pass"
+            },
+            {
+              "id": "complete-node-worker",
+              "description": "All fields of 27 actual core replays match freshly executed Node",
+              "status": "pass"
+            },
+            {
+              "id": "saved-node-worker",
+              "description": "Four saved safe boundaries restore to identical full Node replays",
+              "status": "pass"
+            },
+            {
+              "id": "frozen-golden",
+              "description": "Every command hash and full-output checksum matches the frozen golden",
+              "status": "pass"
+            },
+            {
+              "id": "real-clearing",
+              "description": "A01 results come from funded core clearing and service-account ledger",
+              "status": "pass"
+            },
+            {
+              "id": "repeat-request",
+              "description": "Second real Worker request preserves identity and exact output",
+              "status": "pass"
+            },
+            {
+              "id": "invalid-request",
+              "description": "Wrong expected probe version receives a defined error without a replay",
+              "status": "pass"
+            },
+            {
+              "id": "browser-errors",
+              "description": "Real browser had no uncaught or console error",
+              "status": "pass"
+            }
+          ],
+          "resultsPath": "artifacts/verification/p2/p1-browser-candidate-dev/results.json",
+          "resultsSha256": "67021a97e614fbfffa22385a811506a1efb80456368120252f6814df0ce77ff3",
+          "screenshot": "artifacts/verification/p2/p1-browser-candidate-dev/worker-replay.png"
+        },
+        {
+          "status": "pass",
+          "url": "http://127.0.0.1:4173/p1-probe.html",
+          "browserVersion": "154.0.8037.93",
+          "browserExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+          "runtime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs",
+          "nodeVersion": "v26.7.0",
+          "recordedAt": "2026-10-01T23:07:52.607Z",
+          "actualCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\browser-probe.mjs http://127.0.0.1:4173/p1-probe.html \"C:/Program Files/Google/Chrome/Application/chrome.exe\" artifacts/verification/p2/p1-browser-candidate-static",
+          "checks": [
+            {
+              "id": "actual-worker",
+              "description": "Dedicated Worker ran production TradingCore",
+              "status": "pass"
+            },
+            {
+              "id": "complete-node-worker",
+              "description": "All fields of 27 actual core replays match freshly executed Node",
+              "status": "pass"
+            },
+            {
+              "id": "saved-node-worker",
+              "description": "Four saved safe boundaries restore to identical full Node replays",
+              "status": "pass"
+            },
+            {
+              "id": "frozen-golden",
+              "description": "Every command hash and full-output checksum matches the frozen golden",
+              "status": "pass"
+            },
+            {
+              "id": "real-clearing",
+              "description": "A01 results come from funded core clearing and service-account ledger",
+              "status": "pass"
+            },
+            {
+              "id": "repeat-request",
+              "description": "Second real Worker request preserves identity and exact output",
+              "status": "pass"
+            },
+            {
+              "id": "invalid-request",
+              "description": "Wrong expected probe version receives a defined error without a replay",
+              "status": "pass"
+            },
+            {
+              "id": "browser-errors",
+              "description": "Real browser had no uncaught or console error",
+              "status": "pass"
+            }
+          ],
+          "resultsPath": "artifacts/verification/p2/p1-browser-candidate-static/results.json",
+          "resultsSha256": "0aab1f92457a4e1706a206645a64c812d3e6386fc2a173c1db859882d2287299",
+          "screenshot": "artifacts/verification/p2/p1-browser-candidate-static/worker-replay.png"
+        }
+      ],
+      "priorBindingPreservation": {
+        "format": "p1-browser-prior-binding-preservation-v1",
+        "recordedAt": "2026-10-01T23:08:30.842Z",
+        "source": "docs/verification/fixtures/p1-browser.json",
+        "priorHash": "6da89b60d7bf9352fa42aa94fa887db201c8e3e44b8d82faf93363c02e3c0f7a",
+        "path": "artifacts/verification/p2/p1-browser-candidate-binding/prior-p1-browser.json",
+        "scope": "preserve old recorded source before binding actual new dev/static Chrome replays; frozen Node golden unchanged"
+      }
+    }
   }
 }

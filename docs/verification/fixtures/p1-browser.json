@@ -2,8 +2,8 @@
   "format": "p1-browser-evidence-v1",
   "status": "pass",
   "independentAcceptance": "pending",
-  "sourceHash": "e33076dca0eff5591467a35057fe05e0c2385fdc882e8085e31bb9e6010089bd",
-  "recordCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\record-browser.mjs artifacts/verification/p1/browser-dev-delivery/results.json artifacts/verification/p1/browser-static-delivery/results.json",
+  "sourceHash": "a8aaf4b15f02e20905e954c1b543a802d057f2ede3b126090a5c220defa2edeb",
+  "recordCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\record-browser.mjs artifacts/verification/p2/p1-browser-candidate-dev/results.json artifacts/verification/p2/p1-browser-candidate-static/results.json",
   "comparison": "Actual DedicatedWorker production-core outputs equal freshly executed Node full canonical replays; also match frozen hashes",
   "nodeGolden": [
     {
@@ -429,12 +429,12 @@
     {
       "status": "pass",
       "url": "http://127.0.0.1:5173/p1-probe.html",
-      "browserVersion": "154.0.8037.58",
+      "browserVersion": "154.0.8037.93",
       "browserExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
       "runtime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs",
       "nodeVersion": "v26.7.0",
-      "recordedAt": "2026-10-01T15:38:26.616Z",
-      "actualCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\browser-probe.mjs http://127.0.0.1:5173/p1-probe.html \"C:/Program Files/Google/Chrome/Application/chrome.exe\" artifacts/verification/p1/browser-dev-delivery",
+      "recordedAt": "2026-10-01T23:07:50.059Z",
+      "actualCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\browser-probe.mjs http://127.0.0.1:5173/p1-probe.html \"C:/Program Files/Google/Chrome/Application/chrome.exe\" artifacts/verification/p2/p1-browser-candidate-dev",
       "checks": [
         {
           "id": "actual-worker",
@@ -477,19 +477,19 @@
           "status": "pass"
         }
       ],
-      "resultsPath": "artifacts/verification/p1/browser-dev-delivery/results.json",
-      "resultsSha256": "76ff2bcd1e8d67236775f78fecc1b072d399364ffcf0f785d97e218970cc764c",
-      "screenshot": "artifacts/verification/p1/browser-dev-delivery/worker-replay.png"
+      "resultsPath": "artifacts/verification/p2/p1-browser-candidate-dev/results.json",
+      "resultsSha256": "67021a97e614fbfffa22385a811506a1efb80456368120252f6814df0ce77ff3",
+      "screenshot": "artifacts/verification/p2/p1-browser-candidate-dev/worker-replay.png"
     },
     {
       "status": "pass",
       "url": "http://127.0.0.1:4173/p1-probe.html",
-      "browserVersion": "154.0.8037.58",
+      "browserVersion": "154.0.8037.93",
       "browserExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
       "runtime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs",
       "nodeVersion": "v26.7.0",
-      "recordedAt": "2026-10-01T15:38:28.655Z",
-      "actualCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\browser-probe.mjs http://127.0.0.1:4173/p1-probe.html \"C:/Program Files/Google/Chrome/Application/chrome.exe\" artifacts/verification/p1/browser-static-delivery",
+      "recordedAt": "2026-10-01T23:07:52.607Z",
+      "actualCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\browser-probe.mjs http://127.0.0.1:4173/p1-probe.html \"C:/Program Files/Google/Chrome/Application/chrome.exe\" artifacts/verification/p2/p1-browser-candidate-static",
       "checks": [
         {
           "id": "actual-worker",
@@ -532,9 +532,9 @@
           "status": "pass"
         }
       ],
-      "resultsPath": "artifacts/verification/p1/browser-static-delivery/results.json",
-      "resultsSha256": "25ddda97dbd5a387f5af7544ac8eba1a339df30915af43852927cd7aa328a590",
-      "screenshot": "artifacts/verification/p1/browser-static-delivery/worker-replay.png"
+      "resultsPath": "artifacts/verification/p2/p1-browser-candidate-static/results.json",
+      "resultsSha256": "0aab1f92457a4e1706a206645a64c812d3e6386fc2a173c1db859882d2287299",
+      "screenshot": "artifacts/verification/p2/p1-browser-candidate-static/worker-replay.png"
     }
   ]
 }
