@@ -50,12 +50,12 @@ export function splitInteger(total: bigint, weights: bigint[], ids: string[]): b
 export function capWeights(raw: bigint[], sectors: SectorId[], redistribute: boolean): bigint[] {
   const target=raw.reduce((n,w)=>n+w,0n),out=raw.map(w=>clipQ(w,0n,150_000_000n));
   for(const sector of SECTORS){const indexes=sectors.flatMap((s,i)=>s===sector?[i]:[]),sum=indexes.reduce((n,i)=>n+out[i]!,0n);
-    if(sum>350_000_000n){const values=splitInteger(350_000_000n,indexes.map(i=>out[i]!),indexes.map(i=>String(i).padStart(3,'0')));indexes.forEach((i,j)=>out[i]=values[j]!);}}
+    if(sum>350_000_000n)for(const i of indexes)out[i]=out[i]!*350_000_000n/sum;}
   if(redistribute)for(let pass=0;pass<raw.length+1;pass++){
     const left=target-out.reduce((n,w)=>n+w,0n);if(left<=0n)break;
     const sums=new Map(SECTORS.map(s=>[s,out.reduce((n,w,i)=>n+(sectors[i]===s?w:0n),0n)]));
     const eligible=raw.flatMap((w,i)=>w>0n&&out[i]!<150_000_000n&&sums.get(sectors[i]!)!<350_000_000n?[i]:[]);if(eligible.length===0)break;
-    const additions=splitInteger(left,eligible.map(i=>raw[i]!),eligible.map(i=>String(i).padStart(3,'0')));let used=0n;
+    const weight=eligible.reduce((n,i)=>n+raw[i]!,0n),additions=eligible.map(i=>left*raw[i]!/weight);let used=0n;
     for(let j=0;j<eligible.length;j++){const i=eligible[j]!,s=sectors[i]!,room=clipQ(350_000_000n-sums.get(s)!,0n,150_000_000n-out[i]!);
       const add=additions[j]!<room?additions[j]!:room;out[i]!+=add;sums.set(s,sums.get(s)!+add);used+=add;}
     if(used===0n)break;
@@ -117,20 +117,20 @@ export function generateWorld(config:WorldConfig):TradingState {
   assignConcepts(seed,economy);
   const accounts:ScenarioAccount[]=[];
   for(const market of ['A','B'] as const)for(const role of ROLES)accounts.push({id:`${market}:${role}`,cash:0n,holdings:[]});
-  accounts.push({id:'cross:crossSwing',cash:0n,holdings:[]},{id:'cross:crossLong',cash:0n,holdings:[]},{id:'founder',canTrade:false,cash:0n,holdings:[],feeWeight:0n});
+  accounts.push({id:'cross:swing',cash:0n,holdings:[]},{id:'cross:long',cash:0n,holdings:[]},{id:'founder',canTrade:false,cash:0n,holdings:[],feeWeight:0n});
   const add=(id:string,stockId:string,quantity:bigint)=>{const a=accounts.find(x=>x.id===id)!;if(quantity>0n)a.holdings.push({stockId,quantity:Number(quantity)});};
   for(let i=0;i<stocks.length;i++){
-    const stock=stocks[i]!,e=economy[i]!,float=BigInt(e.floatShares),distribution=splitInteger(float,[90n,5n,5n],['local','crossSwing','crossLong']);
+    const stock=stocks[i]!,e=economy[i]!,float=BigInt(e.floatShares),distribution=splitInteger(float,[90n,5n,5n],['local','cross:swing','cross:long']);
     const groups: NpcRole[][]=[ROLES.slice(0,3),ROLES.slice(3,5),ROLES.slice(5,7),ROLES.slice(7,11),ROLES.slice(11)];
     const byStyle=splitInteger(distribution[0]!,stock.market==='A'?[28n,18n,20n,26n,8n]:[40n,16n,12n,26n,6n],['value','trend','theme','inventory','noise']);
     groups.forEach((roles,g)=>{const weights=roles.map(r=>950n+BigInt(randomU32(seed,'inventory',stock.id,0,ROLES.indexOf(r))%101));
       const quantities=splitInteger(byStyle[g]!,weights,roles);roles.forEach((role,j)=>add(`${stock.market}:${role}`,stock.id,quantities[j]!));});
-    add('cross:crossSwing',stock.id,distribution[1]!);add('cross:crossLong',stock.id,distribution[2]!);add('founder',stock.id,BigInt(stock.totalShares!)-float);
+    add('cross:swing',stock.id,distribution[1]!);add('cross:long',stock.id,distribution[2]!);add('founder',stock.id,BigInt(stock.totalShares!)-float);
   }
   for(const a of accounts)if(a.canTrade!==false){a.cash=a.holdings.reduce((n,h)=>n+BigInt(h.quantity)*BigInt(stocks.find(s=>s.id===h.stockId)!.initialPrice),0n)/4n;a.feeWeight=a.cash;}
   const state=initialState({seed,playerAccountId:null,stocks,accounts});
   const npcs:NpcState[]=state.accounts.filter(a=>a.canTrade).map(a=>{
-    const market=a.id.startsWith('A:')?'A':a.id.startsWith('B:')?'B':null,role=a.id.split(':')[1] as NpcRole,style=styleOf(role),eligible=economy.filter(s=>market===null||s.market===market);
+    const market=a.id.startsWith('A:')?'A':a.id.startsWith('B:')?'B':null,role=market===null?a.id==='cross:swing'?'crossSwing':'crossLong':a.id.split(':')[1] as NpcRole,style=styleOf(role),eligible=economy.filter(s=>market===null||s.market===market);
     const values=eligible.map(s=>BigInt(totalShares(a,s.id))*BigInt(stocks.find(x=>x.id===s.id)!.initialPrice)),holdingValue=values.reduce((n,v)=>n+v,0n),nav=holdingValue+a.cash;
     const weights=capWeights(values.map(v=>v*SCALE/nav),eligible.map(s=>s.sector),false);
     return {accountId:a.id,role,style,market,cashWeightQ:SCALE-weights.reduce((n,w)=>n+w,0n),lastReviewAt:null,lastReviewPublicVersion:0,

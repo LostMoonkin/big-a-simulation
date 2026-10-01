@@ -3,7 +3,7 @@ import { MAX_AMOUNT, MAX_PRICE, MAX_SHARES, SCALE, reserve } from './numeric.ts'
 import { active, assert, audit, tick, validClock, validInteger } from './state.ts';
 import type { TradingState } from './trading-types.ts';
 import type { Candle } from './world-types.ts';
-import { SECTORS } from './world-generation.ts';
+import { BASELINE_REVIEW, SECTORS } from './world-generation.ts';
 
 /** Current resources only. Historical documents are fully checked on create/export/restore. */
 export function validateWorldBalances(state:TradingState):void {
@@ -58,6 +58,7 @@ export function validateWorld(state:TradingState):void {
       if(i>0){const prev=e.hours[i-1]!;assert(b.worldDay*4+b.hour===prev.worldDay*4+prev.hour!+1,'non-continuous completed hours');}}
   }
   const npcIds=new Set<string>();for(const n of w.npcs){assert(typeof n.accountId==='string'&&!npcIds.has(n.accountId)&&state.accounts.some(a=>a.id===n.accountId&&a.canTrade),'invalid NPC account');npcIds.add(n.accountId);
+    assert(n.role in BASELINE_REVIEW&&n.accountId===(n.role==='crossSwing'?'cross:swing':n.role==='crossLong'?'cross:long':`${n.market}:${n.role}`),'invalid frozen NPC identity');
     assert(['value','trend','theme','inventory','noise','crossMarket'].includes(n.style)&&(n.market===null||['A','B'].includes(n.market))&&Array.isArray(n.assets)&&n.assets.length===(n.market===null?40:20),'invalid NPC profile');
     assert(validInteger(n.lastReviewPublicVersion,0,state.publicVersion)&&(n.lastReviewAt===null||validClock(n.lastReviewAt)&&tick(n.lastReviewAt)<=at)&&bounded(n.cashWeightQ,0n,SCALE),'invalid NPC review memory');
     assert(new Set(n.assets.map(a=>a.stockId)).size===n.assets.length&&n.assets.reduce((sum,a)=>sum+a.previousWeightQ,0n)+n.cashWeightQ===SCALE,'invalid complete target vector');

@@ -105,7 +105,7 @@ export function generateNpcOrders(state:TradingState):void {
       const fraction=clipQ(params.stockFractionQ+mulQ(100_000_000n,w.macro.riskAppetiteQ),350_000_000n,850_000_000n);
       const raw=npc.assets.map(a=>{let weight=mulQ(a.baselineWeightQ,expQ(divQ(a.scoreQ,params.temperatureQ)));
         if(npc.style==='crossMarket'){const e=economy.get(a.stockId)!,sector=w.sectors.find(s=>s.market===e.market&&s.sector===e.sector)!;weight=mulQ(weight,expQ(mulQ(250_000_000n,sector.outlookQ)));}return weight;});
-      const normal=splitInteger(fraction,raw,npc.assets.map(a=>a.stockId)),capped=capWeights(normal,npc.assets.map(a=>economy.get(a.stockId)!.sector),true);
+      const rawSum=raw.reduce((n,q)=>n+q,0n),normal=raw.map(q=>q*fraction/rawSum),capped=capWeights(normal,npc.assets.map(a=>economy.get(a.stockId)!.sector),true);
       const lambda=major&&scheduled.lambdaQ<500_000_000n?500_000_000n:scheduled.lambdaQ;
       npc.assets.forEach((a,i)=>{a.previousWeightQ=mulQ(SCALE-lambda,a.previousWeightQ)+mulQ(lambda,capped[i]!);a.targetShares=Number(nav*a.previousWeightQ/(SCALE*BigInt(stockMap.get(a.stockId)!.lastPrice)));});
       npc.cashWeightQ=SCALE-npc.assets.reduce((n,a)=>n+a.previousWeightQ,0n);npc.lastReviewAt={...state.clock};npc.lastReviewPublicVersion=state.publicVersion;
@@ -144,7 +144,7 @@ export function recordWorldBatch(state:TradingState,stockId:string,price:number|
   if(state.clock.batch===15){e.currentDay.completed=true;e.days=[...e.days,e.currentDay];
     const sector=w.sectors.find(s=>s.market===e.market&&s.sector===e.sector)!;
     const exposure=mulQ(e.demandExposureQ,w.macro.demandQ)+mulQ(e.financingExposureQ,w.macro.financingQ);
-    e.pendingGrowthQ=clipQ(e.muQ+mulQ(500_000n,exposure)+mulQ(500_000n,sector.outlookQ)+mulQ(800_000n,normalQ(state.seed,'operating',e.id,tick(state.clock),0)),-3_000_000n,3_000_000n);
+    e.pendingGrowthQ=clipQ(e.muQ+mulQ(500_000n,exposure)+mulQ(500_000n,sector.outlookQ)+mulQ(800_000n,normalQ(state.seed,'operating',e.id,state.clock.worldDay*16,0)),-3_000_000n,3_000_000n);
   }
 }
 export function finishWorldBatch(state:TradingState):void {
