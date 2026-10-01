@@ -1,0 +1,490 @@
+{
+  "format": "p2-diagnostic-evidence-v1",
+  "scope": "diagnostic-only",
+  "status": "fail",
+  "independentAcceptance": "pending",
+  "economicSourceHash": "1c56df1eaafef06c29d0bf14a513a8a2426da1481f67be20dba4cb5217bb3c83",
+  "sourceFiles": [
+    {
+      "path": "docs/design/market-identities.md",
+      "sha256": "c9760607a4e0885453a5fee9d31a05f8c85073ed727ea9f47dcb3d96dc84496a"
+    },
+    {
+      "path": "docs/design/market-model-rules.md",
+      "sha256": "984643e65e26133e232effdc9e8131aeca0d11fb4073659711991c6a6b33a1d8"
+    },
+    {
+      "path": "packages/sim-core/src/auction.ts",
+      "sha256": "9401950627b9d5c1da34204ef4cb5569eed0556bf7609d022ba542f8e4938289"
+    },
+    {
+      "path": "packages/sim-core/src/contracts.ts",
+      "sha256": "9ee55cfec31b28fac606ae0b9f7544443ef83cabe839f5b13a25f7801dfe2906"
+    },
+    {
+      "path": "packages/sim-core/src/hash.ts",
+      "sha256": "f4d751d6ef9729901b71cd6191c92b893182774b1fbd3fcdadef84808b2406bd"
+    },
+    {
+      "path": "packages/sim-core/src/index.ts",
+      "sha256": "f615e8ae6654d661daa4653288cd6b7926e7af9cc570f29aa8b8b9a497bcc3cc"
+    },
+    {
+      "path": "packages/sim-core/src/numeric.ts",
+      "sha256": "8522bd46c06bbbe7aad9374a0df3d3671eb7998588aa13e71467fc70f756c05f"
+    },
+    {
+      "path": "packages/sim-core/src/state.ts",
+      "sha256": "1d86d1f4749fc6a22c3702861742de99b9851913001f64b300f704741d39c5a0"
+    },
+    {
+      "path": "packages/sim-core/src/trading-core.ts",
+      "sha256": "f69555a9ed50e2332ab9831411a8599c6ae2b2cb07344afed8a40aeb940adb4e"
+    },
+    {
+      "path": "packages/sim-core/src/trading-types.ts",
+      "sha256": "1dabba8902df10567bfb457ae18f8c889c654d24953e1f07c26420e88ed2f8ad"
+    },
+    {
+      "path": "packages/sim-core/src/world-generation.ts",
+      "sha256": "cd42ed83b1f36938078d825fd452123caf7bcb27c83b13b4cebb701f6e2466b9"
+    },
+    {
+      "path": "packages/sim-core/src/world-simulation.ts",
+      "sha256": "b399a09a0794538ec454e7e46779b4513cec9ea946477f8542c57fe6d88e7f10"
+    },
+    {
+      "path": "packages/sim-core/src/world-types.ts",
+      "sha256": "bee9664ed22c0390e7fb5e8502247960ba06fbab5afb8090f3361097e11ede89"
+    },
+    {
+      "path": "packages/sim-core/src/world-validation.ts",
+      "sha256": "96f82df9dcf7116a353c93ecfad489e06759b9cde65cb9b4f4026835a06183fe"
+    },
+    {
+      "path": "tests/scenarios/p0/baseline-v1.json",
+      "sha256": "50a1fbf7feddf87cbc5d201093c966c3689c6aed432405c37cd69f78022410b6"
+    }
+  ],
+  "behaviorCheckpointCommit": "f632812",
+  "checkpointNote": "A later type-only WorldPlayerView correction changes source bytes; this commit preserves the failed economic behavior.",
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "mathVersion": "fixed-q9-v1",
+  "rngVersion": "rng-v1",
+  "schemaVersion": 1,
+  "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-batch.mjs --manifest tests/scenarios/p2/diagnostic-manifest.json --out artifacts/verification/p2/diagnostic-01 --jobs 1",
+  "seedManifestHash": "316476b2309c5d4669b58d7370b22ac639a8557502490e033b802a05abe0d7fb",
+  "environment": {
+    "node": "v26.7.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "os": "Windows 11 Pro",
+    "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+    "logicalProcessors": 16,
+    "memoryBytes": 33409036288
+  },
+  "warmupDays": 250,
+  "playerDays": 5,
+  "observedBatches": 8160,
+  "rows": [
+    {
+      "seed": 3572871866,
+      "economicSourceHash": "1c56df1eaafef06c29d0bf14a513a8a2426da1481f67be20dba4cb5217bb3c83",
+      "markets": [
+        {
+          "market": "A",
+          "qualifying": 3,
+          "minimumDays": 4,
+          "medianTurnover": 0.000026680494226382572,
+          "longestAllZeroDays": 0
+        },
+        {
+          "market": "B",
+          "qualifying": 5,
+          "minimumDays": 4,
+          "medianTurnover": 0.00003562131060537921,
+          "longestAllZeroDays": 0
+        }
+      ],
+      "observedBatches": 4080,
+      "audit": {
+        "observedBatches": 4080,
+        "warmupBatches": 4000,
+        "playerBatches": 80,
+        "cashViolations": 0,
+        "shareViolations": 0,
+        "negativeBalances": 0,
+        "frozenResourceViolations": 0,
+        "hourCapacityViolations": 0,
+        "unbalancedTrades": 0
+      },
+      "timing": {
+        "warmupMs": 85071.065,
+        "totalMs": 88682.6747
+      },
+      "blocked": 2,
+      "noCross": 2730,
+      "zero": [
+        {
+          "id": "A001",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 247
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A003",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 220
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A006",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 89
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A007",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 216
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A008",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 244
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A014",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 247
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A019",
+          "lastTradeAt": {
+            "batch": 10,
+            "worldDay": 233
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B003",
+          "lastTradeAt": null,
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B009",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 217
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B012",
+          "lastTradeAt": null,
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B013",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 202
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B016",
+          "lastTradeAt": null,
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B019",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 241
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B020",
+          "lastTradeAt": {
+            "batch": 10,
+            "worldDay": 221
+          },
+          "blocked": 2,
+          "noCross": 78
+        }
+      ],
+      "wallets": {
+        "accounts": 26,
+        "minCash": {
+          "$bigint": "80996617454"
+        },
+        "maxCash": {
+          "$bigint": "257015947485"
+        },
+        "reserved": {
+          "$bigint": "0"
+        },
+        "lotCount": 57696,
+        "totalShares": 5023366093
+      }
+    },
+    {
+      "seed": 1866980507,
+      "economicSourceHash": "1c56df1eaafef06c29d0bf14a513a8a2426da1481f67be20dba4cb5217bb3c83",
+      "markets": [
+        {
+          "market": "A",
+          "qualifying": 2,
+          "minimumDays": 4,
+          "medianTurnover": 0.00021721103458166886,
+          "longestAllZeroDays": 0
+        },
+        {
+          "market": "B",
+          "qualifying": 2,
+          "minimumDays": 4,
+          "medianTurnover": 0.0000634289099753924,
+          "longestAllZeroDays": 0
+        }
+      ],
+      "observedBatches": 4080,
+      "audit": {
+        "observedBatches": 4080,
+        "warmupBatches": 4000,
+        "playerBatches": 80,
+        "cashViolations": 0,
+        "shareViolations": 0,
+        "negativeBalances": 0,
+        "frozenResourceViolations": 0,
+        "hourCapacityViolations": 0,
+        "unbalancedTrades": 0
+      },
+      "timing": {
+        "warmupMs": 73242.8194,
+        "totalMs": 76238.80159999999
+      },
+      "blocked": 0,
+      "noCross": 2829,
+      "zero": [
+        {
+          "id": "A002",
+          "lastTradeAt": {
+            "batch": 14,
+            "worldDay": 244
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A008",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 227
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A009",
+          "lastTradeAt": {
+            "batch": 2,
+            "worldDay": 246
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A010",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 201
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A013",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 195
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A018",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 215
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "A020",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 222
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B004",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 245
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B007",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 246
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B008",
+          "lastTradeAt": {
+            "batch": 1,
+            "worldDay": 200
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B009",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 234
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B012",
+          "lastTradeAt": {
+            "batch": 5,
+            "worldDay": 248
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B013",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 246
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B014",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 243
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B015",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 245
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B016",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 221
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B018",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 243
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B019",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 245
+          },
+          "blocked": 0,
+          "noCross": 80
+        },
+        {
+          "id": "B020",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 231
+          },
+          "blocked": 0,
+          "noCross": 80
+        }
+      ],
+      "wallets": {
+        "accounts": 26,
+        "minCash": {
+          "$bigint": "102656603244"
+        },
+        "maxCash": {
+          "$bigint": "301272371791"
+        },
+        "reserved": {
+          "$bigint": "0"
+        },
+        "lotCount": 50089,
+        "totalShares": 4150647577
+      }
+    }
+  ],
+  "artifactDirectory": "artifacts/verification/p2/diagnostic-01",
+  "formal250And1000DayGate": "not_run"
+}

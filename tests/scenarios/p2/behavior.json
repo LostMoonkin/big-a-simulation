@@ -1,0 +1,19 @@
+{
+  "format": "p2-behavior-v1",
+  "seed": 3572871866,
+  "playerCapital": {
+    "$bigint": "100000000"
+  },
+  "warmupDays": 250,
+  "restoreDays": 20,
+  "stockId": "A001",
+  "secondMarketStockId": "B001",
+  "reviewContracts": [
+    "A16",
+    "A17",
+    "BASELINE-STYLE-01",
+    "SNAP-PUBLIC-01",
+    "SNAP-SETTLED-01"
+  ],
+  "scope": "Deterministic autonomous world checks. Player commands use production API; no synthesized NPC order fixtures."
+}

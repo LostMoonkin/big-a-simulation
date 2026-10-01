@@ -1,0 +1,35 @@
+{
+  "format": "p2-batch-manifest-v1",
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "mathVersion": "fixed-q9-v1",
+  "rngVersion": "rng-v1",
+  "schemaVersion": 1,
+  "seedSource": "tests/scenarios/p0/seeds.json",
+  "seedSourceHash": "fd21606f097a53b388609f3cd3d0791ecbef2c75d5917c0e65072267cbd6e136",
+  "presetSource": "tests/scenarios/p0/baseline-v1.json",
+  "presetSourceHash": "50a1fbf7feddf87cbc5d201093c966c3689c6aed432405c37cd69f78022410b6",
+  "config": {
+    "size": "prototype",
+    "mode": "baseline",
+    "playerCapital": {
+      "$bigint": "100000000"
+    }
+  },
+  "warmupDays": 250,
+  "threshold": {
+    "stocksPerMarket": 20,
+    "requiredStocks": 18,
+    "tradedDayNumerator": 4,
+    "tradedDayDenominator": 5
+  },
+  "selection": "P0 seed-manifest-v1; registered before observing autonomous market output; no player orders",
+  "scope": "diagnostic-only",
+  "seeds": [
+    3572871866,
+    1866980507
+  ],
+  "longSeeds": [],
+  "playerDays": 5,
+  "longPlayerDays": 5
+}

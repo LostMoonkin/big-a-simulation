@@ -1,0 +1,754 @@
+{
+  "format": "p2-diagnostic-evidence-v1",
+  "scope": "diagnostic-only",
+  "status": "fail",
+  "independentAcceptance": "pending",
+  "economicSourceHash": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+  "sourceFiles": [
+    {
+      "path": "docs/design/market-identities.md",
+      "sha256": "c9760607a4e0885453a5fee9d31a05f8c85073ed727ea9f47dcb3d96dc84496a"
+    },
+    {
+      "path": "docs/design/market-model-rules.md",
+      "sha256": "984643e65e26133e232effdc9e8131aeca0d11fb4073659711991c6a6b33a1d8"
+    },
+    {
+      "path": "packages/sim-core/src/auction.ts",
+      "sha256": "9401950627b9d5c1da34204ef4cb5569eed0556bf7609d022ba542f8e4938289"
+    },
+    {
+      "path": "packages/sim-core/src/contracts.ts",
+      "sha256": "9ee55cfec31b28fac606ae0b9f7544443ef83cabe839f5b13a25f7801dfe2906"
+    },
+    {
+      "path": "packages/sim-core/src/hash.ts",
+      "sha256": "f4d751d6ef9729901b71cd6191c92b893182774b1fbd3fcdadef84808b2406bd"
+    },
+    {
+      "path": "packages/sim-core/src/index.ts",
+      "sha256": "f615e8ae6654d661daa4653288cd6b7926e7af9cc570f29aa8b8b9a497bcc3cc"
+    },
+    {
+      "path": "packages/sim-core/src/numeric.ts",
+      "sha256": "8522bd46c06bbbe7aad9374a0df3d3671eb7998588aa13e71467fc70f756c05f"
+    },
+    {
+      "path": "packages/sim-core/src/state.ts",
+      "sha256": "1d86d1f4749fc6a22c3702861742de99b9851913001f64b300f704741d39c5a0"
+    },
+    {
+      "path": "packages/sim-core/src/trading-core.ts",
+      "sha256": "f69555a9ed50e2332ab9831411a8599c6ae2b2cb07344afed8a40aeb940adb4e"
+    },
+    {
+      "path": "packages/sim-core/src/trading-types.ts",
+      "sha256": "1dabba8902df10567bfb457ae18f8c889c654d24953e1f07c26420e88ed2f8ad"
+    },
+    {
+      "path": "packages/sim-core/src/world-generation.ts",
+      "sha256": "2cbbc6839ec76dd948ec9f36a613262497acf989fb33ae42a607160179cec2a5"
+    },
+    {
+      "path": "packages/sim-core/src/world-simulation.ts",
+      "sha256": "6e8a1cd4a02b5ca9ae98e5feeb7e568943a8c4838bf59658cf912be353fd2a1e"
+    },
+    {
+      "path": "packages/sim-core/src/world-types.ts",
+      "sha256": "944d3609c4ba162761bf2e10622dddb23ba6ac0ecb3e6138ef1bdfa7a4ff59c3"
+    },
+    {
+      "path": "packages/sim-core/src/world-validation.ts",
+      "sha256": "1dc2c5ef64c8578ecebe5d53c95e50b9b45595eaa7173874030b3131c37450b2"
+    },
+    {
+      "path": "tests/scenarios/p0/baseline-v1.json",
+      "sha256": "50a1fbf7feddf87cbc5d201093c966c3689c6aed432405c37cd69f78022410b6"
+    }
+  ],
+  "coreCommit": "3443852",
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "mathVersion": "fixed-q9-v1",
+  "rngVersion": "rng-v1",
+  "schemaVersion": 1,
+  "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-batch.mjs --manifest tests/scenarios/p2/diagnostic-manifest.json --out artifacts/verification/p2/diagnostic-02 --jobs 1",
+  "seedManifestHash": "316476b2309c5d4669b58d7370b22ac639a8557502490e033b802a05abe0d7fb",
+  "environment": {
+    "node": "v26.7.0",
+    "platform": "win32",
+    "architecture": "x64",
+    "os": "Windows 11 Pro",
+    "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+    "logicalProcessors": 16,
+    "memoryBytes": 33409036288
+  },
+  "warmupDays": 250,
+  "playerDays": 5,
+  "observedBatches": 8160,
+  "rows": [
+    {
+      "seed": 3572871866,
+      "economicSourceHash": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+      "economicSourceAtEnd": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+      "markets": [
+        {
+          "market": "A",
+          "stocks": 20,
+          "requiredStocks": 18,
+          "qualifyingStocks": 2,
+          "minimumDays": 4,
+          "days": 5,
+          "passes": false,
+          "longestAllZeroDays": 0,
+          "medianStockDailyTurnover": 0,
+          "medianMarketDailyTurnover": 0.00004349977979827244,
+          "turnoverDiagnostic": "outside-initial-diagnostic-range"
+        },
+        {
+          "market": "B",
+          "stocks": 20,
+          "requiredStocks": 18,
+          "qualifyingStocks": 6,
+          "minimumDays": 4,
+          "days": 5,
+          "passes": false,
+          "longestAllZeroDays": 0,
+          "medianStockDailyTurnover": 0,
+          "medianMarketDailyTurnover": 0.000049428653477647755,
+          "turnoverDiagnostic": "outside-initial-diagnostic-range"
+        }
+      ],
+      "timing": {
+        "warmupMs": 79477.2527,
+        "totalMs": 82477.2613,
+        "operationMs": {
+          "createWorld": 15.191400000000002,
+          "coreAdvance": 58885.54429999991,
+          "entryPrepare": 6.478099999992992,
+          "diagnostics": 21815.15860000003,
+          "audit": 292.5687999999884,
+          "metrics": 1.8596000000252388,
+          "snapshotExport": 1334.1241999999943,
+          "snapshotSerializeWrite": 94.88209999998686,
+          "walletSerializeWrite": 5.728799999992262,
+          "dailyWrite": 1.2405999999900814,
+          "progressWrite": 3.155199999992874
+        }
+      },
+      "audit": {
+        "observedBatches": 4080,
+        "warmupBatches": 4000,
+        "playerBatches": 80,
+        "cashViolations": 0,
+        "shareViolations": 0,
+        "negativeBalances": 0,
+        "frozenResourceViolations": 0,
+        "hourCapacityViolations": 0,
+        "unbalancedTrades": 0
+      },
+      "blocked": 0,
+      "noCross": 2659,
+      "wallets": {
+        "minCash": {
+          "$bigint": "80101227410"
+        },
+        "maxCash": {
+          "$bigint": "271552917110"
+        },
+        "reserved": {
+          "$bigint": "0"
+        },
+        "lots": 54832
+      },
+      "zeroStocks": [
+        {
+          "id": "A001",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 247
+          },
+          "price": 4716,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A003",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 220
+          },
+          "price": 6641,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A005",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 228
+          },
+          "price": 5781,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 2,
+            "sell": 12,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A006",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 135
+          },
+          "price": 2319,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 1,
+            "sell": 13,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A007",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 216
+          },
+          "price": 8139,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A008",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 200
+          },
+          "price": 1398,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A013",
+          "lastTradeAt": {
+            "batch": 13,
+            "worldDay": 223
+          },
+          "price": 7793,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 1,
+            "sell": 13,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A014",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 247
+          },
+          "price": 8338,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A017",
+          "lastTradeAt": {
+            "batch": 14,
+            "worldDay": 210
+          },
+          "price": 4153,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A020",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 246
+          },
+          "price": 2379,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B003",
+          "lastTradeAt": null,
+          "price": 1550,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B007",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 249
+          },
+          "price": 2320,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 3,
+            "sell": 11,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B012",
+          "lastTradeAt": {
+            "batch": 0,
+            "worldDay": 113
+          },
+          "price": 6412,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B013",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 230
+          },
+          "price": 3505,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 2,
+            "sell": 12,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B016",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 95
+          },
+          "price": 8828,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        }
+      ]
+    },
+    {
+      "seed": 1866980507,
+      "economicSourceHash": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+      "economicSourceAtEnd": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+      "markets": [
+        {
+          "market": "A",
+          "stocks": 20,
+          "requiredStocks": 18,
+          "qualifyingStocks": 1,
+          "minimumDays": 4,
+          "days": 5,
+          "passes": false,
+          "longestAllZeroDays": 0,
+          "medianStockDailyTurnover": 0,
+          "medianMarketDailyTurnover": 0.00003400501846457392,
+          "turnoverDiagnostic": "outside-initial-diagnostic-range"
+        },
+        {
+          "market": "B",
+          "stocks": 20,
+          "requiredStocks": 18,
+          "qualifyingStocks": 6,
+          "minimumDays": 4,
+          "days": 5,
+          "passes": false,
+          "longestAllZeroDays": 0,
+          "medianStockDailyTurnover": 0,
+          "medianMarketDailyTurnover": 0.00011490303427320094,
+          "turnoverDiagnostic": "outside-initial-diagnostic-range"
+        }
+      ],
+      "timing": {
+        "warmupMs": 79600.23659999999,
+        "totalMs": 82160.68299999999,
+        "operationMs": {
+          "createWorld": 15.230200000000004,
+          "coreAdvance": 58486.83729999997,
+          "entryPrepare": 6.430900000006659,
+          "diagnostics": 21951.48569999963,
+          "audit": 326.7661000003507,
+          "metrics": 1.7417999999743188,
+          "snapshotExport": 1246.8371000000016,
+          "snapshotSerializeWrite": 95.85789999999614,
+          "walletSerializeWrite": 4.609900000005041,
+          "dailyWrite": 1.2752999999938766,
+          "progressWrite": 3.0956000000078348
+        }
+      },
+      "audit": {
+        "observedBatches": 4080,
+        "warmupBatches": 4000,
+        "playerBatches": 80,
+        "cashViolations": 0,
+        "shareViolations": 0,
+        "negativeBalances": 0,
+        "frozenResourceViolations": 0,
+        "hourCapacityViolations": 0,
+        "unbalancedTrades": 0
+      },
+      "blocked": 2,
+      "noCross": 2731,
+      "wallets": {
+        "minCash": {
+          "$bigint": "102126662296"
+        },
+        "maxCash": {
+          "$bigint": "302994559959"
+        },
+        "reserved": {
+          "$bigint": "0"
+        },
+        "lots": 54565
+      },
+      "zeroStocks": [
+        {
+          "id": "A002",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 236
+          },
+          "price": 9078,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 1,
+            "sell": 13,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A004",
+          "lastTradeAt": {
+            "batch": 12,
+            "worldDay": 247
+          },
+          "price": 6314,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 3,
+            "sell": 11,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A005",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 213
+          },
+          "price": 7327,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A006",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 215
+          },
+          "price": 1481,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A008",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 223
+          },
+          "price": 9353,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A009",
+          "lastTradeAt": {
+            "batch": 2,
+            "worldDay": 246
+          },
+          "price": 3814,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 4,
+            "sell": 10,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A010",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 163
+          },
+          "price": 5673,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A012",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 249
+          },
+          "price": 4553,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A017",
+          "lastTradeAt": {
+            "batch": 0,
+            "worldDay": 247
+          },
+          "price": 1816,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A018",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 238
+          },
+          "price": 9854,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 3,
+            "sell": 11,
+            "equal": 0
+          }
+        },
+        {
+          "id": "A020",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 222
+          },
+          "price": 9610,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B007",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 246
+          },
+          "price": 756,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 4,
+            "sell": 9,
+            "equal": 1
+          }
+        },
+        {
+          "id": "B008",
+          "lastTradeAt": {
+            "batch": 7,
+            "worldDay": 242
+          },
+          "price": 9102,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 13,
+            "equal": 1
+          }
+        },
+        {
+          "id": "B012",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 211
+          },
+          "price": 8650,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B013",
+          "lastTradeAt": {
+            "batch": 11,
+            "worldDay": 243
+          },
+          "price": 7979,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 1,
+            "sell": 12,
+            "equal": 1
+          }
+        },
+        {
+          "id": "B016",
+          "lastTradeAt": {
+            "batch": 15,
+            "worldDay": 231
+          },
+          "price": 3473,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 2,
+            "sell": 12,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B018",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 243
+          },
+          "price": 2227,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 3,
+            "sell": 10,
+            "equal": 1
+          }
+        },
+        {
+          "id": "B019",
+          "lastTradeAt": {
+            "batch": 3,
+            "worldDay": 245
+          },
+          "price": 2656,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 0,
+            "sell": 14,
+            "equal": 0
+          }
+        },
+        {
+          "id": "B020",
+          "lastTradeAt": {
+            "batch": 8,
+            "worldDay": 244
+          },
+          "price": 8534,
+          "blocked": 0,
+          "noCross": 80,
+          "targetCounts": {
+            "buy": 2,
+            "sell": 12,
+            "equal": 0
+          }
+        }
+      ]
+    }
+  ],
+  "artifactDirectory": "artifacts/verification/p2/diagnostic-02",
+  "formal250And1000DayGate": "not_run"
+}

@@ -2,7 +2,7 @@
 
 浏览器端单人金融策略游戏，以经营配置、事件判断、短线交易和资金执行为核心。正式目标是两个虚构市场、每市100只股票。
 
-目前 P0 与 P1 已独立验收通过，P1 的有限资金交易核心、CLI、固定回放和生产 Worker 黄金证据见[第1轮独立报告](docs/verification/p1-independent-round-1.md)。黑色交易终端仍为 UI 预览：行情与自选、日/小时 K 线、资产组合、公开资讯和委托预览均使用固定虚构示例，接入自主市场与可玩闭环属于 P2。默认红涨绿跌，可在右上角切换外观，偏好保存在当前浏览器。阶段进度见 [specs](docs/specs/README.md)。
+目前 P0 与 P1 已独立验收通过，P1 的有限资金交易核心、CLI、固定回放和生产 Worker 黄金证据见[第1轮独立报告](docs/verification/p1-independent-round-1.md)。P2 正在接入两市 40 股、26 个有限钱包的自主市场与单 Worker 浏览器交互，尚未独立验收；当前实际检查与失败样例见 [P2 实施报告](docs/verification/p2-implementation.md)。默认红涨绿跌，外观偏好保存在当前浏览器。阶段进度见 [specs](docs/specs/README.md)。
 
 UI 的布局、交互与接入边界见 [界面设计](docs/design/ui-design.md)，本次检查见 [UI 核验记录](docs/verification/ui-preview.md)。自选仅保留于本次会话；外观偏好不是游戏存档。
 
@@ -39,6 +39,19 @@ npm run sim:replay -- --input tests/replays/a12-public-decision.json --out artif
 
 Windows PowerShell 用 `npm.cmd` 转发 `--`。P1 使用生产核心，覆盖 27 个固定场景与 2000 个固定种子的有界穷举/真实账本对照；私有快照和公开投影分别供恢复、决策使用。试验页 `/p1-probe.html` 在真实 Worker 重放同一核心，复跑及输出说明见 [CLI README](tools/sim-runner/README.md)，独立结论见 [P1 验收报告](docs/verification/p1-independent-round-1.md)，实施证据见 [P1 实施报告](docs/verification/p1-implementation.md)。
 
+P2 实际运行入口（PowerShell）：
+
+```powershell
+npm.cmd run fixtures:p2
+npm.cmd run sim:batch -- --manifest tests/scenarios/p2/diagnostic-manifest.json --out artifacts/verification/p2/diagnostic --jobs 1
+npm.cmd run sim:batch -- --manifest tests/scenarios/p2/baseline-manifest.json --out artifacts/verification/p2/baseline-final --jobs 4
+npm.cmd run sim:continue -- --input path/to/exported-snapshot.json --days 20 --out artifacts/verification/p2/continued
+npm.cmd run benchmark -- --out artifacts/verification/p2/benchmark-final
+npm.cmd run verify:p2 -- --out artifacts/verification/p2/review
+```
+
+`sim:batch` 真实预热 250 日后加入玩家本金；玩家保持持币，全部批次检查现金、股份、冻结与小时容量。正式清单保留 P0 登记的全部 100 个种子及其中 10 个 1,000 玩家日延长组，5 日诊断不能替代正式门槛。`--resume yes` 只复用同经济源码和同清单的已完成种子，失败仍保留；源码变化需新输出目录。`verify:p2` 汇总真实生成、恢复、逐种子统计、P1 回归、真实 Chrome 60 日操作与小性能测量，缺少证据会返回非零；它不授予独立阶段签收。
+
 ## 目录
 
 ```text
@@ -46,8 +59,9 @@ apps/web/                  浏览器应用、样式与Vite配置
 packages/sim-core/         纯TypeScript数值、交易、账本、时钟与快照核心
 tools/p0/                 P0配额、数值、浏览器能力试验与核验
 tests/scenarios/p0/        冻结配置、种子和合同场景
-tools/sim-runner/          P1薄CLI、独立穷举、行为核验和Worker driver
+tools/sim-runner/          生产核心CLI、独立穷举、自主实验和恢复核验
 tests/scenarios/p1/        P1有限资金场景与2000固定种子
+tests/scenarios/p2/        P2冻结种子清单、诊断与恢复输入
 tests/replays/            完整输出黄金及四个关键安全快照
 tools/design-checks/       设计算术脚本，不是游戏模拟器
 docs/design/               玩法、精确规则和模型验证

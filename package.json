@@ -25,7 +25,12 @@
     "fixtures:p1": "node tools/sim-runner/generate-fixtures.mjs",
     "verify:p1": "node tools/sim-runner/verify.mjs",
     "sim:replay": "node tools/sim-runner/cli.mjs",
-    "probe:p1": "node tools/sim-runner/record-golden.mjs"
+    "probe:p1": "node tools/sim-runner/record-golden.mjs",
+    "fixtures:p2": "node tools/sim-runner/p2-fixtures.mjs",
+    "sim:batch": "node tools/sim-runner/p2-batch.mjs",
+    "sim:continue": "node tools/sim-runner/p2-golden.mjs",
+    "verify:p2": "node tools/sim-runner/p2-verify.mjs",
+    "benchmark": "node tools/sim-runner/p2-benchmark.mjs"
   },
   "devDependencies": {
     "typescript": "7.0.2"

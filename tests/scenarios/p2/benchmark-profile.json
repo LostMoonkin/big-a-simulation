@@ -1,0 +1,7 @@
+{
+  "format": "p2-benchmark-v1",
+  "seed": 1100312380,
+  "sampleDays": 5,
+  "advanceBudget": 64,
+  "scope": "One40-stock Node world: actual warmup/day/export/restore/core cancellation diagnostics; no P5 browser, UI latency or memory acceptance."
+}
