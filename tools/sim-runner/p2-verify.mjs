@@ -33,6 +33,7 @@ group('all-registered-autonomous-seeds', () => {
   assert.equal(protocol.scope, 'stage-baseline');
   const data = load(inputs.batchResults);
   assert.equal(data.status, 'pass'); assert.equal(data.scope, 'stage-baseline');
+  assert.equal(data.npcQuoteVersion, protocol.npcQuoteVersion);
   assert.equal(data.economicSourceHash, manifest.economicSourceHash); assert.equal(data.economicSourceAtEnd, manifest.economicSourceHash);
   assert.equal(data.seedManifestHash, manifestHash);
   assert.equal(data.completedSeeds, 100); assert.equal(data.completedLongSeeds, 10); assert.equal(data.failedSeeds.length, 0);
@@ -41,6 +42,7 @@ group('all-registered-autonomous-seeds', () => {
   const base = dirname(resolve(inputs.batchResults));
   for (const seed of data.seeds) {
     assert.equal(seed.status, 'pass'); assert.equal(seed.economicSourceHash, manifest.economicSourceHash); assert.equal(seed.economicSourceAtEnd, manifest.economicSourceHash);
+    assert.equal(seed.npcQuoteVersion, protocol.npcQuoteVersion);
     const isLong = protocol.longSeeds.includes(seed.seed); const totalDays = isLong ? 1000 : 250;
     assert.equal(seed.audit.observedBatches, 4000 + totalDays * 16);
     for (const name of ['cashViolations', 'shareViolations', 'negativeBalances', 'frozenResourceViolations', 'hourCapacityViolations', 'unbalancedTrades']) assert.equal(seed.audit[name], 0);
@@ -96,6 +98,7 @@ group('minimal-Node-measurements', () => {
 });
 const finalIdentity = p2Identity();
 if (finalIdentity.economicSourceHash !== manifest.economicSourceHash) groups.push({ id: 'economic-source-stability', status: 'fail', message: 'production source changed during verification' });
+if (finalIdentity.runnerSourceHash !== manifest.runnerSourceHash) groups.push({ id: 'runner-source-stability', status: 'fail', message: 'runner source changed during verification' });
 const status = groups.every(group => group.status === 'pass') ? 'pass' : 'fail';
 const results = { status, independentAcceptance: 'pending', sourceHash: manifest.sourceHash, economicSourceHash: manifest.economicSourceHash, groups };
 writeJson(`${out}/manifest.json`, manifest); writeJson(`${out}/results.json`, results);

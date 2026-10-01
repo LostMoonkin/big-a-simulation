@@ -32,11 +32,14 @@ export function checkWorldInitialization() {
   assert.equal(a.exportSnapshot().checksum, b.exportSnapshot().checksum);
   const state = sim.decodeExact(a.exportSnapshot().payload);
   assert.equal(state.world.generationVersion, sim.INITIALIZATION_VERSION);
+  assert.equal(state.world.npcQuoteVersion, sim.NPC_QUOTE_VERSION);
   const initialStyles = JSON.parse(readFileSync('tests/scenarios/p0/baseline-v1.json', 'utf8')).styles;
   auditLedger(state);
   assert.equal(state.playerInjected, false); assert.equal(state.world.npcs.length, 26);
   const view = a.readWorldView({ kind: 'market' });
   assert.equal(view.companies.length, 40); assert.equal(view.world.playerInjected, false);
+  assert.equal(view.world.npcQuoteVersion, sim.NPC_QUOTE_VERSION);
+  assert.equal(a.diagnosticsSummary().world.npcQuoteVersion, sim.NPC_QUOTE_VERSION);
   const allowed = { storage: ['energy', 'industry', 'infrastructure'], compute: ['digital', 'infrastructure', 'energy'], autonomy: ['industry', 'digital', 'health'],
     renewal: ['infrastructure', 'industry', 'consumer'], automation: ['industry', 'digital', 'consumer'], recycling: ['energy', 'industry', 'consumer'], longevity: ['health', 'consumer', 'digital'], crossborder: ['industry', 'energy', 'consumer'] };
   const expectedConcepts = { storage: 5, compute: 5, autonomy: 5, renewal: 5, automation: 5, recycling: 5, longevity: 4, crossborder: 4 };
@@ -78,7 +81,7 @@ export function checkWorldInitialization() {
   const initialChecksum = a.exportSnapshot().checksum;
   for (let i = 0; i < 10; i++) { a.readWorldView({ kind: 'company', stockId: 'A001' }); a.readWorldView({ kind: 'chart', stockId: 'B001', scale: i % 2 ? 'day' : 'hour' }); }
   assert.equal(a.exportSnapshot().checksum, initialChecksum);
-  return { seed: fixture.seed, initializationVersion: state.world.generationVersion, initialChecksum, companies: 40, npcWallets: 26,
+  return { seed: fixture.seed, initializationVersion: state.world.generationVersion, npcQuoteVersion: view.world.npcQuoteVersion, initialChecksum, companies: 40, npcWallets: 26,
     npcInitialCash: state.accounts.reduce((sum, account) => sum + account.cash, 0n), initialCashFormula: 'ordinary floor(H*(1-f)/f); inventory floor(H/4); fixed initial feeWeight',
     quotas: 'exact P0 matrix and concepts', conservation: 'zero', publicQueryChanges: 0 };
 }
@@ -159,6 +162,9 @@ export function checkBaselinePreset() {
   const normalize = value => typeof value === 'bigint' ? value.toString() : Array.isArray(value) ? value.map(normalize) : value && typeof value === 'object' ? Object.fromEntries(Object.entries(value).map(([key, item]) => [key, normalize(item)])) : value;
   const normalized = normalize(actual);
   assert.equal(normalized.preset, expected.preset); assert.equal(normalized.accountCount, 26);
+  assert.equal(normalized.npcQuoteVersion, sim.NPC_QUOTE_VERSION);
+  assert.equal(normalized.npcQuoteVersion, expected.npcQuoteVersion);
+  assert.deepEqual(normalized.quote, expected.quote);
   assert.deepEqual(normalized.disabled, expected.disabled); assert.deepEqual(normalized.styles, expected.styles);
   return { preset: normalized.preset, actual, matchesFrozenBehavior: true };
 }

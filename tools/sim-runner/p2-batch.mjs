@@ -13,10 +13,11 @@ const jobs = integerOption(options.jobs, 4, 1, 8, 'jobs');
 if (options.resume !== undefined && !['yes', 'no'].includes(options.resume)) throw new Error('--resume must be yes or no');
 const { manifest: protocol, manifestHash } = readBatchManifest(input);
 const manifest = p2Manifest(commandLine(), { batchManifest: input, batchManifestHash: manifestHash, scope: protocol.scope, seeds: protocol.seeds, longSeeds: protocol.longSeeds,
-  warmupDays: 250, playerDays: protocol.playerDays, longPlayerDays: protocol.longPlayerDays, jobs });
+  npcQuoteVersion: protocol.npcQuoteVersion, warmupDays: 250, playerDays: protocol.playerDays, longPlayerDays: protocol.longPlayerDays, jobs });
 if (existsSync(`${out}/manifest.json`)) {
   const prior = readEvidence(`${out}/manifest.json`);
   assert.equal(prior.economicSourceHash, manifest.economicSourceHash, 'economic source changed: preserve this run and choose a new output directory');
+  assert.equal(prior.runnerSourceHash, manifest.runnerSourceHash, 'runner source changed: preserve this run and choose a new output directory');
   assert.equal(prior.inputs.batchManifestHash, manifestHash, 'seed protocol changed: preserve this run and choose a new output directory');
   assert.equal(options.resume, 'yes', 'output already contains a run; use --resume yes for the same frozen source/protocol');
   writeJson(`${out}/resume-manifest-${Date.now()}.json`, manifest);
@@ -32,10 +33,10 @@ function completedResult(seed) {
   const path = `${out}/seeds/${seed}/results.json`;
   if (!existsSync(path)) return null;
   const result = JSON.parse(readFileSync(path, 'utf8'));
-  if (result.seed !== seed || result.economicSourceHash !== manifest.economicSourceHash || result.sourceChanged) return null;
+  if (result.seed !== seed || result.economicSourceHash !== manifest.economicSourceHash || result.runnerSourceHash !== manifest.runnerSourceHash || result.sourceChanged) return null;
   // A completed failed audit must remain a failure when resuming the run.
   if (result.status === 'fail' && result.error) return result;
-  if (result.baseline?.playerDays !== protocol.playerDays || Boolean(result.long) !== protocol.longSeeds.includes(seed)) return null;
+  if (result.npcQuoteVersion !== protocol.npcQuoteVersion || result.baseline?.playerDays !== protocol.playerDays || Boolean(result.long) !== protocol.longSeeds.includes(seed)) return null;
   if (result.long && result.long.playerDays !== protocol.longPlayerDays) return null;
   return result;
 }
@@ -58,7 +59,7 @@ async function worker() {
         const path = `${out}/seeds/${seed}/results.json`;
         let result;
         try { result = JSON.parse(readFileSync(path, 'utf8')); } catch { result = { seed, status: 'fail', error: { message: stderr || `seed subprocess ended ${code} without results` } }; }
-        if (result.economicSourceHash !== manifest.economicSourceHash || result.sourceChanged || code !== 0) result.status = 'fail';
+        if (result.economicSourceHash !== manifest.economicSourceHash || result.runnerSourceHash !== manifest.runnerSourceHash || result.sourceChanged || code !== 0) result.status = 'fail';
         if (stderr) result.subprocessStderr = stderr;
         results.push(result);
         writeJson(`${out}/progress.json`, { status: 'running', completed: results.length, expected: protocol.seeds.length, passed: results.filter(row => row.status === 'pass').length, failed: results.filter(row => row.status !== 'pass').length, elapsedMs: performance.now() - started });
@@ -70,12 +71,12 @@ async function worker() {
 await Promise.all(Array.from({ length: Math.min(jobs, protocol.seeds.length) }, () => worker()));
 results.sort((a, b) => protocol.seeds.indexOf(a.seed) - protocol.seeds.indexOf(b.seed));
 const ending = p2Identity();
-const sourceStable = ending.economicSourceHash === manifest.economicSourceHash;
+const sourceStable = ending.economicSourceHash === manifest.economicSourceHash && ending.runnerSourceHash === manifest.runnerSourceHash;
 const baselineMarkets = results.flatMap(row => row.baseline?.markets.map(market => ({ seed: row.seed, ...market })) ?? []);
 const longMarkets = results.flatMap(row => row.long?.markets.map(market => ({ seed: row.seed, ...market })) ?? []);
 const result = { status: sourceStable && results.length === protocol.seeds.length && results.every(row => row.status === 'pass') ? 'pass' : 'fail', scope: protocol.scope, independentAcceptance: 'pending',
   economicSourceHash: manifest.economicSourceHash, economicSourceAtEnd: ending.economicSourceHash, runnerSourceHash: manifest.runnerSourceHash, runnerSourceAtEnd: ending.runnerSourceHash,
-  seedManifestHash: manifestHash, expectedSeeds: protocol.seeds.length, expectedLongSeeds: protocol.longSeeds.length,
+  npcQuoteVersion: protocol.npcQuoteVersion, seedManifestHash: manifestHash, expectedSeeds: protocol.seeds.length, expectedLongSeeds: protocol.longSeeds.length,
   completedSeeds: results.length, completedLongSeeds: results.filter(row => row.long).length, passedSeeds: results.filter(row => row.status === 'pass').length,
   failedSeeds: results.filter(row => row.status !== 'pass').map(row => ({ seed: row.seed, reasons: row.failureReasons ?? [row.error?.message ?? 'source or subprocess failure'] })),
   sourceStable, baselineMarkets, longMarkets, observedBatches: results.reduce((total, row) => total + (row.audit?.observedBatches ?? row.observedBatches ?? 0), 0),

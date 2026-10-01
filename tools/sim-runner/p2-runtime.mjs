@@ -3,7 +3,7 @@ import { resolve } from 'node:path';
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import os from 'node:os';
-import { RULES_VERSION, CONTENT_VERSION, MATH_VERSION, SNAPSHOT_VERSION, INITIALIZATION_VERSION, encodeExact } from '../../packages/sim-core/src/index.ts';
+import { RULES_VERSION, CONTENT_VERSION, MATH_VERSION, SNAPSHOT_VERSION, INITIALIZATION_VERSION, NPC_QUOTE_VERSION, encodeExact } from '../../packages/sim-core/src/index.ts';
 
 export const sha = value => createHash('sha256').update(value).digest('hex');
 export const writeJson = (path, value) => writeFileSync(path, JSON.stringify(value, (_key, v) => typeof v === 'bigint' ? { $bigint: v.toString() } : v, 2) + '\n');
@@ -46,7 +46,7 @@ export function p2Manifest(command, inputs = {}) {
   let headAtExecution = null;
   try { headAtExecution = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8', windowsHide: true }).trim(); } catch {}
   return { format: 'p2-verification-v1', stage: 'P2', independentAcceptance: 'pending', recordedAt: new Date().toISOString(), headAtExecution,
-    ...p2Identity(), rulesVersion: RULES_VERSION, contentVersion: CONTENT_VERSION, mathVersion: MATH_VERSION, rngVersion: 'rng-v1', schemaVersion: SNAPSHOT_VERSION, currentInitializationVersion: INITIALIZATION_VERSION,
+    ...p2Identity(), rulesVersion: RULES_VERSION, contentVersion: CONTENT_VERSION, mathVersion: MATH_VERSION, rngVersion: 'rng-v1', schemaVersion: SNAPSHOT_VERSION, currentInitializationVersion: INITIALIZATION_VERSION, currentNpcQuoteVersion: NPC_QUOTE_VERSION,
     baselinePresetHash: sha(readFileSync('tests/scenarios/p0/baseline-v1.json')), seedListHash: sha(readFileSync('tests/scenarios/p0/seeds.json')),
     environment: { node: process.version, platform: process.platform, architecture: process.arch, os: os.version(), cpu: os.cpus()[0]?.model.trim(), logicalProcessors: os.cpus().length, memoryBytes: os.totalmem() }, command, inputs };
 }

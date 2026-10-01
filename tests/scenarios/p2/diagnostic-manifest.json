@@ -6,10 +6,11 @@
   "rngVersion": "rng-v1",
   "schemaVersion": 1,
   "initializationVersion": "world-v2-style-cash",
+  "npcQuoteVersion": "npc-quote-v2-target-gap",
   "seedSource": "tests/scenarios/p0/seeds.json",
   "seedSourceHash": "fd21606f097a53b388609f3cd3d0791ecbef2c75d5917c0e65072267cbd6e136",
   "presetSource": "tests/scenarios/p0/baseline-v1.json",
-  "presetSourceHash": "50a1fbf7feddf87cbc5d201093c966c3689c6aed432405c37cd69f78022410b6",
+  "presetSourceHash": "606059d6034f644c2f780ae70ccc60e0b7aff66607d345f1b1231fd1ad7e024d",
   "config": {
     "size": "prototype",
     "mode": "baseline",

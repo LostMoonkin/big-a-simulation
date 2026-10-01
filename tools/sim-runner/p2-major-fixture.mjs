@@ -16,6 +16,8 @@ try {
   assert.equal(fixture.format, 'p2-major-report-fixed-input-v1');
   const core = createMarketCore(); assert.equal(core.restoreSnapshot(input).restored, true);
   const initial = core.exportSnapshot(); const initialState = decodeExact(initial.payload);
+  assert.equal(initial.checksum, input.checksum); assert.equal(initial.payload, input.payload);
+  const npcQuoteVersion = core.diagnosticsSummary().world.npcQuoteVersion;
   assert.ok(initialState.world && initialState.playerInjected);
   assert.equal(initial.phase, 'settled'); assert.equal(initial.clock.batch, 15);
   const metadata = initialState.world.stocks.find(s => s.id === fixture.stockId);
@@ -25,7 +27,7 @@ try {
   let reportDay = initial.clock.worldDay + 1;
   while (reportDay % 20 !== metadata.reportPhase) reportDay++;
   manifest = p2Manifest(commandLine(), { scope: 'fixed-hidden-input-only', input: options.input, inputSha256: sha(bytes), fixture: fixturePath,
-    fixtureSha256: sha(readFileSync(fixturePath)), initialChecksum: initial.checksum, reportDay, stockId: fixture.stockId });
+    fixtureSha256: sha(readFileSync(fixturePath)), initialChecksum: initial.checksum, npcQuoteVersion, reportDay, stockId: fixture.stockId });
   writeJson(`${out}/manifest.json`, manifest);
   const beforeReport = { worldDay: reportDay - 1, batch: 15 };
   if (tick(beforeReport) > tick(initial.clock)) advanceTo(core, beforeReport);
@@ -73,9 +75,12 @@ try {
   const restored = createMarketCore(); assert.equal(restored.restoreSnapshot(paused).restored, true);
   restored.prepareNextBatch(); assert.equal(restored.exportSnapshot().checksum, paused.checksum, 'restored public preparation applied the report twice');
   const ending = p2Identity(); assert.equal(ending.economicSourceHash, manifest.economicSourceHash);
+  assert.equal(ending.runnerSourceHash, manifest.runnerSourceHash);
+  assert.equal(receiver.diagnosticsSummary().world.npcQuoteVersion, npcQuoteVersion);
   writeJson(`${out}/paused-snapshot.json`, paused);
   const result = { status: 'pass', scope: 'fixed-hidden-input-only', independentAcceptance: 'pending', naturalEconomicEvidence: false,
-    economicSourceHash: manifest.economicSourceHash, economicSourceAtEnd: ending.economicSourceHash, initialChecksum: initial.checksum,
+    npcQuoteVersion, economicSourceHash: manifest.economicSourceHash, economicSourceAtEnd: ending.economicSourceHash,
+    runnerSourceHash: manifest.runnerSourceHash, runnerSourceAtEnd: ending.runnerSourceHash, initialChecksum: initial.checksum,
     baseChecksum: base.checksum, baseClock: base.clock, actualAdvanceBatchesToBase: tick(base.clock) - tick(initial.clock),
     inputChecksum: patched.checksum, patch: { field: `stocks[${fixture.stockId}].actualOperatingIndexQ`, before: previousIndex, after: fixedIndex },
     priorPublicProjectionUnchanged: true, pausedChecksum: paused.checksum, phase: paused.phase, clock: paused.clock,

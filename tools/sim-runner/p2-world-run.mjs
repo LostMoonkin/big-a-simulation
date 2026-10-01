@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync, writeFileSync, appendFileSync } from 'node:fs';
 import { performance } from 'node:perf_hooks';
-import { createMarketCore, RULES_VERSION, CONTENT_VERSION, INITIALIZATION_VERSION, decodeExact } from '../../packages/sim-core/src/index.ts';
+import { createMarketCore, RULES_VERSION, CONTENT_VERSION, INITIALIZATION_VERSION, NPC_QUOTE_VERSION, decodeExact } from '../../packages/sim-core/src/index.ts';
 import { EconomicMetrics, auditBatch } from './p2-metrics.mjs';
 import { directory, sha, writeJson, p2Identity, tick } from './p2-runtime.mjs';
 
@@ -13,6 +13,7 @@ export function readBatchManifest(path) {
   assert.equal(manifest.rulesVersion, RULES_VERSION);
   assert.equal(manifest.contentVersion, CONTENT_VERSION);
   assert.equal(manifest.initializationVersion, INITIALIZATION_VERSION);
+  assert.equal(manifest.npcQuoteVersion, NPC_QUOTE_VERSION);
   assert.equal(manifest.seedSourceHash, sha(readFileSync(manifest.seedSource)));
   assert.equal(manifest.presetSourceHash, sha(readFileSync(manifest.presetSource)));
   assert.equal(manifest.warmupDays, 250);
@@ -75,6 +76,8 @@ export function runSeed(manifest, seed, out) {
   try {
     core = measured('createWorld', () => createAutonomousWorld(seed, manifest.config.playerCapital));
     save('initial');
+    assert.equal(lastSummary.world.initializationVersion, manifest.initializationVersion);
+    assert.equal(lastSummary.world.npcQuoteVersion, manifest.npcQuoteVersion);
     const initialCash = lastSummary.audit.initialCash;
     for (let at = 0; at < 4000; at++) {
       const reply = measured('coreAdvance', () => core.advance({ stop: 'batch', maxBatches: 1, pauseOnMajor: false }));
@@ -111,8 +114,9 @@ export function runSeed(manifest, seed, out) {
     if (long) save('long-end');
     const final = latestSnapshot;
     assert.equal(tick(final.clock), (250 + days) * 16 - 1);
+    assert.equal(lastSummary.world.npcQuoteVersion, manifest.npcQuoteVersion);
     result = { seed, status: baseline.status === 'pass' && (!long || long.status === 'pass') ? 'pass' : 'fail', scope: manifest.scope, initializationVersion: lastSummary.world.initializationVersion,
-      configHash: final.configHash, baseline, long, audit: { observedBatches, warmupBatches: 4000, playerBatches: days * 16, cashViolations: 0, shareViolations: 0, negativeBalances: 0, frozenResourceViolations: 0, hourCapacityViolations: 0, unbalancedTrades: 0 },
+      npcQuoteVersion: lastSummary.world.npcQuoteVersion, configHash: final.configHash, baseline, long, audit: { observedBatches, warmupBatches: 4000, playerBatches: days * 16, cashViolations: 0, shareViolations: 0, negativeBalances: 0, frozenResourceViolations: 0, hourCapacityViolations: 0, unbalancedTrades: 0 },
       checkpoints, timing: { warmupMs, totalMs: performance.now() - started, operationMs }, finalChecksum: final.checksum,
       finalWallets: lastSummary.wallets, failureReasons: [...baseline.markets, ...(long?.markets ?? [])].filter(market => !market.passes).map(market => `${market.market}: ${market.qualifyingStocks}/20 meet ${market.minimumDays}/${market.days} days`) };
   } catch (error) {
@@ -123,7 +127,8 @@ export function runSeed(manifest, seed, out) {
   result.economicSourceHash = sourceAtStart.economicSourceHash;
   result.runnerSourceHash = sourceAtStart.runnerSourceHash;
   result.economicSourceAtEnd = sourceAtEnd.economicSourceHash;
-  if (sourceAtStart.economicSourceHash !== sourceAtEnd.economicSourceHash) { result.status = 'fail'; result.sourceChanged = true; }
+  result.runnerSourceAtEnd = sourceAtEnd.runnerSourceHash;
+  if (sourceAtStart.economicSourceHash !== sourceAtEnd.economicSourceHash || sourceAtStart.runnerSourceHash !== sourceAtEnd.runnerSourceHash) { result.status = 'fail'; result.sourceChanged = true; }
   writeJson(`${out}/results.json`, result);
   writeFileSync(`${out}/summary.md`, `# P2 seed ${seed}\n\nStatus: ${result.status}; scope: ${manifest.scope}; independent acceptance: pending.\nEconomic source: ${result.economicSourceHash}\nObserved actual batches: ${result.audit?.observedBatches ?? observedBatches}\n${result.error?.message ?? result.failureReasons?.join('\n') ?? ''}\n`);
   return result;
