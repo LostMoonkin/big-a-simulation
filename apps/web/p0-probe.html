@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>P0 图表与 Worker 工程试验</title>
+    <link rel="icon" href="data:," />
+    <style>
+      :root { color-scheme: dark; font-family: system-ui, sans-serif; background: #090e13; color: #cbd5df; }
+      * { box-sizing: border-box; }
+      body { margin: 0; padding: 24px; }
+      main { max-width: 1180px; margin: auto; }
+      h1 { font-size: 22px; margin: 0 0 8px; }
+      p { color: #8495a6; line-height: 1.6; }
+      .toolbar { display: flex; flex-wrap: wrap; gap: 8px; margin: 18px 0; }
+      button { background: #141f2a; color: #bdcddd; border: 1px solid #2c3e50; border-radius: 5px; padding: 9px 14px; cursor: pointer; }
+      button[aria-pressed="true"] { color: #72c9f5; border-color: #4c98bf; background: #162e40; }
+      #chart { height: 460px; border: 1px solid #243342; background: #0c141c; }
+      #chart-status { min-height: 28px; color: #9ac8e6; font-size: 13px; }
+      .panel { border: 1px solid #243342; padding: 16px; margin-top: 16px; background: #0c141c; }
+      .panel h2 { margin: 0 0 12px; font-size: 15px; }
+      #ma-status { display: flex; gap: 22px; flex-wrap: wrap; font-size: 13px; color: #e0bc76; }
+      #worker-status { color: #9ac8e6; }
+      pre { overflow: auto; max-height: 320px; font-size: 12px; color: #8093a5; }
+      a { color: #8ec8ed; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>P0 · 图表与 Worker 工程试验</h1>
+      <p>固定虚构夹具用于检查工程能力。此页尚未接入交易模拟；图形与技术试验结果不代表市场、经济或玩法通过。</p>
+      <div class="toolbar" aria-label="试验操作">
+        <button id="day" type="button" aria-pressed="true">日 K</button>
+        <button id="hour" type="button" aria-pressed="false">小时 K</button>
+        <button id="short" type="button" aria-pressed="false">仅 4 根历史</button>
+        <button id="horizontal" type="button">画水平线</button>
+        <button id="trend" type="button">画趋势线</button>
+        <button id="remove" type="button">删除画线</button>
+        <button id="worker" type="button">重跑 Worker 对照</button>
+      </div>
+      <div id="chart-status" role="status"></div>
+      <div id="chart" role="img" aria-label="固定夹具 K 线图"></div>
+      <section class="panel" aria-label="均线状态">
+        <h2>均线 · 仅已完成窗口</h2>
+        <div id="ma-status"></div>
+      </section>
+      <section class="panel" aria-label="数值与通信对照">
+        <h2>Worker 与 Node 黄金样本</h2>
+        <div id="worker-status" role="status">等待 Worker</div>
+        <pre id="probe-output" aria-label="试验结构输出"></pre>
+      </section>
+      <p>图表：KLineChart 9.8.12（Apache-2.0）。<a href="https://v9.klinecharts.com/en-US/guide/instance-api">版本 9 官方接口</a></p>
+    </main>
+    <script type="module" src="/src/p0-probe.ts"></script>
+  </body>
+</html>

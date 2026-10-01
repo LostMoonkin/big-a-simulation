@@ -1,0 +1,389 @@
+{
+  "scope": "P0 KLineChart/Worker engineering probe only",
+  "status": "pass",
+  "sourceCommitBeforeProbe": "298c9990c178a3ed63b3d2a1ec28405c82cab26f",
+  "sourceHashes": {
+    "apps/web/p0-probe.html": "650a55e220c813493c7c6d9efafc214cf6c418d4b8bb7215baa99b36b8e81fdf",
+    "apps/web/src/p0-probe.ts": "df3d9d403a878cd618e5bdee7b41c71a627198b312e035182732796e1fea6f2a",
+    "apps/web/src/p0-worker.ts": "0bdded0516f65e1bc37e28fa85ffc281eb8fac3e9b145a5dacc79e6bb56673cb",
+    "tools/p0/numeric-probe.ts": "7dd57812782e369545e9b887d4ca9a3f16f8b546d46b556e5aec8337b551cb96",
+    "packages/sim-core/src/numeric.ts": "799d20f92dbf375e060509db1aa4086c5d3919a441a913ee03a2fce59ede66c2",
+    "docs/verification/fixtures/p0-numeric-golden.json": "91085befbfc0de6bf02ca5b6b58c06e4a99e7564909be924c6fb1bcefebe66a4"
+  },
+  "actualCommands": [
+    "npm run typecheck --workspace @big-a/web",
+    "node artifacts/verification/p0/browser-probe.mjs",
+    "node artifacts/verification/p0/browser-probe.mjs http://127.0.0.1:4173/p0-probe.html 'C:/Program Files/Google/Chrome/Application/chrome.exe' artifacts/verification/p0/browser-release"
+  ],
+  "replay": {
+    "setup": "npm ci; npm run dev (5173) or npm run build + npm run preview (4173)",
+    "command": "node tools/p0/browser-probe.mjs <probe-url> <browser-executable> <output-dir>",
+    "playwrightOverride": "P0_PLAYWRIGHT_PATH: absolute path to playwright/index.mjs",
+    "defaultPlaywright": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs",
+    "chromeExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe"
+  },
+  "notes": [
+    "Actual local headless Chrome executed the real Vite page, Canvas library and Dedicated Worker; this is not a browser simulator.",
+    "Read-only diagnostics verify real library data, finished overlay points and actual removal after toolbar and pointer actions; screenshots are additional visual evidence.",
+    "KLineChart 9 has a 500 ms synthetic double-click window. The pointer test waits 550 ms between distinct drawing clicks.",
+    "Initial failed pointer probes remain in ignored artifacts. The final dev and static runs both pass all 11 checks.",
+    "The committed fixture contains compact actual results. Full results and screenshots are generated artifacts and reproducible with the recorded driver.",
+    "No market engine, trading acceptance, long-run economy, default-start performance or cross-browser compatibility conclusion is claimed."
+  ],
+  "runs": [
+    {
+      "kind": "dev",
+      "status": "pass",
+      "recordedAt": "2026-10-01T13:09:23.876Z",
+      "url": "http://127.0.0.1:5173/p0-probe.html",
+      "browserExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "browserVersion": "154.0.8037.58",
+      "nodeVersion": "v26.7.0",
+      "playwrightRuntime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs",
+      "viewport": {
+        "width": 1280,
+        "height": 960
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "checks": [
+        {
+          "id": "chart-initialize",
+          "description": "Real canvas chart initializes at locked version",
+          "status": "pass"
+        },
+        {
+          "id": "day-ma",
+          "description": "Daily MA5/20/60 values and unavailable MA200 use completed windows",
+          "status": "pass"
+        },
+        {
+          "id": "zero-volume",
+          "description": "No-trade candle is a marked flat line with V=0",
+          "status": "pass"
+        },
+        {
+          "id": "worker-golden",
+          "description": "Actual Worker equals freshly executed Node golden field for field",
+          "status": "pass"
+        },
+        {
+          "id": "hour-switch",
+          "description": "Switching to actual hourly fixture replaces chart and MA windows",
+          "status": "pass"
+        },
+        {
+          "id": "insufficient-history",
+          "description": "Only four completed bars show MA unavailable without copied history",
+          "status": "pass"
+        },
+        {
+          "id": "draw-horizontal",
+          "description": "Toolbar and real pointer input create a horizontal line",
+          "status": "pass"
+        },
+        {
+          "id": "draw-trend",
+          "description": "Toolbar and two real pointer points create a trend line",
+          "status": "pass"
+        },
+        {
+          "id": "remove-lines",
+          "description": "Deleting lines removes actual library overlays",
+          "status": "pass"
+        },
+        {
+          "id": "worker-request-ids",
+          "description": "Repeated real Worker requests preserve identity and equal numeric output",
+          "status": "pass"
+        },
+        {
+          "id": "browser-errors",
+          "description": "No page or console error occurred during the probe",
+          "status": "pass"
+        }
+      ],
+      "measurements": {
+        "dailyCandles": 65,
+        "dailyCompletedCandles": 64,
+        "dailyMaPeriods": [
+          5,
+          20,
+          60,
+          200
+        ],
+        "dailyLatestCompletedMa": {
+          "ma5": 12.468,
+          "ma20": 12.142500000000002,
+          "ma60": 11.342333333333338
+        },
+        "dailyLatestUnfinishedMa": {},
+        "dailyStatusAnnotations": [
+          {
+            "id": "p0-status-day-1772409600000",
+            "text": "无成交",
+            "points": [
+              {
+                "timestamp": 1772409600000,
+                "value": 12.36
+              }
+            ]
+          },
+          {
+            "id": "p0-status-day-1772755200000",
+            "text": "进行中",
+            "points": [
+              {
+                "timestamp": 1772755200000,
+                "value": 12.46
+              }
+            ]
+          }
+        ],
+        "hourlyCandles": 33,
+        "hourlyMaPeriods": [
+          5,
+          20
+        ],
+        "hourlyLatestCompletedMa": {
+          "ma5": 11.206,
+          "ma20": 10.880499999999998
+        },
+        "shortCompletedCandles": 4,
+        "shortIndicator": [
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "drawnOverlays": [
+          {
+            "id": "p0-line-1",
+            "name": "horizontalStraightLine",
+            "points": [
+              {
+                "dataIndex": -23,
+                "value": 11.119661625364431
+              }
+            ],
+            "currentStep": -1
+          },
+          {
+            "id": "p0-line-2",
+            "name": "straightLine",
+            "points": [
+              {
+                "timestamp": 1767265200000,
+                "dataIndex": 11,
+                "value": 10.460536260932944
+              },
+              {
+                "timestamp": 1767319200000,
+                "dataIndex": 26,
+                "value": 11.119661625364431
+              }
+            ],
+            "currentStep": -1
+          }
+        ],
+        "overlaysAfterRemoval": [],
+        "workerRequestIds": [
+          "p0-request-1",
+          "p0-request-2"
+        ],
+        "workerPayloadHash": "f0e368ae885e678166e2af2133abc88304be6a01f8552fa569e0cc33a4b640e1",
+        "goldenProtocol": "fixed-q9-v1",
+        "workerGoldenMatches": [
+          true,
+          true
+        ],
+        "pageErrors": []
+      },
+      "rawResults": "artifacts/verification/p0/browser-dev/results.json",
+      "rawResultsSha256": "bdcbc35d296588a9856127e640ddff229621583b3aa62d489332d78497fb7a2a",
+      "screenshots": [
+        "artifacts/verification/p0/browser-dev/day.png",
+        "artifacts/verification/p0/browser-dev/hour.png",
+        "artifacts/verification/p0/browser-dev/short-history.png",
+        "artifacts/verification/p0/browser-dev/drawn-lines.png"
+      ]
+    },
+    {
+      "kind": "release",
+      "status": "pass",
+      "recordedAt": "2026-10-01T13:11:04.078Z",
+      "url": "http://127.0.0.1:4173/p0-probe.html",
+      "browserExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "browserVersion": "154.0.8037.58",
+      "nodeVersion": "v26.7.0",
+      "playwrightRuntime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs",
+      "viewport": {
+        "width": 1280,
+        "height": 960
+      },
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36",
+      "checks": [
+        {
+          "id": "chart-initialize",
+          "description": "Real canvas chart initializes at locked version",
+          "status": "pass"
+        },
+        {
+          "id": "day-ma",
+          "description": "Daily MA5/20/60 values and unavailable MA200 use completed windows",
+          "status": "pass"
+        },
+        {
+          "id": "zero-volume",
+          "description": "No-trade candle is a marked flat line with V=0",
+          "status": "pass"
+        },
+        {
+          "id": "worker-golden",
+          "description": "Actual Worker equals freshly executed Node golden field for field",
+          "status": "pass"
+        },
+        {
+          "id": "hour-switch",
+          "description": "Switching to actual hourly fixture replaces chart and MA windows",
+          "status": "pass"
+        },
+        {
+          "id": "insufficient-history",
+          "description": "Only four completed bars show MA unavailable without copied history",
+          "status": "pass"
+        },
+        {
+          "id": "draw-horizontal",
+          "description": "Toolbar and real pointer input create a horizontal line",
+          "status": "pass"
+        },
+        {
+          "id": "draw-trend",
+          "description": "Toolbar and two real pointer points create a trend line",
+          "status": "pass"
+        },
+        {
+          "id": "remove-lines",
+          "description": "Deleting lines removes actual library overlays",
+          "status": "pass"
+        },
+        {
+          "id": "worker-request-ids",
+          "description": "Repeated real Worker requests preserve identity and equal numeric output",
+          "status": "pass"
+        },
+        {
+          "id": "browser-errors",
+          "description": "No page or console error occurred during the probe",
+          "status": "pass"
+        }
+      ],
+      "measurements": {
+        "dailyCandles": 65,
+        "dailyCompletedCandles": 64,
+        "dailyMaPeriods": [
+          5,
+          20,
+          60,
+          200
+        ],
+        "dailyLatestCompletedMa": {
+          "ma5": 12.468,
+          "ma20": 12.142500000000002,
+          "ma60": 11.342333333333338
+        },
+        "dailyLatestUnfinishedMa": {},
+        "dailyStatusAnnotations": [
+          {
+            "id": "p0-status-day-1772409600000",
+            "text": "无成交",
+            "points": [
+              {
+                "timestamp": 1772409600000,
+                "value": 12.36
+              }
+            ]
+          },
+          {
+            "id": "p0-status-day-1772755200000",
+            "text": "进行中",
+            "points": [
+              {
+                "timestamp": 1772755200000,
+                "value": 12.46
+              }
+            ]
+          }
+        ],
+        "hourlyCandles": 33,
+        "hourlyMaPeriods": [
+          5,
+          20
+        ],
+        "hourlyLatestCompletedMa": {
+          "ma5": 11.206,
+          "ma20": 10.880499999999998
+        },
+        "shortCompletedCandles": 4,
+        "shortIndicator": [
+          {},
+          {},
+          {},
+          {},
+          {}
+        ],
+        "drawnOverlays": [
+          {
+            "id": "p0-line-1",
+            "name": "horizontalStraightLine",
+            "points": [
+              {
+                "dataIndex": -23,
+                "value": 11.119661625364431
+              }
+            ],
+            "currentStep": -1
+          },
+          {
+            "id": "p0-line-2",
+            "name": "straightLine",
+            "points": [
+              {
+                "timestamp": 1767265200000,
+                "dataIndex": 11,
+                "value": 10.460536260932944
+              },
+              {
+                "timestamp": 1767319200000,
+                "dataIndex": 26,
+                "value": 11.119661625364431
+              }
+            ],
+            "currentStep": -1
+          }
+        ],
+        "overlaysAfterRemoval": [],
+        "workerRequestIds": [
+          "p0-request-1",
+          "p0-request-2"
+        ],
+        "workerPayloadHash": "f0e368ae885e678166e2af2133abc88304be6a01f8552fa569e0cc33a4b640e1",
+        "goldenProtocol": "fixed-q9-v1",
+        "workerGoldenMatches": [
+          true,
+          true
+        ],
+        "pageErrors": []
+      },
+      "rawResults": "artifacts/verification/p0/browser-release/results.json",
+      "rawResultsSha256": "0b7bb30f539503ea57cb21e948724b5326f876088d545fffd99e638c203b7d5b",
+      "screenshots": [
+        "artifacts/verification/p0/browser-release/day.png",
+        "artifacts/verification/p0/browser-release/hour.png",
+        "artifacts/verification/p0/browser-release/short-history.png",
+        "artifacts/verification/p0/browser-release/drawn-lines.png"
+      ]
+    }
+  ]
+}
