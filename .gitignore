@@ -1,0 +1,30 @@
+# Dependencies, build output and local caches
+node_modules/
+dist/
+coverage/
+.vite/
+*.tsbuildinfo
+.npm-cache/
+__pycache__/
+*.py[cod]
+.venv/
+
+# Generated experiment/release output and local game saves
+artifacts/
+playwright-report/
+test-results/
+saves/
+*.save.json
+*.log
+
+# Local configuration and secrets
+.env
+.env.*
+!.env.example
+.npmrc
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+.agents/
+.codex/

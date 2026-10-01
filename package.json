@@ -1,0 +1,25 @@
+{
+  "name": "big-a-simulation",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": "^24.0.0 || ^26.0.0",
+    "npm": ">=11 <13"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run dev --workspace @big-a/web --",
+    "typecheck": "npm run typecheck --workspaces",
+    "build": "npm run typecheck && npm run build --workspace @big-a/web",
+    "preview": "npm run preview --workspace @big-a/web --",
+    "check": "npm run build",
+    "check:design": "python tools/design-checks/check_model_arithmetic.py"
+  },
+  "devDependencies": {
+    "typescript": "7.0.2"
+  }
+}
