@@ -6,6 +6,8 @@ P2回流候选world-v2-style-cash按第6节失败处理修订初始化而保持9
 
 ## 1. 进入条件与交付边界
 
+P2第1轮失败后的报价修订只实施 `npc-quote-v2-target-gap`：先冻结[规则5.2](../../design/market-model-rules.md)及[两个保留反例](../../../tests/scenarios/p0/npc-quote-candidate.json)，再在相同资源/数量与实际清算中对照原v1和新v2；补有界响应、成交后需求收敛、现金/可售股不足、旧档规范字节及未知版本拒绝。新世界显式报价版本进入configHash/预设/manifest，旧缺字段档不迁移。冻结后原3572871866/1866980507重新完整250+5；短窗合理后原100+10重新预热/运行，不叠第二调参、不用旧预热替新源、不改90%×80%硬线。未来P3 complete也使用同一报价合同并重新预热。规则/内容0.3.1、schema/math/rng未变，行为由独立报价版本标识，候选未通过前不改阶段通过结论。
+
 输入为0.2玩法/精确规则、验证A01–A32、原始研究和本阶段spec。无需已有游戏代码或线上环境。模型负责人和核心工程共同对规则空白负责；Web工程可并行验证图表及公开视图合同。
 
 本阶段预计产出以下文档/数据，路径为计划路径：`docs/design/market-identities.md`、`docs/design/engineering-baseline.md`、正式与原型配置样本、试验场景、`docs/verification/p0-baseline.md`。如修订已有规则，同步其版本与验证文档；不另建一份含相互冲突公式的“最终版”。

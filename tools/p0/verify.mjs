@@ -10,6 +10,7 @@ import { INITIALIZATION_VERSION } from '../../packages/sim-core/src/world-genera
 
 const read = path => JSON.parse(readFileSync(path,'utf8'));
 const checks=[];
+const quoteCandidate=read('tests/scenarios/p0/npc-quote-candidate.json');
 const check=(id,run)=>{try{const metrics=run();checks.push({id,status:'pass',metrics:metrics??null});}catch(error){checks.push({id,status:'fail',error:error.message});}};
 const sectors=['energy','industry','consumer','infrastructure','digital','health'];
 const concepts=['storage','compute','autonomy','renewal','automation','recycling','longevity','crossborder'];
@@ -86,7 +87,24 @@ check('BASELINE-STYLE-01',()=>{
   for(const [style,alpha]of Object.entries(expectedAlpha))assert.equal(c.styles[style].alphaQ,alpha);
   for(const key of ['betaQ','gammaQ','kTQ','kHQ','themeHQ'])assert.equal(c.disabled[key],'0');
   assert.equal(c.styles.inventory.targetKind,'shares');assert.equal(c.styles.inventory.hourCapacityQ,'100000000');
+  assert.equal(c.npcQuoteVersion,quoteCandidate.npcQuoteVersion);assert.equal(c.quote.gapScale,'initialShares');assert.equal(c.quote.maxLogShiftQ,quoteCandidate.maxLogShiftQ);
   return {alphaQ:expectedAlpha,technicalAndThemeOnlyDisabled:true,scope:'frozen configuration; production economic checks remain P2'};
+});
+
+check('NPC-QUOTE-01-ARITHMETIC',()=>{
+  assert.equal(quoteCandidate.id,'NPC-QUOTE-01');assert.equal(quoteCandidate.npcQuoteVersion,'npc-quote-v2-target-gap');assert.equal(quoteCandidate.legacyNpcQuoteVersion,'npc-quote-v1');
+  const limit=BigInt(quoteCandidate.maxLogShiftQ);assert.equal(limit,120_000_000n);
+  const rows=quoteCandidate.cases.map(c=>{
+    const price=(a,side)=>{assert.ok(Number.isSafeInteger(a.initialShares)&&a.initialShares>0);const gap=BigInt(a.targetShares-a.held),raw=gap*SCALE/BigInt(a.initialShares),shift=raw< -limit?-limit:raw>limit?limit:raw;
+      const reference=BigInt(a.referenceQ),execution=mulQ(reference,expQ(shift));
+      const rounded=q=>Number(side==='buy'?q/SCALE:(q+SCALE-1n)/SCALE);
+      assert.equal(rounded(reference),a.legacyTopPrice);assert.equal(rounded(execution),a.candidateTopPrice);
+      if(side==='buy'){assert.ok(gap>0n);assert.ok(BigInt(a.cash)>=reserve(a.candidateTopPrice,1,1));}else assert.ok(gap<0n&&a.held>0);
+      assert.ok(execution>=mulQ(reference,expQ(-limit))&&execution<=mulQ(reference,expQ(limit)));
+      return {gap:gap.toString(),shiftQ:shift.toString(),legacy:rounded(reference),candidate:rounded(execution)};};
+    const buyer=price(c.buyer,'buy'),seller=price(c.seller,'sell');assert.ok(buyer.legacy<seller.legacy);assert.ok(buyer.candidate>=seller.candidate);
+    return {id:c.id,buyer,seller};});
+  return {npcQuoteVersion:quoteCandidate.npcQuoteVersion,cases:rows,scope:'Fixed participant price arithmetic only; production resources/clearing and new autonomous warmup remain P2 checks'};
 });
 
 // P0 only: bounded exhaustive arithmetic oracle, never used by the game.
@@ -222,9 +240,9 @@ const sourceHash=hash.digest('hex');
 const manifest={phase:'p0',recordedAt:new Date().toISOString(),testedSourceHash:sourceHash,sourceFiles,
   baseCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),rulesVersion:'0.3.1',contentVersion:'0.3.1',schemaVersion:1,mathVersion:'fixed-q9-v1',seedListHash:createHash('sha256').update(readFileSync('tests/scenarios/p0/seeds.json')).digest('hex'),
   runtime:process.version,device:{cpu:os.cpus()[0]?.model.trim(),logicalProcessors:os.cpus().length,memoryBytes:os.totalmem(),os:os.version(),release:os.release()},commands:['npm run verify:p0'],
-  initializationVersion:INITIALIZATION_VERSION,scope:'P0 design/numeric/fixture checks rerun for initialization candidate only; no simulated economy or game acceptance'};
+  initializationVersion:INITIALIZATION_VERSION,npcQuoteVersion:quoteCandidate.npcQuoteVersion,scope:'P0 contract/numeric/fixture checks for initialization and quote candidates; no autonomous economy or game acceptance'};
 mkdirSync('docs/verification/fixtures',{recursive:true});
-writeFileSync(`docs/verification/fixtures/p0-node-results-${INITIALIZATION_VERSION}.json`,JSON.stringify({manifest,status:checks.some(c=>c.status==='fail')?'fail':'pass',checks},null,2)+'\n');
+writeFileSync(`docs/verification/fixtures/p0-node-results-${INITIALIZATION_VERSION}-${quoteCandidate.npcQuoteVersion}.json`,JSON.stringify({manifest,status:checks.some(c=>c.status==='fail')?'fail':'pass',checks},null,2)+'\n');
 for(const c of checks)console.log(`${c.status.toUpperCase()} ${c.id}${c.error?': '+c.error:''}`);
 console.log(`Tested sourceHash ${sourceHash}`);
 if(checks.some(c=>c.status==='fail'))process.exitCode=1;

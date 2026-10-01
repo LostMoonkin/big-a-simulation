@@ -68,6 +68,8 @@ P2首个可玩原型的冻结浏览器范围是本机Windows11上的真实桌面
 
 ## 工具依据、许可和复现
 
+P2第1轮后单一报价候选为 `npc-quote-v2-target-gap`，详见[规则5.2](market-model-rules.md)与[固定反例](../../tests/scenarios/p0/npc-quote-candidate.json)。新完整世界显式保存world.npcQuoteVersion并绑定configHash、生产预设、运行manifest及缓存；缺字段旧world-v1/world-v2-style-cash档有效版本为npc-quote-v1，恢复/查询不补字段，规范字节和原报价保留；未知值拒绝。报价响应只用本人剩余需求/固定初始股数，最大对数偏离±.12；baseline关闭技术/主题项不会关闭该资源执行合同，未来complete共享它并从创建重新预热。交易/内容0.3.1、schema1、fixed-q9-v1、rng-v1不变。原现金候选的250+5失败与原100+10 not_run保留，候选短窗和完整长期结果分别报告，不能混用旧快照或降低门槛。
+
 canonical键顺序的官方定义参照[ECMAScript OrdinaryOwnPropertyKeys](https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-ordinaryownpropertykeys)：数组索引键先数值升序；本协议在普通字符串键的创建顺序前先做UTF-16排序，所以非索引键也与输入插入顺序无关。0.3.1明确现有实现字节，而非另换编码器；新增数字样式键、非规范数字键和嵌套边界黄金。
 
 实际锁：React/react-dom19.3.0 MIT，TypeScript7.0.2 Apache-2.0，Vite8.3.2 MIT，@vitejs/plugin-react6.1.1 MIT，KLineChart9.8.12 Apache-2.0。Node26.7.0、npm12.0.2是本机runtime而非随游戏分发。许可文件由锁定npm包核验；P6随构建保留适用LICENSE/NOTICE。测试采用Node内置assert，P0浏览器试验复用已配置Playwright依赖控制真实Chrome，不加入游戏运行依赖。

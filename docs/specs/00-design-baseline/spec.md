@@ -4,6 +4,8 @@
 
 P2回流修订（2026-10-02）：world-v2-style-cash初始化候选仅调整新建普通钱包现金为按原风格持股比例换算，库存仍25%，股份/参数/报价/保护/硬门槛不变；依据见[核对与保留失败](../../../packages/sim-core/p2-contract-diagnosis.md)、[规则第2节](../../design/market-model-rules.md)及[旧/新完整初值](../../../tests/scenarios/p0/initialization-candidate.json)。历史P0通过记录仍描述world-v1；本候选待P2实际复跑/独立核对，不自动继承原经济通过结论。
 
+P2第1轮已[独立fail](../../verification/p2-independent-round-1.md)：仅提高初现金不足以解决成交覆盖，52,284条报价符合原公式。新增单一报价候选 `npc-quote-v2-target-gap` 将本人剩余需求/初始股数裁在±0.12后，以指数因子调整原R；不改现金初值、持续目标、风格参数、数量、三档、保护或门槛。精确公式、旧档缺字段保持v1和未来complete从头预热合同见[规则5.2](../../design/market-model-rules.md)，可执行反例见[npc-quote-candidate.json](../../../tests/scenarios/p0/npc-quote-candidate.json)。本修订须生产回归及原登记样本重新真实运行；历史P0/P1通过不代表新经济通过。
+
 ## Goal
 
 在正式实现前关闭会改变交易规则、资金行为、存档与验收方式的歧义。当前已有统一价批量竞价和多周期框架，但两市政策传导、资金特点和典型形态仍未定案；40股原型配额、数值实现和完整实验口径也需要固定。

@@ -1,0 +1,34 @@
+{
+  "id": "NPC-QUOTE-01",
+  "status": "candidate-pending-P2-validation",
+  "npcQuoteVersion": "npc-quote-v2-target-gap",
+  "legacyNpcQuoteVersion": "npc-quote-v1",
+  "initializationVersion": "world-v2-style-cash",
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "gapScale": "initialShares",
+  "maxLogShiftQ": "120000000",
+  "gap": "targetShares-held-activeBuyRemaining+activeSellRemaining; after risk restriction",
+  "reservation": "mulQ(referenceQ, expQ(clip(BigInt(gap)*Q9/BigInt(initialShares), -maxLogShiftQ, maxLogShiftQ)))",
+  "source": "docs/verification/p2-independent-round-1.md; actual production books at world255/batch0; initialShares from retained diagnostic-03 initial snapshots",
+  "scope": "Fixed participant input regression, not autonomous warmup or long gate evidence",
+  "preserved": ["initial cash", "26 wallets", "stock allocations", "baseline style parameters", "persistent targets", "review lifecycle", "referenceQ for scores", "hour capacity", "three levels and 20/30/50 quantities", "shared fee-inclusive cash budget", "sellability", "information timing", "protection", "fees", "registered seeds", "90% x 80% gate"],
+  "cases": [
+    {
+      "id": "NPC-QUOTE-A001",
+      "seed": 3572871866,
+      "clock": {"worldDay": 255, "batch": 0},
+      "stockId": "A001",
+      "buyer": {"accountId": "A:shortTrend", "held": 14596043, "targetShares": 16323790, "initialShares": 15238690, "cash": "358730268095", "referenceQ": "4911142622556", "hourCapacity": 100251, "legacyTopPrice": 4911, "candidateTopPrice": 5500},
+      "seller": {"accountId": "A:inventory1", "held": 11390795, "targetShares": 11123944, "initialShares": 11247723, "cash": "108357519596", "referenceQ": "5163121585771", "hourCapacity": 100251, "legacyTopPrice": 5164, "candidateTopPrice": 5043}
+    },
+    {
+      "id": "NPC-QUOTE-A003",
+      "seed": 1866980507,
+      "clock": {"worldDay": 255, "batch": 0},
+      "stockId": "A003",
+      "buyer": {"accountId": "A:inventory1", "held": 6518663, "targetShares": 6519643, "initialShares": 6445534, "cash": "123171615880", "referenceQ": "4837031226788", "hourCapacity": 54680, "legacyTopPrice": 4837, "candidateTopPrice": 4837},
+      "seller": {"accountId": "A:swingTrend", "held": 8116742, "targetShares": 7373133, "initialShares": 8765258, "cash": "414197809097", "referenceQ": "4874608540544", "hourCapacity": 54680, "legacyTopPrice": 4875, "candidateTopPrice": 4479}
+    }
+  ]
+}
