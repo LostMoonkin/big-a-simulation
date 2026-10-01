@@ -1,0 +1,1925 @@
+{
+  "metadata": {
+    "contractVersion": "event-v1",
+    "schemaVersion": 1,
+    "rulesVersion": "0.3.1",
+    "contentVersion": "0.3.1",
+    "mathVersion": "fixed-q9-v1",
+    "rngVersion": "rng-v1",
+    "status": "implementation-fix-awaiting-independent-round-2"
+  },
+  "units": {
+    "q9": {
+      "encoding": "canonical signed scaled-integer decimal string",
+      "scaleQ": "1000000000"
+    },
+    "oneOffLog": "dimensionless log(E) increment before signed business weight",
+    "dailyLog": "dimensionless log(E) increment per completed world day before signed business weight",
+    "financingLevel": "absolute public environment level [-1,1], no cash",
+    "demandDelta": "additive shock to shared demand recursion [-.25,.25]",
+    "clock": "worldDay integer, batch integer 0..15, tick=worldDay*16+batch",
+    "durationDays": "integer world days; [startDay,endDayExclusive)"
+  },
+  "publicSchema": {
+    "required": [
+      "eventId",
+      "templateId",
+      "chainId",
+      "effectId",
+      "version",
+      "previousVersion",
+      "publishedAt",
+      "effectiveUntil",
+      "status",
+      "primaryChannel",
+      "targets",
+      "expectedRange",
+      "reliabilityQ",
+      "effectiveFrom",
+      "coverage",
+      "disclosedResult",
+      "major",
+      "attentionQ",
+      "textSlots",
+      "text"
+    ],
+    "statuses": [
+      "preview",
+      "update",
+      "result",
+      "denied",
+      "expired",
+      "archived"
+    ],
+    "channels": [
+      "operatingLog",
+      "rateOutlook",
+      "effectiveFinancing",
+      "sharedDemand"
+    ],
+    "rangeComponents": [
+      "oneOffLog",
+      "dailyLog",
+      "financingLevel",
+      "demandDelta"
+    ],
+    "integerRangeComponents": [
+      "durationDays",
+      "startDelayDays"
+    ],
+    "rangeFields": [
+      "meanQ",
+      "lowQ",
+      "highQ"
+    ],
+    "targetVariants": {
+      "company": [
+        "stockId",
+        "businessWeightQ",
+        "businessSource"
+      ],
+      "market": [
+        "marketId"
+      ],
+      "world": [
+        "worldId"
+      ]
+    },
+    "privateFieldsForbidden": [
+      "creationTick",
+      "seed",
+      "branch",
+      "futureNodes",
+      "privateResult",
+      "resultKey",
+      "applicationMarks",
+      "coverageMarks"
+    ],
+    "pendingExpiryDays": 20,
+    "verifiedEffectiveUntil": null,
+    "pendingContinuousPointEstimate": "public startDelayDays.mean and durationDays.mean; mean=floor((min+max)/2); future private duration is not used"
+  },
+  "generation": {
+    "dailyProbabilityQ": {
+      "company": "350000000",
+      "sector": "120000000",
+      "macro": "30000000"
+    },
+    "maximumNewChainsPerCategoryPerDay": 1,
+    "maximumUnresolvedMajorChainsPerCompany": 1,
+    "maximumUnresolvedChainsPerConcept": 2,
+    "templateWeightsQ": {
+      "company": {
+        "O01": "350000000",
+        "O02": "350000000",
+        "I01": "200000000",
+        "I02": "100000000"
+      },
+      "sector": {
+        "S01": "500000000",
+        "S02": "500000000"
+      },
+      "macro": {
+        "M01": "600000000",
+        "M02": "400000000"
+      }
+    },
+    "eligibility": "world/template eligibility and public business exposure; filter legal targets and unresolved chain caps before sorted-ID selection; no eligible reference means skip I02",
+    "rootBatches": [
+      0,
+      4,
+      8,
+      12
+    ],
+    "dayOnlyTemplates": [
+      "M01",
+      "M02",
+      "S02"
+    ],
+    "objectSelection": "sorted stable ID; index=floor(uniformQ*n/SCALE); empty set skips",
+    "randomKeys": [
+      {
+        "purpose": "event-candidate",
+        "entity": "category/<category>",
+        "tick": "worldDay*16",
+        "slot": 0
+      },
+      {
+        "purpose": "event-template",
+        "entity": "category/<category>",
+        "tick": "worldDay*16",
+        "slot": 0
+      },
+      {
+        "purpose": "event-target",
+        "entity": "<templateId>/<scopeId>",
+        "tick": "worldDay*16",
+        "slot": 0
+      },
+      {
+        "purpose": "event-batch",
+        "entity": "<rootId>/publish",
+        "tick": "creationTick",
+        "slot": 0
+      },
+      {
+        "purpose": "event-expectation",
+        "entity": "<rootId>/<effectName>.<component>",
+        "tick": "creationTick",
+        "slot": 0
+      },
+      {
+        "purpose": "event-result",
+        "entity": "<rootId>/<effectName>.<component>",
+        "tick": "creationTick",
+        "slot": 0
+      },
+      {
+        "purpose": "event-duration",
+        "entity": "<rootId>/operating.durationDays",
+        "tick": "creationTick",
+        "slot": 0
+      },
+      {
+        "purpose": "event-delay",
+        "entity": "<rootId>/<nodeName>",
+        "tick": "creationTick",
+        "slot": 0
+      },
+      {
+        "purpose": "event-branch",
+        "entity": "<rootId>/branch",
+        "tick": "creationTick",
+        "slot": 0
+      },
+      {
+        "purpose": "event-update",
+        "entity": "<rootId>/<effectName>.<component>",
+        "tick": "creationTick",
+        "slot": "newVersion-1"
+      }
+    ],
+    "rootId": "event-v1/<templateId>/<scopeId>/<targetId>/<creationTick>",
+    "nodeId": "<rootId>/node/<nodeName>",
+    "effectId": "<rootId>/effect/<effectName>"
+  },
+  "distributions": {
+    "uniformMean": "clip(baseQ+mulQ(halfWidthQ,2*uniformQ-SCALE),minQ,maxQ)",
+    "boundedNormal": "clip(meanQ+mulQ(sigmaQ,normalQ),minQ,maxQ); normalQ=clip(sum(12 uniformQ)-6*SCALE,-3*SCALE,3*SCALE)",
+    "publicRange": "lowQ=clip(meanQ-3*sigmaQ,minQ,maxQ); highQ=clip(meanQ+3*sigmaQ,minQ,maxQ)",
+    "integerUniform": "min+floor(uniformQ*(max-min+1)/SCALE); inclusive min,max",
+    "categorical": "first cumulative probability strictly greater than uniformQ; half-open intervals",
+    "inheritSource": "same effect result and parameter tuple; no additional draw",
+    "boundedNormalAroundOldMean": "clip(oldMeanQ+mulQ(sourceSigmaQ/2,normalQ),sourceMinQ,sourceMaxQ); actual result remains unchanged"
+  },
+  "templates": [
+    {
+      "id": "O01",
+      "category": "company",
+      "defaultChannel": "operatingLog",
+      "mode": "realize",
+      "parameters": {
+        "oneOffLog": {
+          "baseQ": "60000000",
+          "halfWidthQ": "20000000",
+          "sigmaQ": "20000000",
+          "minQ": "-200000000",
+          "maxQ": "200000000",
+          "meanDistribution": "uniformMean",
+          "resultDistribution": "boundedNormal"
+        }
+      },
+      "schedule": {
+        "resultDelayDays": {
+          "min": 5,
+          "max": 10
+        },
+        "resultBatch": 0
+      },
+      "major": "publicReferenceChange5Percent",
+      "attentionQ": "250000000",
+      "reliabilityByStatusQ": {
+        "preview": "650000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "{objectName}采购结果公布",
+        "body": "{businessRelation}；{resultOrUnpublished}（{unit}），此前预期{previousExpectation}，{risk}。"
+      }
+    },
+    {
+      "id": "O02",
+      "category": "company",
+      "defaultChannel": "operatingLog",
+      "mode": "realize",
+      "parameters": {
+        "oneOffLog": {
+          "baseQ": "40000000",
+          "halfWidthQ": "20000000",
+          "sigmaQ": "15000000",
+          "minQ": "-100000000",
+          "maxQ": "100000000",
+          "meanDistribution": "uniformMean",
+          "resultDistribution": "boundedNormal"
+        },
+        "dailyLog": {
+          "baseQ": "400000",
+          "halfWidthQ": "200000",
+          "sigmaQ": "200000",
+          "minQ": "-2000000",
+          "maxQ": "2000000",
+          "meanDistribution": "uniformMean",
+          "resultDistribution": "boundedNormal"
+        },
+        "durationDays": {
+          "min": 5,
+          "max": 20,
+          "distribution": "integerUniform"
+        }
+      },
+      "schedule": {
+        "resultDelayDays": {
+          "min": 8,
+          "max": 8
+        },
+        "resultBatch": 0
+      },
+      "major": "publicReferenceChange5Percent",
+      "attentionQ": "250000000",
+      "reliabilityByStatusQ": {
+        "preview": "650000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "{objectName}产能进展",
+        "body": "{expectedRange}；{knownEffectivePeriod}，{resultOrUnpublished}（{unit}）；{businessRelation}，{risk}。"
+      }
+    },
+    {
+      "id": "S01",
+      "category": "sector",
+      "defaultChannel": "operatingLog",
+      "mode": "preview",
+      "parameters": {
+        "resultTemplate": "O01",
+        "oneOffLog": {
+          "baseQ": "60000000",
+          "halfWidthQ": "20000000",
+          "sigmaQ": "20000000",
+          "minQ": "-200000000",
+          "maxQ": "200000000",
+          "meanDistribution": "uniformMean",
+          "resultDistribution": "boundedNormal"
+        }
+      },
+      "schedule": {
+        "resultDelayDays": {
+          "min": 5,
+          "max": 10
+        },
+        "resultBatch": 0
+      },
+      "major": "declared",
+      "attentionQ": "300000000",
+      "reliabilityByStatusQ": {
+        "preview": "650000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "{objectName}政策配置预告",
+        "body": "{businessRelation}；预期{expectedRange}（{unit}），可靠度{reliability}，{resultOrUnpublished}；{risk}。"
+      }
+    },
+    {
+      "id": "S02",
+      "category": "sector",
+      "defaultChannel": "effectiveFinancing",
+      "mode": "realize",
+      "parameters": {
+        "financingLevel": {
+          "baseQ": "0",
+          "halfWidthQ": "0",
+          "sigmaQ": "150000000",
+          "minQ": "-1000000000",
+          "maxQ": "1000000000",
+          "meanDistribution": "uniformMean",
+          "resultDistribution": "boundedNormal",
+          "baseSource": "currentPublicRateOutlookQ"
+        },
+        "linkedResult": "C02.policyResult"
+      },
+      "schedule": {
+        "resultDelayDays": {
+          "min": 5,
+          "max": 5
+        },
+        "resultBatch": 0
+      },
+      "major": "declared",
+      "attentionQ": "200000000",
+      "reliabilityByStatusQ": {
+        "preview": "650000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "{objectName}融资条件生效",
+        "body": "融资水平{resultOrUnpublished}，{knownEffectivePeriod}；负债敏感度经经营模型传导，{risk}。"
+      }
+    },
+    {
+      "id": "M01",
+      "category": "macro",
+      "defaultChannel": "rateOutlook",
+      "mode": "preview",
+      "parameters": {
+        "financingLevel": {
+          "baseQ": "300000000",
+          "halfWidthQ": "200000000",
+          "sigmaQ": "150000000",
+          "minQ": "-1000000000",
+          "maxQ": "1000000000",
+          "meanDistribution": "uniformMean",
+          "resultDistribution": "boundedNormal"
+        },
+        "negativeBaseQ": "-300000000",
+        "linkedEffectiveTemplate": "S02"
+      },
+      "schedule": {
+        "verificationDelayDays": {
+          "min": 5,
+          "max": 5
+        },
+        "withdrawDelayDays": {
+          "min": 7,
+          "max": 7
+        },
+        "resultBatch": 0
+      },
+      "major": "declared",
+      "attentionQ": "300000000",
+      "reliabilityByStatusQ": {
+        "preview": "650000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "{objectName}融资预期更新",
+        "body": "预期水平{expectedRange}，此前{previousExpectation}；{knownEffectivePeriod}，{resultOrUnpublished}，{risk}。"
+      }
+    },
+    {
+      "id": "M02",
+      "category": "macro",
+      "defaultChannel": "sharedDemand",
+      "mode": "realize",
+      "parameters": {
+        "demandDelta": {
+          "baseQ": "50000000",
+          "halfWidthQ": "50000000",
+          "sigmaQ": "50000000",
+          "minQ": "-250000000",
+          "maxQ": "250000000",
+          "meanDistribution": "uniformMean",
+          "resultDistribution": "boundedNormal"
+        }
+      },
+      "schedule": {
+        "resultDelayDays": {
+          "min": 3,
+          "max": 3
+        },
+        "resultBatch": 0
+      },
+      "major": "absPublicDemandDeltaAtLeastPoint10",
+      "attentionQ": "200000000",
+      "reliabilityByStatusQ": {
+        "preview": "650000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "共同需求指标变动",
+        "body": "预期增量{expectedRange}（{unit}）；{resultOrUnpublished}，各公司暴露不同，{risk}。"
+      }
+    },
+    {
+      "id": "I01",
+      "category": "company",
+      "defaultChannel": "operatingLog",
+      "mode": "reference",
+      "parameters": {
+        "defaultSourceTemplate": "O01",
+        "resultDistribution": "inheritSource",
+        "allowedReferenceChannels": [
+          "operatingLog",
+          "rateOutlook"
+        ],
+        "reliabilityQ": "450000000"
+      },
+      "schedule": {
+        "confirmPolicyDelayDays": 4,
+        "denyDelayDays": 6,
+        "expiryDays": 20,
+        "preserveRootBatchForDenyAndExpiry": true
+      },
+      "major": "never",
+      "attentionQ": "200000000",
+      "reliabilityByStatusQ": {
+        "preview": "450000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "{objectName}先行线索",
+        "body": "{businessRelation}；预期{expectedRange}（{unit}），可靠度{reliability}，{resultOrUnpublished}，{risk}。"
+      }
+    },
+    {
+      "id": "I02",
+      "category": "company",
+      "defaultChannel": "operatingLog",
+      "mode": "reference",
+      "parameters": {
+        "defaultSourceTemplate": "O02",
+        "resultDistribution": "inheritSource",
+        "allowedReferenceChannels": [
+          "operatingLog",
+          "rateOutlook"
+        ],
+        "modes": [
+          "guidance",
+          "update",
+          "verify",
+          "deny"
+        ],
+        "updateDistribution": "boundedNormalAroundOldMean",
+        "updateSigmaDivisor": 2,
+        "reliabilityByModeQ": {
+          "guidance": "650000000",
+          "update": "650000000",
+          "verify": "1000000000",
+          "deny": "1000000000"
+        }
+      },
+      "schedule": {
+        "guidanceToResultDays": 8,
+        "updateDelayDays": 7,
+        "expiryDays": 20
+      },
+      "major": "sourceConditionWithActualPublicChange",
+      "attentionQ": "100000000",
+      "reliabilityByStatusQ": {
+        "preview": "650000000",
+        "update": "650000000",
+        "result": "1000000000",
+        "denied": "1000000000",
+        "expired": "1000000000",
+        "archived": "1000000000"
+      },
+      "textSlots": [
+        "objectName",
+        "businessRelation",
+        "previousExpectation",
+        "expectedRange",
+        "unit",
+        "reliability",
+        "knownEffectivePeriod",
+        "resultOrUnpublished",
+        "risk"
+      ],
+      "text": {
+        "title": "{objectName}信息核实与指引",
+        "body": "此前{previousExpectation}，本次{expectedRange}（{unit}）；{resultOrUnpublished}，{knownEffectivePeriod}，{risk}。"
+      }
+    }
+  ],
+  "chains": [
+    {
+      "id": "C01",
+      "members": [
+        "I01",
+        "S01",
+        "O01",
+        "I02"
+      ],
+      "root": "clue",
+      "effects": [
+        {
+          "name": "operating",
+          "channel": "operatingLog",
+          "resultSource": "O01"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "clue",
+          "templateId": "I01",
+          "dayOffset": 0,
+          "effect": "operating"
+        },
+        {
+          "id": "policy",
+          "templateId": "S01",
+          "dayOffset": 4,
+          "batch": 0,
+          "effect": "operating"
+        },
+        {
+          "id": "delivery",
+          "templateId": "O01",
+          "dayOffset": {
+            "min": 9,
+            "max": 14
+          },
+          "batch": 0,
+          "effect": "operating"
+        },
+        {
+          "id": "verified",
+          "templateId": "I02",
+          "afterNode": "delivery",
+          "delayDays": 1,
+          "batch": 0,
+          "mode": "verify",
+          "effect": "operating"
+        },
+        {
+          "id": "denied",
+          "templateId": "I02",
+          "dayOffset": 6,
+          "preserveRootBatch": true,
+          "mode": "deny",
+          "effect": "operating"
+        },
+        {
+          "id": "expired",
+          "templateId": "I01",
+          "dayOffset": 20,
+          "preserveRootBatch": true,
+          "mode": "expire",
+          "effect": "operating"
+        }
+      ],
+      "branches": [
+        {
+          "id": "confirm",
+          "probabilityQ": "650000000",
+          "path": [
+            "clue",
+            "policy",
+            "delivery",
+            "verified"
+          ]
+        },
+        {
+          "id": "deny",
+          "probabilityQ": "250000000",
+          "path": [
+            "clue",
+            "denied"
+          ]
+        },
+        {
+          "id": "expire",
+          "probabilityQ": "100000000",
+          "path": [
+            "clue",
+            "expired"
+          ]
+        }
+      ],
+      "edges": [
+        [
+          "clue",
+          "policy"
+        ],
+        [
+          "policy",
+          "delivery"
+        ],
+        [
+          "delivery",
+          "verified"
+        ],
+        [
+          "clue",
+          "denied"
+        ],
+        [
+          "clue",
+          "expired"
+        ]
+      ]
+    },
+    {
+      "id": "C02",
+      "members": [
+        "M01",
+        "S02",
+        "I02",
+        "O02"
+      ],
+      "root": "outlook",
+      "effects": [
+        {
+          "name": "outlook",
+          "channel": "rateOutlook",
+          "resultSource": "M01",
+          "sharedResult": "policyResult"
+        },
+        {
+          "name": "effective",
+          "channel": "effectiveFinancing",
+          "resultSource": "M01",
+          "sharedResult": "policyResult"
+        },
+        {
+          "name": "operating",
+          "channel": "operatingLog",
+          "resultSource": "O02"
+        }
+      ],
+      "nodes": [
+        {
+          "id": "outlook",
+          "templateId": "M01",
+          "dayOffset": 0,
+          "batch": 0,
+          "effect": "outlook"
+        },
+        {
+          "id": "effective",
+          "templateId": "S02",
+          "dayOffset": 5,
+          "batch": 0,
+          "effect": "effective",
+          "alsoPublishSourceResult": "outlook"
+        },
+        {
+          "id": "guidance",
+          "templateId": "I02",
+          "dayOffset": 8,
+          "batch": 0,
+          "mode": "guidance",
+          "effect": "operating"
+        },
+        {
+          "id": "ramp",
+          "templateId": "O02",
+          "dayOffset": 16,
+          "batch": 0,
+          "effect": "operating"
+        },
+        {
+          "id": "withdrawn",
+          "templateId": "I02",
+          "dayOffset": 7,
+          "batch": 0,
+          "mode": "deny",
+          "effect": "outlook"
+        }
+      ],
+      "branches": [
+        {
+          "id": "implement",
+          "probabilityQ": "700000000",
+          "path": [
+            "outlook",
+            "effective",
+            "guidance",
+            "ramp"
+          ]
+        },
+        {
+          "id": "withdraw",
+          "probabilityQ": "300000000",
+          "path": [
+            "outlook",
+            "withdrawn"
+          ]
+        }
+      ],
+      "edges": [
+        [
+          "outlook",
+          "effective"
+        ],
+        [
+          "effective",
+          "guidance"
+        ],
+        [
+          "guidance",
+          "ramp"
+        ],
+        [
+          "outlook",
+          "withdrawn"
+        ]
+      ]
+    }
+  ],
+  "rngSamples": [
+    {
+      "kind": "uniform",
+      "key": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/I01/market-A/A001/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 1046655606,
+      "expectedQ": "243693498"
+    },
+    {
+      "kind": "normal",
+      "key": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/I01/market-A/A001/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "expectedQ": "-121321675"
+    },
+    {
+      "kind": "uniform",
+      "key": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M01/market-B/B/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 2013091642,
+      "expectedQ": "468709422"
+    },
+    {
+      "kind": "normal",
+      "key": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M01/market-B/B/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "expectedQ": "962131232"
+    },
+    {
+      "kind": "uniform",
+      "key": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M01/market-B/B/4000/operating.dailyLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 3734223889,
+      "expectedQ": "869441751"
+    },
+    {
+      "kind": "normal",
+      "key": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M01/market-B/B/4000/operating.dailyLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "expectedQ": "-438478962"
+    },
+    {
+      "kind": "uniform",
+      "key": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M01/market-B/B/4000/policy.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 1108914854,
+      "expectedQ": "258189359"
+    },
+    {
+      "kind": "normal",
+      "key": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M01/market-B/B/4000/policy.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "expectedQ": "2381894805"
+    },
+    {
+      "kind": "uniform",
+      "key": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M02/world/world/4000/demand.demandDelta",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 2404483364,
+      "expectedQ": "559837409"
+    },
+    {
+      "kind": "normal",
+      "key": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M02/world/world/4000/demand.demandDelta",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "expectedQ": "181382923"
+    },
+    {
+      "kind": "uniform",
+      "key": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/S02/market-B/B/4000/effective.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 4282515898,
+      "expectedQ": "997100932"
+    },
+    {
+      "kind": "normal",
+      "key": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/S02/market-B/B/4000/effective.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "expectedQ": "-373343391"
+    },
+    {
+      "kind": "normal",
+      "key": {
+        "seed": 42,
+        "purpose": "event-update",
+        "entity": "event-v1/I01/market-A/A001/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 1
+      },
+      "expectedQ": "361566608"
+    }
+  ],
+  "outcomeDraws": [
+    {
+      "id": "O01-result",
+      "parameters": {
+        "baseQ": "60000000",
+        "halfWidthQ": "20000000",
+        "sigmaQ": "20000000",
+        "minQ": "-200000000",
+        "maxQ": "200000000",
+        "meanDistribution": "uniformMean",
+        "resultDistribution": "boundedNormal"
+      },
+      "expectationKey": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/I01/market-A/A001/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "resultKey": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/I01/market-A/A001/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "meanQ": "49747740",
+      "lowQ": "-10252260",
+      "highQ": "109747740",
+      "resultQ": "47321307"
+    },
+    {
+      "id": "O02-oneOff",
+      "parameters": {
+        "baseQ": "40000000",
+        "halfWidthQ": "20000000",
+        "sigmaQ": "15000000",
+        "minQ": "-100000000",
+        "maxQ": "100000000",
+        "meanDistribution": "uniformMean",
+        "resultDistribution": "boundedNormal"
+      },
+      "expectationKey": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M01/market-B/B/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "resultKey": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M01/market-B/B/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "meanQ": "38748377",
+      "lowQ": "-6251623",
+      "highQ": "83748377",
+      "resultQ": "53180345"
+    },
+    {
+      "id": "O02-daily",
+      "parameters": {
+        "baseQ": "400000",
+        "halfWidthQ": "200000",
+        "sigmaQ": "200000",
+        "minQ": "-2000000",
+        "maxQ": "2000000",
+        "meanDistribution": "uniformMean",
+        "resultDistribution": "boundedNormal"
+      },
+      "expectationKey": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M01/market-B/B/4000/operating.dailyLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "resultKey": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M01/market-B/B/4000/operating.dailyLog",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "meanQ": "547776",
+      "lowQ": "-52224",
+      "highQ": "1147776",
+      "resultQ": "460081"
+    },
+    {
+      "id": "M01-policy",
+      "parameters": {
+        "baseQ": "300000000",
+        "halfWidthQ": "200000000",
+        "sigmaQ": "150000000",
+        "minQ": "-1000000000",
+        "maxQ": "1000000000",
+        "meanDistribution": "uniformMean",
+        "resultDistribution": "boundedNormal"
+      },
+      "expectationKey": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M01/market-B/B/4000/policy.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "resultKey": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M01/market-B/B/4000/policy.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "meanQ": "203275744",
+      "lowQ": "-246724256",
+      "highQ": "653275744",
+      "resultQ": "560559964"
+    },
+    {
+      "id": "M02-demand",
+      "parameters": {
+        "baseQ": "50000000",
+        "halfWidthQ": "50000000",
+        "sigmaQ": "50000000",
+        "minQ": "-250000000",
+        "maxQ": "250000000",
+        "meanDistribution": "uniformMean",
+        "resultDistribution": "boundedNormal"
+      },
+      "expectationKey": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/M02/world/world/4000/demand.demandDelta",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "resultKey": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/M02/world/world/4000/demand.demandDelta",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "meanQ": "55983740",
+      "lowQ": "-94016260",
+      "highQ": "205983740",
+      "resultQ": "65052886"
+    },
+    {
+      "id": "S02-standalone",
+      "parameters": {
+        "baseQ": "500000000",
+        "halfWidthQ": "0",
+        "sigmaQ": "150000000",
+        "minQ": "-1000000000",
+        "maxQ": "1000000000",
+        "meanDistribution": "uniformMean",
+        "resultDistribution": "boundedNormal"
+      },
+      "expectationKey": {
+        "seed": 42,
+        "purpose": "event-expectation",
+        "entity": "event-v1/S02/market-B/B/4000/effective.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "resultKey": {
+        "seed": 42,
+        "purpose": "event-result",
+        "entity": "event-v1/S02/market-B/B/4000/effective.financingLevel",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "meanQ": "500000000",
+      "lowQ": "50000000",
+      "highQ": "950000000",
+      "resultQ": "443998492"
+    }
+  ],
+  "branchSamples": [
+    {
+      "chainId": "C01",
+      "branch": "confirm",
+      "kind": "uniform",
+      "key": {
+        "seed": 0,
+        "purpose": "event-branch",
+        "entity": "event-v1/I01/market-A/A001/4000/branch",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 868789961,
+      "expectedQ": "202280925"
+    },
+    {
+      "chainId": "C01",
+      "branch": "deny",
+      "kind": "uniform",
+      "key": {
+        "seed": 3,
+        "purpose": "event-branch",
+        "entity": "event-v1/I01/market-A/A001/4000/branch",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 2879953272,
+      "expectedQ": "670541374"
+    },
+    {
+      "chainId": "C01",
+      "branch": "expire",
+      "kind": "uniform",
+      "key": {
+        "seed": 10,
+        "purpose": "event-branch",
+        "entity": "event-v1/I01/market-A/A001/4000/branch",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 3867102751,
+      "expectedQ": "900380022"
+    },
+    {
+      "chainId": "C02",
+      "branch": "implement",
+      "kind": "uniform",
+      "key": {
+        "seed": 1,
+        "purpose": "event-branch",
+        "entity": "event-v1/M01/market-B/B/4000/branch",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 1081844549,
+      "expectedQ": "251886562"
+    },
+    {
+      "chainId": "C02",
+      "branch": "withdraw",
+      "kind": "uniform",
+      "key": {
+        "seed": 0,
+        "purpose": "event-branch",
+        "entity": "event-v1/M01/market-B/B/4000/branch",
+        "creationTick": 4000,
+        "slot": 0
+      },
+      "u32": 3536366879,
+      "expectedQ": "823374576"
+    }
+  ],
+  "publicSampleSemantics": "Independent typed projection examples, not one combined chain: only O01 preview/result share a version sequence; I02 update has prior public version 1 with meanQ=60000000 from UPDATE-DRAW-01.",
+  "publicSamples": [
+    {
+      "eventId": "sample/O01",
+      "templateId": "O01",
+      "chainId": null,
+      "effectId": "sample/effect/O01",
+      "version": 1,
+      "previousVersion": null,
+      "publishedAt": {
+        "worldDay": 250,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 270,
+        "batch": 0
+      },
+      "status": "preview",
+      "primaryChannel": "operatingLog",
+      "targets": [
+        {
+          "stockId": "A001",
+          "businessWeightQ": "1000000000",
+          "businessSource": "公开采购设备业务"
+        }
+      ],
+      "expectedRange": {
+        "oneOffLog": {
+          "meanQ": "49747740",
+          "lowQ": "-10252260",
+          "highQ": "109747740"
+        }
+      },
+      "reliabilityQ": "650000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": true,
+      "attentionQ": "250000000",
+      "textSlots": {
+        "objectName": "甲一号",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "无前版",
+        "expectedRange": "公开预期区间",
+        "unit": "对数经营变化",
+        "reliability": "0.65",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/O02",
+      "templateId": "O02",
+      "chainId": null,
+      "effectId": "sample/effect/O02",
+      "version": 1,
+      "previousVersion": null,
+      "publishedAt": {
+        "worldDay": 250,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 270,
+        "batch": 0
+      },
+      "status": "preview",
+      "primaryChannel": "operatingLog",
+      "targets": [
+        {
+          "stockId": "A001",
+          "businessWeightQ": "1000000000",
+          "businessSource": "公开采购设备业务"
+        }
+      ],
+      "expectedRange": {
+        "oneOffLog": {
+          "meanQ": "38748377",
+          "lowQ": "-6251623",
+          "highQ": "83748377"
+        },
+        "dailyLog": {
+          "meanQ": "547776",
+          "lowQ": "-52224",
+          "highQ": "1147776"
+        },
+        "durationDays": {
+          "min": 5,
+          "max": 20,
+          "mean": 12
+        },
+        "startDelayDays": {
+          "min": 8,
+          "max": 8,
+          "mean": 8
+        }
+      },
+      "reliabilityQ": "650000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": false,
+      "attentionQ": "250000000",
+      "textSlots": {
+        "objectName": "甲一号",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "无前版",
+        "expectedRange": "公开预期区间",
+        "unit": "对数经营变化",
+        "reliability": "0.65",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/S01",
+      "templateId": "S01",
+      "chainId": null,
+      "effectId": "sample/effect/S01",
+      "version": 1,
+      "previousVersion": null,
+      "publishedAt": {
+        "worldDay": 250,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 270,
+        "batch": 0
+      },
+      "status": "preview",
+      "primaryChannel": "operatingLog",
+      "targets": [
+        {
+          "stockId": "A001",
+          "businessWeightQ": "600000000",
+          "businessSource": "采购设备供应商"
+        },
+        {
+          "stockId": "A002",
+          "businessWeightQ": "-300000000",
+          "businessSource": "被新设备替代的原业务"
+        }
+      ],
+      "expectedRange": {
+        "oneOffLog": {
+          "meanQ": "49747740",
+          "lowQ": "-10252260",
+          "highQ": "109747740"
+        }
+      },
+      "reliabilityQ": "650000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": true,
+      "attentionQ": "300000000",
+      "textSlots": {
+        "objectName": "甲一号",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "无前版",
+        "expectedRange": "公开预期区间",
+        "unit": "对数经营变化",
+        "reliability": "0.65",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/S02",
+      "templateId": "S02",
+      "chainId": null,
+      "effectId": "sample/effect/S02",
+      "version": 1,
+      "previousVersion": null,
+      "publishedAt": {
+        "worldDay": 250,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 270,
+        "batch": 0
+      },
+      "status": "preview",
+      "primaryChannel": "effectiveFinancing",
+      "targets": [
+        {
+          "marketId": "B"
+        }
+      ],
+      "expectedRange": {
+        "financingLevel": {
+          "meanQ": "500000000",
+          "lowQ": "50000000",
+          "highQ": "950000000"
+        }
+      },
+      "reliabilityQ": "650000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": true,
+      "attentionQ": "200000000",
+      "textSlots": {
+        "objectName": "乙市场",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "无前版",
+        "expectedRange": "公开预期区间",
+        "unit": "融资水平",
+        "reliability": "0.65",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/M01",
+      "templateId": "M01",
+      "chainId": null,
+      "effectId": "sample/effect/M01",
+      "version": 1,
+      "previousVersion": null,
+      "publishedAt": {
+        "worldDay": 250,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 270,
+        "batch": 0
+      },
+      "status": "preview",
+      "primaryChannel": "rateOutlook",
+      "targets": [
+        {
+          "marketId": "B"
+        }
+      ],
+      "expectedRange": {
+        "financingLevel": {
+          "meanQ": "203275744",
+          "lowQ": "-246724256",
+          "highQ": "653275744"
+        }
+      },
+      "reliabilityQ": "650000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": true,
+      "attentionQ": "300000000",
+      "textSlots": {
+        "objectName": "乙市场",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "无前版",
+        "expectedRange": "公开预期区间",
+        "unit": "融资水平",
+        "reliability": "0.65",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/M02",
+      "templateId": "M02",
+      "chainId": null,
+      "effectId": "sample/effect/M02",
+      "version": 1,
+      "previousVersion": null,
+      "publishedAt": {
+        "worldDay": 250,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 270,
+        "batch": 0
+      },
+      "status": "preview",
+      "primaryChannel": "sharedDemand",
+      "targets": [
+        {
+          "worldId": "world"
+        }
+      ],
+      "expectedRange": {
+        "demandDelta": {
+          "meanQ": "55983740",
+          "lowQ": "-94016260",
+          "highQ": "205983740"
+        }
+      },
+      "reliabilityQ": "650000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": false,
+      "attentionQ": "200000000",
+      "textSlots": {
+        "objectName": "共同需求",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "无前版",
+        "expectedRange": "公开预期区间",
+        "unit": "需求增量",
+        "reliability": "0.65",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/I01",
+      "templateId": "I01",
+      "chainId": null,
+      "effectId": "sample/effect/I01",
+      "version": 1,
+      "previousVersion": null,
+      "publishedAt": {
+        "worldDay": 250,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 270,
+        "batch": 0
+      },
+      "status": "preview",
+      "primaryChannel": "operatingLog",
+      "targets": [
+        {
+          "stockId": "A001",
+          "businessWeightQ": "1000000000",
+          "businessSource": "公开采购设备业务"
+        }
+      ],
+      "expectedRange": {
+        "oneOffLog": {
+          "meanQ": "49747740",
+          "lowQ": "-10252260",
+          "highQ": "109747740"
+        }
+      },
+      "reliabilityQ": "450000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": false,
+      "attentionQ": "200000000",
+      "textSlots": {
+        "objectName": "甲一号",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "无前版",
+        "expectedRange": "公开预期区间",
+        "unit": "对数经营变化",
+        "reliability": "0.45",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/I02",
+      "templateId": "I02",
+      "chainId": null,
+      "effectId": "sample/effect/I02",
+      "version": 2,
+      "previousVersion": 1,
+      "publishedAt": {
+        "worldDay": 257,
+        "batch": 0
+      },
+      "effectiveUntil": {
+        "worldDay": 277,
+        "batch": 0
+      },
+      "status": "update",
+      "primaryChannel": "operatingLog",
+      "targets": [
+        {
+          "stockId": "A001",
+          "businessWeightQ": "1000000000",
+          "businessSource": "公开采购设备业务"
+        }
+      ],
+      "expectedRange": {
+        "oneOffLog": {
+          "meanQ": "63615666",
+          "lowQ": "3615666",
+          "highQ": "123615666"
+        }
+      },
+      "reliabilityQ": "650000000",
+      "effectiveFrom": null,
+      "coverage": null,
+      "disclosedResult": null,
+      "major": false,
+      "attentionQ": "100000000",
+      "textSlots": {
+        "objectName": "甲一号",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "60000000",
+        "expectedRange": "公开预期区间",
+        "unit": "对数经营变化",
+        "reliability": "0.65",
+        "knownEffectivePeriod": "尚待生效",
+        "resultOrUnpublished": "尚未公开",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "示例对象的公开预期可能落空；结果尚未公开，成交须有真实资源。"
+    },
+    {
+      "eventId": "sample/O01",
+      "templateId": "O01",
+      "chainId": null,
+      "effectId": "sample/effect/O01",
+      "version": 2,
+      "previousVersion": 1,
+      "publishedAt": {
+        "worldDay": 255,
+        "batch": 0
+      },
+      "effectiveUntil": null,
+      "status": "result",
+      "primaryChannel": "operatingLog",
+      "targets": [
+        {
+          "stockId": "A001",
+          "businessWeightQ": "1000000000",
+          "businessSource": "公开采购设备业务"
+        }
+      ],
+      "expectedRange": {
+        "oneOffLog": {
+          "meanQ": "47321307",
+          "lowQ": "47321307",
+          "highQ": "47321307"
+        }
+      },
+      "reliabilityQ": "1000000000",
+      "effectiveFrom": {
+        "worldDay": 255,
+        "batch": 0
+      },
+      "coverage": {
+        "oneOffAt": {
+          "worldDay": 255,
+          "batch": 0
+        },
+        "startDay": null,
+        "endDayExclusive": null
+      },
+      "disclosedResult": {
+        "oneOffLog": "47321307"
+      },
+      "major": false,
+      "attentionQ": "250000000",
+      "textSlots": {
+        "objectName": "甲一号",
+        "businessRelation": "设备采购业务，权重1",
+        "previousExpectation": "49747740",
+        "expectedRange": "公开预期区间",
+        "unit": "对数经营变化",
+        "reliability": "1",
+        "knownEffectivePeriod": "世界日255/0已生效",
+        "resultOrUnpublished": "47321307",
+        "risk": "预期可能落空，成交须有真实资源"
+      },
+      "text": "甲一号采购结果已公开，实际对数经营变化低于此前预期；一次性应用，不保证成交。"
+    }
+  ],
+  "examples": [
+    {
+      "id": "EXPECTED-REPLACEMENT-01",
+      "channel": "operatingLog",
+      "businessWeightQ": "600000000",
+      "oldMeanQ": "80000000",
+      "resultQ": "100000000",
+      "oldContributionQ": "48000000",
+      "newContributionQ": "60000000",
+      "actualApplyCount": 1,
+      "verificationAdditionalApplyCount": 0
+    },
+    {
+      "id": "SIGNED-BUSINESS-01",
+      "shockQ": "80000000",
+      "weightsQ": [
+        "600000000",
+        "-300000000"
+      ],
+      "contributionsQ": [
+        "48000000",
+        "-24000000"
+      ],
+      "absoluteWeightSumQ": "900000000"
+    },
+    {
+      "id": "BELOW-EXPECTATION-01",
+      "oldMeanQ": "95310176",
+      "publishedResultQ": "48790160",
+      "actualEFromQ": "100000000000",
+      "actualEToQ": "104999999400",
+      "publicReferenceDirection": "down relative to old expectation",
+      "additionalApplyFromI02": 0
+    },
+    {
+      "id": "FINANCING-CHANNELS-01",
+      "policyResultQ": "500000000",
+      "durationQ": "800000000",
+      "leverageQ": "400000000",
+      "A": {
+        "durationKQ": "40000000",
+        "publicValuationLogQ": "16000000"
+      },
+      "B": {
+        "durationKQ": "160000000",
+        "publicValuationLogQ": "64000000"
+      },
+      "operatingDailyLogBeforeEffectiveQ": "0",
+      "operatingDailyLogAfterEffectiveQ": "40000",
+      "cashCreated": "0",
+      "sourceResultDrawCount": 1,
+      "effectIds": [
+        "root/effect/outlook",
+        "root/effect/effective"
+      ]
+    },
+    {
+      "id": "M02-RECURSION-01",
+      "oldDemandQ": "0",
+      "regimeMeanQ": "0",
+      "innovationQ": "0",
+      "publishedShockQ": "100000000",
+      "nextDemandQ": "100000000",
+      "extraOperatingEventContributionQ": "0"
+    },
+    {
+      "id": "PARTIAL-REPORT-01",
+      "oneOffAt": {
+        "worldDay": 511,
+        "batch": 8
+      },
+      "oneOffLogQ": "50000000",
+      "dailyLogQ": "1000000",
+      "startDay": 512,
+      "endDayExclusive": 522,
+      "reportAt": {
+        "worldDay": 514,
+        "batch": 0
+      },
+      "reportCoversThroughDay": 513,
+      "coveredDays": [
+        512,
+        513
+      ],
+      "coveredOneOffQ": "50000000",
+      "coveredDailyQ": "2000000",
+      "coveredTotalQ": "52000000",
+      "remainingDays": [
+        514,
+        515,
+        516,
+        517,
+        518,
+        519,
+        520,
+        521
+      ],
+      "remainingFutureQ": "8000000",
+      "baseGrowthFromReportAfterRemovingKnownContributionQ": "0",
+      "secondApplicationCount": 0
+    },
+    {
+      "id": "OLD-EXPIRY-01",
+      "effectId": "sample/effect/O01",
+      "versions": [
+        {
+          "version": 1,
+          "publishedAt": {
+            "worldDay": 489,
+            "batch": 4
+          },
+          "effectiveUntil": {
+            "worldDay": 509,
+            "batch": 4
+          },
+          "meanQ": "100000000"
+        },
+        {
+          "version": 2,
+          "publishedAt": {
+            "worldDay": 503,
+            "batch": 0
+          },
+          "effectiveUntil": {
+            "worldDay": 523,
+            "batch": 0
+          },
+          "meanQ": "60000000"
+        }
+      ],
+      "atOldExpiry": {
+        "worldDay": 509,
+        "batch": 4
+      },
+      "activeVersion": 2,
+      "activeMeanQ": "60000000"
+    },
+    {
+      "id": "DENY-OR-EXPIRY-01",
+      "primaryChannel": "rateOutlook",
+      "previousVerifiedLevelQ": "0",
+      "rumorMeanQ": "500000000",
+      "outlookAfterRemovalQ": "0",
+      "actualEChanged": false,
+      "effectiveFinancingChanged": false
+    },
+    {
+      "id": "UPDATE-DRAW-01",
+      "key": {
+        "seed": 42,
+        "purpose": "event-update",
+        "entity": "event-v1/I01/market-A/A001/4000/operating.oneOffLog",
+        "creationTick": 4000,
+        "slot": 1
+      },
+      "oldMeanQ": "60000000",
+      "sourceSigmaQ": "20000000",
+      "newMeanQ": "63615666",
+      "sourceActualResultUnchanged": true
+    },
+    {
+      "id": "A15-REPORT-NO-DOUBLE-01",
+      "reportedLogChangeQ": "60000000",
+      "knownCoveredEventQ": "60000000",
+      "reportIntervalDays": 20,
+      "estimatedHistoricalDailyGrowthQ": "0",
+      "eventForecastRemainingQ": "0"
+    },
+    {
+      "id": "MAJOR-PUBLIC-ONLY-01",
+      "positiveLogReferenceQ": "48790160",
+      "negativeLogReferenceQ": "-51293303",
+      "positiveDeltaQ": "60000000",
+      "negativeDeltaQ": "-60000000",
+      "positiveMultiplierQ": "1061836546",
+      "negativeMultiplierQ": "941764534",
+      "actualMajorTest": "expQ(deltaLogQ)>=1050000000 or expQ(deltaLogQ)<=950000000; log references alone are not thresholds",
+      "hiddenBranchUsed": false
+    }
+  ]
+}
