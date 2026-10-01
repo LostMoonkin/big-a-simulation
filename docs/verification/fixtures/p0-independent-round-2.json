@@ -1,0 +1,775 @@
+{
+  "phase": "p0",
+  "round": 2,
+  "status": "pass",
+  "recordedAt": "2026-10-01T14:49:06.377Z",
+  "implementationCommit": "13567e6cb5333c042cb28e1f61e6337c36661426",
+  "priorAcceptanceCommit": "2859420e3392a9c113b8326508e1bb430f5f47f1",
+  "testedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
+  "committedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
+  "workingSourceHashAtDiagnostics": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
+  "sourceFiles": [
+    "apps/web/p0-probe.html",
+    "apps/web/package.json",
+    "apps/web/src/p0-probe.ts",
+    "apps/web/src/p0-worker.ts",
+    "apps/web/vite.config.ts",
+    "docs/design/engineering-baseline.md",
+    "docs/design/event-content-contract.md",
+    "docs/design/gameplay-market-model.md",
+    "docs/design/market-identities.md",
+    "docs/design/market-model-rules.md",
+    "docs/design/model-validation.md",
+    "docs/design/ui-design.md",
+    "package-lock.json",
+    "package.json",
+    "packages/sim-core/src/contracts.ts",
+    "packages/sim-core/src/index.ts",
+    "packages/sim-core/src/numeric.ts",
+    "tests/scenarios/p0/baseline-v1.json",
+    "tests/scenarios/p0/content-registry.json",
+    "tests/scenarios/p0/cross-season.json",
+    "tests/scenarios/p0/market-cases.json",
+    "tests/scenarios/p0/protection-cases.json",
+    "tests/scenarios/p0/representative-events.json",
+    "tests/scenarios/p0/seeds.json",
+    "tests/scenarios/p0/snapshot-projections.json",
+    "tests/scenarios/p0/world-full.json",
+    "tests/scenarios/p0/world-prototype.json",
+    "tools/p0/browser-probe.mjs",
+    "tools/p0/generate-fixtures.mjs",
+    "tools/p0/math-accuracy.py",
+    "tools/p0/numeric-probe.ts",
+    "tools/p0/record-numeric.mjs",
+    "tools/p0/verify.mjs",
+    "tsconfig.base.json"
+  ],
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "eventContractVersion": "event-v1",
+  "schemaVersion": 1,
+  "mathVersion": "fixed-q9-v1",
+  "rngVersion": "rng-v1",
+  "thresholdVersion": "P0-spec-1.0/rules-0.3.1",
+  "seedListHash": "fd21606f097a53b388609f3cd3d0791ecbef2c75d5917c0e65072267cbd6e136",
+  "environment": {
+    "runtime": "v26.7.0",
+    "device": {
+      "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+      "logicalProcessors": 16,
+      "memoryBytes": 33409036288,
+      "os": "Windows 11 Pro",
+      "release": "10.0.26200"
+    },
+    "browserVersion": "154.0.8037.58",
+    "browserExecutable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+    "viewport": {
+      "width": 1280,
+      "height": 960
+    },
+    "browserControlRuntime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+  },
+  "commands": [
+    {
+      "command": "npm run verify:p0",
+      "cwd": "artifacts/verification/p0/independent-round-2/source",
+      "exitCode": 0,
+      "checks": 19,
+      "recordedAt": "2026-10-01T14:34:40.360Z"
+    },
+    {
+      "command": "npm run build",
+      "cwd": ".",
+      "exitCode": 0,
+      "modules": 24,
+      "includes": "workspace typecheck and static Vite build"
+    },
+    {
+      "command": "node tools/p0/browser-probe.mjs http://127.0.0.1:4173/p0-probe.html \"C:/Program Files/Google/Chrome/Application/chrome.exe\" artifacts/verification/p0/independent-round-2/browser-release",
+      "cwd": ".",
+      "exitCode": 0,
+      "checks": 11,
+      "recordedAt": "2026-10-01T14:38:58.349Z"
+    },
+    {
+      "command": "node artifacts/verification/p0/independent-round-2/diagnostics.mjs",
+      "cwd": ".",
+      "exitCode": 1,
+      "scope": "acceptance reader defect: read nonexistent workerPayload; raw evidence stores workerTrace[0].payload. No implementation defect or implementation edit."
+    },
+    {
+      "command": "node artifacts/verification/p0/independent-round-2/diagnostics.mjs",
+      "cwd": ".",
+      "exitCode": 0,
+      "checks": 5,
+      "recordedAt": "2026-10-01T14:43:06.232Z",
+      "resolution": "read actual evidence schema workerTrace[0].payload"
+    }
+  ],
+  "nodeChecks": [
+    {
+      "id": "QUOTA-PROTOTYPE",
+      "status": "pass",
+      "metrics": {
+        "stocks": 40,
+        "relations": 38,
+        "wallets": 26,
+        "floatValue": "7216000000000",
+        "npcCash": "1804000000000",
+        "conceptCounts": {
+          "storage": 5,
+          "compute": 5,
+          "autonomy": 5,
+          "renewal": 5,
+          "automation": 5,
+          "recycling": 5,
+          "longevity": 4,
+          "crossborder": 4
+        }
+      }
+    },
+    {
+      "id": "QUOTA-FULL",
+      "status": "pass",
+      "metrics": {
+        "stocks": 200,
+        "relations": 190,
+        "wallets": 26,
+        "floatValue": "36080000000000",
+        "npcCash": "9020000000000",
+        "conceptCounts": {
+          "storage": 26,
+          "compute": 26,
+          "autonomy": 25,
+          "renewal": 25,
+          "automation": 24,
+          "recycling": 24,
+          "longevity": 20,
+          "crossborder": 20
+        }
+      }
+    },
+    {
+      "id": "NUM-01",
+      "status": "pass",
+      "metrics": {
+        "goldenEqual": true,
+        "boundaryProduct": "800000000000000000",
+        "reserve16": "16023",
+        "unsafeEncodingRejected": true
+      }
+    },
+    {
+      "id": "NUM-KEY-ORDER-01",
+      "status": "pass",
+      "metrics": {
+        "counterexample": "{\"2\":2,\"10\":1}",
+        "golden": "{\"2\":2,\"10\":1,\"02\":3,\"a\":5,\"nested\":{\"4294967294\":2,\"-1\":3,\"4294967295\":1},\"z\":4}",
+        "insertionOrderIndependent": true
+      }
+    },
+    {
+      "id": "BASELINE-STYLE-01",
+      "status": "pass",
+      "metrics": {
+        "alphaQ": {
+          "value": "900000000",
+          "trend": "150000000",
+          "theme": "150000000",
+          "noise": "200000000",
+          "crossMarket": "750000000"
+        },
+        "technicalAndThemeOnlyDisabled": true,
+        "scope": "frozen configuration; production economic checks remain P2"
+      }
+    },
+    {
+      "id": "PR-BOUNDARY-A",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": 1100,
+          "quantity": 100
+        },
+        "unbounded": {
+          "price": 1100,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-BOUNDARY-B",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": 1000,
+          "quantity": 100
+        },
+        "unbounded": {
+          "price": 1000,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "A13",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": 1400,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "A14",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": 1400,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-NO-CROSS",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": null,
+          "quantity": 0
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-EMPTY",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": null,
+          "quantity": 0
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-REOPEN-EMPTY",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": null,
+          "quantity": 0
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "MI-CONTRACT-01",
+      "status": "pass",
+      "metrics": {
+        "cases": [
+          "MI-A01",
+          "MI-A02",
+          "MI-A03",
+          "MI-A04",
+          "MI-B01",
+          "MI-B02",
+          "MI-B03",
+          "MI-B04"
+        ],
+        "bDurationQ": "64000000",
+        "swappedAProfileQ": "16000000",
+        "scope": "directional contract, actual targets/orders required in P3"
+      }
+    },
+    {
+      "id": "TIME-CROSS-01",
+      "status": "pass",
+      "metrics": {
+        "worldDayAtSeasonEnd": 499,
+        "nextOpenPhase20": 0,
+        "expectationReplacement": [
+          240,
+          254,
+          262
+        ],
+        "coveredQ": "52000000",
+        "remainingQ": "8000000",
+        "scope": "paper/data timing; production event/season path required in P3/P4"
+      }
+    },
+    {
+      "id": "SNAP-PROJECTION-01",
+      "status": "pass",
+      "metrics": {
+        "hiddenFieldsAbsent": true,
+        "safePhases": [
+          "publicDecision",
+          "settled"
+        ],
+        "scope": "sample projection; production future-prefix checks required in P1/P3"
+      }
+    },
+    {
+      "id": "SEEDS-01",
+      "status": "pass",
+      "metrics": {
+        "uniqueIndependentSeeds": 381,
+        "baselineLong": 10,
+        "fullSurvivalLong": 10,
+        "selectedWithoutMarketOutcomes": true
+      }
+    },
+    {
+      "id": "CONTENT-01",
+      "status": "pass",
+      "metrics": {
+        "templates": 24,
+        "chains": 6,
+        "p3Templates": 8,
+        "p3Chains": 2
+      }
+    },
+    {
+      "id": "EVENT-CONTRACT-01",
+      "status": "pass",
+      "metrics": {
+        "templates": 8,
+        "chains": 2,
+        "rngSamples": 13,
+        "outcomeDraws": 6,
+        "reachableBranchSamples": 5,
+        "publicSamples": 9,
+        "partialReportQ": "52000000",
+        "scope": "P0 contract/data arithmetic only; production event application and natural market acceptance remain P3"
+      }
+    },
+    {
+      "id": "MATH-ACCURACY-01",
+      "status": "pass",
+      "metrics": {
+        "points": 13,
+        "reference": "Python Decimal context precision 96",
+        "scope": "13 frozen boundary points, not a global approximation proof"
+      }
+    }
+  ],
+  "browser": {
+    "status": "pass",
+    "url": "http://127.0.0.1:4173/p0-probe.html",
+    "checks": [
+      {
+        "id": "chart-initialize",
+        "description": "Real canvas chart initializes at locked version",
+        "status": "pass"
+      },
+      {
+        "id": "day-ma",
+        "description": "Daily MA5/20/60 values and unavailable MA200 use completed windows",
+        "status": "pass"
+      },
+      {
+        "id": "zero-volume",
+        "description": "No-trade candle is a marked flat line with V=0",
+        "status": "pass"
+      },
+      {
+        "id": "worker-golden",
+        "description": "Actual Worker equals freshly executed Node golden field for field",
+        "status": "pass"
+      },
+      {
+        "id": "hour-switch",
+        "description": "Switching to actual hourly fixture replaces chart and MA windows",
+        "status": "pass"
+      },
+      {
+        "id": "insufficient-history",
+        "description": "Only four completed bars show MA unavailable without copied history",
+        "status": "pass"
+      },
+      {
+        "id": "draw-horizontal",
+        "description": "Toolbar and real pointer input create a horizontal line",
+        "status": "pass"
+      },
+      {
+        "id": "draw-trend",
+        "description": "Toolbar and two real pointer points create a trend line",
+        "status": "pass"
+      },
+      {
+        "id": "remove-lines",
+        "description": "Deleting lines removes actual library overlays",
+        "status": "pass"
+      },
+      {
+        "id": "worker-request-ids",
+        "description": "Repeated real Worker requests preserve identity and equal numeric output",
+        "status": "pass"
+      },
+      {
+        "id": "browser-errors",
+        "description": "No page or console error occurred during the probe",
+        "status": "pass"
+      }
+    ],
+    "errors": [],
+    "workerPayloadHash": "8f0c0e97281ba06fe14871f3a9591b3094bb510aafef8560842c4f659219e7d6",
+    "keyOrderEncoding": "{\"2\":2,\"10\":1,\"02\":3,\"a\":5,\"nested\":{\"4294967294\":2,\"-1\":3,\"4294967295\":1},\"z\":4}"
+  },
+  "independentDiagnostics": [
+    {
+      "id": "SOURCE-COMMIT-BINDING",
+      "status": "pass",
+      "files": 34,
+      "committedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
+      "workingSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
+      "copiedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f"
+    },
+    {
+      "id": "ENCODING-AND-PRIOR-GOLDEN",
+      "status": "pass",
+      "originalCounterexample": "{\"2\":2,\"10\":1}",
+      "keyOrderEncoding": "{\"2\":2,\"10\":1,\"02\":3,\"a\":5,\"nested\":{\"4294967294\":2,\"-1\":3,\"4294967295\":1},\"z\":4}",
+      "unchangedPriorFields": 9,
+      "browserPayloadEqualsCurrentGolden": true
+    },
+    {
+      "id": "UNCHANGED-QUOTAS-WALLETS-SEEDS",
+      "status": "pass",
+      "fixtureHashes": {
+        "tests/scenarios/p0/world-prototype.json": "480e066fb91b518fac8c68724a7cc467bf5739d79544dfb5afa4ec0606df5a8c",
+        "tests/scenarios/p0/world-full.json": "f1a5247873a347d3606ff8f0c30da2f57f6a90dc19f7ceac2e59c968524345ba",
+        "tests/scenarios/p0/seeds.json": "fd21606f097a53b388609f3cd3d0791ecbef2c75d5917c0e65072267cbd6e136"
+      },
+      "differenceAllowed": "rulesVersion/contentVersion only"
+    },
+    {
+      "id": "BASELINE-ALL-NONTECHNICAL-STYLE-PARAMETERS",
+      "status": "pass",
+      "styles": 6,
+      "checkedFieldsPerOrdinaryStyle": [
+        "alphaQ",
+        "temperatureQ",
+        "stockFractionQ",
+        "beliefSigmaQ",
+        "scoreNoiseMultiplier",
+        "hourCapacityQ"
+      ],
+      "inventoryTargetRetained": true
+    },
+    {
+      "id": "REAL-BROWSER-CURRENT-SOURCE",
+      "status": "pass",
+      "checks": 11,
+      "browserVersion": "154.0.8037.58",
+      "sourceHashes": {
+        "apps/web/p0-probe.html": "650a55e220c813493c7c6d9efafc214cf6c418d4b8bb7215baa99b36b8e81fdf",
+        "apps/web/src/p0-probe.ts": "df3d9d403a878cd618e5bdee7b41c71a627198b312e035182732796e1fea6f2a",
+        "apps/web/src/p0-worker.ts": "0bdded0516f65e1bc37e28fa85ffc281eb8fac3e9b145a5dacc79e6bb56673cb",
+        "tools/p0/numeric-probe.ts": "9ddd144492d68fd22f4f2097b2d071bdd92ccc62e2762eb30623c03a754759f3",
+        "packages/sim-core/src/numeric.ts": "8522bd46c06bbbe7aad9374a0df3d3671eb7998588aa13e71467fc70f756c05f",
+        "docs/verification/fixtures/p0-numeric-golden.json": "548735f9e72b0800cc0179800f25b587f8dc14d0e4fccbc229a9397421926d11"
+      },
+      "rootSourceFilesUnchangedSinceRoundOne": true
+    }
+  ],
+  "eventDataSummary": {
+    "templates": [
+      "O01",
+      "O02",
+      "S01",
+      "S02",
+      "M01",
+      "M02",
+      "I01",
+      "I02"
+    ],
+    "chains": [
+      "C01",
+      "C02"
+    ],
+    "branches": [
+      "C01/confirm",
+      "C01/deny",
+      "C01/expire",
+      "C02/implement",
+      "C02/withdraw"
+    ],
+    "publicSamples": 9
+  },
+  "blockers": [
+    {
+      "id": "B01",
+      "status": "closed",
+      "evidence": [
+        "BASELINE-STYLE-01",
+        "BASELINE-ALL-NONTECHNICAL-STYLE-PARAMETERS",
+        "rule/baseline/P2 plan consistency review"
+      ]
+    },
+    {
+      "id": "B02",
+      "status": "closed",
+      "evidence": [
+        "CONTENT-01",
+        "EVENT-CONTRACT-01",
+        "event-v1 document/data distributions, public schema, coverage, major conditions, text slots and chain branch review"
+      ]
+    },
+    {
+      "id": "B03",
+      "status": "closed",
+      "evidence": [
+        "NUM-KEY-ORDER-01",
+        "ENCODING-AND-PRIOR-GOLDEN",
+        "worker-golden",
+        "canonical ordering document matches tested bytes"
+      ]
+    },
+    {
+      "id": "B04",
+      "status": "closed",
+      "evidence": [
+        "engineering baseline/P2 plan actual Windows Chrome scope and upgrade protocol review"
+      ]
+    }
+  ],
+  "acceptanceCriteria": [
+    {
+      "id": "P0-AC1",
+      "status": "pass",
+      "evidence": [
+        "B01",
+        "B02",
+        "B03",
+        "B04",
+        "D01-D08 authority and dependency review"
+      ]
+    },
+    {
+      "id": "P0-AC2",
+      "status": "pass",
+      "evidence": [
+        "MI-CONTRACT-01",
+        "MI-A01-04/MI-B01-04 profile/public timing/source review"
+      ]
+    },
+    {
+      "id": "P0-AC3",
+      "status": "pass",
+      "evidence": [
+        "PR-BOUNDARY-A",
+        "PR-BOUNDARY-B",
+        "A13",
+        "A14",
+        "PR-NO-CROSS",
+        "PR-EMPTY",
+        "PR-REOPEN-EMPTY"
+      ]
+    },
+    {
+      "id": "P0-AC4",
+      "status": "pass",
+      "evidence": [
+        "QUOTA-PROTOTYPE",
+        "QUOTA-FULL",
+        "UNCHANGED-QUOTAS-WALLETS-SEEDS",
+        "round-one independent matrices and regeneration"
+      ]
+    },
+    {
+      "id": "P0-AC5",
+      "status": "pass",
+      "evidence": [
+        "NUM-01",
+        "NUM-KEY-ORDER-01",
+        "MATH-ACCURACY-01",
+        "worker-golden",
+        "ENCODING-AND-PRIOR-GOLDEN"
+      ]
+    },
+    {
+      "id": "P0-AC6",
+      "status": "pass",
+      "evidence": [
+        "TIME-CROSS-01",
+        "SNAP-PROJECTION-01",
+        "EVENT-CONTRACT-01",
+        "phase/version/coverage consistency review"
+      ]
+    },
+    {
+      "id": "P0-AC7",
+      "status": "pass",
+      "evidence": [
+        "build exit 0",
+        "actual static Chrome 11 checks",
+        "unchanged round-one installed license/official source review"
+      ]
+    },
+    {
+      "id": "P0-AC8",
+      "status": "pass",
+      "evidence": [
+        "SEEDS-01",
+        "B01",
+        "B04",
+        "A01-A32 ownership and fixed start/seed/performance protocol review"
+      ]
+    }
+  ],
+  "decisions": [
+    {
+      "id": "D01",
+      "status": "closed-for-P0"
+    },
+    {
+      "id": "D02",
+      "status": "closed-for-P0"
+    },
+    {
+      "id": "D03",
+      "status": "closed-for-P0"
+    },
+    {
+      "id": "D04",
+      "status": "closed-for-P0"
+    },
+    {
+      "id": "D05",
+      "status": "closed-for-P0"
+    },
+    {
+      "id": "D06",
+      "status": "closed-for-P0"
+    },
+    {
+      "id": "D07",
+      "status": "closed-for-P0"
+    },
+    {
+      "id": "D08",
+      "status": "closed-for-P0"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "P0-T1",
+      "status": "independently-accepted"
+    },
+    {
+      "id": "P0-T2",
+      "status": "independently-accepted"
+    },
+    {
+      "id": "P0-T3",
+      "status": "independently-accepted"
+    }
+  ],
+  "inheritedEvidence": {
+    "fromAcceptanceCommit": "2859420",
+    "sourceFilesUnchanged": [
+      "apps/web/p0-probe.html",
+      "apps/web/src/p0-probe.ts",
+      "apps/web/src/p0-worker.ts",
+      "package-lock.json"
+    ],
+    "checks": [
+      "151 MA values independently recomputed: max error 0",
+      "actual chart and drawing screenshots visually reviewed",
+      "installed dependency LICENSE/NOTICE and official direction references",
+      "fixture regeneration and frozen industry/size matrix verification"
+    ]
+  },
+  "rawEvidence": [
+    {
+      "path": "artifacts/verification/p0/independent-round-2/source/docs/verification/fixtures/p0-node-results.json",
+      "sha256": "0bcbf8e8a8ebe3ba2d6ed060a731118f05f8831ab199fa65d67be9ab72872d22",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/source/docs/verification/fixtures/p0-math-accuracy.json",
+      "sha256": "7f584d134180962b2f39b2b6bdc302f0e522e90cc6f27f00238db99334a5f058",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/browser-release/results.json",
+      "sha256": "1e420813005dd89e86196001183f9a25371a401167e0333e4ee2d7e7c8777170",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/browser-release/day.png",
+      "sha256": "e7cf622b75117f9fa9152220f2adb7e6f16058e3477c30c2a32066d50a2969ac",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/browser-release/hour.png",
+      "sha256": "ee416add82b32eb51ec8ec3e9986cd1fcf12bf3ba060d3e51e3b94b7042b3324",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/browser-release/short-history.png",
+      "sha256": "bc7efe3a8df2e3814a4d4872d2c392f97e1e888c656bde44b5e4f73180c4fc29",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/browser-release/drawn-lines.png",
+      "sha256": "bd4e5d779dc06a03b6e0339fa475ff0e77bac63b43ca6dc71d8f20caeb9200d7",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/diagnostics.json",
+      "sha256": "5dc84ac4cfa41369bdf7479ada5337dc0d5e66839ac2a794f49adc4f571071b7",
+      "storage": "ignored local artifact"
+    },
+    {
+      "path": "artifacts/verification/p0/independent-round-2/diagnostics.mjs",
+      "sha256": "36365177e6d28d55795ded5750cf2123491564bab6e59afc97cec6ca60be679d",
+      "storage": "ignored local artifact"
+    }
+  ],
+  "notRun": [
+    "P1 production ledger/settlement/sellability/command replay/restore",
+    "P2 100 baseline seeds plus 10 long seeds and complete 60-day browser game",
+    "P3 production event application, strategy training and held-out screening",
+    "P4 complete 200-stock long run, durable saves and season flow",
+    "P5 final desktop browser compatibility, real Safari/mobile, target players and performance"
+  ],
+  "scope": "P0 AC1-8 design/contract and minimal technology acceptance only. Later phases and complete G0-G4 are not accepted. No implementation code was repaired or optimized.",
+  "stateUpdates": [
+    "README.md",
+    "docs/specs/README.md",
+    "docs/specs/implementation-plan.md",
+    "docs/specs/acceptance-matrix.md",
+    "docs/specs/00-design-baseline/spec.md",
+    "docs/specs/00-design-baseline/plan.md",
+    "docs/specs/00-design-baseline/tasks.md"
+  ]
+}

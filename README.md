@@ -26,7 +26,7 @@ npm run preview
 
 `check`执行全部工作区的类型检查并构建Web；产物在`apps/web/dist/`。`preview`用静态构建在`http://127.0.0.1:4173`预览，需要先构建，不等同于公网部署。
 
-单独的`npm run typecheck`可快速检查类型。`npm run check:design`需要Python3标准库。P0现已交付数值/接口合同、完整配额样本和独立图表/Worker技术试验，待独立验收：[P0记录](docs/verification/p0-baseline.md)。`npm run verify:p0`用Node与Python Decimal核验设计/数值/样本；`npm run fixtures:p0`可重建配额/种子，`npm run probe:p0`只在有意更新数值协议时重录黄金。静态预览`/p0-probe.html`及`node tools/p0/browser-probe.mjs`提供真实浏览器复现。P0不包含市场模拟；`npm test`与生产回放仍随P1实施。
+单独的`npm run typecheck`可快速检查类型。`npm run check:design`需要Python3标准库。P0数值/接口合同、完整配额样本和图表/Worker技术试验已于第2轮独立验收通过：[独立报告](docs/verification/p0-independent-round-2.md)。`npm run verify:p0`用Node与Python Decimal核验设计/数值/样本；`npm run fixtures:p0`可重建配额/种子，`npm run probe:p0`只在有意更新数值协议时重录黄金。静态预览`/p0-probe.html`及`node tools/p0/browser-probe.mjs`提供真实浏览器复现。P0不包含市场模拟；`npm test`与生产回放仍随P1实施。
 
 ## 目录
 
