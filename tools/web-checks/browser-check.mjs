@@ -98,12 +98,20 @@ async function continueTo(worldDay) {
     const days = worldDay - before.clock.worldDay + (before.phase === 'publicDecision' && before.clock.batch === 0 ? 1 : 0);
     const reply = days > 0 ? await fast(days) : await step('step-day');
     if (reply.advance.reason === 'majorMessage') {
-      pauses++; assert.equal(reply.view.phase, 'publicDecision'); assert.equal(reply.view.clock.batch, 0);
-      const saved = await compare(`major-window-${worldDay}-${pauses}`), body = decodeExact(saved.snapshot.payload);
-      assert.equal(body.world.lastSettledTick, body.clock.worldDay * 16 + body.clock.batch - 1);
+      pauses++; assert.equal(reply.view.phase, 'publicDecision');
+      const saved = await compare(`notification-window-${worldDay}-${pauses}`), body = decodeExact(saved.snapshot.payload);
+      const at = body.clock.worldDay * 16 + body.clock.batch;
+      assert.equal(body.world.lastSettledTick, at - 1);
       assert.ok(!body.orders.some(order => order.accountId !== 'player' && ['active', 'partial'].includes(order.status)));
-      assert.ok(body.world.majorStockIds.some(id => body.accounts.find(account => account.id === 'player').lots.some(lot => lot.stockId === id && lot.quantity > 0)));
-      evidence.majorPause = { checksum: saved.snapshot.checksum, clock: saved.snapshot.clock, phase: saved.snapshot.phase, lastSettledTick: body.world.lastSettledTick };
+      const held = id => body.accounts.find(account => account.id === 'player').lots.some(lot => lot.stockId === id && lot.quantity > 0);
+      const reports = body.world.majorStockIds.filter(held).map(id => body.messages.find(message => message.id === `report:${id}` && message.publishedAt.worldDay * 16 + message.publishedAt.batch === at && message.text.includes('变动至少5%')));
+      assert.ok(reports.every(Boolean));
+      if (reports.length) assert.equal(body.clock.batch, 0);
+      const protection = body.messages.filter(message => message.id.startsWith('protection:') && held(message.id.split(':')[1]) && message.publishedAt.worldDay * 16 + message.publishedAt.batch === at - 1);
+      assert.ok(reports.length || protection.length, 'held notification pause needs a current report or previous-batch protection announcement');
+      const window = { checksum: saved.snapshot.checksum, clock: saved.snapshot.clock, phase: saved.snapshot.phase, lastSettledTick: body.world.lastSettledTick,
+        reportIds: reports.map(message => message.id), protectionAnnouncements: protection.map(message => ({ id: message.id, publishedAt: message.publishedAt, text: message.text })), npcClearingBatchesAtWindow: 0 };
+      (evidence.notificationPauses ??= []).push(window);
     }
   }
   return pauses;
@@ -265,7 +273,7 @@ try {
     }
     check('bad-import-keeps-current-world', 'P2-AC7');
     const pauses = await continueTo(279); const uninterrupted = await compare('uninterrupted-20-days');
-    if(pauses)check('held-major-report-before-npc-clearing', 'P2-AC6', { pauses, ...evidence.majorPause });
+    if(pauses)check('held-notification-before-npc-clearing', 'P2-AC6', { pauses, windows: evidence.notificationPauses });
     const nodeOut = resolve(output, 'node-20-days');
     execFileSync(process.execPath, ['tools/sim-runner/p2-golden.mjs', '--input', checkpoint.path, '--days', '20', '--out', nodeOut], { stdio: 'pipe', windowsHide: true });
     const nodeResult = JSON.parse(await readFile(resolve(nodeOut, 'results.json'), 'utf8')); assert.equal(nodeResult.finalChecksum, uninterrupted.snapshot.checksum); assert.equal(nodeResult.completedBatches, 320);
