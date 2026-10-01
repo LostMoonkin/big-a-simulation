@@ -1,0 +1,917 @@
+{
+  "format": "p2-independent-acceptance-v1",
+  "stage": "P2",
+  "round": 1,
+  "independentAcceptance": true,
+  "status": "fail",
+  "recordedAt": "2026-10-01T23:31:27.075Z",
+  "timezone": "Asia/Shanghai",
+  "testedHead": "9dfc69ffb1ee314d6d2a90b8fdad6d2a5f873548",
+  "phaseStatus": "implementation-in-progress-acceptance-failed",
+  "reviewersIndependentOfImplementers": true,
+  "productionRulesGoldenModifiedByReviewer": false,
+  "versions": {
+    "initialization": "world-v2-style-cash",
+    "rules": "0.3.1",
+    "content": "0.3.1",
+    "schema": 1,
+    "math": "fixed-q9-v1",
+    "rng": "rng-v1"
+  },
+  "identities": {
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "currentBrowserWorktreeSourceHash": "ae0ba6c0089996ea6a61c07753f478ba609aa2220ee786786e0e1323b1d2ed2e",
+    "fullBrowserTestedHead": "1e27259dd1332e71c7a397944380d4d12065e733",
+    "fullBrowserTestedSourceHash": "c54044561ed3f905afea7e0285ad1f1f18ec3e48fcd526ab4beb0c100444b949",
+    "compiledSourceHash": "ef43a15df6f938f74d1a900054580be16209c6c5f16263a5c66e6b69fb3ccce3",
+    "gitFilesChecked": 66,
+    "exactRawMatches": 65,
+    "lineEndingEquivalence": [
+      {
+        "path": "apps/web/src/styles.css",
+        "gitBlobSha256": "5c953d06962f86e126f4d39b1bbc241916cf9d9ceb77a775cff4e8df44aad4e7",
+        "testedWorktreeSha256": "05ce792b8c144e6239355653e37ded3991fa65a8a846ee6d3aced7f99468a66f",
+        "normalizedSha256": "5c953d06962f86e126f4d39b1bbc241916cf9d9ceb77a775cff4e8df44aad4e7",
+        "transformation": "Only CRLF to LF; .gitattributes text=auto eol=lf, index LF/worktree mixed."
+      }
+    ],
+    "P1": {
+      "sourceHash": "a8aaf4b15f02e20905e954c1b543a802d057f2ede3b126090a5c220defa2edeb",
+      "groups": [
+        {
+          "id": "auction-reference",
+          "status": "pass"
+        },
+        {
+          "id": "fixed-core-replays",
+          "status": "pass"
+        },
+        {
+          "id": "funded-random-core",
+          "status": "pass"
+        },
+        {
+          "id": "command-and-snapshot-boundaries",
+          "status": "pass"
+        },
+        {
+          "id": "resume-and-granularity",
+          "status": "pass"
+        },
+        {
+          "id": "recorded-node-golden",
+          "status": "pass"
+        },
+        {
+          "id": "saved-snapshot-replays",
+          "status": "pass"
+        },
+        {
+          "id": "cli-success-and-failure",
+          "status": "pass"
+        },
+        {
+          "id": "actual-browser-evidence",
+          "status": "pass"
+        }
+      ],
+      "originalNodeGoldenHash": "b9c5f389067e6f4eec919a11657ea4eee6c9116d4e0963a3b32be78cf913132c"
+    }
+  },
+  "deliveryCommits": {
+    "runner": "7367dbd72f4d5aef313f548ebb2db7ed0d0a2b27",
+    "measurements": "a4b018a7dea277c6418be3b2a2c8350d19fecdb3",
+    "P1BrowserAndRegression": "4a4e5eae754285ad5b25224f2a57a7e862bc1e8e",
+    "WebObservationAndFooter": "9dfc69ffb1ee314d6d2a90b8fdad6d2a5f873548"
+  },
+  "ownCommands": [
+    {
+      "command": "npm.cmd run verify:p2 -- --out artifacts/verification/p2/independent-round-1/verify-node",
+      "exitCode": 1,
+      "evidence": "artifacts/verification/p2/independent-round-1/verify-node/results.json",
+      "note": "First four automatic groups pass; missing/stale aggregate evidence at execution retained, not rewritten after later delivery."
+    },
+    {
+      "command": "node artifacts/verification/p2/independent-round-1/diagnostics.mjs",
+      "exitCode": 1,
+      "evidence": "artifacts/verification/p2/independent-round-1/checksum-reader-failed-results.json",
+      "note": "Reader first checked payload-only checksum; corrected reader only."
+    },
+    {
+      "command": "node artifacts/verification/p2/independent-round-1/diagnostics.mjs",
+      "exitCode": 0,
+      "evidence": "artifacts/verification/p2/independent-round-1/diagnostics-results.json"
+    },
+    {
+      "command": "node artifacts/verification/p2/independent-round-1/entry-check.mjs",
+      "exitCode": 0,
+      "evidence": "artifacts/verification/p2/independent-round-1/entry-results.json"
+    },
+    {
+      "command": "node artifacts/verification/p2/independent-round-1/protection-pause.mjs",
+      "exitCode": 0,
+      "evidence": "artifacts/verification/p2/independent-round-1/protection-pause-results.json"
+    },
+    {
+      "command": "node artifacts/verification/p2/browser-candidate-footer/footer-replay.mjs artifacts/verification/p2/independent-round-1/footer-current",
+      "exitCode": 0,
+      "evidence": "artifacts/verification/p2/independent-round-1/footer-current/results.json",
+      "scope": "Actual terminal success statement with captured real checks/BigInt; browser not relaunched."
+    },
+    {
+      "command": "node artifacts/verification/p2/independent-round-1/final-evidence.mjs",
+      "exitCode": 1,
+      "evidence": "artifacts/verification/p2/independent-round-1/final-source-bytecheck-failed.json",
+      "note": "Reader required raw identity on mixed-EOL CSS; exact normalization verified without source modification."
+    },
+    {
+      "command": "node artifacts/verification/p2/independent-round-1/final-evidence.mjs",
+      "exitCode": 0,
+      "evidence": "artifacts/verification/p2/independent-round-1/final-evidence-results.json"
+    }
+  ],
+  "reviewedInitialization": {
+    "independentInitialCashFormula": "value/cross H*3/7; trend/theme H*2/3; noise H*9/11; inventory H/4, each floored in cents",
+    "designSamples": [
+      {
+        "size": "prototype",
+        "wallets": 26,
+        "floatValue": "7216000000000",
+        "oldCash": "1804000000000",
+        "newCash": "3478439999994",
+        "cashDelta": "1674439999994"
+      },
+      {
+        "size": "full",
+        "wallets": 26,
+        "floatValue": "36080000000000",
+        "oldCash": "9020000000000",
+        "newCash": "17392199999993",
+        "cashDelta": "8372199999993"
+      }
+    ],
+    "actualRepeated40StockSeeds": {
+      "status": "pass",
+      "seeds": [
+        {
+          "seed": 3572871866,
+          "repeatedFullStateChecksum": "00546079e18d3812b354761dd6e7c610b3d844e9bbeae8795ecefa53a1c0aa34",
+          "npcCash": "7843830185627"
+        },
+        {
+          "seed": 1866980507,
+          "repeatedFullStateChecksum": "7d39d44b132f2275cb0114e90a77d75509cf94750a1bb8c0ed9a4fa9aa9f8a52",
+          "npcCash": "8469613616930"
+        },
+        {
+          "seed": 20261001,
+          "repeatedFullStateChecksum": "c07c55e85eee9d94bdcc81b83bd18eeb184cfc84257b9f8d91f51ec1e2933bb8",
+          "npcCash": "6928325807100"
+        },
+        {
+          "seed": 0,
+          "repeatedFullStateChecksum": "ff93bf7538ba3b9bdacc885617331261750e69519d53ebde82612bac4544f38c",
+          "npcCash": "6882913577720"
+        },
+        {
+          "seed": 4294967295,
+          "repeatedFullStateChecksum": "684dc242194227ff2ea4ffe57311d9cf89279e805855db13070f3d8cda9cf68c",
+          "npcCash": "7289694133368"
+        }
+      ],
+      "observedWallets": 130
+    },
+    "frozenParameters": {
+      "status": "pass",
+      "unchangedStyleScalars": 30,
+      "unchangedDisabled": {
+        "betaQ": "0",
+        "gammaQ": "0",
+        "kTQ": "0",
+        "kHQ": "0",
+        "themeHQ": "0",
+        "technicalSignals": false,
+        "majorEvents": false,
+        "policyChains": false,
+        "shapeLabels": false
+      },
+      "registeredSeeds": 100,
+      "registeredLongSeeds": 10,
+      "hardGateUnchanged": true
+    },
+    "legacyV1Restore": {
+      "status": "pass",
+      "inputPath": "artifacts/verification/p2/diagnostic-02/seeds/3572871866/baseline-end-snapshot.json",
+      "checksum": "a2e55f42ff1a5e4bc1b66ab2db11af037776be2ee31ea44491a7f82348d83195",
+      "initializationVersion": "world-v1",
+      "cashPreserved": true
+    }
+  },
+  "economicEvidence": {
+    "shortDiagnostic": {
+      "status": "pass",
+      "economicConclusion": "fail",
+      "seeds": [
+        {
+          "seed": 3572871866,
+          "actualBatches": 4080,
+          "status": "fail",
+          "recount": [
+            {
+              "market": "A",
+              "qualifyingStocks": 6,
+              "requiredStocks": 18,
+              "requiredDays": 4,
+              "days": 5,
+              "status": "fail"
+            },
+            {
+              "market": "B",
+              "qualifyingStocks": 11,
+              "requiredStocks": 18,
+              "requiredDays": 4,
+              "days": 5,
+              "status": "fail"
+            }
+          ],
+          "resultSha256": "d235af0eda021c5a900ad36c1f4453b0eb72a2510e9a16143accd754321c9caf"
+        },
+        {
+          "seed": 1866980507,
+          "actualBatches": 4080,
+          "status": "fail",
+          "recount": [
+            {
+              "market": "A",
+              "qualifyingStocks": 7,
+              "requiredStocks": 18,
+              "requiredDays": 4,
+              "days": 5,
+              "status": "fail"
+            },
+            {
+              "market": "B",
+              "qualifyingStocks": 4,
+              "requiredStocks": 18,
+              "requiredDays": 4,
+              "days": 5,
+              "status": "fail"
+            }
+          ],
+          "resultSha256": "c82e6ba5e29620890d0d487cdec0b82df389c49af6be3e1d3ec694ddd4583fc3"
+        }
+      ],
+      "full100Plus10": "not_run",
+      "denominatorIsPlayerDaysOnly": true
+    },
+    "observedDiagnosticBatches": 8160,
+    "fullBaseline": "not_run",
+    "requiredGate": {
+      "perSeedPerMarket": true,
+      "requiredStocks": 18,
+      "stocksPerMarket": 20,
+      "normalTrueTradedDays": "200/250",
+      "longTrueTradedDays": "800/1000",
+      "accountingViolations": 0
+    },
+    "fundedRawBookDiagnosis": [
+      {
+        "seed": 3572871866,
+        "observedRealBatches": 16,
+        "rawStockBooks": 640,
+        "quoteChecks": 26004,
+        "reasons": {
+          "highest-funded-bid-below-lowest-ask": 399,
+          "raw-cross-exists": 241
+        },
+        "coreCrossMismatches": 0,
+        "ledgerMismatches": 0
+      },
+      {
+        "seed": 1866980507,
+        "observedRealBatches": 16,
+        "rawStockBooks": 640,
+        "quoteChecks": 26280,
+        "reasons": {
+          "raw-cross-exists": 159,
+          "highest-funded-bid-below-lowest-ask": 481
+        },
+        "coreCrossMismatches": 0,
+        "ledgerMismatches": 0
+      }
+    ],
+    "counterexamples": [
+      {
+        "seed": 3572871866,
+        "clock": {
+          "batch": 0,
+          "worldDay": 255
+        },
+        "stockId": "A001",
+        "bestBid": 4911,
+        "bestAsk": 5164,
+        "reason": "highest-funded-bid-below-lowest-ask",
+        "buyer": {
+          "accountId": "A:shortTrend",
+          "role": "shortTrend",
+          "cash": "358730268095",
+          "frozenCash": "419515475",
+          "pendingCash": "0",
+          "holdings": 14596043,
+          "target": 16323790,
+          "gap": 1727747,
+          "remainingHourCapacity": 100251,
+          "referenceQ": "4911142622556",
+          "quotes": [
+            {
+              "side": "buy",
+              "price": 4911,
+              "shares": 5013,
+              "reservedCash": "24631153",
+              "reservedShares": 0
+            },
+            {
+              "side": "buy",
+              "price": 4897,
+              "shares": 7519,
+              "reservedCash": "36838954",
+              "reservedShares": 0
+            },
+            {
+              "side": "buy",
+              "price": 4871,
+              "shares": 12531,
+              "reservedCash": "61069021",
+              "reservedShares": 0
+            }
+          ]
+        },
+        "seller": {
+          "accountId": "A:inventory1",
+          "role": "inventory1",
+          "cash": "108357519596",
+          "frozenCash": "293572694",
+          "pendingCash": "0",
+          "holdings": 11390795,
+          "target": 11123944,
+          "gap": -266851,
+          "remainingHourCapacity": 100251,
+          "referenceQ": "5163121585771",
+          "quotes": [
+            {
+              "side": "sell",
+              "price": 5164,
+              "shares": 5013,
+              "reservedCash": "0",
+              "reservedShares": 5013
+            },
+            {
+              "side": "sell",
+              "price": 5178,
+              "shares": 7519,
+              "reservedCash": "0",
+              "reservedShares": 7519
+            },
+            {
+              "side": "sell",
+              "price": 5206,
+              "shares": 12531,
+              "reservedCash": "0",
+              "reservedShares": 12531
+            }
+          ]
+        },
+        "scope": "Actual funded raw NPC book observed before true core clearing; noCross confirmed without relying on self-reported audit.valid."
+      },
+      {
+        "seed": 1866980507,
+        "clock": {
+          "batch": 0,
+          "worldDay": 255
+        },
+        "stockId": "A003",
+        "bestBid": 4837,
+        "bestAsk": 4875,
+        "reason": "highest-funded-bid-below-lowest-ask",
+        "buyer": {
+          "accountId": "A:inventory1",
+          "role": "inventory1",
+          "cash": "123171615880",
+          "frozenCash": "371233195",
+          "pendingCash": "0",
+          "holdings": 6518663,
+          "target": 6519643,
+          "gap": 980,
+          "remainingHourCapacity": 54680,
+          "referenceQ": "4837031226788",
+          "quotes": [
+            {
+              "side": "buy",
+              "price": 4837,
+              "shares": 49,
+              "reservedCash": "237132",
+              "reservedShares": 0
+            },
+            {
+              "side": "buy",
+              "price": 4807,
+              "shares": 74,
+              "reservedCash": "355896",
+              "reservedShares": 0
+            },
+            {
+              "side": "buy",
+              "price": 4747,
+              "shares": 122,
+              "reservedCash": "579424",
+              "reservedShares": 0
+            }
+          ]
+        },
+        "seller": {
+          "accountId": "A:swingTrend",
+          "role": "swingTrend",
+          "cash": "414197809097",
+          "frozenCash": "332584369",
+          "pendingCash": "0",
+          "holdings": 8116742,
+          "target": 7373133,
+          "gap": -743609,
+          "remainingHourCapacity": 54680,
+          "referenceQ": "4874608540544",
+          "quotes": [
+            {
+              "side": "sell",
+              "price": 4875,
+              "shares": 2734,
+              "reservedCash": "0",
+              "reservedShares": 2734
+            },
+            {
+              "side": "sell",
+              "price": 4905,
+              "shares": 4101,
+              "reservedCash": "0",
+              "reservedShares": 4101
+            },
+            {
+              "side": "sell",
+              "price": 4965,
+              "shares": 6835,
+              "reservedCash": "0",
+              "reservedShares": 6835
+            }
+          ]
+        },
+        "scope": "Actual funded raw NPC book observed before true core clearing; noCross confirmed without relying on self-reported audit.valid."
+      }
+    ],
+    "conclusion": "Observed target/quote contract incompatibility after cash-only initialization candidate; no frozen price formula implementation difference identified in sampled true books."
+  },
+  "browserEvidence": {
+    "sourceManifest": "artifacts/verification/p2/browser-candidate-final/manifest.json",
+    "buildManifest": "artifacts/verification/p2/browser-candidate-final/build-manifest.json",
+    "testedHead": "1e27259dd1332e71c7a397944380d4d12065e733",
+    "testedBrowserSourceHash": "c54044561ed3f905afea7e0285ad1f1f18ec3e48fcd526ab4beb0c100444b949",
+    "recordedFullCommandStatus": "fail",
+    "fullCommandDetail": "TypeError: Do not know how to serialize a BigInt",
+    "currentDriverSourceHash": "ae0ba6c0089996ea6a61c07753f478ba609aa2220ee786786e0e1323b1d2ed2e",
+    "compiledHash": "ef43a15df6f938f74d1a900054580be16209c6c5f16263a5c66e6b69fb3ccce3",
+    "driverDifference": "Only success console.log BigInt replacer; exact source comparison passed.",
+    "terminalStatementIndependentStatus": "pass",
+    "scope": "Actual recorded full UI actions verified; original full command exit and driver-only logging repair are reported separately, never rewritten as a new complete run.",
+    "environment": {
+      "browserVersion": "154.0.8037.93",
+      "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "url": "http://127.0.0.1:4173/"
+    },
+    "checks": 17,
+    "accounting": [
+      {
+        "name": "first-trades",
+        "checksum": "0e33eb1f7deff6355943c8b4f9dfb5c4a79ee9742f287d6c07bd9acbb89b9a1b",
+        "clock": {
+          "batch": 3,
+          "worldDay": 250
+        },
+        "phase": "settled",
+        "executionRows": 4,
+        "feeGroups": 4,
+        "expectedCash": "98904212",
+        "actualCash": "98904212",
+        "shareDifferences": 0,
+        "unlockDifferences": 0
+      },
+      {
+        "name": "qualified-checkpoint",
+        "checksum": "29a785c87635635ff5a0aa8eb88a5d78ae23a05919220fad3b20aa5d626083ae",
+        "clock": {
+          "batch": 15,
+          "worldDay": 259
+        },
+        "phase": "settled",
+        "executionRows": 6,
+        "feeGroups": 5,
+        "expectedCash": "96203272",
+        "actualCash": "96203272",
+        "shareDifferences": 0,
+        "unlockDifferences": 0
+      },
+      {
+        "name": "uninterrupted-20-days",
+        "checksum": "97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd",
+        "clock": {
+          "batch": 15,
+          "worldDay": 279
+        },
+        "phase": "settled",
+        "executionRows": 22,
+        "feeGroups": 21,
+        "expectedCash": "53883449",
+        "actualCash": "53883449",
+        "shareDifferences": 0,
+        "unlockDifferences": 0
+      },
+      {
+        "name": "reopened-20-days",
+        "checksum": "97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd",
+        "clock": {
+          "batch": 15,
+          "worldDay": 279
+        },
+        "phase": "settled",
+        "executionRows": 22,
+        "feeGroups": 21,
+        "expectedCash": "53883449",
+        "actualCash": "53883449",
+        "shareDifferences": 0,
+        "unlockDifferences": 0
+      },
+      {
+        "name": "prototype-60-days",
+        "checksum": "b5a4b5fb51faf8a806371b3d1a6930a1556c1caa6a2452b3a94cf3e28d6f9219",
+        "clock": {
+          "batch": 15,
+          "worldDay": 309
+        },
+        "phase": "settled",
+        "executionRows": 22,
+        "feeGroups": 21,
+        "expectedCash": "53883449",
+        "actualCash": "53883449",
+        "shareDifferences": 0,
+        "unlockDifferences": 0
+      }
+    ],
+    "chartFromFullSnapshot": true,
+    "checkpointChecksum": "29a785c87635635ff5a0aa8eb88a5d78ae23a05919220fad3b20aa5d626083ae",
+    "partialPlan": {
+      "filled": 489,
+      "remaining": 7815,
+      "reservedCash": "46561610"
+    },
+    "full20DayChecksum": "97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd",
+    "continuationRealBatches": 320,
+    "summary60DayChecksum": "b5a4b5fb51faf8a806371b3d1a6930a1556c1caa6a2452b3a94cf3e28d6f9219",
+    "coreEnded": false,
+    "fixedReportChecksum": "8d49b50a713a6e31ab4d7265cb087a3bc0c0fcbce3aa8b03eb74ab14bafd15e4",
+    "naturalFixedReportEvidence": false,
+    "ownFinalVerifierStatus": "pass",
+    "originalFullCommandExitCode": 1,
+    "originalFullCommandStatus": "fail",
+    "actualUiChecks": "17/17 pass",
+    "originalFullResultMutated": false,
+    "correctedDriverFullyRerun": false,
+    "limitedFooterStatementExitCode": 0,
+    "currentSourceInheritanceReason": "Exact single success console.log BigInt replacer difference; all production files and tested compiled outputs unchanged; no unresolved behaviour risk from that statement.",
+    "defaultSeedNaturalMajorReportObserved": false,
+    "auxiliary100SeedLocatorIsCompleteNaturalWorldEvidence": false
+  },
+  "ac": [
+    {
+      "id": "P2-AC1",
+      "status": "pass",
+      "scope": "40-stock generation/full legal shares/26 funded wallets, actual 4000-batch warmup and idempotent one-time entry"
+    },
+    {
+      "id": "P2-AC2",
+      "status": "pass",
+      "scope": "Frozen actual baseline parameters/A16/A17 and current P1 nine groups/real dev+static Chrome/unchanged original Node golden"
+    },
+    {
+      "id": "P2-AC3",
+      "status": "fail",
+      "shortDiagnostic": "fail",
+      "full100Seeds250Days": "not_run",
+      "original10Seeds1000Days": "not_run",
+      "scope": "A five-day diagnostic does not replace 250/1000-day acceptance."
+    },
+    {
+      "id": "P2-AC4",
+      "status": "pass",
+      "scope": "Actual current initialization Chrome empty-session/warmup/company/history; independently checked full snapshot and chart"
+    },
+    {
+      "id": "P2-AC5",
+      "status": "pass",
+      "scope": "Actual three order types/cancel/partial/rejections with independent cash/fee/share/unlock reconstruction"
+    },
+    {
+      "id": "P2-AC6",
+      "status": "pass",
+      "scope": "Actual equal hour/day/fast command stream, settled cancellation, no query/background advancement, protection and fixed held-report publicDecision before NPC clearing"
+    },
+    {
+      "id": "P2-AC7",
+      "status": "pass",
+      "scope": "Actual qualified downloaded checkpoint, close/reopen+import, 320 true batches identical with uninterrupted Chrome and Node, bad-file retention/publicDecision restore"
+    },
+    {
+      "id": "P2-AC8",
+      "status": "pass",
+      "scope": "Actual new-world 60-player-day readonly summary without core-ended/liquidation/reward; original full command fail and limited logger repair remain distinct."
+    }
+  ],
+  "blockers": [
+    {
+      "id": "B01",
+      "status": "fail",
+      "affectedAC": "P2-AC3",
+      "cause": "Short registered candidate coverage fails, funded buyer bids below available seller asks in 880/1280 observed raw books.",
+      "minimumRepair": "One recorded P0 target/quote-compatible contract candidate and versioned implementation, grounded in the two retained real counterexamples; preserve finite resources/public information and old failures."
+    },
+    {
+      "id": "B02",
+      "status": "not_run",
+      "affectedAC": "P2-AC3",
+      "cause": "Registered full100 seeds250-player-day and original10 seeds1000-player-day experiment not executed.",
+      "minimumRepair": "After candidate frozen and original short seeds rerun, execute all original registered full worlds without weakening per-seed/per-market18/20 and80% true-traded-day lines; then formal round2."
+    }
+  ],
+  "notRunScope": [
+    "P3",
+    "P4",
+    "200-stock actual long-world acceptance",
+    "P5 compatibility breadth/performance/player evidence"
+  ],
+  "preservedHistoricalEvidence": [
+    "artifacts/verification/p2/diagnostic-01",
+    "artifacts/verification/p2/diagnostic-02",
+    "artifacts/verification/p2/diagnostic-03/interruption-checkpoint",
+    "artifacts/verification/p2/browser-candidate-full",
+    "artifacts/verification/p2/browser-candidate-final"
+  ],
+  "evidence": [
+    {
+      "path": "artifacts/verification/p2/independent-round-1/diagnostics.mjs",
+      "sha256": "676964c802a1d1525c130c69c60aca8c8cca87146f8215e1626615e5d7c5208b",
+      "bytes": 15517
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/diagnostics-results.json",
+      "sha256": "0ced51a5923d27f70078aede478a6e020c076bbe881cddc3a5c48e94e5d81c14",
+      "bytes": 39747
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/checksum-reader-failed-results.json",
+      "sha256": "685cbf0649020ff747b40dab4faa77bf8bac1393a9e559df4f706f78f6072aaa",
+      "bytes": 1867
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/entry-check.mjs",
+      "sha256": "367cb9448338e16c24d40e9464f53b2a04135cd2fb4823216ec1f5dbd5242e00",
+      "bytes": 3101
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/entry-results.json",
+      "sha256": "af3fbe18071d332005712265e491d1578f13b1fe1e49665524c8beb94f3d2d4a",
+      "bytes": 1008
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/protection-pause.mjs",
+      "sha256": "975454f480daa6f6a8ab53f0f4c8715769a9c31c2ac8b6697d4d2678bb1c0524",
+      "bytes": 3251
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/protection-pause-results.json",
+      "sha256": "2237dcc091e0422e5f8b7c7ce9f217e8aa65495a050f4556135940ccd8c10550",
+      "bytes": 1124
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/no-cross-3572871866.json",
+      "sha256": "d3d926ab061565f3d0d84fd9cae47136071d8ae77a109f20903a12b4539717e3",
+      "bytes": 232513
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/no-cross-1866980507.json",
+      "sha256": "db990576b8c3d221e7222d0803e354891ffb2233cd4f11162eda500bf06566be",
+      "bytes": 234816
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/verify-node/manifest.json",
+      "sha256": "7b0204dfdbea9b5672917d998b569de2f8d13f3896f8df0971859534b232c505",
+      "bytes": 8396
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/verify-node/results.json",
+      "sha256": "02a4cb5dddfa057d2e584288fcd94bb46ca1caedbad155295d1f85d889093f31",
+      "bytes": 13684
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/final-evidence.mjs",
+      "sha256": "8757f85b90bb5d81d155bd9ac0bcc6e5136f22f5b30afbc8172234f3fa372aa8",
+      "bytes": 14083
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/final-evidence-results.json",
+      "sha256": "943af7fd62c6ee19f465b5164d80c4fa893ad59c36a64ada7323633ca3d0eb9e",
+      "bytes": 5825
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/final-source-bytecheck-failed.json",
+      "sha256": "670fd23b15372afa7884db1cfe97c143f645a070e2b24880d926578fed423c58",
+      "bytes": 758
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/footer-current/manifest.json",
+      "sha256": "286938d1011aa997e3c1d5f765deea118c2ebc072ee2aab5e2d0f5cbe9b5b8c4",
+      "bytes": 8646
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/footer-current/results.json",
+      "sha256": "817bc48002fc3a526da047effa3f7abda68c0ba44409f56d50994a7e7022706e",
+      "bytes": 732
+    },
+    {
+      "path": "artifacts/verification/p2/independent-round-1/footer-current/stdout.json",
+      "sha256": "ee7e4ed275953ee0c0ef4534fb49000e5b866b4de8b34a32ecd23fb37db856f8",
+      "bytes": 9112
+    },
+    {
+      "path": "artifacts/verification/p2/diagnostic-03/manifest.json",
+      "sha256": "1a7986e79b421d14e970064775702b654623adfe8191273697d52cf2c9b9d216",
+      "bytes": 8431
+    },
+    {
+      "path": "artifacts/verification/p2/diagnostic-03/results.json",
+      "sha256": "fcd1e9c2d656300876ad05a48b4f16b8ad5114750ce704ea8c72559e0df19967",
+      "bytes": 805927
+    },
+    {
+      "path": "artifacts/verification/p2/diagnostic-03/seeds/3572871866/results.json",
+      "sha256": "d235af0eda021c5a900ad36c1f4453b0eb72a2510e9a16143accd754321c9caf",
+      "bytes": 342721
+    },
+    {
+      "path": "artifacts/verification/p2/diagnostic-03/seeds/1866980507/results.json",
+      "sha256": "c82e6ba5e29620890d0d487cdec0b82df389c49af6be3e1d3ec694ddd4583fc3",
+      "bytes": 342436
+    },
+    {
+      "path": "artifacts/verification/p2/diagnostic-03/seeds/3572871866/daily.jsonl",
+      "sha256": "37773d1ff356fccfc26df6cdcc5532fb4717cce5df154a76ec0e7e32291fc7fa",
+      "bytes": 4368
+    },
+    {
+      "path": "artifacts/verification/p2/diagnostic-03/seeds/1866980507/daily.jsonl",
+      "sha256": "d400e0d860b0b74fde96ef2358b2d0d836a7b16190cbca5296bbd2040f112a40",
+      "bytes": 4242
+    },
+    {
+      "path": "artifacts/verification/p2/benchmark-candidate-03/manifest.json",
+      "sha256": "17a6b902d3dc1e7954a29a197cf3cf147796ccf385dce27676df45f0880ffd0f",
+      "bytes": 8109
+    },
+    {
+      "path": "artifacts/verification/p2/benchmark-candidate-03/results.json",
+      "sha256": "ae28bc491f13b901383bfe7fd5a415f07a53ff615fb240456c7524573383b7ab",
+      "bytes": 1741
+    },
+    {
+      "path": "artifacts/verification/p2/p1-regression/manifest.json",
+      "sha256": "b1b26f14a957503151a7150476c4a263734e5c1ba0fb8e7d36ed9d12f6dace09",
+      "bytes": 8304
+    },
+    {
+      "path": "artifacts/verification/p2/p1-regression/results.json",
+      "sha256": "ac26e1d5fcc0d53520695eca5c2cc8743951efafb1449dd0224893ab28492da8",
+      "bytes": 80621
+    },
+    {
+      "path": "artifacts/verification/p2/p1-browser-candidate-dev/results.json",
+      "sha256": "67021a97e614fbfffa22385a811506a1efb80456368120252f6814df0ce77ff3",
+      "bytes": 2106421
+    },
+    {
+      "path": "artifacts/verification/p2/p1-browser-candidate-static/results.json",
+      "sha256": "0aab1f92457a4e1706a206645a64c812d3e6386fc2a173c1db859882d2287299",
+      "bytes": 2106421
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-full/results.json",
+      "sha256": "c8d96c8da78e39574abe0fe97de758312e442cb22a72a4cd93b45cf042ee9859",
+      "bytes": 9647
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/manifest.json",
+      "sha256": "ddea14547c827c2a2f0509d855f716f4750da2a6e8f33470cb122cc7762184ab",
+      "bytes": 10919
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/results.json",
+      "sha256": "5fa5a3276e589ea597d1ca4a719cdaf0996ab69ccfcc3197edfc720ac94b9805",
+      "bytes": 42303
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/build-manifest.json",
+      "sha256": "2abdd809197bf2453589826374a7a0c4928800e1f0ee29e0919baccb14471dfa",
+      "bytes": 13029
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/before-close-ui-log.json",
+      "sha256": "d814132be0ca25d03d0e9c38782bbe3774eafc7adfd7990ced08ef760e8e3134",
+      "bytes": 19661720
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/qualified-checkpoint.json",
+      "sha256": "0ec247a8177592600c93d2d6997ec7daaab0b2e5decbfad11203c8f0269ec8b6",
+      "bytes": 14049406
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/uninterrupted-20-days.json",
+      "sha256": "f5327bd442d33272cf1ca426f212e47ec25f737f47c1706eae663a6e1214ce43",
+      "bytes": 14571266
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/reopened-20-days.json",
+      "sha256": "f5327bd442d33272cf1ca426f212e47ec25f737f47c1706eae663a6e1214ce43",
+      "bytes": 14571266
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/prototype-60-days.json",
+      "sha256": "8c4e90b271200a8d4770c970dd3c2b5ee9288a2d00cb770ec1dda52cab054f51",
+      "bytes": 15209082
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/node-20-days/results.json",
+      "sha256": "81240c1b47893af8798408cb153419277016f4e2a9d8049273f9cecb62b1ef5d",
+      "bytes": 563
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/fixed-report-node/results.json",
+      "sha256": "408c6877aaa723fdea924ecc2ea4a1c2edf5f5b5990601225678e5c20a5a831b",
+      "bytes": 1690
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/fixed-report-public-window.json",
+      "sha256": "804784c13655cbf2f3e152643ca39cb8312d3864067797a45489d782606b85c3",
+      "bytes": 14079710
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/fixed-report-restored-window.json",
+      "sha256": "804784c13655cbf2f3e152643ca39cb8312d3864067797a45489d782606b85c3",
+      "bytes": 14079710
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-footer/red/manifest.json",
+      "sha256": "4c865bb69b93f27854c328fe9efe65bc37bebe0236fbf42ed2efcc357edbe95f",
+      "bytes": 8640
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-footer/red/results.json",
+      "sha256": "1e649b584c10e4ba296d875eef9065f90eef79017845da206d436de07bf8d4c1",
+      "bytes": 417
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-footer/green/manifest.json",
+      "sha256": "0a66695e733ff8656b1f71b211cd83d221faf506d48e241c52f7b16953535eb4",
+      "bytes": 8642
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-footer/green/results.json",
+      "sha256": "817bc48002fc3a526da047effa3f7abda68c0ba44409f56d50994a7e7022706e",
+      "bytes": 732
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-footer/green/stdout.json",
+      "sha256": "ee7e4ed275953ee0c0ef4534fb49000e5b866b4de8b34a32ecd23fb37db856f8",
+      "bytes": 9112
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/terminal.png",
+      "sha256": "afd8fd25400117f5d89a4072e02e0cf4acc915c4d0adbeab8aa72ecdb48703cf",
+      "bytes": 207547
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/summary-60-days.png",
+      "sha256": "09de4cdd2ca4ec884f3d8074c2e131f4e0983f40dd605bbdef903afa6259f30e",
+      "bytes": 242625
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/fixed-report-paused.png",
+      "sha256": "ea849417430a3387da0769dbf1432dc026115eff42c3a09b76cbe604262f568b",
+      "bytes": 229010
+    }
+  ]
+}
