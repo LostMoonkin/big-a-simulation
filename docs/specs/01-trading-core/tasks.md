@@ -1,12 +1,12 @@
 # P1 Tickets
 
-状态：四项均已实施，待独立验收。关联：[Spec](./spec.md) · [Plan](./plan.md) · [实施证据](../../verification/p1-implementation.md)。
+状态：四项均已独立验收通过（第1轮，2026-10-02）。关联：[Spec](./spec.md) · [Plan](./plan.md) · [独立验收](../../verification/p1-independent-round-1.md) · [实施证据](../../verification/p1-implementation.md)。
 
 拆分为 4 个纵向交付：单批成交、持续委托、双市场交易日、完整恢复。每个都能独立通过 CLI 演示；合并后会把账务、时序和序列化的失败混在一次不可定位的大交付中。测试与使用说明随各 Ticket 完成，不单列水平任务。
 
 ## P1-T1 — 从有限钱包完成一批真实交易
 
-状态：已实施，待独立验收。
+状态：已独立验收通过；证据见[第1轮报告](../../verification/p1-independent-round-1.md)。
 
 ### Outcome
 
@@ -37,7 +37,7 @@
 
 ## P1-T2 — 在多个批次中提交、完成和撤销交易计划
 
-状态：已实施，待独立验收。
+状态：已独立验收通过；证据见[第1轮报告](../../verification/p1-independent-round-1.md)。
 
 ### Outcome
 
@@ -64,7 +64,7 @@
 
 ## P1-T3 — 经历一个有公告和价格保护的双市场交易日
 
-状态：已实施，待独立验收。
+状态：已独立验收通过；证据见[第1轮报告](../../verification/p1-independent-round-1.md)。
 
 ### Outcome
 
@@ -94,7 +94,7 @@
 
 ## P1-T4 — 保存未完成交易并跨运行端精确恢复
 
-状态：已实施，待独立验收。
+状态：已独立验收通过；证据见[第1轮报告](../../verification/p1-independent-round-1.md)。
 
 ### Outcome
 

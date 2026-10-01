@@ -1,6 +1,6 @@
 # 分阶段实施与交付规格
 
-版本：1.0；日期：2026-10-01。冻结玩法/规则0.3.1；P0已于第2轮独立验收通过，证据见[独立报告](../verification/p0-independent-round-2.md)。P1有限资金交易核心与回放验证已实施，待独立验收，见[实施报告](../verification/p1-implementation.md)；P2–P6尚未开始。React/Vite页面仍为固定示例数据驱动的[UI 预览](../design/ui-design.md)，P1的真实交易从CLI和Worker试验入口核验。现有可运行命令见[项目README](../../README.md)，工程与自检不替代阶段独立验收。
+版本：1.0；日期：2026-10-01。冻结玩法/规则0.3.1；P0已于第2轮独立验收通过，证据见[独立报告](../verification/p0-independent-round-2.md)。P1有限资金交易核心与回放验证已于第1轮独立验收通过，见[P1独立报告](../verification/p1-independent-round-1.md)；P2–P6尚未开始。React/Vite页面仍为固定示例数据驱动的[UI 预览](../design/ui-design.md)，P1的真实交易从CLI和Worker试验入口核验。现有可运行命令见[项目README](../../README.md)，工程与自检不替代阶段独立验收。
 
 ## 目标与使用方式
 
@@ -27,7 +27,7 @@
 | P5 验证与性能 | 保留种子、对抗、连续1000日、目标玩家与浏览器实测、候选版本 | P4功能完整 | G0–G4证据齐备，没有未解释的硬错误；玩法和性能结论有实际数据 | [spec](05-validation-and-performance/spec.md) / [plan](05-validation-and-performance/plan.md) / [tasks](05-validation-and-performance/tasks.md) |
 | P6 发布交付 | 可复现静态包、许可与使用说明、兼容声明、冒烟和回滚记录 | P5候选版本通过 | 在干净环境可构建、静态运行并验证；具备托管条件时可发布 | [spec](06-release/spec.md) / [plan](06-release/plan.md) / [tasks](06-release/tasks.md) |
 
-当前P0为**已独立验收通过（第2轮）**，P1为**已实施、待独立验收**，P2–P6未开始；P0结论见[第2轮pass](../verification/p0-independent-round-2.md)，历史证据见[P0首次交付](../verification/p0-baseline.md)、[第1轮fail](../verification/p0-independent-round-1.md)与[B01–B04修复](../verification/p0-repair-round-1.md)。冻结玩法/规则0.3.1。表中“出口”仍是各阶段通过条件。P0设计审查不代表市场已被模拟证明；P1固定输入账本不代表自主经济稳定，P2浏览器原型不代表P5平衡、性能和1000日全行为验收已经通过。
+当前P0为**已独立验收通过（第2轮）**，P1为**已独立验收通过（第1轮）**，P2–P6未开始；P1结论见[第1轮pass](../verification/p1-independent-round-1.md)，P0结论见[第2轮pass](../verification/p0-independent-round-2.md)，历史证据见[P0首次交付](../verification/p0-baseline.md)、[第1轮fail](../verification/p0-independent-round-1.md)与[B01–B04修复](../verification/p0-repair-round-1.md)。冻结玩法/规则0.3.1。表中“出口”仍是各阶段通过条件。P0设计审查不代表市场已被模拟证明；P1固定输入账本不代表自主经济稳定，P2浏览器原型不代表P5平衡、性能和1000日全行为验收已经通过。
 
 ## 范围控制
 

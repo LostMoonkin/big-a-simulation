@@ -2,7 +2,7 @@
 
 浏览器端单人金融策略游戏，以经营配置、事件判断、短线交易和资金执行为核心。正式目标是两个虚构市场、每市100只股票。
 
-目前 P0 已独立验收通过，P1 有限资金交易核心、CLI、固定回放和生产 Worker 黄金核验已实施，待独立验收。黑色交易终端仍为 UI 预览：行情与自选、日/小时 K 线、资产组合、公开资讯和委托预览均使用固定虚构示例，接入自主市场与可玩闭环属于 P2。默认红涨绿跌，可在右上角切换外观，偏好保存在当前浏览器。阶段进度见 [specs](docs/specs/README.md)。
+目前 P0 与 P1 已独立验收通过，P1 的有限资金交易核心、CLI、固定回放和生产 Worker 黄金证据见[第1轮独立报告](docs/verification/p1-independent-round-1.md)。黑色交易终端仍为 UI 预览：行情与自选、日/小时 K 线、资产组合、公开资讯和委托预览均使用固定虚构示例，接入自主市场与可玩闭环属于 P2。默认红涨绿跌，可在右上角切换外观，偏好保存在当前浏览器。阶段进度见 [specs](docs/specs/README.md)。
 
 UI 的布局、交互与接入边界见 [界面设计](docs/design/ui-design.md)，本次检查见 [UI 核验记录](docs/verification/ui-preview.md)。自选仅保留于本次会话；外观偏好不是游戏存档。
 
@@ -37,7 +37,7 @@ npm run sim:replay -- --input tests/scenarios/p1/cases.json --case A01 --out art
 npm run sim:replay -- --input tests/replays/a12-public-decision.json --out artifacts/verification/p1/restore
 ```
 
-Windows PowerShell 用 `npm.cmd` 转发 `--`。P1 使用生产核心，覆盖 27 个固定场景与 2000 个固定种子的有界穷举/真实账本对照；私有快照和公开投影分别供恢复、决策使用。试验页 `/p1-probe.html` 在真实 Worker 重放同一核心，复跑及输出说明见 [CLI README](tools/sim-runner/README.md)，实际证据见 [P1 实施报告](docs/verification/p1-implementation.md)。自检通过不代表阶段独立验收通过。
+Windows PowerShell 用 `npm.cmd` 转发 `--`。P1 使用生产核心，覆盖 27 个固定场景与 2000 个固定种子的有界穷举/真实账本对照；私有快照和公开投影分别供恢复、决策使用。试验页 `/p1-probe.html` 在真实 Worker 重放同一核心，复跑及输出说明见 [CLI README](tools/sim-runner/README.md)，独立结论见 [P1 验收报告](docs/verification/p1-independent-round-1.md)，实施证据见 [P1 实施报告](docs/verification/p1-implementation.md)。
 
 ## 目录
 

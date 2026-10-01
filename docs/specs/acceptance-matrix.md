@@ -1,6 +1,6 @@
 # 需求与验收追踪矩阵
 
-版本：1.0；状态：追踪矩阵。本文将用户需求、现有设计场景和阶段任务连起来，逐项通过结论由阶段独立报告记录。P0设计与工程基线已[第2轮独立验收通过](../verification/p0-independent-round-2.md)；P1–P6、其对应AC与完整G0–G4尚未通过。旧 Python 脚本的设计算术结果仍只按[原验证说明](../design/model-validation.md)的范围解释。
+版本：1.0；状态：追踪矩阵。本文将用户需求、现有设计场景和阶段任务连起来，逐项通过结论由阶段独立报告记录。P0设计与工程基线已[第2轮独立验收通过](../verification/p0-independent-round-2.md)，P1有限资金交易内核已[第1轮独立验收通过](../verification/p1-independent-round-1.md)；P2–P6、其对应AC与完整G0–G4尚未通过。旧 Python 脚本的设计算术结果仍只按[原验证说明](../design/model-validation.md)的范围解释。
 
 [阶段总览](README.md) · [总实施计划](implementation-plan.md)
 
@@ -98,7 +98,7 @@ P0新增稳定ID责任表如下；P0仅合同/方向性试验，正式生产场�
 | [P5](05-validation-and-performance/spec.md) | T1→AC1–3；T2→AC4–6；T3→AC7及AC8设备部分；T4→AC8试玩及AC9 | P5-T4 |
 | [P6](06-release/spec.md) | T1→AC1–2；T2→AC3–5；T3→AC6–8 | P6-T3 |
 
-共26个实施任务。任务的步骤、产物、明确前置和非目标以各阶段`tasks.md`为准；各阶段`plan.md`规定任务整合顺序与演示。P0三个任务已按对应AC独立验收通过，其余未开始；逐项证据见[P0第2轮独立报告](../verification/p0-independent-round-2.md)。
+共26个实施任务。任务的步骤、产物、明确前置和非目标以各阶段`tasks.md`为准；各阶段`plan.md`规定任务整合顺序与演示。P0三个任务与P1四个任务已按对应AC独立验收通过，其余未开始；逐项证据见[P0第2轮独立报告](../verification/p0-independent-round-2.md)与[P1第1轮独立报告](../verification/p1-independent-round-1.md)。
 
 ## 4. 模型闸门与阶段关系
 

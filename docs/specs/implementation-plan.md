@@ -1,6 +1,6 @@
 # 总实施计划
 
-版本：1.0；状态：P0合同已独立验收通过（第2轮）；下游规划。结论见[P0独立报告](../verification/p0-independent-round-2.md)，配合[阶段总览](README.md)使用。工程初始化已建立`apps/web/`、`packages/sim-core/`占位和基础npm命令，详见[项目README](../../README.md)。P0数值/接口合同和核验入口已落地，见工程基线及P0报告；生产市场API、CLI与后续阶段包仍待实现，骨架和试验不代表市场通过。
+版本：1.0；状态：P0合同已独立验收通过（第2轮），P1有限资金交易内核已独立验收通过（第1轮）；P2及后续规划。结论见[P0独立报告](../verification/p0-independent-round-2.md)与[P1独立报告](../verification/p1-independent-round-1.md)，配合[阶段总览](README.md)使用。`packages/sim-core`、薄CLI及真实Worker已能回放有限资源场景，运行命令见[项目README](../../README.md)。自主世界生成、预热、可玩浏览器经济和后续阶段包仍待实现。
 
 ## 1. 实施顺序与并行安排
 

@@ -1,6 +1,6 @@
 # P1 — 可回放的有限资金交易内核
 
-状态：已实施，待独立验收。依赖已通过的 P0 规则0.3.1；实际命令、受测源码与逐项自检见 [P1实施报告](../../verification/p1-implementation.md)。本状态不授予阶段通过。
+状态：已独立验收通过（第1轮，2026-10-02）。依赖已通过的 P0 规则0.3.1；结论见 [P1独立验收](../../verification/p1-independent-round-1.md)，实际命令、受测源码与逐项自检见 [P1实施报告](../../verification/p1-implementation.md)。
 
 关联：[阶段总览](../README.md) · [实施计划](./plan.md) · [Tickets](./tasks.md) · [精确规则](../../design/market-model-rules.md) · [验收场景](../../design/model-validation.md)
 

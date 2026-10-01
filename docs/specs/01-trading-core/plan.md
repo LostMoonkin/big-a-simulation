@@ -1,6 +1,6 @@
 # P1 实施计划 — 无界面交易验收包
 
-状态：已实施，待独立验收。范围与验收以 [Spec](./spec.md) 为准，交付顺序见 [Tickets](./tasks.md)，实际证据见 [实施报告](../../verification/p1-implementation.md)。
+状态：已独立验收通过（第1轮，2026-10-02）。范围与验收以 [Spec](./spec.md) 为准，交付顺序见 [Tickets](./tasks.md)，结论见 [独立验收](../../verification/p1-independent-round-1.md)，实施证据见 [实施报告](../../verification/p1-implementation.md)。
 
 ## 进入条件
 
