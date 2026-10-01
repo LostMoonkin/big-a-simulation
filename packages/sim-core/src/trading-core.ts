@@ -216,7 +216,8 @@ export class TradingCore implements MarketCore {
       if(body.side==='sell'&&body.quantity>sellableShares(account,stock.id,at)-reservedShares(state,accountId,stock.id))return reject('insufficientShares','unlocked unreserved shares are insufficient');
       orderId=`order:${command.id}`;
       draft.orders.push({id:orderId,accountId,kind:body.kind,stockId:stock.id,side:body.side,quantity:body.quantity,remainingQuantity:body.quantity,filledQuantity:0,
-        limitPrice:body.limitPrice,startTick:target,endTick:end,sequence:draft.nextSequence++,reservedCash:needed,reservedShares:body.side==='sell'?body.quantity:0,feesPaid:0n,status:'active'});
+        limitPrice:body.limitPrice,startTick:target,endTick:end,sequence:draft.nextSequence++,reservedCash:needed,reservedShares:body.side==='sell'?body.quantity:0,feesPaid:0n,status:'active',
+        ...(state.world?{submissionReference:stock.lastPrice,submissionReferenceOnly:stock.lastTradeAt===null}:{})});
       owner.reservedCash+=needed;
     }else return reject('invalidInput','unknown command kind');
     draft.stateVersion++;
@@ -300,7 +301,8 @@ export class TradingCore implements MarketCore {
     let bars:WorldPublicView['bars']=[];
     if(query.kind==='chart'){const e=w.stocks.find(s=>s.id===query.stockId);assert(e,'unknown chart stock');const history=query.scale==='day'?e.days:e.hours,current=query.scale==='day'?e.currentDay:e.currentHour;
       bars=clone([...history,...(!current.completed?[current]:[])].filter(c=>query.fromWorldDay===undefined||c.worldDay>=query.fromWorldDay));}
-    return {...view,world:progress(state),companies,player,macro:{...w.macro},sectors:clone(w.sectors),bars,executions:clone(w.executions)};
+    return {...view,world:progress(state),companies,player,macro:{...w.macro},sectors:clone(w.sectors),bars,executions:clone(w.executions),
+      orders:view.orders.map(o=>({...o,submissionReference:o.submissionReference??null,submissionReferenceOnly:o.submissionReferenceOnly??false}))};
   }
   diagnosticsSummary():WorldDiagnostics {
     const state=this.current(),w=state.world;assert(w,'not an autonomous world');const at=tick(state.clock);

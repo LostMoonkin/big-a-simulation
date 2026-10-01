@@ -66,6 +66,8 @@ export function validateWorld(state:TradingState):void {
       assert(validInteger(a.initialShares,1,s.totalShares)&&validInteger(a.targetShares,0,MAX_SHARES)&&bounded(a.baselineWeightQ,1n,SCALE)&&bounded(a.previousWeightQ,0n,150_000_000n)&&bounded(a.biasQ,-120_000_000n,120_000_000n)&&bounded(a.beliefNoiseQ,-100_000_000n,100_000_000n)&&bounded(a.inventoryZetaQ,-100_000_000n,100_000_000n)&&bounded(a.referenceQ,1n,MAX_AMOUNT)&&typeof a.scoreQ==='bigint','invalid NPC target/belief');
       assert(validInteger(a.hourCapacity,0,MAX_SHARES)&&validInteger(a.hourUsed,0,a.hourCapacity),'invalid hourly capacity');}
   }
+  for(const o of state.orders)if(o.submissionReference!==undefined||o.submissionReferenceOnly!==undefined)
+    assert(validInteger(o.submissionReference,1,MAX_PRICE)&&typeof o.submissionReferenceOnly==='boolean','invalid captured order reference');
   assert(Array.isArray(w.majorStockIds)&&w.majorStockIds.every(id=>ids.has(id))&&Array.isArray(w.executions)&&w.executions.length<=1_000_000,'invalid public execution history');
   for(const x of w.executions)assert(validClock(x.clock)&&tick(x.clock)<=at&&ids.has(x.stockId)&&typeof x.orderId==='string'&&['buy','sell'].includes(x.side)&&validInteger(x.price,1,MAX_PRICE)&&validInteger(x.quantity,1,MAX_SHARES)&&bounded(x.fee,0n,MAX_AMOUNT)&&(x.side==='buy'?validClock(x.unlockAt)&&tick(x.unlockAt)>tick(x.clock):x.unlockAt===null),'invalid owned execution');
   assert(audit(state).valid,'world ledger conservation');validateWorldBalances(state);

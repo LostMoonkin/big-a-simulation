@@ -40,7 +40,9 @@ export type OrderState = { id: string; accountId: string; kind: 'immediate' | 'd
   stockId: string; side: Side; quantity: number; remainingQuantity: number; filledQuantity: number;
   limitPrice: number; startTick: number; endTick: number; sequence: number;
   reservedCash: bigint; reservedShares: number; feesPaid: bigint;
-  status: 'active' | 'partial' | 'completed' | 'cancelled' | 'expired' };
+  status: 'active' | 'partial' | 'completed' | 'cancelled' | 'expired';
+  /** Captured only for player orders in generated worlds; absent from P1 scenario payloads. */
+  submissionReference?: number | null; submissionReferenceOnly?: boolean };
 export type BatchRecord = { clock: Clock; price: number | null; quantity: number };
 export type StockState = { id: string; market: MarketId; initialPrice: number; totalShares: number;
   lastPrice: number; lastTradeAt: Clock | null; actualOperatingIndexQ: bigint;

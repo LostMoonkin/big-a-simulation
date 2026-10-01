@@ -1,5 +1,5 @@
 import type { Clock, MarketId, PublicAccount, PublicCompany, WorldConfig } from './contracts.ts';
-import type { AuditSummary, BatchTrace, ProtectionState, PublicTradingView, Side } from './trading-types.ts';
+import type { AuditSummary, BatchTrace, OrderState, ProtectionState, PublicTradingView, Side } from './trading-types.ts';
 
 export type SectorId = 'energy' | 'industry' | 'consumer' | 'infrastructure' | 'digital' | 'health';
 export type CompanyTier = 'large' | 'medium' | 'small';
@@ -24,11 +24,12 @@ export type WorldProgress = { seed: number; size: 'prototype'; mode: 'baseline';
   warmupCompletedBatches: number; warmupTotalBatches: 4000; preheated: boolean;
   playerInjected: boolean; playerDay: number | null; originalCapital: bigint; prototypeDayLimit: 60 };
 /** Public preparation has finished in publicDecision; NPC orders do not exist until advance clears it. */
-export type WorldPublicView = Omit<PublicTradingView, 'companies' | 'player'> & {
+export type WorldOrderView = OrderState & { submissionReference: number | null; submissionReferenceOnly: boolean };
+export type WorldPublicView = Omit<PublicTradingView, 'companies' | 'player' | 'orders'> & {
   world: WorldProgress; companies: WorldCompanyView[]; player: WorldPlayerView | null;
   macro: { demandQ: bigint; financingQ: bigint; riskAppetiteQ: bigint };
   sectors: { market: MarketId; sector: SectorId; outlookQ: bigint }[];
-  bars: Candle[]; executions: PlayerExecution[] };
+  bars: Candle[]; executions: PlayerExecution[]; orders: WorldOrderView[] };
 export type WarmupRequest = { maxBatches: number; cancelRequested?: boolean };
 /** Complete means settled world249/batch15. Explicit prepareNextBatch then injects at world250/batch0. */
 export type WarmupResult = WorldProgress & { clock: Clock; phase: 'settled' | 'publicDecision';
