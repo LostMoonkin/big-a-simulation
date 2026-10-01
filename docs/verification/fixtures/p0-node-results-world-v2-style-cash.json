@@ -1,0 +1,352 @@
+{
+  "manifest": {
+    "phase": "p0",
+    "recordedAt": "2026-10-01T17:26:58.155Z",
+    "testedSourceHash": "f835d27997381d0ab482adb94af200c3e79e8c2366a262dbb3640a1103e785bc",
+    "sourceFiles": [
+      "apps/web/p0-probe.html",
+      "apps/web/package.json",
+      "apps/web/src/p0-probe.ts",
+      "apps/web/src/p0-worker.ts",
+      "apps/web/vite.config.ts",
+      "docs/design/engineering-baseline.md",
+      "docs/design/event-content-contract.md",
+      "docs/design/gameplay-market-model.md",
+      "docs/design/market-identities.md",
+      "docs/design/market-model-rules.md",
+      "docs/design/model-validation.md",
+      "docs/design/ui-design.md",
+      "package-lock.json",
+      "package.json",
+      "packages/sim-core/src/auction.ts",
+      "packages/sim-core/src/contracts.ts",
+      "packages/sim-core/src/hash.ts",
+      "packages/sim-core/src/index.ts",
+      "packages/sim-core/src/numeric.ts",
+      "packages/sim-core/src/state.ts",
+      "packages/sim-core/src/trading-core.ts",
+      "packages/sim-core/src/trading-types.ts",
+      "packages/sim-core/src/world-generation.ts",
+      "packages/sim-core/src/world-simulation.ts",
+      "packages/sim-core/src/world-types.ts",
+      "packages/sim-core/src/world-validation.ts",
+      "tests/scenarios/p0/baseline-v1.json",
+      "tests/scenarios/p0/content-registry.json",
+      "tests/scenarios/p0/cross-season.json",
+      "tests/scenarios/p0/initialization-candidate.json",
+      "tests/scenarios/p0/market-cases.json",
+      "tests/scenarios/p0/protection-cases.json",
+      "tests/scenarios/p0/representative-events.json",
+      "tests/scenarios/p0/seeds.json",
+      "tests/scenarios/p0/snapshot-projections.json",
+      "tests/scenarios/p0/world-full.json",
+      "tests/scenarios/p0/world-prototype.json",
+      "tools/p0/browser-probe.mjs",
+      "tools/p0/generate-fixtures.mjs",
+      "tools/p0/math-accuracy.py",
+      "tools/p0/numeric-probe.ts",
+      "tools/p0/record-numeric.mjs",
+      "tools/p0/verify.mjs",
+      "tsconfig.base.json"
+    ],
+    "baseCommit": "9991d5bea4d7bce1f9b248c6c3951f2b28f4e4c2",
+    "rulesVersion": "0.3.1",
+    "contentVersion": "0.3.1",
+    "schemaVersion": 1,
+    "mathVersion": "fixed-q9-v1",
+    "seedListHash": "fd21606f097a53b388609f3cd3d0791ecbef2c75d5917c0e65072267cbd6e136",
+    "runtime": "v26.7.0",
+    "device": {
+      "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+      "logicalProcessors": 16,
+      "memoryBytes": 33409036288,
+      "os": "Windows 11 Pro",
+      "release": "10.0.26200"
+    },
+    "commands": [
+      "npm run verify:p0"
+    ],
+    "initializationVersion": "world-v2-style-cash",
+    "scope": "P0 design/numeric/fixture checks rerun for initialization candidate only; no simulated economy or game acceptance"
+  },
+  "status": "pass",
+  "checks": [
+    {
+      "id": "QUOTA-PROTOTYPE",
+      "status": "pass",
+      "metrics": {
+        "stocks": 40,
+        "relations": 38,
+        "wallets": 26,
+        "floatValue": "7216000000000",
+        "initializationVersion": "world-v2-style-cash",
+        "previousNpcCash": "1804000000000",
+        "npcCash": "3478439999994",
+        "initialCashDelta": "1674439999994",
+        "conceptCounts": {
+          "storage": 5,
+          "compute": 5,
+          "autonomy": 5,
+          "renewal": 5,
+          "automation": 5,
+          "recycling": 5,
+          "longevity": 4,
+          "crossborder": 4
+        }
+      }
+    },
+    {
+      "id": "QUOTA-FULL",
+      "status": "pass",
+      "metrics": {
+        "stocks": 200,
+        "relations": 190,
+        "wallets": 26,
+        "floatValue": "36080000000000",
+        "initializationVersion": "world-v2-style-cash",
+        "previousNpcCash": "9020000000000",
+        "npcCash": "17392199999993",
+        "initialCashDelta": "8372199999993",
+        "conceptCounts": {
+          "storage": 26,
+          "compute": 26,
+          "autonomy": 25,
+          "renewal": 25,
+          "automation": 24,
+          "recycling": 24,
+          "longevity": 20,
+          "crossborder": 20
+        }
+      }
+    },
+    {
+      "id": "NUM-01",
+      "status": "pass",
+      "metrics": {
+        "goldenEqual": true,
+        "boundaryProduct": "800000000000000000",
+        "reserve16": "16023",
+        "unsafeEncodingRejected": true
+      }
+    },
+    {
+      "id": "NUM-KEY-ORDER-01",
+      "status": "pass",
+      "metrics": {
+        "counterexample": "{\"2\":2,\"10\":1}",
+        "golden": "{\"2\":2,\"10\":1,\"02\":3,\"a\":5,\"nested\":{\"4294967294\":2,\"-1\":3,\"4294967295\":1},\"z\":4}",
+        "insertionOrderIndependent": true
+      }
+    },
+    {
+      "id": "BASELINE-STYLE-01",
+      "status": "pass",
+      "metrics": {
+        "alphaQ": {
+          "value": "900000000",
+          "trend": "150000000",
+          "theme": "150000000",
+          "noise": "200000000",
+          "crossMarket": "750000000"
+        },
+        "technicalAndThemeOnlyDisabled": true,
+        "scope": "frozen configuration; production economic checks remain P2"
+      }
+    },
+    {
+      "id": "PR-BOUNDARY-A",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": 1100,
+          "quantity": 100
+        },
+        "unbounded": {
+          "price": 1100,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-BOUNDARY-B",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": 1000,
+          "quantity": 100
+        },
+        "unbounded": {
+          "price": 1000,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "A13",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": 1400,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "A14",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": 1400,
+          "quantity": 100
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-NO-CROSS",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": null,
+          "quantity": 0
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-EMPTY",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": null,
+          "quantity": 0
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "PR-REOPEN-EMPTY",
+      "status": "pass",
+      "metrics": {
+        "actual": {
+          "price": null,
+          "quantity": 0
+        },
+        "unbounded": {
+          "price": null,
+          "quantity": 0
+        },
+        "scope": "fixed arithmetic, production state machine required in P1"
+      }
+    },
+    {
+      "id": "MI-CONTRACT-01",
+      "status": "pass",
+      "metrics": {
+        "cases": [
+          "MI-A01",
+          "MI-A02",
+          "MI-A03",
+          "MI-A04",
+          "MI-B01",
+          "MI-B02",
+          "MI-B03",
+          "MI-B04"
+        ],
+        "bDurationQ": "64000000",
+        "swappedAProfileQ": "16000000",
+        "scope": "directional contract, actual targets/orders required in P3"
+      }
+    },
+    {
+      "id": "TIME-CROSS-01",
+      "status": "pass",
+      "metrics": {
+        "worldDayAtSeasonEnd": 499,
+        "nextOpenPhase20": 0,
+        "expectationReplacement": [
+          240,
+          254,
+          262
+        ],
+        "coveredQ": "52000000",
+        "remainingQ": "8000000",
+        "scope": "paper/data timing; production event/season path required in P3/P4"
+      }
+    },
+    {
+      "id": "SNAP-PROJECTION-01",
+      "status": "pass",
+      "metrics": {
+        "hiddenFieldsAbsent": true,
+        "safePhases": [
+          "publicDecision",
+          "settled"
+        ],
+        "scope": "sample projection; production future-prefix checks required in P1/P3"
+      }
+    },
+    {
+      "id": "SEEDS-01",
+      "status": "pass",
+      "metrics": {
+        "uniqueIndependentSeeds": 381,
+        "baselineLong": 10,
+        "fullSurvivalLong": 10,
+        "selectedWithoutMarketOutcomes": true
+      }
+    },
+    {
+      "id": "CONTENT-01",
+      "status": "pass",
+      "metrics": {
+        "templates": 24,
+        "chains": 6,
+        "p3Templates": 8,
+        "p3Chains": 2
+      }
+    },
+    {
+      "id": "EVENT-CONTRACT-01",
+      "status": "pass",
+      "metrics": {
+        "templates": 8,
+        "chains": 2,
+        "rngSamples": 13,
+        "outcomeDraws": 6,
+        "reachableBranchSamples": 5,
+        "publicSamples": 9,
+        "partialReportQ": "52000000",
+        "scope": "P0 contract/data arithmetic only; production event application and natural market acceptance remain P3"
+      }
+    },
+    {
+      "id": "MATH-ACCURACY-01",
+      "status": "pass",
+      "metrics": {
+        "points": 13,
+        "reference": "Python Decimal context precision 96",
+        "scope": "13 frozen boundary points, not a global approximation proof"
+      }
+    }
+  ]
+}

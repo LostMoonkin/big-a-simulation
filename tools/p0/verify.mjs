@@ -6,6 +6,7 @@ import os from 'node:os';
 import { runNumericProbe } from './numeric-probe.ts';
 import { fee, reserve, encodeExact, decodeExact, integerSqrt, SCALE, mulQ, expQ, randomU32, uniformQ, normalQ } from '../../packages/sim-core/src/numeric.ts';
 import { RULES_VERSION, CONTENT_VERSION } from '../../packages/sim-core/src/contracts.ts';
+import { INITIALIZATION_VERSION } from '../../packages/sim-core/src/world-generation.ts';
 
 const read = path => JSON.parse(readFileSync(path,'utf8'));
 const checks=[];
@@ -41,10 +42,20 @@ for(const size of ['prototype','full']) check(`QUOTA-${size.toUpperCase()}`,()=>
   }
   assert.deepEqual(matrix,w.industrySizeMatrix);assert.deepEqual(conceptCounts,w.conceptTargets);
   for(const c of concepts) assert.ok(new Set(w.stocks.filter(s=>s.concepts.some(x=>x.id===c)).map(s=>s.sector)).size>=2);
-  let cash=0n;
-  for(const a of w.wallets) {const holdingValue=a.holdings.reduce((sum,h)=>sum+BigInt(h.quantity)*BigInt(w.stocks.find(s=>s.id===h.stockId).initialPrice),0n);assert.equal(BigInt(a.cash),holdingValue/4n);cash+=BigInt(a.cash);}
-  assert.equal(cash,floatValue/4n);assert.equal(w.playerInjected,false);
-  return {stocks:w.stocks.length,relations:Object.values(conceptCounts).reduce((a,b)=>a+b,0),wallets:w.wallets.length,floatValue:floatValue.toString(),npcCash:cash.toString(),conceptCounts};
+  assert.equal(w.initializationVersion,'world-v2-style-cash');assert.equal(w.previousInitializationVersion,'world-v1');
+  // Independent frozen role fractions: do not call the production cash helper.
+  const fractions={repairValue:700_000_000n,allocationValue:700_000_000n,longValue:700_000_000n,shortTrend:600_000_000n,swingTrend:600_000_000n,eventTheme:600_000_000n,allocationTheme:600_000_000n,noise:550_000_000n,crossSwing:700_000_000n,crossLong:700_000_000n};
+  const inventoryRoles=['inventory1','inventory2','inventory3','inventory4'];let cash=0n,oldCash=0n;
+  for(const a of w.wallets) {const holdingValue=a.holdings.reduce((sum,h)=>sum+BigInt(h.quantity)*BigInt(w.stocks.find(s=>s.id===h.stockId).initialPrice),0n);
+    const f=fractions[a.role];assert.ok(inventoryRoles.includes(a.role)||f!==undefined);
+    const expected=inventoryRoles.includes(a.role)?holdingValue/4n:holdingValue*(SCALE-f)/f;
+    assert.equal(BigInt(a.previousCash),holdingValue/4n);assert.equal(BigInt(a.cash),expected);oldCash+=BigInt(a.previousCash);cash+=BigInt(a.cash);
+  }
+  assert.equal(oldCash,floatValue/4n);assert.equal(w.playerInjected,false);
+  const candidate=read('tests/scenarios/p0/initialization-candidate.json');assert.equal(candidate.initializationVersion,w.initializationVersion);assert.equal(candidate.previousInitializationVersion,'world-v1');assert.deepEqual(candidate.originalFailedSeeds,[3572871866,1866980507]);
+  const sample=candidate.samples.find(s=>s.size===size);assert.ok(sample);assert.equal(sample.floatValue,floatValue.toString());assert.equal(sample.oldNpcCash,oldCash.toString());assert.equal(sample.newNpcCash,cash.toString());assert.equal(sample.initialCashDelta,(cash-oldCash).toString());assert.equal(sample.oldNpcAssets,(floatValue+oldCash).toString());assert.equal(sample.newNpcAssets,(floatValue+cash).toString());
+  assert.deepEqual(sample.wallets,w.wallets.map(a=>({id:a.id,role:a.role,previousCash:a.previousCash,cash:a.cash})));
+  return {stocks:w.stocks.length,relations:Object.values(conceptCounts).reduce((a,b)=>a+b,0),wallets:w.wallets.length,floatValue:floatValue.toString(),initializationVersion:w.initializationVersion,previousNpcCash:oldCash.toString(),npcCash:cash.toString(),initialCashDelta:(cash-oldCash).toString(),conceptCounts};
 });
 
 check('NUM-01',()=>{
@@ -211,9 +222,9 @@ const sourceHash=hash.digest('hex');
 const manifest={phase:'p0',recordedAt:new Date().toISOString(),testedSourceHash:sourceHash,sourceFiles,
   baseCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),rulesVersion:'0.3.1',contentVersion:'0.3.1',schemaVersion:1,mathVersion:'fixed-q9-v1',seedListHash:createHash('sha256').update(readFileSync('tests/scenarios/p0/seeds.json')).digest('hex'),
   runtime:process.version,device:{cpu:os.cpus()[0]?.model.trim(),logicalProcessors:os.cpus().length,memoryBytes:os.totalmem(),os:os.version(),release:os.release()},commands:['npm run verify:p0'],
-  scope:'P0 design/numeric/fixture checks only; no simulated economy or game acceptance'};
+  initializationVersion:INITIALIZATION_VERSION,scope:'P0 design/numeric/fixture checks rerun for initialization candidate only; no simulated economy or game acceptance'};
 mkdirSync('docs/verification/fixtures',{recursive:true});
-writeFileSync('docs/verification/fixtures/p0-node-results.json',JSON.stringify({manifest,status:checks.some(c=>c.status==='fail')?'fail':'pass',checks},null,2)+'\n');
+writeFileSync(`docs/verification/fixtures/p0-node-results-${INITIALIZATION_VERSION}.json`,JSON.stringify({manifest,status:checks.some(c=>c.status==='fail')?'fail':'pass',checks},null,2)+'\n');
 for(const c of checks)console.log(`${c.status.toUpperCase()} ${c.id}${c.error?': '+c.error:''}`);
 console.log(`Tested sourceHash ${sourceHash}`);
 if(checks.some(c=>c.status==='fail'))process.exitCode=1;
