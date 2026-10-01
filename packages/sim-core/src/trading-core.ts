@@ -9,6 +9,19 @@ import { active, assert, audit, availableCash, clockAt, clone, initialState, MAX
   reservedShares, sellableShares, sortLots, tick, totalShares, validClock, validInteger, validateState } from './state.ts';
 import type { AccountState, AuctionInput, AuctionResult, BatchTrace, FeeItem, Intent,
   ProtectionState, PublicTradingView, ScenarioInput, StockState, TradingDiagnostics, TradingState } from './trading-types.ts';
+import type { WarmupRequest, WarmupResult, WorldDiagnostics, WorldProgress, WorldPublicView } from './world-types.ts';
+import { generateWorld } from './world-generation.ts';
+import { finishWorldBatch, forkWorldState, generateNpcOrders, prepareWorld, recordWorldBatch } from './world-simulation.ts';
+import { validateWorld, validateWorldBalances } from './world-validation.ts';
+
+function fork(state:TradingState):TradingState{return state.world?forkWorldState(state):clone(state);}
+function validateRuntime(state:TradingState):void{if(state.world)validateWorldBalances(state);else validateState(state);}
+function progress(state:TradingState):WorldProgress{
+  const w=state.world;assert(w,'not an autonomous world');const done=Math.min(4000,w.lastSettledTick+1);
+  return {seed:state.seed,size:'prototype',mode:'baseline',preset:'baseline-v1',warmupCompletedBatches:done,warmupTotalBatches:4000,
+    preheated:done===4000,playerInjected:state.playerInjected,playerDay:state.playerInjected?state.clock.worldDay-249:null,
+    originalCapital:w.config.playerCapital,prototypeDayLimit:60};
+}
 
 function bounds(stock: StockState, at: number): { low: number; high: number } {
   const p=stock.protection;
@@ -55,6 +68,8 @@ function applyClearing(state: TradingState,stock:StockState,result:AuctionResult
       assert(r.fee<=fee(r.amount),'fee attribution exceeds reservation');
       r.order.remainingQuantity-=r.fill.quantity;r.order.filledQuantity+=r.fill.quantity;r.order.feesPaid+=r.fee;
       r.order.status=r.order.remainingQuantity===0?'completed':'partial';
+      if(state.world&&first.accountId===state.playerAccountId)state.world.executions.push({clock:{...state.clock},stockId:stock.id,orderId:r.order.id,side:first.side,price,quantity:r.fill.quantity,fee:r.fee,
+        unlockAt:first.side==='buy'?clockAt(stock.market==='A'?(state.clock.worldDay+1)*16:at+1):null});
       if(first.side==='buy'){
         account.cash-=r.amount+r.fee;
         account.lots.push({stockId:stock.id,quantity:r.fill.quantity,unlockTick:stock.market==='A'?(state.clock.worldDay+1)*16:at+1});
@@ -74,7 +89,8 @@ function applyClearing(state: TradingState,stock:StockState,result:AuctionResult
 function notice(state:TradingState,stock:StockState,text:string): void {
   const id=`protection:${stock.id}:${tick(state.clock)}`;
   state.messages.push({id,revision:1,publishedAt:clone(state.clock),expiresAt:{worldDay:state.clock.worldDay+20,batch:state.clock.batch},expectationQ:0n,status:'verified',text});
-  state.publicVersion++;state.pauseNextDecision=true;
+  state.publicVersion++;
+  if(!state.world||state.playerAccountId&&totalShares(getAccount(state,state.playerAccountId),stock.id)>0)state.pauseNextDecision=true;
 }
 function updateProtection(state:TradingState,stock:StockState,clearing:AuctionResult,indicative:AuctionResult,band:{low:number;high:number}): void {
   const at=tick(state.clock),p=stock.protection;
@@ -118,6 +134,7 @@ function prepare(state:TradingState,newTick:number): void {
   for(const order of state.orders)if(active(order)&&order.endTick<newTick)order.status=order.kind==='immediate'?'cancelled':'expired';
   resetReservations(state);
   if(newTick%16===0&&state.clock.worldDay>0&&state.clock.worldDay%20===0)distributeService(state);
+  if(state.world)prepareWorld(state);
   for(const p of state.publications){const m=p.message,key=JSON.stringify([m.id,m.revision,tick(m.publishedAt)]);
     if(tick(m.publishedAt)!==newTick||state.appliedPublications.includes(key))continue;
     const previous=state.messages.filter(x=>x.id===m.id).sort((a,b)=>b.revision-a.revision)[0];
@@ -147,7 +164,8 @@ export class TradingCore implements MarketCore {
     if(!validInteger(config.seed,0,0xffff_ffff)||!['prototype','full'].includes(config.size)||!['baseline','complete'].includes(config.mode)||
       typeof config.playerCapital!=='bigint'||config.playerCapital<10_000_000n||config.playerCapital>1_000_000_000n)
       return {reason:'invalidInput',detail:'invalid world configuration'};
-    return {reason:'generationFailed',detail:'P1 accepts explicit funded scenarios; autonomous generation/preheat starts in P2'};
+    try{const state=generateWorld(config);prepare(state,0);validateState(state);validateWorld(state);this.state=state;this.trace=[];return {stateVersion:state.stateVersion};}
+    catch(error){return {reason:'generationFailed',detail:error instanceof Error?error.message:'world generation failed'};}
   }
 
   submitCommand(command:Command):CommandResult {const state=this.current();
@@ -164,8 +182,8 @@ export class TradingCore implements MarketCore {
     if(!account||!command||typeof command.id!=='string'||command.id.length===0||command.id.length>256)
       return {accepted:false,id:command?.id??'',stateVersion:state.stateVersion,reason:'invalidInput',detail:'invalid command/account identity'};
     const reject=(reason:FailureCode,detail:string):CommandResult=>{
-      const draft=clone(state);draft.stateVersion++;const result:CommandResult={accepted:false,id:command.id,stateVersion:draft.stateVersion,reason,detail};
-      draft.commands.push({id:command.id,accountId,canonical,result});validateState(draft);this.state=draft;return clone(result);};
+      const draft=fork(state);draft.stateVersion++;const result:CommandResult={accepted:false,id:command.id,stateVersion:draft.stateVersion,reason,detail};
+      draft.commands.push({id:command.id,accountId,canonical,result});validateRuntime(draft);this.state=draft;return clone(result);};
     if(state.ended)return reject('ended','career ended');
     if(command.publicVersion!==state.publicVersion)return reject('staleView','public version changed');
     if(!validClock(command.target))return reject('invalidInput','invalid target clock');
@@ -173,7 +191,7 @@ export class TradingCore implements MarketCore {
     if(target<expected)return reject('pastBatch','batch already settled');
     if(target!==expected)return reject('notDecisionWindow','command must target current decision or next unsettled batch');
     if(!command.body||typeof command.body!=='object')return reject('invalidInput','missing command body');
-    const body=command.body,draft=clone(state),owner=getAccount(draft,accountId);
+    const body=command.body,draft=fork(state),owner=getAccount(draft,accountId);
     let orderId:string|undefined;
     if(body.kind==='cancel'){
       const order=draft.orders.find(o=>o.id===body.orderId&&o.accountId===accountId);
@@ -203,21 +221,26 @@ export class TradingCore implements MarketCore {
     }else return reject('invalidInput','unknown command kind');
     draft.stateVersion++;
     const result:CommandResult={accepted:true,id:command.id,stateVersion:draft.stateVersion,duplicate:false,...(orderId?{orderId}:{})};
-    draft.commands.push({id:command.id,accountId,canonical,result});validateState(draft);this.state=draft;return clone(result);
+    draft.commands.push({id:command.id,accountId,canonical,result});validateRuntime(draft);this.state=draft;return clone(result);
   }
 
   /** Public preparation only; a publicDecision call is idempotent and never clears. */
   prepareNextBatch():PublicTradingView {
-    const state=this.current();if(state.ended)return this.readPublicView({kind:'market'});
-    if(state.phase==='settled'){const draft=clone(state);prepare(draft,tick(state.clock)+1);validateState(draft);this.state=draft;}
+    this.prepareBoundary();
     return this.readPublicView({kind:'market'});
+  }
+  private prepareBoundary():void {
+    const state=this.current();if(state.ended)return;
+    if(state.phase==='settled'){const draft=fork(state);prepare(draft,tick(state.clock)+1);validateRuntime(draft);this.state=draft;}
   }
 
   private settle():void {
     const original=this.current();assert(original.phase==='publicDecision','settlement requires prepared public window');
-    const draft=clone(original),at=tick(draft.clock),fees:FeeItem[]=[],stocks:BatchTrace['stocks']=[];
+    const draft=fork(original),at=tick(draft.clock),fees:FeeItem[]=[],stocks:BatchTrace['stocks']=[];
+    if(draft.world)generateNpcOrders(draft);
+    const byStock=new Map<string,TradingState['orders']>();for(const o of draft.orders){const rows=byStock.get(o.stockId)??[];rows.push(o);byStock.set(o.stockId,rows);}
     for(const stock of draft.stocks){
-      const orders=draft.orders.filter(o=>active(o)&&o.stockId===stock.id&&o.startTick<=at&&o.endTick>=at)
+      const orders=(byStock.get(stock.id)??[]).filter(o=>active(o)&&o.startTick<=at&&o.endTick>=at)
         .map(o=>({id:o.id,accountId:o.accountId,side:o.side,limitPrice:o.limitPrice,sequence:o.sequence,
           quantity:o.kind==='plan'?Number(ceilDiv(BigInt(o.remainingQuantity),BigInt(o.endTick-at+1))):o.remainingQuantity}));
       const band=bounds(stock,at),input:AuctionInput={seed:draft.seed,tick:at,stockId:stock.id,reference:stock.lastPrice,...band,orders};
@@ -225,13 +248,16 @@ export class TradingCore implements MarketCore {
       const suspended=stock.market==='A'&&stock.protection.mode!=='normal'&&at%16!==0;
       const clearing=suspended?emptyAuction():clearAuction(input);
       fees.push(...applyClearing(draft,stock,clearing));updateProtection(draft,stock,clearing,indicative,band);
-      stock.batches.push({clock:clone(draft.clock),price:clearing.price,quantity:clearing.quantity});
+      if(draft.world)recordWorldBatch(draft,stock.id,clearing.price,clearing.quantity);
+      else stock.batches.push({clock:clone(draft.clock),price:clearing.price,quantity:clearing.quantity});
       stocks.push({stockId:stock.id,...band,clearing,indicative,protectionBefore:before,protectionAfter:clone(stock.protection)});
     }
     for(const o of draft.orders)if(active(o)&&(o.kind==='immediate'&&o.startTick<=at||o.endTick<=at))o.status=o.kind==='immediate'?'cancelled':'expired';
-    draft.phase='settled';resetReservations(draft);draft.stateVersion++;validateState(draft);
+    if(draft.world)finishWorldBatch(draft);
+    draft.phase='settled';resetReservations(draft);draft.stateVersion++;validateRuntime(draft);
     const summary=audit(draft);assert(summary.valid,'atomic batch audit failed');
-    this.state=draft;this.trace.push({clock:clone(draft.clock),publicVersion:original.publicVersion,stocks,fees,audit:summary});
+    this.state=draft;const trace={clock:clone(draft.clock),publicVersion:original.publicVersion,stocks,fees,audit:summary};
+    if(draft.world)this.trace=[trace];else this.trace.push(trace);
   }
 
   advance(request:AdvanceRequest):AdvanceResult {
@@ -247,7 +273,7 @@ export class TradingCore implements MarketCore {
     let completed=0;
     const result=(reason:AdvanceResult['reason']):AdvanceResult=>{state=this.current();return {clock:clone(state.clock),phase:state.phase,stateVersion:state.stateVersion,publicVersion:state.publicVersion,reason,completedBatches:completed};};
     if(state.ended)return result('ended');if(request.cancelRequested)return result('cancelled');
-    while(completed<request.maxBatches){this.prepareNextBatch();state=this.current();
+    while(completed<request.maxBatches){this.prepareBoundary();state=this.current();
       if(request.pauseOnMajor&&state.majorAtCurrentTick)return result('majorMessage');
       this.settle();completed++;state=this.current();
       if(tick(state.clock)>=target)return result(request.stop==='season'?'seasonEnd':'target');
@@ -255,7 +281,36 @@ export class TradingCore implements MarketCore {
     return result('budget');
   }
 
-  readPublicView(query:PublicQuery):PublicTradingView {return this.readFor(this.current().playerAccountId,query);}
+  readPublicView(query:PublicQuery):PublicTradingView {return this.current().world?this.readWorldView(query):this.readFor(this.current().playerAccountId,query);}
+  warmup(request:WarmupRequest):WarmupResult {
+    let state=this.current();assert(state.world,'not an autonomous world');let completed=0,reason:WarmupResult['reason']='complete';
+    if(state.world.lastSettledTick<3999){const result=this.advance({stop:{worldDay:249,batch:15},maxBatches:request.maxBatches,pauseOnMajor:false,...(request.cancelRequested===undefined?{}:{cancelRequested:request.cancelRequested})});completed=result.completedBatches;reason=result.reason==='target'?'complete':result.reason==='cancelled'?'cancelled':'budget';}
+    state=this.current();return {...progress(state),clock:{...state.clock},phase:state.phase,stateVersion:state.stateVersion,publicVersion:state.publicVersion,reason,completedBatches:completed};
+  }
+  readWorldView(query:PublicQuery):WorldPublicView {
+    const state=this.current(),w=state.world;assert(w,'not an autonomous world');
+    const view=this.readFor(state.playerAccountId,query),account=state.playerAccountId?getAccount(state,state.playerAccountId):null;
+    const companies=view.companies.map(company=>{const e=w.stocks.find(s=>s.id===company.id)!,s=state.stocks.find(s=>s.id===company.id)!;
+      return {...company,name:e.name,sector:e.sector,sectorName:e.sectorName,tier:e.tier,totalShares:s.totalShares,floatShares:e.floatShares,initialPrice:s.initialPrice,concepts:clone(e.concepts),business:e.business,
+        demandExposureQ:e.demandExposureQ,financingExposureQ:e.financingExposureQ,leverageQ:e.leverageQ,durationQ:e.durationQ,reportPhase:e.reportPhase,
+        forecastQ:e.forecastQ,forecastLowQ:e.forecastQ*90n/100n,forecastHighQ:e.forecastQ*110n/100n,publicGrowthQ:e.publicGrowthQ,
+        currentDay:clone(e.currentDay),currentHour:clone(e.currentHour),protection:{...s.protection,...bounds(s,tick(state.clock))}};});
+    const holdings=view.player&&account?view.player.holdings.map(h=>({...h,locked:h.total-h.sellable,lots:account.lots.filter(l=>l.stockId===h.stockId).map(l=>({quantity:l.quantity,unlockAt:clockAt(l.unlockTick)}))})):[];
+    const player=view.player&&account?{...view.player,holdings,netAssetValue:state.stocks.reduce((n,s)=>n+BigInt(totalShares(account,s.id))*BigInt(s.lastPrice),account.cash)}:null;
+    let bars:WorldPublicView['bars']=[];
+    if(query.kind==='chart'){const e=w.stocks.find(s=>s.id===query.stockId);assert(e,'unknown chart stock');const history=query.scale==='day'?e.days:e.hours,current=query.scale==='day'?e.currentDay:e.currentHour;
+      bars=clone([...history,...(!current.completed?[current]:[])].filter(c=>query.fromWorldDay===undefined||c.worldDay>=query.fromWorldDay));}
+    return {...view,world:progress(state),companies,player,macro:{...w.macro},sectors:clone(w.sectors),bars,executions:clone(w.executions)};
+  }
+  diagnosticsSummary():WorldDiagnostics {
+    const state=this.current(),w=state.world;assert(w,'not an autonomous world');const at=tick(state.clock);
+    return {clock:{...state.clock},phase:state.phase,stateVersion:state.stateVersion,publicVersion:state.publicVersion,audit:audit(state),latestBatch:this.trace.length?clone(this.trace[this.trace.length-1]!):null,
+      world:{...progress(state),config:{...w.config}},wallets:state.accounts.map(a=>{const npc=w.npcs.find(n=>n.accountId===a.id);
+        return {id:a.id,role:npc?.role??(a.id==='player'?'player':'founder'),market:npc?.market??null,cash:a.cash,reservedCash:a.reservedCash,availableCash:availableCash(a),pendingCash:a.pendingProceeds.reduce((n,p)=>n+p.amount,0n),
+          holdings:state.stocks.map(s=>({stockId:s.id,quantity:totalShares(a,s.id),sellable:sellableShares(a,s.id,at),reserved:reservedShares(state,a.id,s.id)})),
+          targets:npc?npc.assets.map(x=>({stockId:x.stockId,targetShares:x.targetShares,previousWeightQ:x.previousWeightQ,baselineWeightQ:x.baselineWeightQ,hourCapacity:x.hourCapacity,hourUsed:x.hourUsed})):[]};}),
+      stocks:state.stocks.map(s=>{const e=w.stocks.find(e=>e.id===s.id)!;return {id:s.id,market:s.market,sector:e.sector,floatShares:e.floatShares,lastPrice:s.lastPrice,lastTradeAt:s.lastTradeAt?{...s.lastTradeAt}:null,protection:{...s.protection},lastCompletedDay:e.days.length?clone(e.days[e.days.length-1]!):null};})};
+  }
   readFor(accountId:string|null,query:PublicQuery):PublicTradingView {
     const state=this.current();assert(query&&['market','portfolio','messages','orders','company','chart'].includes(query.kind),'invalid public query');
     const account=accountId===null?null:getAccount(state,accountId),at=tick(state.clock);
@@ -294,7 +349,7 @@ export class TradingCore implements MarketCore {
 
   diagnostics():TradingDiagnostics {const state=this.current();return {state:clone(state),trace:clone(this.trace),audit:audit(state),stateHash:sha256(encodeExact(state as ExactValue))};}
   exportSnapshot():SnapshotEnvelope {
-    const state=this.current();validateState(state);const payload=encodeExact(state as ExactValue);
+    const state=this.current();validateState(state);if(state.world)validateWorld(state);const payload=encodeExact(state as ExactValue);
     assert(payload.length<=MAX_SNAPSHOT_BYTES&&utf8ByteLength(payload)<=MAX_SNAPSHOT_BYTES,'snapshot exceeds 64 MiB');
     const body={schemaVersion:SNAPSHOT_VERSION,rulesVersion:RULES_VERSION,contentVersion:CONTENT_VERSION,mathVersion:MATH_VERSION,seed:state.seed,configHash:state.configHash,clock:clone(state.clock),phase:state.phase,stateVersion:state.stateVersion,publicVersion:state.publicVersion,playerInjected:state.playerInjected,payload};
     return {...body,checksum:sha256(encodeExact(body))};
@@ -308,7 +363,7 @@ export class TradingCore implements MarketCore {
       const {checksum,...body}=snapshot;assert(typeof checksum==='string'&&checksum===sha256(encodeExact(body as ExactValue)),'snapshot checksum mismatch');
       const decoded=decodeExact(snapshot.payload);
       const visit=(v:unknown,depth:number):void=>{assert(depth<=64,'snapshot too deep');if(v&&typeof v==='object')for(const x of Object.values(v))visit(x,depth+1);};visit(decoded,0);
-      const state=decoded as TradingState;validateState(state);
+      const state=decoded as TradingState;validateState(state);if(state.world)validateWorld(state);
       assert(state.seed===snapshot.seed&&state.configHash===snapshot.configHash&&encodeExact(state.clock)===encodeExact(snapshot.clock)&&state.phase===snapshot.phase&&state.stateVersion===snapshot.stateVersion&&state.publicVersion===snapshot.publicVersion&&state.playerInjected===snapshot.playerInjected,'snapshot envelope/payload mismatch');
       assert(snapshot.payload===encodeExact(state as ExactValue),'non-canonical snapshot payload');
       this.state=state;this.trace=[];return {restored:true,stateVersion:state.stateVersion};

@@ -48,7 +48,8 @@ export function sortLots(account: AccountState): void {
 }
 export function audit(state: TradingState): AuditSummary {
   const cash=state.accounts.reduce((n,a)=>n+a.cash,state.serviceCash);
-  const shares=state.initialShares.map(s=>{const total=state.accounts.reduce((n,a)=>n+totalShares(a,s.stockId),0);
+  const totals=new Map<string,number>();for(const a of state.accounts)for(const lot of a.lots)totals.set(lot.stockId,(totals.get(lot.stockId)??0)+lot.quantity);
+  const shares=state.initialShares.map(s=>{const total=totals.get(s.stockId)??0;
     return {stockId:s.stockId,total,expected:s.quantity,difference:total-s.quantity};});
   return {cash,initialCash:state.initialCash,cashDifference:cash-state.initialCash,shares,
     valid:cash===state.initialCash&&shares.every(s=>s.difference===0)};

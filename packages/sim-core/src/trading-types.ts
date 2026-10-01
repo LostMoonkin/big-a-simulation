@@ -1,4 +1,5 @@
 import type { Clock, Command, CommandResult, MarketId, PublicMessage, PublicView, SafePhase } from './contracts.ts';
+import type { WorldState } from './world-types.ts';
 
 export type Side = 'buy' | 'sell';
 export type ProtectionState = {
@@ -53,7 +54,7 @@ export type TradingState = { seed: number; rngVersion: 'rng-v1'; configHash: str
   stocks: StockState[]; accounts: AccountState[]; serviceCash: bigint;
   orders: OrderState[]; nextSequence: number; commands: ReceiptRecord[];
   publications: Publication[]; appliedPublications: string[]; messages: PublicMessage[];
-  initialCash: bigint; initialShares: { stockId: string; quantity: number }[] };
+  initialCash: bigint; initialShares: { stockId: string; quantity: number }[]; world?: WorldState };
 export type FeeItem = { accountId: string; stockId: string; side: Side; amount: bigint;
   fee: bigint; attribution: { orderId: string; fee: bigint }[] };
 export type StockTrace = { stockId: string; low: number; high: number;
