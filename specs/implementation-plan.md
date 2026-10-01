@@ -28,7 +28,7 @@ flowchart LR
 
 以研究推荐的TypeScript纯模拟核心、DOM界面、Canvas金融图表、单个Dedicated Worker、IndexedDB和静态部署为实施方案。工程初始化已采用React+Vite、TypeScript和npm workspaces，具体版本以锁文件为准；图表候选KLineChart、测试候选Vitest与Playwright尚未安装，在实际功能需要时验证并引入。初始化不替代P0的图表、Worker、数值和兼容能力试验；只有验证不满足当前需求时才更换并记录理由。无需先引入游戏引擎、后端、WASM或多线程共享内存。
 
-目录及职责（Web和核心仅有骨架，其余按阶段创建）：
+目录及职责（Web已有固定示例数据的UI预览，核心仍为骨架，其余按阶段创建）：
 
 | 计划路径 | 内容与负责人 | 不应放入 |
 |---|---|---|
