@@ -31,6 +31,8 @@ export function checkWorldInitialization() {
   const b = createAutonomousWorld(fixture.seed, fixture.playerCapital);
   assert.equal(a.exportSnapshot().checksum, b.exportSnapshot().checksum);
   const state = sim.decodeExact(a.exportSnapshot().payload);
+  assert.equal(state.world.generationVersion, sim.INITIALIZATION_VERSION);
+  const initialStyles = JSON.parse(readFileSync('tests/scenarios/p0/baseline-v1.json', 'utf8')).styles;
   auditLedger(state);
   assert.equal(state.playerInjected, false); assert.equal(state.world.npcs.length, 26);
   const view = a.readWorldView({ kind: 'market' });
@@ -64,7 +66,9 @@ export function checkWorldInitialization() {
   for (const npc of state.world.npcs) {
     const wallet = state.accounts.find(account => account.id === npc.accountId);
     const value = wallet.lots.reduce((sum, lot) => sum + BigInt(lot.quantity) * BigInt(state.stocks.find(stock => stock.id === lot.stockId).initialPrice), 0n);
-    assert.equal(wallet.cash, value / 4n); assert.equal(wallet.feeWeight, wallet.cash);
+    const fraction = npc.style === 'inventory' ? null : BigInt(initialStyles[npc.style].stockFractionQ);
+    const expectedCash = fraction === null ? value / 4n : value * (1_000_000_000n - fraction) / fraction;
+    assert.equal(wallet.cash, expectedCash); assert.equal(sim.initialNpcCash(value, npc.role), expectedCash); assert.equal(wallet.feeWeight, wallet.cash);
     if (npc.market !== null) assert.ok(wallet.lots.every(lot => lot.stockId.startsWith(npc.market)));
     assert.ok(npc.assets.every(asset => asset.initialShares > 0 && asset.baselineWeightQ > 0n));
   }
@@ -74,7 +78,9 @@ export function checkWorldInitialization() {
   const initialChecksum = a.exportSnapshot().checksum;
   for (let i = 0; i < 10; i++) { a.readWorldView({ kind: 'company', stockId: 'A001' }); a.readWorldView({ kind: 'chart', stockId: 'B001', scale: i % 2 ? 'day' : 'hour' }); }
   assert.equal(a.exportSnapshot().checksum, initialChecksum);
-  return { seed: fixture.seed, initialChecksum, companies: 40, npcWallets: 26, quotas: 'exact P0 matrix and concepts', conservation: 'zero', publicQueryChanges: 0 };
+  return { seed: fixture.seed, initializationVersion: state.world.generationVersion, initialChecksum, companies: 40, npcWallets: 26,
+    npcInitialCash: state.accounts.reduce((sum, account) => sum + account.cash, 0n), initialCashFormula: 'ordinary floor(H*(1-f)/f); inventory floor(H/4); fixed initial feeWeight',
+    quotas: 'exact P0 matrix and concepts', conservation: 'zero', publicQueryChanges: 0 };
 }
 
 export function checkWorldBehavior(out) {

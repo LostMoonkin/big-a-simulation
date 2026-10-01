@@ -52,6 +52,8 @@ npm.cmd run verify:p2 -- --out artifacts/verification/p2/review
 
 `sim:continue` 的输入是完整生产存档，特别是浏览器实际下载文件。它保存原始 checksum，按同核心、`pauseOnMajor:false` 继续恰好 `days*16` 批，输出 `final-snapshot.json`、`results.json` 与版本/源码清单。20 日恢复证据必须同时有浏览器原会话继续、新空会话导入继续和 Node 三份完全一致的最终 checksum，不能用构造订单 fixture 替代真实 NPC 市场。
 
+`node tools/sim-runner/p2-major-fixture.mjs --input <浏览器实际下载完整档> --out <dir>` 是单独 AC6 固定输入检查。输入必须已有真实 A002 持仓；同核心先推进至其下一报告前日末，只固定该股尚未公开经营指数，输出 `major-input-snapshot.json` 供真实 UI 导入，及 `paused-snapshot.json`/`results.json` 的下一报告公开窗口。它核对之前公共投影不变、真实报告在 NPC 清算前暂停与恢复不重复；不改成交价、历史、玩家股份或钱包，明确 `naturalEconomicEvidence:false`，不得计入自然行情/长期种子结果。
+
 P2 源码身份将经济（core、规则、市场制度、冻结 preset）、实验工具及浏览器分别记录。经济证据绑定 `economicSourceHash`，每次运行核对首末身份；纯 UI 或报告更改不自动让 100 个种子重跑。行为变化后必须重跑受影响证据。P1 沿用其既有完整源码身份，因此新增这些工具后需真实复跑 P1 浏览器证据；不能盲目重录旧黄金。
 
 `verify:p2` 核验生成配额/钱股/公开边界、导出的实际 baseline 参数、零 ADV 的真实容量、20 日固定份额费用回流、一次入场、完整状态步进/恢复、登记种子的逐日量重计、P1 全部回归和已记录的 Windows Chrome 60 日操作。可用 `--seed-manifest`、`--batch-results`、`--browser-results`、`--benchmark-results`、`--p1-results` 指定实际证据位置。未执行或过期证据按 `not_run`/失败记录，整个命令返回非零；实施自检始终待独立验收。

@@ -1,0 +1,1583 @@
+{
+  "format": "p2-runner-implementation-checkpoint-v1",
+  "stageStatus": "in_progress",
+  "independentAcceptance": "pending",
+  "selfChecks": {
+    "economicSourceHash": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+    "resultsHash": "ae474840d8956691c599a9e1b4ea963681b85e09fe4b1a33c498d0e73726f067",
+    "groups": [
+      {
+        "id": "statistics-hard-gate",
+        "status": "pass"
+      },
+      {
+        "id": "generated-world-and-public-boundary",
+        "status": "pass"
+      },
+      {
+        "id": "actual-baseline-parameters",
+        "status": "pass"
+      },
+      {
+        "id": "zero-ADV-fee-cycle-entry-and20-day-resume",
+        "status": "pass"
+      },
+      {
+        "id": "all-registered-autonomous-seeds",
+        "status": "not_run"
+      },
+      {
+        "id": "P1-complete-regression",
+        "status": "not_run"
+      },
+      {
+        "id": "actual-Windows-Chrome60-day-UI",
+        "status": "not_run"
+      },
+      {
+        "id": "minimal-Node-measurements",
+        "status": "not_run"
+      }
+    ],
+    "resume": {
+      "seed": 3572871866,
+      "A16": {
+        "positiveCapacityAssets": 560,
+        "stocksWithRealUnboundedCross": 38,
+        "audit": "zero"
+      },
+      "A17": {
+        "worldDay": 260,
+        "distributed": {
+          "$bigint": "22214244"
+        },
+        "recipients": 26,
+        "fixedInitialCashShares": true,
+        "sharesChanged": false
+      },
+      "warmupChecksum": "8dcf41106d58e6fc0b46e94cf5cc49c4e8e26f21a3f4cfe1f201f20af9c745e0",
+      "entryChecksum": "3330dc5bfc7b72a0a40ab6d766b4c761182328f85ce6ffb8d9c8b8edced5b4f4",
+      "entryCashAdded": {
+        "$bigint": "100000000"
+      },
+      "repeatedInjection": 0,
+      "checkpointChecksum": "bdf5df0f8dd5941885d5dfbcbed513f1d9710046928bbf14eff13ff4b7955f17",
+      "checkpoint": {
+        "clock": {
+          "batch": 1,
+          "worldDay": 259
+        },
+        "phase": "publicDecision",
+        "partiallyFilledPlan": true,
+        "reservedCash": {
+          "$bigint": "14953061"
+        },
+        "lockedA": true
+      },
+      "continuationBatches": 320,
+      "continuedThrough": {
+        "worldDay": 279,
+        "batch": 0
+      },
+      "finalChecksum": "5a6119660ed808b2704bb05b15feb2bc6d087e638b30eb67a46b896dea500c6c",
+      "budgets": [
+        {
+          "budget": 1,
+          "checksum": "5a6119660ed808b2704bb05b15feb2bc6d087e638b30eb67a46b896dea500c6c"
+        },
+        {
+          "budget": 4,
+          "checksum": "5a6119660ed808b2704bb05b15feb2bc6d087e638b30eb67a46b896dea500c6c"
+        },
+        {
+          "budget": 16,
+          "checksum": "5a6119660ed808b2704bb05b15feb2bc6d087e638b30eb67a46b896dea500c6c"
+        },
+        {
+          "budget": 64,
+          "checksum": "5a6119660ed808b2704bb05b15feb2bc6d087e638b30eb67a46b896dea500c6c"
+        }
+      ],
+      "corruptRestoreRetainedCurrentWorld": 3,
+      "coreCancelledAtBoundary": true
+    }
+  },
+  "nodeContinuation": {
+    "status": "pass",
+    "initialChecksum": "bdf5df0f8dd5941885d5dfbcbed513f1d9710046928bbf14eff13ff4b7955f17",
+    "finalChecksum": "5a6119660ed808b2704bb05b15feb2bc6d087e638b30eb67a46b896dea500c6c",
+    "phase": "settled",
+    "clock": {
+      "batch": 0,
+      "worldDay": 279
+    },
+    "targetClock": {
+      "worldDay": 279,
+      "batch": 0
+    },
+    "days": 20,
+    "completedBatches": 320,
+    "economicSourceHash": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+    "economicSourceAtEnd": "a5cd1981a077cd9b27e2f50f1cd2f1834635bfcdc85ba5aa75a0cb7e0f08f803",
+    "resultsHash": "4aea69a8d7bcb3763fbf8c3eefed58494bfab1e453fa11bc976f8af33bdd9849",
+    "inputOrigin": "Node-generated real production world checkpoint; browser-downloaded counterpart is separate Web evidence."
+  },
+  "majorFixture": {
+    "status": "pass",
+    "scope": "fixed-hidden-input-only",
+    "independentAcceptance": "pending",
+    "naturalEconomicEvidence": false,
+    "economicSourceHash": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4",
+    "economicSourceAtEnd": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4",
+    "initialChecksum": "834e192bdec22bd1302e25eb5c8510eed4749591b8fbfbd9e359ae618a6c0952",
+    "baseChecksum": "f7f60c7f77e16de092d4f8066e73b68194b65388e7c3cdf4f8909456b7951d12",
+    "baseClock": {
+      "batch": 15,
+      "worldDay": 260
+    },
+    "actualAdvanceBatchesToBase": 16,
+    "inputChecksum": "db6e6ccf704a15a54aa9f9d80a0c74dea93f256ddcdbdb4810e70663ad270401",
+    "patch": {
+      "field": "stocks[A002].actualOperatingIndexQ",
+      "before": {
+        "$bigint": "100793643002"
+      },
+      "after": {
+        "$bigint": "120952371602"
+      }
+    },
+    "priorPublicProjectionUnchanged": true,
+    "pausedChecksum": "5f31f1486a2767608b5541f811dcaf45d32e6e2858701fd062fecd192d58afbe",
+    "phase": "publicDecision",
+    "clock": {
+      "batch": 0,
+      "worldDay": 261
+    },
+    "forecastBefore": {
+      "$bigint": "100979626414"
+    },
+    "forecastAfter": {
+      "$bigint": "128292756599"
+    },
+    "npcClearingBatchesAfterBase": 0,
+    "balancesOrdersMatchUntradedControlPreparation": true,
+    "historicalPricesUnchanged": true,
+    "repeatedAndRestoredPreparationDuplicates": 0,
+    "fixtureStatement": "AC6 fixture only: start from an actual browser-downloaded world with a real A002 holding; advance through the production core to its next report boundary, then change only the still-unpublished operating index. Do not count this controlled input as natural seed, NPC economy, liquidity or 60-day evidence."
+  },
+  "benchmark": {
+    "status": "pass",
+    "economicSourceHash": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4",
+    "economicSourceAtEnd": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4",
+    "sourceStable": true,
+    "scope": "One40-stock Node world: actual warmup/day/export/restore/core cancellation diagnostics; no P5 browser, UI latency or memory acceptance.",
+    "independentAcceptance": "pending",
+    "warmup": {
+      "milliseconds": 51712.945700000004,
+      "batches": 4000,
+      "calls": 63
+    },
+    "dayMilliseconds": {
+      "samples": [
+        215.6771000000008,
+        252.39830000000075,
+        245.78480000000127,
+        218.050900000002,
+        255.67579999999725
+      ],
+      "maximum": 255.67579999999725,
+      "p95": 255.67579999999725
+    },
+    "exportMilliseconds": {
+      "samples": [
+        453.05829999999696,
+        363.1692000000039,
+        357.2882000000027,
+        362.62109999999666,
+        363.6218999999983
+      ],
+      "maximum": 453.05829999999696,
+      "p95": 453.05829999999696
+    },
+    "restoreMilliseconds": {
+      "samples": [
+        537.4234999999971,
+        457.1938000000009,
+        464.31439999999566,
+        446.4773999999961,
+        451.7566999999981
+      ],
+      "maximum": 537.4234999999971,
+      "p95": 537.4234999999971
+    },
+    "coreCancellationMilliseconds": 0.1047000000035041,
+    "encodedSnapshotBytes": 12231972,
+    "peakObservedNodeRssBytes": 531992576,
+    "limitations": [
+      "Five samples report all values and maximum; they do not estimate stable population tails.",
+      "Node RSS sampled at batch boundaries; not peak UI+Worker memory.",
+      "Core accepts an already received cancellation flag; actual in-flight browser cancellation belongs to browser evidence.",
+      "40-stock timing does not sign P5 200-stock budgets."
+    ],
+    "environment": {
+      "node": "v26.7.0",
+      "platform": "win32",
+      "architecture": "x64",
+      "os": "Windows 11 Pro",
+      "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+      "logicalProcessors": 16,
+      "memoryBytes": 33409036288
+    },
+    "backgroundWork": "Web integration driver and short CLI fixture work were active; these are diagnostic samples, not P5 acceptance."
+  },
+  "p1Regression": {
+    "status": "fail",
+    "sourceHash": "ab75ccb970adbc02caf1f75b4a501de357493f4ffb4624c965458821d8771bbf",
+    "resultsHash": "d6e989dd45cbb4077cf021602a9ec20d092318c4aa4bc421c3640f3b7c6f5316",
+    "groups": [
+      {
+        "id": "auction-reference",
+        "status": "pass"
+      },
+      {
+        "id": "fixed-core-replays",
+        "status": "pass"
+      },
+      {
+        "id": "funded-random-core",
+        "status": "pass"
+      },
+      {
+        "id": "command-and-snapshot-boundaries",
+        "status": "pass"
+      },
+      {
+        "id": "resume-and-granularity",
+        "status": "pass"
+      },
+      {
+        "id": "recorded-node-golden",
+        "status": "pass"
+      },
+      {
+        "id": "saved-snapshot-replays",
+        "status": "pass"
+      },
+      {
+        "id": "cli-success-and-failure",
+        "status": "pass"
+      },
+      {
+        "id": "actual-browser-evidence",
+        "status": "fail"
+      }
+    ],
+    "goldenRerecorded": false,
+    "completeBrowserBinding": "stale; final real browser rerun pending"
+  },
+  "remaining": {
+    "registered100And10Long": "not_run",
+    "finalEconomicCandidate": "short diagnostic fail; full100+10 not_run",
+    "finalWindowsChrome60And20": "pending",
+    "independentP2Acceptance": "round1 in_progress; not_signed"
+  },
+  "candidateDiagnostic": {
+    "status": "fail",
+    "scope": "diagnostic-only",
+    "independentAcceptance": "pending",
+    "stagePass": false,
+    "recordedAt": "2026-10-01T22:58:41.738Z",
+    "initializationVersion": "world-v2-style-cash",
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "economicSourceAtEnd": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "runnerSourceAtEnd": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "sourceStable": true,
+    "sourceFiles": [
+      {
+        "path": "docs/design/market-identities.md",
+        "sha256": "c9760607a4e0885453a5fee9d31a05f8c85073ed727ea9f47dcb3d96dc84496a"
+      },
+      {
+        "path": "docs/design/market-model-rules.md",
+        "sha256": "53314d8ec347d36390a80a3b35836fd30e825b0a234acd3c15262ea3b41be2da"
+      },
+      {
+        "path": "packages/sim-core/src/auction.ts",
+        "sha256": "9401950627b9d5c1da34204ef4cb5569eed0556bf7609d022ba542f8e4938289"
+      },
+      {
+        "path": "packages/sim-core/src/contracts.ts",
+        "sha256": "9ee55cfec31b28fac606ae0b9f7544443ef83cabe839f5b13a25f7801dfe2906"
+      },
+      {
+        "path": "packages/sim-core/src/hash.ts",
+        "sha256": "f4d751d6ef9729901b71cd6191c92b893182774b1fbd3fcdadef84808b2406bd"
+      },
+      {
+        "path": "packages/sim-core/src/index.ts",
+        "sha256": "3bfe840f525c1e5ae6b7e043b817cb89bc6a2d2a54452d64fd1e4189d707e468"
+      },
+      {
+        "path": "packages/sim-core/src/numeric.ts",
+        "sha256": "8522bd46c06bbbe7aad9374a0df3d3671eb7998588aa13e71467fc70f756c05f"
+      },
+      {
+        "path": "packages/sim-core/src/state.ts",
+        "sha256": "1d86d1f4749fc6a22c3702861742de99b9851913001f64b300f704741d39c5a0"
+      },
+      {
+        "path": "packages/sim-core/src/trading-core.ts",
+        "sha256": "d2db876d2d95d31214b5baad7c52c0eaee54b9c74d9825ee9de9dbd4e5d6ca3b"
+      },
+      {
+        "path": "packages/sim-core/src/trading-types.ts",
+        "sha256": "b1c27dc7111018d089206f5cccde36545feb7b58a4f31f6525f9416b5e08bc9e"
+      },
+      {
+        "path": "packages/sim-core/src/world-generation.ts",
+        "sha256": "6e89818573a2d44df3cae6d8f2bb5f3ee923536c815a7b775342ba5fdc23886c"
+      },
+      {
+        "path": "packages/sim-core/src/world-simulation.ts",
+        "sha256": "6e8a1cd4a02b5ca9ae98e5feeb7e568943a8c4838bf59658cf912be353fd2a1e"
+      },
+      {
+        "path": "packages/sim-core/src/world-types.ts",
+        "sha256": "fca451dd1276d81328e1ab5e84a8f668f2792e93f409f1b1cd374c9147e59428"
+      },
+      {
+        "path": "packages/sim-core/src/world-validation.ts",
+        "sha256": "942484cad746112d3051cffe41cd923cefa20a393974b951d15832def9c2fc8e"
+      },
+      {
+        "path": "tests/scenarios/p0/baseline-v1.json",
+        "sha256": "50a1fbf7feddf87cbc5d201093c966c3689c6aed432405c37cd69f78022410b6"
+      }
+    ],
+    "seedManifestHash": "44bccc8b0048247bf0f622b24a9b4b5ec794c7a1d0205209b9b59e2a75cdc558",
+    "runPath": "artifacts/verification/p2/diagnostic-03",
+    "resultsHash": "fcd1e9c2d656300876ad05a48b4f16b8ad5114750ce704ea8c72559e0df19967",
+    "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-batch.mjs --manifest tests/scenarios/p2/diagnostic-manifest.json --out artifacts/verification/p2/diagnostic-03 --jobs 1",
+    "resumeCommand": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-batch.mjs --manifest tests/scenarios/p2/diagnostic-manifest.json --out artifacts/verification/p2/diagnostic-03 --jobs 1 --resume yes",
+    "resumeManifestHash": "55c889ff856206a89e3685e4c41b774a565f2c71593d38d48d064d458740b193",
+    "attemptedNpmCommand": {
+      "command": "npm run sim:batch -- --manifest tests/scenarios/p2/diagnostic-manifest.json --out artifacts/verification/p2/diagnostic-03 --jobs 1 --resume yes",
+      "exitCode": 1,
+      "reason": "PowerShell npm shim parsed forwarded flags as npm config; EUNKNOWNCONFIG before simulation; direct Node entry used afterward"
+    },
+    "completedSeeds": 2,
+    "observedBatches": 8160,
+    "completedLongSeeds": 0,
+    "firstCompletedFailureUnchanged": true,
+    "interruptionPreservation": {
+      "format": "p2-interrupted-diagnostic-preservation-v1",
+      "recordedAt": "2026-10-01T22:53:07.743Z",
+      "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+      "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+      "batchManifestHash": "44bccc8b0048247bf0f622b24a9b4b5ec794c7a1d0205209b9b59e2a75cdc558",
+      "retainedCompleteSeed": {
+        "seed": 3572871866,
+        "status": "fail",
+        "resultHash": "d235af0eda021c5a900ad36c1f4453b0eb72a2510e9a16143accd754321c9caf",
+        "observedBatches": 4080
+      },
+      "interruptedSeed": {
+        "seed": 1866980507,
+        "progress": {
+          "seed": 1866980507,
+          "stage": "warmup",
+          "observedBatches": 3072,
+          "worldDay": 191,
+          "elapsedMs": 79754.87409999999,
+          "millisecondsPerBatch": 25.961874804687497
+        },
+        "files": [
+          {
+            "path": "seed-1866980507/daily.jsonl",
+            "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+          },
+          {
+            "path": "seed-1866980507/initial-snapshot.json",
+            "sha256": "479a9e1a599f1b36d135ada6918ad7ad517d79ffcd4862e4e420bd232053dee6"
+          },
+          {
+            "path": "seed-1866980507/initial-wallets.json",
+            "sha256": "17dd07386595752b7d5b2f4ed7114cb69b9d6875fba790361bf5c8d691ac931e"
+          },
+          {
+            "path": "seed-1866980507/progress.json",
+            "sha256": "f98275365d06ba0f1890fab92c897b3fa038a2c271119ac54573c16c2fc200b1"
+          }
+        ]
+      },
+      "resumeMode": "seed-level; retain first completed failure unchanged; rerun only interrupted second seed from initialization because no mid-seed world checkpoint exists"
+    },
+    "interruptionPreservationHash": "83a094e81e9ab35b637d25b42756c62d0c53b3b3a4c7a9a09156853ec49a04e7",
+    "seeds": [
+      {
+        "seed": 3572871866,
+        "status": "fail",
+        "initializationVersion": "world-v2-style-cash",
+        "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+        "economicSourceAtEnd": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+        "resultHash": "d235af0eda021c5a900ad36c1f4453b0eb72a2510e9a16143accd754321c9caf",
+        "baseline": {
+          "playerDays": 5,
+          "warmupIncluded": false,
+          "markets": [
+            {
+              "market": "A",
+              "stocks": 20,
+              "requiredStocks": 18,
+              "qualifyingStocks": 6,
+              "minimumDays": 4,
+              "days": 5,
+              "passes": false,
+              "longestAllZeroDays": 0,
+              "medianStockDailyTurnover": 0.000028257870536292474,
+              "medianMarketDailyTurnover": 0.00012984477224294654,
+              "turnoverDiagnostic": "outside-initial-diagnostic-range"
+            },
+            {
+              "market": "B",
+              "stocks": 20,
+              "requiredStocks": 18,
+              "qualifyingStocks": 11,
+              "minimumDays": 4,
+              "days": 5,
+              "passes": false,
+              "longestAllZeroDays": 0,
+              "medianStockDailyTurnover": 0.0002864341103670954,
+              "medianMarketDailyTurnover": 0.00021430377334502278,
+              "turnoverDiagnostic": "outside-initial-diagnostic-range"
+            }
+          ],
+          "stocks": [
+            {
+              "id": "A001",
+              "market": "A",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "47925",
+              "noCrossBatches": 74,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "A002",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "134789",
+              "noCrossBatches": 57,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A003",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "95541",
+              "noCrossBatches": 40,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A004",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "24176",
+              "noCrossBatches": 30,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A005",
+              "market": "A",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "1389",
+              "noCrossBatches": 72,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "A006",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "556803",
+              "noCrossBatches": 68,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "A007",
+              "market": "A",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "41789",
+              "noCrossBatches": 23,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "A008",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "12331",
+              "noCrossBatches": 55,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A009",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "7604",
+              "noCrossBatches": 44,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A010",
+              "market": "A",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "9312",
+              "noCrossBatches": 79,
+              "blockedBatches": 0,
+              "longestZeroDays": 4
+            },
+            {
+              "id": "A011",
+              "market": "A",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "39481",
+              "noCrossBatches": 72,
+              "blockedBatches": 0,
+              "longestZeroDays": 4
+            },
+            {
+              "id": "A012",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "10546",
+              "noCrossBatches": 66,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A013",
+              "market": "A",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "374",
+              "noCrossBatches": 71,
+              "blockedBatches": 1,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "A014",
+              "market": "A",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "4628",
+              "noCrossBatches": 77,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "A015",
+              "market": "A",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "A016",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "147474",
+              "noCrossBatches": 40,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A017",
+              "market": "A",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "52871",
+              "noCrossBatches": 36,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "A018",
+              "market": "A",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "11159",
+              "noCrossBatches": 28,
+              "blockedBatches": 32,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "A019",
+              "market": "A",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "70265",
+              "noCrossBatches": 60,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "A020",
+              "market": "A",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "41282",
+              "noCrossBatches": 56,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "B001",
+              "market": "B",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "15341",
+              "noCrossBatches": 65,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B002",
+              "market": "B",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "B003",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "1311632",
+              "noCrossBatches": 50,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B004",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "1242330",
+              "noCrossBatches": 37,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B005",
+              "market": "B",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "107466",
+              "noCrossBatches": 70,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "B006",
+              "market": "B",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "358938",
+              "noCrossBatches": 48,
+              "blockedBatches": 1,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B007",
+              "market": "B",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "11070",
+              "noCrossBatches": 67,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B008",
+              "market": "B",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "208751",
+              "noCrossBatches": 64,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B009",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "56115",
+              "noCrossBatches": 60,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B010",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "38227",
+              "noCrossBatches": 16,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B011",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "18718",
+              "noCrossBatches": 35,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B012",
+              "market": "B",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "28735",
+              "noCrossBatches": 77,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B013",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "286490",
+              "noCrossBatches": 7,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B014",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "39437",
+              "noCrossBatches": 36,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B015",
+              "market": "B",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "14459",
+              "noCrossBatches": 62,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B016",
+              "market": "B",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "36037",
+              "noCrossBatches": 75,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B017",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "83386",
+              "noCrossBatches": 9,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B018",
+              "market": "B",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "66756",
+              "noCrossBatches": 32,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B019",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "97273",
+              "noCrossBatches": 38,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "B020",
+              "market": "B",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "28890",
+              "noCrossBatches": 28,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            }
+          ]
+        },
+        "audit": {
+          "observedBatches": 4080,
+          "warmupBatches": 4000,
+          "playerBatches": 80,
+          "cashViolations": 0,
+          "shareViolations": 0,
+          "negativeBalances": 0,
+          "frozenResourceViolations": 0,
+          "hourCapacityViolations": 0,
+          "unbalancedTrades": 0
+        },
+        "failureReasons": [
+          "A: 6/20 meet 4/5 days",
+          "B: 11/20 meet 4/5 days"
+        ],
+        "timing": {
+          "warmupMs": 105157.3544,
+          "totalMs": 109919.32179999999,
+          "operationMs": {
+            "createWorld": 15.554299999999998,
+            "coreAdvance": 78266.37389999985,
+            "entryPrepare": 7.6687999999994645,
+            "diagnostics": 29755.65579999955,
+            "audit": 316.7083000002592,
+            "metrics": 2.2336999999533873,
+            "snapshotExport": 1414.1685999999988,
+            "snapshotSerializeWrite": 108.34829999998124,
+            "walletSerializeWrite": 4.541600000005772,
+            "dailyWrite": 1.208199999979115,
+            "progressWrite": 3.040900000001784
+          }
+        },
+        "finalChecksum": "5dedb0fa48b4acf80aa2d374ddf95ebac2dd79843f80f1d666ec7b8cc6d68192",
+        "noCrossStockBatches": 2084,
+        "blockedStockBatches": 34
+      },
+      {
+        "seed": 1866980507,
+        "status": "fail",
+        "initializationVersion": "world-v2-style-cash",
+        "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+        "economicSourceAtEnd": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+        "resultHash": "c82e6ba5e29620890d0d487cdec0b82df389c49af6be3e1d3ec694ddd4583fc3",
+        "baseline": {
+          "playerDays": 5,
+          "warmupIncluded": false,
+          "markets": [
+            {
+              "market": "A",
+              "stocks": 20,
+              "requiredStocks": 18,
+              "qualifyingStocks": 7,
+              "minimumDays": 4,
+              "days": 5,
+              "passes": false,
+              "longestAllZeroDays": 0,
+              "medianStockDailyTurnover": 0.0001340486436128065,
+              "medianMarketDailyTurnover": 0.00023997735213386655,
+              "turnoverDiagnostic": "outside-initial-diagnostic-range"
+            },
+            {
+              "market": "B",
+              "stocks": 20,
+              "requiredStocks": 18,
+              "qualifyingStocks": 4,
+              "minimumDays": 4,
+              "days": 5,
+              "passes": false,
+              "longestAllZeroDays": 0,
+              "medianStockDailyTurnover": 0,
+              "medianMarketDailyTurnover": 0.00017384830044218997,
+              "turnoverDiagnostic": "outside-initial-diagnostic-range"
+            }
+          ],
+          "stocks": [
+            {
+              "id": "A001",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "116223",
+              "noCrossBatches": 60,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A002",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "59876",
+              "noCrossBatches": 65,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "A003",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "165802",
+              "noCrossBatches": 54,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A004",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "4349",
+              "noCrossBatches": 59,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A005",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "16758",
+              "noCrossBatches": 49,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A006",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "1179965",
+              "noCrossBatches": 59,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A007",
+              "market": "A",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "A008",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "22786",
+              "noCrossBatches": 34,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "A009",
+              "market": "A",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "3156",
+              "noCrossBatches": 72,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "A010",
+              "market": "A",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "322058",
+              "noCrossBatches": 53,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "A011",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "455027",
+              "noCrossBatches": 55,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A012",
+              "market": "A",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "A013",
+              "market": "A",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "166434",
+              "noCrossBatches": 25,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "A014",
+              "market": "A",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "16534",
+              "noCrossBatches": 76,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "A015",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "11424",
+              "noCrossBatches": 26,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A016",
+              "market": "A",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "A017",
+              "market": "A",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "A018",
+              "market": "A",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "8609",
+              "noCrossBatches": 61,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "A019",
+              "market": "A",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "445856",
+              "noCrossBatches": 8,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            },
+            {
+              "id": "A020",
+              "market": "A",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "5422",
+              "noCrossBatches": 53,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B001",
+              "market": "B",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "B002",
+              "market": "B",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "4811",
+              "noCrossBatches": 69,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B003",
+              "market": "B",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "317716",
+              "noCrossBatches": 52,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "B004",
+              "market": "B",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "97272",
+              "noCrossBatches": 46,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B005",
+              "market": "B",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "1758",
+              "noCrossBatches": 60,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "B006",
+              "market": "B",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "B007",
+              "market": "B",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "10431",
+              "noCrossBatches": 77,
+              "blockedBatches": 0,
+              "longestZeroDays": 4
+            },
+            {
+              "id": "B008",
+              "market": "B",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "B009",
+              "market": "B",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "35853",
+              "noCrossBatches": 65,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "B010",
+              "market": "B",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "B011",
+              "market": "B",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "1799",
+              "noCrossBatches": 65,
+              "blockedBatches": 0,
+              "longestZeroDays": 4
+            },
+            {
+              "id": "B012",
+              "market": "B",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "396403",
+              "noCrossBatches": 44,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B013",
+              "market": "B",
+              "tradedDays": 4,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "22657",
+              "noCrossBatches": 43,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B014",
+              "market": "B",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "4425",
+              "noCrossBatches": 51,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B015",
+              "market": "B",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "B016",
+              "market": "B",
+              "tradedDays": 3,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "992211",
+              "noCrossBatches": 52,
+              "blockedBatches": 0,
+              "longestZeroDays": 1
+            },
+            {
+              "id": "B017",
+              "market": "B",
+              "tradedDays": 0,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "0",
+              "noCrossBatches": 80,
+              "blockedBatches": 0,
+              "longestZeroDays": 5
+            },
+            {
+              "id": "B018",
+              "market": "B",
+              "tradedDays": 2,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "8998",
+              "noCrossBatches": 76,
+              "blockedBatches": 0,
+              "longestZeroDays": 2
+            },
+            {
+              "id": "B019",
+              "market": "B",
+              "tradedDays": 1,
+              "days": 5,
+              "passes": false,
+              "totalQuantity": "3729",
+              "noCrossBatches": 76,
+              "blockedBatches": 0,
+              "longestZeroDays": 3
+            },
+            {
+              "id": "B020",
+              "market": "B",
+              "tradedDays": 5,
+              "days": 5,
+              "passes": true,
+              "totalQuantity": "27434",
+              "noCrossBatches": 19,
+              "blockedBatches": 0,
+              "longestZeroDays": 0
+            }
+          ]
+        },
+        "audit": {
+          "observedBatches": 4080,
+          "warmupBatches": 4000,
+          "playerBatches": 80,
+          "cashViolations": 0,
+          "shareViolations": 0,
+          "negativeBalances": 0,
+          "frozenResourceViolations": 0,
+          "hourCapacityViolations": 0,
+          "unbalancedTrades": 0
+        },
+        "failureReasons": [
+          "A: 7/20 meet 4/5 days",
+          "B: 4/20 meet 4/5 days"
+        ],
+        "timing": {
+          "warmupMs": 146033.7518,
+          "totalMs": 152074.8363,
+          "operationMs": {
+            "createWorld": 16.734900000000003,
+            "coreAdvance": 105865.03940000031,
+            "entryPrepare": 11.17239999998128,
+            "diagnostics": 43368.587799999594,
+            "audit": 558.9531000002731,
+            "metrics": 3.1595000000670552,
+            "snapshotExport": 2055.343999999984,
+            "snapshotSerializeWrite": 151.39539999997208,
+            "walletSerializeWrite": 6.4366999999838015,
+            "dailyWrite": 1.5215999999491032,
+            "progressWrite": 3.5863999999910448
+          }
+        },
+        "finalChecksum": "cc1a482b5fbd6a05cf7540b6a415188eb225fbbbb840cf652ac24efe73d334ef",
+        "noCrossStockBatches": 2404,
+        "blockedStockBatches": 0
+      }
+    ],
+    "fullStage100And10": "not_run",
+    "diagnosticOnly": true,
+    "conclusion": "Both fixed short diagnostics fail the unchanged 18/20 stocks x 4/5 days gate; do not count short diagnostics as250/1000-day or independent acceptance and do not launch the full run from this failure"
+  },
+  "candidateSelfChecks": {
+    "status": "fail",
+    "independentAcceptance": "pending",
+    "stagePass": false,
+    "command": "node D:\\Workspace\\big-a-simulation\\tools\\sim-runner\\p2-verify.mjs --out artifacts/verification/p2/self-candidate-03",
+    "recordedAt": "2026-10-01T22:54:56.350Z",
+    "runPath": "artifacts/verification/p2/self-candidate-03",
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "sourceHash": "ca5223ba3b8ceffe01b14519fa48d617d2af4f1c31a2e84ed5ccdfd8580f9dfc",
+    "resultsHash": "02a4cb5dddfa057d2e584288fcd94bb46ca1caedbad155295d1f85d889093f31",
+    "groups": [
+      {
+        "id": "statistics-hard-gate",
+        "status": "pass"
+      },
+      {
+        "id": "generated-world-and-public-boundary",
+        "status": "pass"
+      },
+      {
+        "id": "actual-baseline-parameters",
+        "status": "pass"
+      },
+      {
+        "id": "zero-ADV-fee-cycle-entry-and20-day-resume",
+        "status": "pass"
+      },
+      {
+        "id": "all-registered-autonomous-seeds",
+        "status": "not_run",
+        "message": "ENOENT: no such file or directory, open 'D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\baseline-final\\results.json'"
+      },
+      {
+        "id": "P1-complete-regression",
+        "status": "not_run",
+        "message": "ENOENT: no such file or directory, open 'D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\p1-regression\\results.json'"
+      },
+      {
+        "id": "actual-Windows-Chrome60-day-UI",
+        "status": "fail",
+        "message": "Expected values to be strictly equal:\n+ actual - expected\n\n+ 'incomplete'\n- 'pass'\n"
+      },
+      {
+        "id": "minimal-Node-measurements",
+        "status": "not_run",
+        "message": "ENOENT: no such file or directory, open 'D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\benchmark-final\\results.json'"
+      }
+    ],
+    "initialization": {
+      "seed": 3572871866,
+      "initializationVersion": "world-v2-style-cash",
+      "initialChecksum": "00546079e18d3812b354761dd6e7c610b3d844e9bbeae8795ecefa53a1c0aa34",
+      "companies": 40,
+      "npcWallets": 26,
+      "npcInitialCash": {
+        "$bigint": "7843830185627"
+      },
+      "initialCashFormula": "ordinary floor(H*(1-f)/f); inventory floor(H/4); fixed initial feeWeight",
+      "quotas": "exact P0 matrix and concepts",
+      "conservation": "zero",
+      "publicQueryChanges": 0
+    },
+    "resume": {
+      "seed": 3572871866,
+      "A16": {
+        "positiveCapacityAssets": 560,
+        "stocksWithRealUnboundedCross": 40,
+        "audit": "zero"
+      },
+      "A17": {
+        "worldDay": 260,
+        "distributed": {
+          "$bigint": "77924823"
+        },
+        "recipients": 26,
+        "fixedInitialCashShares": true,
+        "sharesChanged": false
+      },
+      "warmupChecksum": "2b3ce7f43ddfacdf2f35e49b0349bc7f7ad579a40480c1c3788b57ff1a408276",
+      "entryChecksum": "c6bfd20a44469c1cf9728bba356cd2581666e5b29adc5e0939cd98f4dde9e918",
+      "entryCashAdded": {
+        "$bigint": "100000000"
+      },
+      "repeatedInjection": 0,
+      "checkpointChecksum": "d0f25657ec4961d175de4898b94d3c67c12151f90cf2d37d42b6c153da738af0",
+      "checkpoint": {
+        "clock": {
+          "batch": 1,
+          "worldDay": 259
+        },
+        "phase": "publicDecision",
+        "partiallyFilledPlan": true,
+        "reservedCash": {
+          "$bigint": "16415510"
+        },
+        "lockedA": true
+      },
+      "continuationBatches": 320,
+      "continuedThrough": {
+        "worldDay": 279,
+        "batch": 0
+      },
+      "finalChecksum": "4e99499b3d3c85b1cc7cfd7a6a5a4051651f9fc85e6b9ee9753b4f03bfa53ef9",
+      "budgets": [
+        {
+          "budget": 1,
+          "checksum": "4e99499b3d3c85b1cc7cfd7a6a5a4051651f9fc85e6b9ee9753b4f03bfa53ef9"
+        },
+        {
+          "budget": 4,
+          "checksum": "4e99499b3d3c85b1cc7cfd7a6a5a4051651f9fc85e6b9ee9753b4f03bfa53ef9"
+        },
+        {
+          "budget": 16,
+          "checksum": "4e99499b3d3c85b1cc7cfd7a6a5a4051651f9fc85e6b9ee9753b4f03bfa53ef9"
+        },
+        {
+          "budget": 64,
+          "checksum": "4e99499b3d3c85b1cc7cfd7a6a5a4051651f9fc85e6b9ee9753b4f03bfa53ef9"
+        }
+      ],
+      "corruptRestoreRetainedCurrentWorld": 3,
+      "coreCancelledAtBoundary": true
+    }
+  }
+}

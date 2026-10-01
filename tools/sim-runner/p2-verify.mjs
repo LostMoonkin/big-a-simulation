@@ -89,6 +89,7 @@ group('actual-Windows-Chrome60-day-UI', () => {
 group('minimal-Node-measurements', () => {
   const data = load(inputs.benchmarkResults); const measuredManifest = load(`${dirname(resolve(inputs.benchmarkResults))}/manifest.json`);
   assert.equal(data.status, 'pass'); assert.equal(measuredManifest.economicSourceHash, manifest.economicSourceHash);
+  assert.equal(data.economicSourceAtEnd, measuredManifest.economicSourceHash);
   assert.equal(data.warmup.batches, 4000); assert.equal(data.dayMilliseconds.samples.length, 5);
   assert.ok(data.encodedSnapshotBytes > 0 && data.encodedSnapshotBytes <= 64 * 1024 * 1024);
   return { resultsHash: sha(readFileSync(inputs.benchmarkResults)), data, scope: 'Measured40-stock Node timings; no P5 browser budget acceptance.' };

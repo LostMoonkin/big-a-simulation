@@ -1,10 +1,10 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { createMarketCore, decodeExact } from '../../packages/sim-core/src/index.ts';
-import { argumentsFor, integerOption, outputPath, p2Manifest, commandLine, writeJson, tick, clockAt, sha } from './p2-runtime.mjs';
+import { argumentsFor, integerOption, outputPath, p2Manifest, commandLine, writeJson, tick, clockAt, sha, p2Identity } from './p2-runtime.mjs';
 
 const options = argumentsFor(process.argv.slice(2), ['input', 'days', 'out']);
 const out = outputPath(options, 'golden');
-let core;
+let core, manifest;
 try {
   if (!options.input) throw new Error('--input <complete snapshot.json> is required');
   const bytes = readFileSync(options.input);
@@ -14,6 +14,9 @@ try {
   if (!restored.restored) throw new Error(`restore ${restored.reason}: ${restored.detail}`);
   const days = integerOption(options.days, 20, 1, 1000, 'days');
   const initial = core.exportSnapshot();
+  const inputWorld = core.diagnosticsSummary().world;
+  manifest = p2Manifest(commandLine(), { input: options.input, inputSha256: sha(bytes), days, configHash: initial.configHash, seed: initial.seed, initializationVersion: inputWorld.initializationVersion });
+  writeJson(`${out}/manifest.json`, manifest);
   // Continue exactly days*16 real batches, including the current prepared batch.
   const target = clockAt(tick(initial.clock) + days * 16 - (initial.phase === 'publicDecision' ? 1 : 0));
   let batches = 0;
@@ -24,16 +27,17 @@ try {
     if (reply.reason !== 'budget' || reply.completedBatches === 0) throw new Error(`unexpected continuation stop ${reply.reason}`);
   }
   const final = core.exportSnapshot();
-  const result = { status: 'pass', initialChecksum: initial.checksum, finalChecksum: final.checksum, phase: final.phase, clock: final.clock, targetClock: target, days, completedBatches: batches };
+  const ending = p2Identity();
+  const result = { status: 'pass', initialChecksum: initial.checksum, finalChecksum: final.checksum, phase: final.phase, clock: final.clock, targetClock: target, days, completedBatches: batches,
+    economicSourceHash: manifest.economicSourceHash, economicSourceAtEnd: ending.economicSourceHash };
   if (batches !== days * 16 || final.phase !== 'settled') throw new Error('golden did not complete the requested real batches');
-  const manifest = p2Manifest(commandLine(), { input: options.input, inputSha256: sha(bytes), days, configHash: final.configHash, seed: final.seed });
-  writeJson(`${out}/manifest.json`, manifest);
+  if (ending.economicSourceHash !== manifest.economicSourceHash) throw new Error('economic source changed during continuation; preserve this run and rerun the affected evidence');
   writeJson(`${out}/results.json`, result);
   writeJson(`${out}/final-snapshot.json`, final);
   writeFileSync(`${out}/summary.md`, `# P2 Node continuation\n\n${days} days (${batches} actual batches) resumed from a complete snapshot using the production core.\nInitial: ${result.initialChecksum}\nFinal: ${result.finalChecksum}\nEconomic source: ${manifest.economicSourceHash}\nIndependent acceptance: pending.\n`);
   console.log(JSON.stringify({ ...result, sourceHash: manifest.sourceHash, economicSourceHash: manifest.economicSourceHash, out }));
 } catch (error) {
   process.exitCode = 1;
-  writeJson(`${out}/failure.json`, { status: 'fail', message: error.message, stack: error.stack });
+  writeJson(`${out}/failure.json`, { status: 'fail', economicSourceHash: manifest?.economicSourceHash ?? null, message: error.message, stack: error.stack });
   console.error(error.message);
 }

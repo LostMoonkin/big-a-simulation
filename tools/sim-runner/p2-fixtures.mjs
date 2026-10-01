@@ -1,4 +1,5 @@
 import { readFileSync } from 'node:fs';
+import { INITIALIZATION_VERSION } from '../../packages/sim-core/src/index.ts';
 import { directory, sha, writeJson } from './p2-runtime.mjs';
 
 const input = readFileSync('tests/scenarios/p0/seeds.json');
@@ -6,6 +7,7 @@ const seeds = JSON.parse(input);
 const preset = readFileSync('tests/scenarios/p0/baseline-v1.json');
 directory('tests/scenarios/p2');
 const common = { format: 'p2-batch-manifest-v1', rulesVersion: '0.3.1', contentVersion: '0.3.1', mathVersion: 'fixed-q9-v1', rngVersion: 'rng-v1', schemaVersion: 1,
+  initializationVersion: INITIALIZATION_VERSION,
   seedSource: 'tests/scenarios/p0/seeds.json', seedSourceHash: sha(input), presetSource: 'tests/scenarios/p0/baseline-v1.json', presetSourceHash: sha(preset),
   config: { size: 'prototype', mode: 'baseline', playerCapital: { $bigint: '100000000' } }, warmupDays: 250,
   threshold: { stocksPerMarket: 20, requiredStocks: 18, tradedDayNumerator: 4, tradedDayDenominator: 5 },

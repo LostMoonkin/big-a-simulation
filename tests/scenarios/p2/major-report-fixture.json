@@ -1,0 +1,6 @@
+{
+  "format": "p2-major-report-fixed-input-v1",
+  "stockId": "A002",
+  "hiddenOperatingIndexMultiplierQ": { "$bigint": "1200000000" },
+  "scope": "AC6 fixture only: start from an actual browser-downloaded world with a real A002 holding; advance through the production core to its next report boundary, then change only the still-unpublished operating index. Do not count this controlled input as natural seed, NPC economy, liquidity or 60-day evidence."
+}

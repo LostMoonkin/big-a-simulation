@@ -5,6 +5,7 @@
   "mathVersion": "fixed-q9-v1",
   "rngVersion": "rng-v1",
   "schemaVersion": 1,
+  "initializationVersion": "world-v2-style-cash",
   "seedSource": "tests/scenarios/p0/seeds.json",
   "seedSourceHash": "fd21606f097a53b388609f3cd3d0791ecbef2c75d5917c0e65072267cbd6e136",
   "presetSource": "tests/scenarios/p0/baseline-v1.json",
