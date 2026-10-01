@@ -2,7 +2,7 @@
   "format": "p2-browser-checkpoint-v1",
   "status": "incomplete",
   "independentAcceptance": "pending",
-  "sourceBinding": "Actual browser run predates submission-reference/resource-preview and driver-report fixes. Final source-bound browser rerun remains required.",
+  "sourceBinding": "The pre-existing top-level fields retain the earlier-build checkpoint. candidateCurrent below records this candidate composite evidence; both original full-command failures remain unmodified.",
   "currentBrowserSourceHash": "96f12bcb3725df2e6f76dd35e806e957fc3b7efb1ca795758f51ce2019f6b72c",
   "currentBrowserFiles": [
     {
@@ -286,6 +286,14 @@
     {
       "path": "artifacts/verification/p2/browser-full-trades",
       "reason": "Full natural UI/continuation/60-day actions completed; mandatory major scenario absent, then old failure writer threw BigInt JSON TypeError. Failure writer fixed, original files retained."
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-full/results.json",
+      "reason": "10 browser checks passed; batch0-only driver assumption rejected the real protection:B001:4080 next-batch pause. Production Node and independent acceptance reproduced its correct publicDecision255/1 window."
+    },
+    {
+      "path": "artifacts/verification/p2/browser-candidate-final/results.json",
+      "reason": "All17 browser checks and source assertions completed, errors=[]; the success console JSON then rejected the actual BigInt checkpoint cash. Original exit1/results fail retained. Only that terminal path was repaired and retested, red1 then green0."
     }
   ],
   "remaining": [
@@ -348,5 +356,288 @@
       }
     },
     "screenshot": "artifacts/verification/p2/browser-major-only/fixed-report-paused.png"
+  },
+  "candidateCurrent": {
+    "scope": "Observed P2-AC4 through P2-AC8 browser behavior with a separately executed success-console repair; independent acceptance pending.",
+    "status": "17-browser-checks-observed-pass; original-full-command-fail; success-console-only-retest-pass",
+    "independentAcceptance": "pending",
+    "stageStatus": "incomplete; economic AC3 has failed and 100+10 is not run",
+    "environment": {
+      "browserVersion": "154.0.8037.93",
+      "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "url": "http://127.0.0.1:4173/",
+      "os": "Windows 11 Pro",
+      "node": "v26.7.0"
+    },
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "runnerSourceHash": "cf4327d1307cefc7e9b9d6917f129aa130bc7fb53f1f533a89124dfaa167f169",
+    "testedBrowserSourceHash": "c54044561ed3f905afea7e0285ad1f1f18ec3e48fcd526ab4beb0c100444b949",
+    "testedHeadAtExecution": "1e27259dd1332e71c7a397944380d4d12065e733",
+    "currentBrowserSourceHash": "ae0ba6c0089996ea6a61c07753f478ba609aa2220ee786786e0e1323b1d2ed2e",
+    "compiledHash": "ef43a15df6f938f74d1a900054580be16209c6c5f16263a5c66e6b69fb3ccce3",
+    "productionAndCompiledUnchangedAfterFullRun": true,
+    "driverDifferenceAfterFullRun": "Only the terminal console JSON BigInt replacer; no full browser rerun after this log-only fix.",
+    "fullCommand": {
+      "command": "node tools/web-checks/browser-check.mjs http://127.0.0.1:4173/ artifacts/verification/p2/browser-candidate-final full",
+      "exitCode": 1,
+      "status": "fail",
+      "detail": "TypeError: Do not know how to serialize a BigInt",
+      "elapsedMs": 351196,
+      "results": {
+        "path": "artifacts/verification/p2/browser-candidate-final/results.json",
+        "sha256": "5fa5a3276e589ea597d1ca4a719cdaf0996ab69ccfcc3197edfc720ac94b9805"
+      },
+      "manifest": {
+        "path": "artifacts/verification/p2/browser-candidate-final/manifest.json",
+        "sha256": "ddea14547c827c2a2f0509d855f716f4750da2a6e8f33470cb122cc7762184ab"
+      },
+      "buildManifest": {
+        "path": "artifacts/verification/p2/browser-candidate-final/build-manifest.json",
+        "sha256": "2abdd809197bf2453589826374a7a0c4928800e1f0ee29e0919baccb14471dfa"
+      }
+    },
+    "terminalOnly": {
+      "scope": "success-console-only",
+      "status": "pass",
+      "actualCommand": "node artifacts/verification/p2/browser-candidate-footer/footer-replay.mjs artifacts/verification/p2/browser-candidate-footer/green",
+      "originalCommandStillFail": true,
+      "redExitCode": 1,
+      "greenExitCode": 0,
+      "browserRelaunched": false,
+      "actualCapturedReservedCash": {
+        "$bigint": "46561610"
+      },
+      "stdoutMoneyRoundtripExact": true,
+      "executedDriverSha256": "f73d7587e17bb093a4d540c27ac2b0e82a84ebb0c3c24f38cd3b68df063590a4",
+      "executedSourceLine": 303,
+      "red": {
+        "path": "artifacts/verification/p2/browser-candidate-footer/red/results.json",
+        "sha256": "1e649b584c10e4ba296d875eef9065f90eef79017845da206d436de07bf8d4c1"
+      },
+      "green": {
+        "path": "artifacts/verification/p2/browser-candidate-footer/green/results.json",
+        "sha256": "817bc48002fc3a526da047effa3f7abda68c0ba44409f56d50994a7e7022706e"
+      },
+      "greenManifest": {
+        "path": "artifacts/verification/p2/browser-candidate-footer/green/manifest.json",
+        "sha256": "0a66695e733ff8656b1f71b211cd83d221faf506d48e241c52f7b16953535eb4"
+      },
+      "stdout": {
+        "path": "artifacts/verification/p2/browser-candidate-footer/green/stdout.json",
+        "sha256": "ee7e4ed275953ee0c0ef4534fb49000e5b866b4de8b34a32ecd23fb37db856f8"
+      }
+    },
+    "checks": [
+      {
+        "id": "cancel-warmup-retry",
+        "ac": "P2-AC4",
+        "status": "pass"
+      },
+      {
+        "id": "warmup-start",
+        "ac": "P2-AC4",
+        "status": "pass"
+      },
+      {
+        "id": "real-chart",
+        "ac": "P2-AC4",
+        "status": "pass"
+      },
+      {
+        "id": "node-worker-preheat",
+        "ac": "P2-AC4",
+        "status": "pass"
+      },
+      {
+        "id": "hour-day-fast-ui-same-fixed-stream",
+        "ac": "P2-AC6",
+        "status": "pass"
+      },
+      {
+        "id": "both-markets-history-company-filters-no-free-time",
+        "ac": "P2-AC4/6",
+        "status": "pass"
+      },
+      {
+        "id": "a-immediate-fill-t1-rejection",
+        "ac": "P2-AC5",
+        "status": "pass"
+      },
+      {
+        "id": "day-cancel-opposite-and-cash-rejections",
+        "ac": "P2-AC5",
+        "status": "pass"
+      },
+      {
+        "id": "b-next-batch-sale-fees-and-public-ledger",
+        "ac": "P2-AC5",
+        "status": "pass"
+      },
+      {
+        "id": "zero-fill-day-expiry",
+        "ac": "P2-AC5",
+        "status": "pass"
+      },
+      {
+        "id": "cancel-fast-forward-at-complete-batch",
+        "ac": "P2-AC6",
+        "status": "pass"
+      },
+      {
+        "id": "partial-plan-frozen-cash-a-lock-fee-cycle-checkpoint",
+        "ac": "P2-AC7",
+        "status": "pass"
+      },
+      {
+        "id": "bad-import-keeps-current-world",
+        "ac": "P2-AC7",
+        "status": "pass"
+      },
+      {
+        "id": "held-notification-before-npc-clearing",
+        "ac": "P2-AC6",
+        "status": "pass"
+      },
+      {
+        "id": "close-reopen-import-20-days-full-state",
+        "ac": "P2-AC7",
+        "status": "pass"
+      },
+      {
+        "id": "60-day-readonly-no-liquidation-or-reward",
+        "ac": "P2-AC8",
+        "status": "pass"
+      },
+      {
+        "id": "fixed-held-report-before-npc-clear-and-public-window-restore",
+        "ac": "P2-AC6/7",
+        "status": "pass"
+      }
+    ],
+    "evidence": {
+      "checkpoint": {
+        "checksum": "29a785c87635635ff5a0aa8eb88a5d78ae23a05919220fad3b20aa5d626083ae",
+        "path": "D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\qualified-checkpoint.json",
+        "clock": {
+          "batch": 15,
+          "worldDay": 259
+        },
+        "phase": "settled",
+        "plan": {
+          "quantity": 8304,
+          "filled": 489,
+          "remaining": 7815,
+          "reservedCash": {
+            "$bigint": "46561610"
+          }
+        },
+        "lockedA": [
+          {
+            "quantity": 499,
+            "stockId": "A007",
+            "unlockTick": 4160
+          }
+        ]
+      },
+      "continuation": {
+        "initialChecksum": "29a785c87635635ff5a0aa8eb88a5d78ae23a05919220fad3b20aa5d626083ae",
+        "uninterruptedChecksum": "97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd",
+        "reopenedChecksum": "97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd",
+        "nodeChecksum": "97c230a299568deafc04796e41c2ef8264e4836627f95904c391e45366cf7dcd",
+        "completedBatches": 320,
+        "initialClock": {
+          "batch": 15,
+          "worldDay": 259
+        },
+        "finalClock": {
+          "batch": 15,
+          "worldDay": 279
+        },
+        "nodeResults": "D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\node-20-days\\results.json"
+      },
+      "summary": {
+        "checksum": "b5a4b5fb51faf8a806371b3d1a6930a1556c1caa6a2452b3a94cf3e28d6f9219",
+        "clock": {
+          "batch": 15,
+          "worldDay": 309
+        },
+        "phase": "settled",
+        "coreEnded": false
+      },
+      "fixedMajor": {
+        "scope": "fixed-hidden-input-only",
+        "naturalEconomicEvidence": false,
+        "input": "D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\qualified-checkpoint.json",
+        "nodeResult": "D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-candidate-final\\fixed-report-node\\results.json",
+        "inputChecksum": "ed0387d522ecbbe4829f6baa08e2fc114a6bee004b650905f975c8327ccdf52f",
+        "pausedChecksum": "8d49b50a713a6e31ab4d7265cb087a3bc0c0fcbce3aa8b03eb74ab14bafd15e4",
+        "clock": {
+          "batch": 0,
+          "worldDay": 261
+        },
+        "phase": "publicDecision",
+        "restoredPublicVersion": 4311,
+        "clearingBatchesBeforePause": 0,
+        "duplicatesAfterRestore": 0
+      },
+      "protectionPauseSample": {
+        "checksum": "1099a12da7737303dcc1e99cdef63af311044941d0206d346536112d1d9b713a",
+        "clock": {
+          "batch": 1,
+          "worldDay": 255
+        },
+        "phase": "publicDecision",
+        "lastSettledTick": 4080,
+        "reportIds": [],
+        "protectionAnnouncements": [
+          {
+            "id": "protection:B001:4080",
+            "publishedAt": {
+              "batch": 0,
+              "worldDay": 255
+            },
+            "text": "乙 B001 下一批保护带 ±16%，参考仍为最近实际成交。"
+          }
+        ],
+        "npcClearingBatchesAtWindow": 0
+      },
+      "capturedNotificationWindows": 14,
+      "fullData": {
+        "path": "artifacts/verification/p2/browser-candidate-final/results.json",
+        "sha256": "5fa5a3276e589ea597d1ca4a719cdaf0996ab69ccfcc3197edfc720ac94b9805"
+      }
+    },
+    "artifacts": {
+      "screenshots": [
+        "artifacts/verification/p2/browser-candidate-final/terminal.png",
+        "artifacts/verification/p2/browser-candidate-final/summary-60-days.png",
+        "artifacts/verification/p2/browser-candidate-final/fixed-report-paused.png"
+      ],
+      "uiLog": {
+        "path": "artifacts/verification/p2/browser-candidate-final/before-close-ui-log.json",
+        "sha256": "d814132be0ca25d03d0e9c38782bbe3774eafc7adfd7990ced08ef760e8e3134"
+      },
+      "checkpoint": {
+        "path": "artifacts/verification/p2/browser-candidate-final/qualified-checkpoint.json",
+        "sha256": "0ec247a8177592600c93d2d6997ec7daaab0b2e5decbfad11203c8f0269ec8b6"
+      },
+      "node20Days": {
+        "path": "artifacts/verification/p2/browser-candidate-final/node-20-days/results.json",
+        "sha256": "81240c1b47893af8798408cb153419277016f4e2a9d8049273f9cecb62b1ef5d"
+      },
+      "fixedMajor": {
+        "path": "artifacts/verification/p2/browser-candidate-final/fixed-report-node/results.json",
+        "sha256": "408c6877aaa723fdea924ecc2ea4a1c2edf5f5b5990601225678e5c20a5a831b"
+      },
+      "protectionRegression": {
+        "path": "artifacts/verification/p2/browser-candidate-pause-regression/results.json",
+        "sha256": "d95439d6682ccfbeee0b6a973d08606d767273b2cf02222f6ceecd256250e48a"
+      }
+    },
+    "limitations": [
+      "Composite observation/retest evidence, not a successful complete command on the final driver source.",
+      "The fixed hidden operating input tests report timing and restore only; naturalEconomicEvidence=false.",
+      "No natural-event-frequency, economic AC1-3, P3/P4 feature or P5 compatibility/performance sign-off."
+    ]
   }
 }

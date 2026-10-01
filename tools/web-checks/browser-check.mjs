@@ -300,7 +300,7 @@ try {
   assert.equal(browserSource.sourceHash, browserAtStart.sourceHash, 'browser source changed during the browser run');
   const result = { status: 'pass', independentAcceptance: 'pending', mode, ...p2Identity(), browserSourceHash: browserSource.sourceHash, browserFiles: browserSource.files, environment: { browserVersion: browser.version(), executable, url, playwrightRuntime: runtime }, elapsedMs: Date.now() - startedAt, checks, evidence, errors };
   writeJson(resolve(output, 'results.json'), result);
-  console.log(JSON.stringify({ status: 'pass', checks, browserVersion: browser.version() }));
+  console.log(JSON.stringify({ status: 'pass', checks, browserVersion: browser.version() }, (_key, value) => typeof value === 'bigint' ? { $bigint: value.toString() } : value));
 } catch (error) {
   await page.screenshot({ path: resolve(output, 'failure.png'), fullPage: true }).catch(() => {});
   writeJson(resolve(output, 'results.json'), { status: 'fail', independentAcceptance: 'pending', mode,
