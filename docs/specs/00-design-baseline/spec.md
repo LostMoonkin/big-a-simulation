@@ -2,6 +2,8 @@
 
 状态：已独立验收通过（第2轮，2026-10-01）。规格版本：1.0（验收门槛未改）。冻结规则/玩法0.3.1，初始依据为0.2及其研究。结论见[第2轮独立验收](../../verification/p0-independent-round-2.md)，实施证据见[P0首次交付](../../verification/p0-baseline.md)与[B01–B04修复记录](../../verification/p0-repair-round-1.md)。实施细节见[plan](plan.md)，具体任务见[tasks](tasks.md)。
 
+P2回流修订（2026-10-02）：world-v2-style-cash初始化候选仅调整新建普通钱包现金为按原风格持股比例换算，库存仍25%，股份/参数/报价/保护/硬门槛不变；依据见[核对与保留失败](../../../packages/sim-core/p2-contract-diagnosis.md)、[规则第2节](../../design/market-model-rules.md)及[旧/新完整初值](../../../tests/scenarios/p0/initialization-candidate.json)。历史P0通过记录仍描述world-v1；本候选待P2实际复跑/独立核对，不自动继承原经济通过结论。
+
 ## Goal
 
 在正式实现前关闭会改变交易规则、资金行为、存档与验收方式的歧义。当前已有统一价批量竞价和多周期框架，但两市政策传导、资金特点和典型形态仍未定案；40股原型配额、数值实现和完整实验口径也需要固定。

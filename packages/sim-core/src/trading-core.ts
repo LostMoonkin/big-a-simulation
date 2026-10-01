@@ -18,7 +18,7 @@ function fork(state:TradingState):TradingState{return state.world?forkWorldState
 function validateRuntime(state:TradingState):void{if(state.world)validateWorldBalances(state);else validateState(state);}
 function progress(state:TradingState):WorldProgress{
   const w=state.world;assert(w,'not an autonomous world');const done=Math.min(4000,w.lastSettledTick+1);
-  return {seed:state.seed,size:'prototype',mode:'baseline',preset:'baseline-v1',warmupCompletedBatches:done,warmupTotalBatches:4000,
+  return {seed:state.seed,size:'prototype',mode:'baseline',preset:'baseline-v1',initializationVersion:w.generationVersion,warmupCompletedBatches:done,warmupTotalBatches:4000,
     preheated:done===4000,playerInjected:state.playerInjected,playerDay:state.playerInjected?state.clock.worldDay-249:null,
     originalCapital:w.config.playerCapital,prototypeDayLimit:60};
 }

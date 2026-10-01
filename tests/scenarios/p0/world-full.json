@@ -1,6 +1,8 @@
 {
   "rulesVersion": "0.3.1",
   "contentVersion": "0.3.1",
+  "initializationVersion": "world-v2-style-cash",
+  "previousInitializationVersion": "world-v1",
   "seed": 20261001,
   "size": "full",
   "industrySizeMatrix": {
@@ -3986,7 +3988,7 @@
       "id": "A:repairValue",
       "market": "A",
       "role": "repairValue",
-      "cash": "379015569250",
+      "cash": "649740975857",
       "holdings": [
         {
           "stockId": "A001",
@@ -4488,13 +4490,14 @@
           "quantity": 2574018,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "379015569250"
     },
     {
       "id": "A:allocationValue",
       "market": "A",
       "role": "allocationValue",
-      "cash": "377724956750",
+      "cash": "647528497285",
       "holdings": [
         {
           "stockId": "A001",
@@ -4996,13 +4999,14 @@
           "quantity": 2714027,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "377724956750"
     },
     {
       "id": "A:longValue",
       "market": "A",
       "role": "longValue",
-      "cash": "379779474000",
+      "cash": "651050526857",
       "holdings": [
         {
           "stockId": "A001",
@@ -5504,13 +5508,14 @@
           "quantity": 2775955,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "379779474000"
     },
     {
       "id": "A:shortTrend",
       "market": "A",
       "role": "shortTrend",
-      "cash": "363064872000",
+      "cash": "968172992000",
       "holdings": [
         {
           "stockId": "A001",
@@ -6012,13 +6017,14 @@
           "quantity": 2611489,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "363064872000"
     },
     {
       "id": "A:swingTrend",
       "market": "A",
       "role": "swingTrend",
-      "cash": "367555128000",
+      "cash": "980147008000",
       "holdings": [
         {
           "stockId": "A001",
@@ -6520,13 +6526,14 @@
           "quantity": 2572511,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "367555128000"
     },
     {
       "id": "A:eventTheme",
       "market": "A",
       "role": "eventTheme",
-      "cash": "407928057250",
+      "cash": "1087808152666",
       "holdings": [
         {
           "stockId": "A001",
@@ -7028,13 +7035,14 @@
           "quantity": 2898880,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "407928057250"
     },
     {
       "id": "A:allocationTheme",
       "market": "A",
       "role": "allocationTheme",
-      "cash": "403871942750",
+      "cash": "1076991847333",
       "holdings": [
         {
           "stockId": "A001",
@@ -7536,7 +7544,8 @@
           "quantity": 2861120,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "403871942750"
     },
     {
       "id": "A:inventory1",
@@ -8044,7 +8053,8 @@
           "quantity": 1851851,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "264407929750"
     },
     {
       "id": "A:inventory2",
@@ -8552,7 +8562,8 @@
           "quantity": 1900584,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "263779113000"
     },
     {
       "id": "A:inventory3",
@@ -9060,7 +9071,8 @@
           "quantity": 1833107,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "263149807750"
     },
     {
       "id": "A:inventory4",
@@ -9568,13 +9580,14 @@
           "quantity": 1902458,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "264003149500"
     },
     {
       "id": "A:noise",
       "market": "A",
       "role": "noise",
-      "cash": "324720000000",
+      "cash": "1062720000000",
       "holdings": [
         {
           "stockId": "A001",
@@ -10076,13 +10089,14 @@
           "quantity": 2304000,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "324720000000"
     },
     {
       "id": "B:repairValue",
       "market": "B",
       "role": "repairValue",
-      "cash": "543380149750",
+      "cash": "931508828142",
       "holdings": [
         {
           "stockId": "B001",
@@ -10584,13 +10598,14 @@
           "quantity": 3856513,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "543380149750"
     },
     {
       "id": "B:allocationValue",
       "market": "B",
       "role": "allocationValue",
-      "cash": "541945489250",
+      "cash": "929049410142",
       "holdings": [
         {
           "stockId": "B001",
@@ -11092,13 +11107,14 @@
           "quantity": 3856514,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "541945489250"
     },
     {
       "id": "B:longValue",
       "market": "B",
       "role": "longValue",
-      "cash": "538274361000",
+      "cash": "922756047428",
       "holdings": [
         {
           "stockId": "B001",
@@ -11600,13 +11616,14 @@
           "quantity": 3806973,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "538274361000"
     },
     {
       "id": "B:shortTrend",
       "market": "B",
       "role": "shortTrend",
-      "cash": "323254461500",
+      "cash": "862011897333",
       "holdings": [
         {
           "stockId": "B001",
@@ -12108,13 +12125,14 @@
           "quantity": 2233072,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "323254461500"
     },
     {
       "id": "B:swingTrend",
       "market": "B",
       "role": "swingTrend",
-      "cash": "326185538500",
+      "cash": "869828102666",
       "holdings": [
         {
           "stockId": "B001",
@@ -12616,13 +12634,14 @@
           "quantity": 2374928,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "326185538500"
     },
     {
       "id": "B:eventTheme",
       "market": "B",
       "role": "eventTheme",
-      "cash": "242775669000",
+      "cash": "647401784000",
       "holdings": [
         {
           "stockId": "B001",
@@ -13124,13 +13143,14 @@
           "quantity": 1746524,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "242775669000"
     },
     {
       "id": "B:allocationTheme",
       "market": "B",
       "role": "allocationTheme",
-      "cash": "244304331000",
+      "cash": "651478216000",
       "holdings": [
         {
           "stockId": "B001",
@@ -13632,7 +13652,8 @@
           "quantity": 1709476,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "244304331000"
     },
     {
       "id": "B:inventory1",
@@ -14140,7 +14161,8 @@
           "quantity": 1925807,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "262605802750"
     },
     {
       "id": "B:inventory2",
@@ -14648,7 +14670,8 @@
           "quantity": 1938907,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "264125133500"
     },
     {
       "id": "B:inventory3",
@@ -15156,7 +15179,8 @@
           "quantity": 1839716,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "264967266750"
     },
     {
       "id": "B:inventory4",
@@ -15664,13 +15688,14 @@
           "quantity": 1783570,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "263641797000"
     },
     {
       "id": "B:noise",
       "market": "B",
       "role": "noise",
-      "cash": "243540000000",
+      "cash": "797040000000",
       "holdings": [
         {
           "stockId": "B001",
@@ -16172,13 +16197,14 @@
           "quantity": 1728000,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "243540000000"
     },
     {
       "id": "cross:swing",
       "market": "both",
       "role": "crossSwing",
-      "cash": "451000000000",
+      "cash": "773142857142",
       "holdings": [
         {
           "stockId": "A001",
@@ -17180,13 +17206,14 @@
           "quantity": 1600000,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "451000000000"
     },
     {
       "id": "cross:long",
       "market": "both",
       "role": "crossLong",
-      "cash": "451000000000",
+      "cash": "773142857142",
       "holdings": [
         {
           "stockId": "A001",
@@ -18188,7 +18215,8 @@
           "quantity": 1600000,
           "unlockTick": 0
         }
-      ]
+      ],
+      "previousCash": "451000000000"
     }
   ],
   "serviceCash": "0",

@@ -16,6 +16,7 @@ const BUSINESS = ['储能组件与配套服务','算能设备与供电扩建','�
 const MATRIX = { A:[[1,2,2],[1,1,2],[1,1,2],[1,1,1],[0,1,1],[0,1,1]], B:[[0,1,1],[1,1,1],[0,1,1],[1,1,2],[1,1,2],[1,2,2]] };
 const TAGS = [1,2,1,1,0,1,2,1,0,1,1,2,0,1,1,1,0,1,2,0];
 const ROLES: NpcRole[] = ['repairValue','allocationValue','longValue','shortTrend','swingTrend','eventTheme','allocationTheme','inventory1','inventory2','inventory3','inventory4','noise'];
+export const INITIALIZATION_VERSION = 'world-v2-style-cash';
 export const BASELINE_STYLE = {
   value:{alphaQ:900_000_000n,temperatureQ:800_000_000n,stockFractionQ:700_000_000n,beliefSigmaQ:2_000_000n,scoreNoiseMultiplier:1,hourCapacityQ:40_000_000n},
   trend:{alphaQ:150_000_000n,temperatureQ:600_000_000n,stockFractionQ:600_000_000n,beliefSigmaQ:4_000_000n,scoreNoiseMultiplier:2,hourCapacityQ:100_000_000n},
@@ -32,10 +33,17 @@ export const BASELINE_REVIEW:Record<NpcRole,{period:'hour'|number;lambdaQ:bigint
   crossSwing:{period:5,lambdaQ:250_000_000n},crossLong:{period:20,lambdaQ:350_000_000n}};
 export function exportBaselinePreset(){const p=BASELINE_STYLE.inventory;
   return {preset:'baseline-v1',rulesVersion:RULES_VERSION,contentVersion:CONTENT_VERSION,accountCount:26,
+    initializationVersion:INITIALIZATION_VERSION,
     disabled:{betaQ:0n,gammaQ:0n,kTQ:0n,kHQ:0n,themeHQ:0n,technicalSignals:false,majorEvents:false,policyChains:false,shapeLabels:false},
     styles:{value:{...BASELINE_STYLE.value},trend:{...BASELINE_STYLE.trend},theme:{...BASELINE_STYLE.theme},noise:{...BASELINE_STYLE.noise},crossMarket:{...BASELINE_STYLE.crossMarket},
       inventory:{targetKind:p.targetKind,beliefSigmaQ:p.beliefSigmaQ,hourCapacityQ:p.hourCapacityQ,dailyPersistenceQ:p.dailyPersistenceQ,dailySigmaQ:p.dailySigmaQ,zetaLimitQ:p.zetaLimitQ}},
     review:Object.fromEntries(Object.entries(BASELINE_REVIEW).map(([role,r])=>[role,{...r,phase:0}]))};
+}
+/** New-world endowment only. Restoring/advancing an existing world never calls this formula. */
+export function initialNpcCash(holdingValue:bigint,role:NpcRole):bigint {
+  assert(typeof holdingValue==='bigint'&&holdingValue>=0n&&Object.hasOwn(BASELINE_REVIEW,role),'invalid initial wallet input');
+  const style=styleOf(role);if(style==='inventory')return holdingValue/4n;
+  const fraction=BASELINE_STYLE[style].stockFractionQ;return holdingValue*(SCALE-fraction)/fraction;
 }
 export function clipQ(q: bigint, low: bigint, high: bigint): bigint { return q<low?low:q>high?high:q; }
 export function splitInteger(total: bigint, weights: bigint[], ids: string[]): bigint[] {
@@ -127,7 +135,8 @@ export function generateWorld(config:WorldConfig):TradingState {
       const quantities=splitInteger(byStyle[g]!,weights,roles);roles.forEach((role,j)=>add(`${stock.market}:${role}`,stock.id,quantities[j]!));});
     add('cross:swing',stock.id,distribution[1]!);add('cross:long',stock.id,distribution[2]!);add('founder',stock.id,BigInt(stock.totalShares!)-float);
   }
-  for(const a of accounts)if(a.canTrade!==false){a.cash=a.holdings.reduce((n,h)=>n+BigInt(h.quantity)*BigInt(stocks.find(s=>s.id===h.stockId)!.initialPrice),0n)/4n;a.feeWeight=a.cash;}
+  for(const a of accounts)if(a.canTrade!==false){const role=a.id==='cross:swing'?'crossSwing':a.id==='cross:long'?'crossLong':a.id.split(':')[1] as NpcRole;
+    const value=a.holdings.reduce((n,h)=>n+BigInt(h.quantity)*BigInt(stocks.find(s=>s.id===h.stockId)!.initialPrice),0n);a.cash=initialNpcCash(value,role);a.feeWeight=a.cash;}
   const state=initialState({seed,playerAccountId:null,stocks,accounts});
   const npcs:NpcState[]=state.accounts.filter(a=>a.canTrade).map(a=>{
     const market=a.id.startsWith('A:')?'A':a.id.startsWith('B:')?'B':null,role=market===null?a.id==='cross:swing'?'crossSwing':'crossLong':a.id.split(':')[1] as NpcRole,style=styleOf(role),eligible=economy.filter(s=>market===null||s.market===market);
@@ -138,9 +147,9 @@ export function generateWorld(config:WorldConfig):TradingState {
         previousWeightQ:weights[i]!,targetShares:style==='inventory'?totalShares(a,s.id):Number(nav*weights[i]!/(SCALE*BigInt(stocks.find(x=>x.id===s.id)!.initialPrice))),
         biasQ:-120_000_000n+mulQ(uniformQ(seed,'account-bias',`${a.id}:${s.id}`,0,0),240_000_001n),beliefNoiseQ:0n,inventoryZetaQ:0n,scoreQ:0n,referenceQ:BigInt(stocks.find(x=>x.id===s.id)!.initialPrice)*SCALE,hourCapacity:0,hourUsed:0}))};
   });
-  state.world={generationVersion:'world-v1',config:{...config},preset:'baseline-v1',regime:randomU32(seed,'regime-initial','world',0,0)%4,
+  state.world={generationVersion:INITIALIZATION_VERSION,config:{...config},preset:'baseline-v1',regime:randomU32(seed,'regime-initial','world',0,0)%4,
     regimeExpiresDay:20+randomU32(seed,'regime-duration','world',0,0)%41,macro:{demandQ:0n,financingQ:0n,riskAppetiteQ:0n},
     sectors:(['A','B'] as MarketId[]).flatMap(market=>SECTORS.map(sector=>({market,sector,outlookQ:0n}))),stocks:economy,npcs,executions:[],majorStockIds:[],lastSettledTick:-1};
-  state.configHash=sha256(encodeExact({generationVersion:'world-v1',preset:'baseline-v1',config,initialStocks:stocks,initialAccounts:accounts}));
+  state.configHash=sha256(encodeExact({generationVersion:INITIALIZATION_VERSION,preset:'baseline-v1',config,initialStocks:stocks,initialAccounts:accounts}));
   return state;
 }

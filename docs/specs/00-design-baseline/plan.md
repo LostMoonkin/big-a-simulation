@@ -2,6 +2,8 @@
 
 状态：已独立验收通过（第2轮，2026-10-01）。对应[spec](spec.md)与[tasks](tasks.md)。独立结论见[第2轮验收](../../verification/p0-independent-round-2.md)，实际设计/技术试验见[P0首次交付](../../verification/p0-baseline.md)与[B01–B04修复记录](../../verification/p0-repair-round-1.md)。下列步骤保留作为实施与验收依据。
 
+P2回流候选world-v2-style-cash按第6节失败处理修订初始化而保持90%×80%口径：先记录逐钱包原现金/新现金/股份与总资产变化，生产与样本共享initialNpcCash；仅新建普通角色按原stockFraction换算，库存独立目标维持25%现金。先同原两种子250+5诊断，若仍不足保留候选失败再审议，不同时叠加调参；候选可行后完整登记100+10重新真实预热并运行。历史报告、原失败源/快照/名单保留；旧存档恢复不补差额。详见[核对报告](../../../packages/sim-core/p2-contract-diagnosis.md)与[初值数据](../../../tests/scenarios/p0/initialization-candidate.json)。
+
 ## 1. 进入条件与交付边界
 
 输入为0.2玩法/精确规则、验证A01–A32、原始研究和本阶段spec。无需已有游戏代码或线上环境。模型负责人和核心工程共同对规则空白负责；Web工程可并行验证图表及公开视图合同。

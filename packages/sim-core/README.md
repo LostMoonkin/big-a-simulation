@@ -43,6 +43,8 @@ const saved = core.exportSnapshot();
 
 P2 的 `createWorld({rulesVersion,contentVersion,seed,size:'prototype',mode:'baseline',playerCapital})` 生成两市各 20 股、26 个真实交易钱包及非流通股份的创始持有人，停在世界日 0/批 0 的公开决策窗口。公司价格、股份、流通比例、经营暴露与概念业务来自指定 seed；每批在公开准备之后生成 NPC 委托，以持续目标、小时成交余量、可售股与跨股统一含费现金预算约束，再进入同一生产清算器。`exportBaselinePreset()` 返回正在使用的风格参数、关闭项与角色复核周期；P2 仅支持 prototype/baseline，full/complete 返回 generationFailed。
 
+当前新建初始化候选为 `INITIALIZATION_VERSION='world-v2-style-cash'`，公共 progress 的 initializationVersion 与私有 world.generationVersion 标识它。`initialNpcCash(holdingValue,role)` 仅创建时对普通角色按原基础持股比例 f 返回 floor(H×(1−f)/f)，库存角色仍 H/4；初始股份与所有风格行为参数保持。已有 world-v1 存档恢复保留原现金、固定回流权重和目标，不调用新初值公式；P1显式场景不带初始化字段。样本旧/新总资产与共同失败种子见 [初始化候选](../../tests/scenarios/p0/initialization-candidate.json)。此候选待复跑，不是经济通过或旧世界迁移。
+
 `warmup({maxBatches,cancelRequested?})` 分段执行世界日 0–249 的真实 4000 批。complete 表示 settled/249/15，尚未注资；随后显式 `prepareNextBatch()` 在 250/0 加入玩家本金一次。再次准备/恢复不会重新加钱或重置 NPC 记忆。也可用 `advance` 的显式 249/15 目标完成同一预热。预算或取消只在完整批次边界返回，Worker 应在小预算块之间让出消息循环。60 玩家日是 Web 体验边界（309/15），核心允许长期实验继续运行，不强制清仓或发奖金。
 
 生成世界通过 `readWorldView(query)` 读取 [world-types.ts](src/world-types.ts) 的公共字段。公司简报只含公开报告、经营预期参考与示意区间（参考值的 ±10%，不是概率承诺）、业务暴露和真实行情；不含隐藏经营值或阶段名称。chart/company 查询沿 P1 只返回所选公司的 companies，可另读 market 获取全表。小时/日 bars 从真实清算价与数量聚合，未完成和全窗无成交均有明确标记；小时线保留最近 120 世界日，日线完整保留。timestamp 是从 2000-01-01 起的固定虚构图表坐标，不是现实市场时间。本人 executions 保存逐次成交价、量、费用与买入可售时点，跨恢复保留，不虚构持仓成本或浮盈。玩家委托保存提交当时的 submissionReference 与 submissionReferenceOnly；早期未捕获参考的开发存档显示 null，不用恢复后的行情冒充提交价。

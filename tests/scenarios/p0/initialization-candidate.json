@@ -1,0 +1,461 @@
+{
+  "initializationVersion": "world-v2-style-cash",
+  "status": "candidate-pending-P2-validation",
+  "previousInitializationVersion": "world-v1",
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "originalFailedSeeds": [
+    3572871866,
+    1866980507
+  ],
+  "ordinaryCash": "floor(holdingValue*(1-f)/f)",
+  "inventoryCash": "floor(holdingValue/4)",
+  "preserved": [
+    "stock allocations",
+    "26 roles",
+    "baseline-v1 style parameters",
+    "quotes",
+    "protection",
+    "fees",
+    "registered seeds",
+    "90% x 80% gate"
+  ],
+  "samples": [
+    {
+      "size": "prototype",
+      "worldFixture": "world-prototype.json",
+      "floatValue": "7216000000000",
+      "oldNpcCash": "1804000000000",
+      "newNpcCash": "3478439999994",
+      "initialCashDelta": "1674439999994",
+      "oldNpcAssets": "9020000000000",
+      "newNpcAssets": "10694439999994",
+      "styles": [
+        {
+          "style": "value",
+          "holdingValue": "2208096000000",
+          "oldCash": "552024000000",
+          "newCash": "946326857140",
+          "oldAssetShareQ": "306000000",
+          "newAssetShareQ": "294959142"
+        },
+        {
+          "style": "trend",
+          "holdingValue": "1104048000000",
+          "oldCash": "276012000000",
+          "newCash": "736031999999",
+          "oldAssetShareQ": "153000000",
+          "newAssetShareQ": "172059500"
+        },
+        {
+          "style": "theme",
+          "holdingValue": "1039104000000",
+          "oldCash": "259776000000",
+          "newCash": "692735999999",
+          "oldAssetShareQ": "144000000",
+          "newAssetShareQ": "161938353"
+        },
+        {
+          "style": "inventory",
+          "holdingValue": "1688544000000",
+          "oldCash": "422136000000",
+          "newCash": "422136000000",
+          "oldAssetShareQ": "234000000",
+          "newAssetShareQ": "197362367"
+        },
+        {
+          "style": "noise",
+          "holdingValue": "454608000000",
+          "oldCash": "113652000000",
+          "newCash": "371952000000",
+          "oldAssetShareQ": "63000000",
+          "newAssetShareQ": "77288759"
+        },
+        {
+          "style": "crossMarket",
+          "holdingValue": "721600000000",
+          "oldCash": "180400000000",
+          "newCash": "309257142856",
+          "oldAssetShareQ": "100000000",
+          "newAssetShareQ": "96391876"
+        }
+      ],
+      "wallets": [
+        {
+          "id": "A:repairValue",
+          "role": "repairValue",
+          "previousCash": "76293440750",
+          "cash": "130788755571"
+        },
+        {
+          "id": "A:allocationValue",
+          "role": "allocationValue",
+          "previousCash": "75621561750",
+          "cash": "129636963000"
+        },
+        {
+          "id": "A:longValue",
+          "role": "longValue",
+          "previousCash": "75388997500",
+          "cash": "129238281428"
+        },
+        {
+          "id": "A:shortTrend",
+          "role": "shortTrend",
+          "previousCash": "72674060250",
+          "cash": "193797494000"
+        },
+        {
+          "id": "A:swingTrend",
+          "role": "swingTrend",
+          "previousCash": "73449939750",
+          "cash": "195866506000"
+        },
+        {
+          "id": "A:eventTheme",
+          "role": "eventTheme",
+          "previousCash": "81297479250",
+          "cash": "216793278000"
+        },
+        {
+          "id": "A:allocationTheme",
+          "role": "allocationTheme",
+          "previousCash": "81062520750",
+          "cash": "216166722000"
+        },
+        {
+          "id": "A:inventory1",
+          "role": "inventory1",
+          "previousCash": "52557712250",
+          "cash": "52557712250"
+        },
+        {
+          "id": "A:inventory2",
+          "role": "inventory2",
+          "previousCash": "53380129000",
+          "cash": "53380129000"
+        },
+        {
+          "id": "A:inventory3",
+          "role": "inventory3",
+          "previousCash": "52785546750",
+          "cash": "52785546750"
+        },
+        {
+          "id": "A:inventory4",
+          "role": "inventory4",
+          "previousCash": "52344612000",
+          "cash": "52344612000"
+        },
+        {
+          "id": "A:noise",
+          "role": "noise",
+          "previousCash": "64944000000",
+          "cash": "212544000000"
+        },
+        {
+          "id": "B:repairValue",
+          "role": "repairValue",
+          "previousCash": "109231930750",
+          "cash": "187254738428"
+        },
+        {
+          "id": "B:allocationValue",
+          "role": "allocationValue",
+          "previousCash": "108603845250",
+          "cash": "186178020428"
+        },
+        {
+          "id": "B:longValue",
+          "role": "longValue",
+          "previousCash": "106884224000",
+          "cash": "183230098285"
+        },
+        {
+          "id": "B:shortTrend",
+          "role": "shortTrend",
+          "previousCash": "65131422500",
+          "cash": "173683793333"
+        },
+        {
+          "id": "B:swingTrend",
+          "role": "swingTrend",
+          "previousCash": "64756577500",
+          "cash": "172684206666"
+        },
+        {
+          "id": "B:eventTheme",
+          "role": "eventTheme",
+          "previousCash": "49223139250",
+          "cash": "131261704666"
+        },
+        {
+          "id": "B:allocationTheme",
+          "role": "allocationTheme",
+          "previousCash": "48192860750",
+          "cash": "128514295333"
+        },
+        {
+          "id": "B:inventory1",
+          "role": "inventory1",
+          "previousCash": "52423400000",
+          "cash": "52423400000"
+        },
+        {
+          "id": "B:inventory2",
+          "role": "inventory2",
+          "previousCash": "53121479500",
+          "cash": "53121479500"
+        },
+        {
+          "id": "B:inventory3",
+          "role": "inventory3",
+          "previousCash": "52888887000",
+          "cash": "52888887000"
+        },
+        {
+          "id": "B:inventory4",
+          "role": "inventory4",
+          "previousCash": "52634233500",
+          "cash": "52634233500"
+        },
+        {
+          "id": "B:noise",
+          "role": "noise",
+          "previousCash": "48708000000",
+          "cash": "159408000000"
+        },
+        {
+          "id": "cross:swing",
+          "role": "crossSwing",
+          "previousCash": "90200000000",
+          "cash": "154628571428"
+        },
+        {
+          "id": "cross:long",
+          "role": "crossLong",
+          "previousCash": "90200000000",
+          "cash": "154628571428"
+        }
+      ]
+    },
+    {
+      "size": "full",
+      "worldFixture": "world-full.json",
+      "floatValue": "36080000000000",
+      "oldNpcCash": "9020000000000",
+      "newNpcCash": "17392199999993",
+      "initialCashDelta": "8372199999993",
+      "oldNpcAssets": "45100000000000",
+      "newNpcAssets": "53472199999993",
+      "styles": [
+        {
+          "style": "value",
+          "holdingValue": "11040480000000",
+          "oldCash": "2760120000000",
+          "newCash": "4731634285711",
+          "oldAssetShareQ": "306000000",
+          "newAssetShareQ": "294959142"
+        },
+        {
+          "style": "trend",
+          "holdingValue": "5520240000000",
+          "oldCash": "1380060000000",
+          "newCash": "3680159999999",
+          "oldAssetShareQ": "153000000",
+          "newAssetShareQ": "172059500"
+        },
+        {
+          "style": "theme",
+          "holdingValue": "5195520000000",
+          "oldCash": "1298880000000",
+          "newCash": "3463679999999",
+          "oldAssetShareQ": "144000000",
+          "newAssetShareQ": "161938353"
+        },
+        {
+          "style": "inventory",
+          "holdingValue": "8442720000000",
+          "oldCash": "2110680000000",
+          "newCash": "2110680000000",
+          "oldAssetShareQ": "234000000",
+          "newAssetShareQ": "197362367"
+        },
+        {
+          "style": "noise",
+          "holdingValue": "2273040000000",
+          "oldCash": "568260000000",
+          "newCash": "1859760000000",
+          "oldAssetShareQ": "63000000",
+          "newAssetShareQ": "77288759"
+        },
+        {
+          "style": "crossMarket",
+          "holdingValue": "3608000000000",
+          "oldCash": "902000000000",
+          "newCash": "1546285714284",
+          "oldAssetShareQ": "100000000",
+          "newAssetShareQ": "96391876"
+        }
+      ],
+      "wallets": [
+        {
+          "id": "A:repairValue",
+          "role": "repairValue",
+          "previousCash": "379015569250",
+          "cash": "649740975857"
+        },
+        {
+          "id": "A:allocationValue",
+          "role": "allocationValue",
+          "previousCash": "377724956750",
+          "cash": "647528497285"
+        },
+        {
+          "id": "A:longValue",
+          "role": "longValue",
+          "previousCash": "379779474000",
+          "cash": "651050526857"
+        },
+        {
+          "id": "A:shortTrend",
+          "role": "shortTrend",
+          "previousCash": "363064872000",
+          "cash": "968172992000"
+        },
+        {
+          "id": "A:swingTrend",
+          "role": "swingTrend",
+          "previousCash": "367555128000",
+          "cash": "980147008000"
+        },
+        {
+          "id": "A:eventTheme",
+          "role": "eventTheme",
+          "previousCash": "407928057250",
+          "cash": "1087808152666"
+        },
+        {
+          "id": "A:allocationTheme",
+          "role": "allocationTheme",
+          "previousCash": "403871942750",
+          "cash": "1076991847333"
+        },
+        {
+          "id": "A:inventory1",
+          "role": "inventory1",
+          "previousCash": "264407929750",
+          "cash": "264407929750"
+        },
+        {
+          "id": "A:inventory2",
+          "role": "inventory2",
+          "previousCash": "263779113000",
+          "cash": "263779113000"
+        },
+        {
+          "id": "A:inventory3",
+          "role": "inventory3",
+          "previousCash": "263149807750",
+          "cash": "263149807750"
+        },
+        {
+          "id": "A:inventory4",
+          "role": "inventory4",
+          "previousCash": "264003149500",
+          "cash": "264003149500"
+        },
+        {
+          "id": "A:noise",
+          "role": "noise",
+          "previousCash": "324720000000",
+          "cash": "1062720000000"
+        },
+        {
+          "id": "B:repairValue",
+          "role": "repairValue",
+          "previousCash": "543380149750",
+          "cash": "931508828142"
+        },
+        {
+          "id": "B:allocationValue",
+          "role": "allocationValue",
+          "previousCash": "541945489250",
+          "cash": "929049410142"
+        },
+        {
+          "id": "B:longValue",
+          "role": "longValue",
+          "previousCash": "538274361000",
+          "cash": "922756047428"
+        },
+        {
+          "id": "B:shortTrend",
+          "role": "shortTrend",
+          "previousCash": "323254461500",
+          "cash": "862011897333"
+        },
+        {
+          "id": "B:swingTrend",
+          "role": "swingTrend",
+          "previousCash": "326185538500",
+          "cash": "869828102666"
+        },
+        {
+          "id": "B:eventTheme",
+          "role": "eventTheme",
+          "previousCash": "242775669000",
+          "cash": "647401784000"
+        },
+        {
+          "id": "B:allocationTheme",
+          "role": "allocationTheme",
+          "previousCash": "244304331000",
+          "cash": "651478216000"
+        },
+        {
+          "id": "B:inventory1",
+          "role": "inventory1",
+          "previousCash": "262605802750",
+          "cash": "262605802750"
+        },
+        {
+          "id": "B:inventory2",
+          "role": "inventory2",
+          "previousCash": "264125133500",
+          "cash": "264125133500"
+        },
+        {
+          "id": "B:inventory3",
+          "role": "inventory3",
+          "previousCash": "264967266750",
+          "cash": "264967266750"
+        },
+        {
+          "id": "B:inventory4",
+          "role": "inventory4",
+          "previousCash": "263641797000",
+          "cash": "263641797000"
+        },
+        {
+          "id": "B:noise",
+          "role": "noise",
+          "previousCash": "243540000000",
+          "cash": "797040000000"
+        },
+        {
+          "id": "cross:swing",
+          "role": "crossSwing",
+          "previousCash": "451000000000",
+          "cash": "773142857142"
+        },
+        {
+          "id": "cross:long",
+          "role": "crossLong",
+          "previousCash": "451000000000",
+          "cash": "773142857142"
+        }
+      ]
+    }
+  ]
+}

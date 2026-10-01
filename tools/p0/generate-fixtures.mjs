@@ -1,6 +1,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { randomU32 } from '../../packages/sim-core/src/numeric.ts';
+import { INITIALIZATION_VERSION, initialNpcCash } from '../../packages/sim-core/src/index.ts';
 
 const sectors = ['energy', 'industry', 'consumer', 'infrastructure', 'digital', 'health'];
 const concepts = ['storage', 'compute', 'autonomy', 'renewal', 'automation', 'recycling', 'longevity', 'crossborder'];
@@ -83,16 +84,23 @@ function world(size,matrix,targets) {
     s.founderShares=s.totalShares-s.floatShares;
     delete s.tagCapacity;
   }
-  for(const w of wallets) w.cash=(w.holdings.reduce((sum,h)=>sum+BigInt(h.quantity)*1_000n,0n)/4n).toString();
-  return {rulesVersion:'0.3.1',contentVersion:'0.3.1',seed:20261001,size,industrySizeMatrix:matrix,conceptTargets:Object.fromEntries(concepts.map((c,i)=>[c,targets[i]])),stocks,wallets,serviceCash:'0',playerInjected:false};
+  for(const w of wallets){const value=w.holdings.reduce((sum,h)=>sum+BigInt(h.quantity)*1_000n,0n);w.previousCash=(value/4n).toString();w.cash=initialNpcCash(value,w.role).toString();}
+  return {rulesVersion:'0.3.1',contentVersion:'0.3.1',initializationVersion:INITIALIZATION_VERSION,previousInitializationVersion:'world-v1',seed:20261001,size,industrySizeMatrix:matrix,conceptTargets:Object.fromEntries(concepts.map((c,i)=>[c,targets[i]])),stocks,wallets,serviceCash:'0',playerInjected:false};
 }
 
 mkdirSync('tests/scenarios/p0',{recursive:true});
+const initializationSamples=[];
 for(const [size,matrix,targets] of [['prototype',prototype,[5,5,5,5,5,5,4,4]],['full',full,[26,26,25,25,24,24,20,20]]]) {
   const value=world(size,matrix,targets), text=JSON.stringify(value,null,2)+'\n';
   writeFileSync(`tests/scenarios/p0/world-${size}.json`,text);
+  const cash= value.wallets.reduce((n,w)=>n+BigInt(w.cash),0n),oldCash=value.wallets.reduce((n,w)=>n+BigInt(w.previousCash),0n),stockValue=value.stocks.reduce((n,s)=>n+BigInt(s.floatShares)*BigInt(s.initialPrice),0n);
+  const roleStyle=role=>role.startsWith('inventory')?'inventory':role.includes('Value')?'value':role.includes('Trend')?'trend':role.includes('Theme')?'theme':role==='noise'?'noise':'crossMarket';
+  const styles=['value','trend','theme','inventory','noise','crossMarket'].map(style=>{const wallets=value.wallets.filter(w=>roleStyle(w.role)===style),holding=wallets.reduce((n,w)=>n+w.holdings.reduce((v,h)=>v+BigInt(h.quantity)*1000n,0n),0n),old=wallets.reduce((n,w)=>n+BigInt(w.previousCash),0n),next=wallets.reduce((n,w)=>n+BigInt(w.cash),0n);
+    return {style,holdingValue:holding.toString(),oldCash:old.toString(),newCash:next.toString(),oldAssetShareQ:((holding+old)*1000000000n/(stockValue+oldCash)).toString(),newAssetShareQ:((holding+next)*1000000000n/(stockValue+cash)).toString()};});
+  initializationSamples.push({size,worldFixture:`world-${size}.json`,floatValue:stockValue.toString(),oldNpcCash:oldCash.toString(),newNpcCash:cash.toString(),initialCashDelta:(cash-oldCash).toString(),oldNpcAssets:(stockValue+oldCash).toString(),newNpcAssets:(stockValue+cash).toString(),styles,wallets:value.wallets.map(w=>({id:w.id,role:w.role,previousCash:w.previousCash,cash:w.cash}))});
   console.log(`${size}: ${value.stocks.length} stocks, ${value.wallets.length} wallets, sha256 ${createHash('sha256').update(text).digest('hex')}`);
 }
+writeFileSync('tests/scenarios/p0/initialization-candidate.json',JSON.stringify({initializationVersion:INITIALIZATION_VERSION,status:'candidate-pending-P2-validation',previousInitializationVersion:'world-v1',rulesVersion:'0.3.1',contentVersion:'0.3.1',originalFailedSeeds:[3572871866,1866980507],ordinaryCash:'floor(holdingValue*(1-f)/f)',inventoryCash:'floor(holdingValue/4)',preserved:['stock allocations','26 roles','baseline-v1 style parameters','quotes','protection','fees','registered seeds','90% x 80% gate'],samples:initializationSamples},null,2)+'\n');
 
 // Seed groups are derived before observing any game outcome, never selected on returns.
 const groups={};
