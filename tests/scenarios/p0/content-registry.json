@@ -1,5 +1,5 @@
 {
-  "version":"0.3.0",
+  "version":"0.3.1",
   "templates": {
     "operating": ["O01 procurement result","O02 capacity ramp","O03 product acceptance","O04 quality setback","O05 efficiency gain","O06 input loss","O07 guidance revision","O08 contract cancellation","O09 research milestone","O10 restructuring delay"],
     "sector": ["S01 policy allocation","S02 financing constraint","S03 substitution demand","S04 supply shortage","S05 standard adoption","S06 transport interruption"],
@@ -16,5 +16,6 @@
   },
   "p3Templates":["O01","O02","S01","S02","M01","M02","I01","I02"],
   "p3Chains":["C01","C02"],
+  "representativeContract":{"contractVersion":"event-v1","schemaVersion":1,"rulesVersion":"0.3.1","contentVersion":"0.3.1","document":"docs/design/event-content-contract.md","data":"tests/scenarios/p0/representative-events.json"},
   "contract":"Node references are allowed branches, not all nodes obligatorily applied. Each active contribution has unique effect ID and one primary channel. Negative branches use the same template."
 }

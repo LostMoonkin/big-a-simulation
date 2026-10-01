@@ -1,6 +1,6 @@
 # 工程、数值与实验基线
 
-版本 0.3.0；2026-10-01；P0 实施冻结、待独立验收。此文件及[精确规则](market-model-rules.md)、[市场特色](market-identities.md)关闭 D01–D08。技术试验只证明方向与协议，不等于游戏、经济、性能或跨浏览器最终通过。
+版本 0.3.1；2026-10-01；P0 实施冻结、待独立验收。此文件及[精确规则](market-model-rules.md)、[市场特色](market-identities.md)关闭 D01–D08。技术试验只证明方向与协议，不等于游戏、经济、性能或跨浏览器最终通过。
 
 ## 数值和随机合同
 
@@ -18,7 +18,7 @@
 
 uniformQ=floor(u32*1e9/2^32)。z用12个独立uniformQ求和减6并裁±3，明确为标准正态的有界近似（替代0.2未指定的正态算法）。公开采样次数、用途和槽号随版本固定，不声称密码学随机。保存seed、rng版本、所有已抽事件/阶段排程与观点记忆；无可变PRNG游标。同一键重求同值，公开查询/图表/通知不消耗键。
 
-快照使用`encodeExact/decodeExact`：BigInt编码为唯一对象`{"$bigint":"规范十进制"}`，保留有符号值；业务对象不得使用保留键`$bigint`。Number必须安全整数，不保存NaN/Infinity/undefined；对象key按UTF-16序排序，数组维持规则定义顺序，主体/公司数组按稳定ID排序。canonical JSON UTF-8经SHA-256得到状态摘要与包校验（核心可注入标准实现，CLI node:crypto、浏览器SubtleCrypto结果须一致）；UI选中股票、渲染/耗时/诊断日志不入状态hash。读档先限64MiB编码大小、深度≤64、实体/历史数量与字段范围，再校验版本/hash/所有不变量，在临时状态完整构造成功后原子替换。未支持版本保留原档且明确拒绝；不建设泛化迁移。
+快照使用`encodeExact/decodeExact`：BigInt编码为唯一对象`{"$bigint":"规范十进制"}`，保留有符号值；业务对象不得使用保留键`$bigint`。Number必须安全整数，不保存NaN/Infinity/undefined；普通对象输出遵循ECMAScript JSON顺序：数组索引键（规范十进制字符串0..4294967294）先按数值升序，其余字符串键按UTF-16码元升序；02、-1、4294967295属于后组。数组维持规则定义顺序，主体/公司数组按稳定ID排序。canonical JSON UTF-8经SHA-256得到状态摘要与包校验（核心可注入标准实现，CLI node:crypto、浏览器SubtleCrypto结果须一致）；UI选中股票、渲染/耗时/诊断日志不入状态hash。读档先限64MiB编码大小、深度≤64、实体/历史数量与字段范围，再校验版本/hash/所有不变量，在临时状态完整构造成功后原子替换。未支持版本保留原档且明确拒绝；不建设泛化迁移。
 
 ## 核心、消息与完整状态
 
@@ -46,7 +46,7 @@ createWorld在生成失败时不产生半个局；标准路径世界0开始、�
 
 90%流通股按每市既定风格份额分给12本地，10%给两个跨市各5%；风格内±5%受控库存扰动、最大余数精确分配，创始持有人持非流通股。每钱包现金=持仓初始市值25%，只有一份跨市现金。原型样本总流通值7,216,000,000,000分、NPC现金1,804,000,000,000分；正式为36,080,000,000,000/9,020,000,000,000分（verify:p0逐股重算）。40股时玩家100万相对每股容量不变、相对全世界份额比正式大5倍；不能据此证明200股平衡。
 
-baseline模式从创建就关闭重大事件/主题与动量：26钱包及全部股份保留；库存/噪声沿其规则，其余角色用价值评分（alpha=.9,beta=gamma=0,kT=kH=0），保留原复核排程/目标生命周期，公开经营/风险与资金约束仍有效。complete模式从创建启用全部profile/模板，不在预热后切参。大小、模式、参数hash独立绑定缓存；消融必须显式标识且不删除钱包/免费补资。正式24/6与P3的8/2子集见内容索引。
+baseline-v1从创建关闭重大事件/主题与动量：26钱包及全部股份保留；各角色仍用原风格alpha（价值.90、趋势.15、主题.15、噪声.20、跨市场.75），温度/基础持股比例/持续噪声/评分噪声倍率/容量/库存目标与原复核排程、lambda、风险约束全部保留；beta=gamma=kT=kH=0、H=0，不把趋势/主题/跨市场账户转换成价值账户。公开经营、风险、报告5%重大变化复核与资金约束仍有效。完整冻结参数见 tests/scenarios/p0/baseline-v1.json，与P2 plan保持一致。complete模式从创建启用全部profile/模板，不在预热后切参。大小、模式、参数hash独立绑定缓存；消融必须显式标识且不删除钱包/免费补资。正式24/6与P3的8/2子集见内容索引；8/2的唯一生成合同为[event-v1](event-content-contract.md)及 representative-events.json，模板渠道/分布/槽位/分支不能由P3另取默认值。
 
 ## 默认启动与验收协议
 
@@ -62,7 +62,11 @@ baseline模式从创建就关闭重大事件/主题与动量：26钱包及全部
 
 开发设备档案：AMD Ryzen7 9700X，16逻辑CPU，33,409,036,288字节RAM（约31.11GiB），Windows11 Pro10.0.26200 x64；Node26.7.0/npm12.0.2。读自node:os，CIM访问被拒绝，未捏造电源/后台配置。最终P5基准桌面以此设备、接市电/平衡模式、无其他重负载为登记条件，浏览器实际版本测试前冻结。macOS Safari真实设备、中端移动目标（iPhone13、iOS正式版本Safari，至少128GB型号）现未具备，本轮not_run；不得以Chromium/WebKit模拟器冒名。P5同时提供Chrome/Edge/Firefox实机、macOS Safari、移动技术检查，不保证完整手机布局。
 
+P2首个可玩原型的冻结浏览器范围是本机Windows11上的真实桌面Google Chrome，当前登记版本154.0.8037.58；它是P2-AC4/6/7/8完整新局、60玩家日操作、消息/三类交易、快进取消、导出/新会话导入及继续的最低验收范围。测试开始记录完整Chrome版本、OS和受测构建；若浏览器自动升级，先登记新完整版本并重跑相应完整浏览器脚本，旧版本证据不能自动代用。P2可用真实headless Chrome自动化并辅以页面核对，不用模拟Worker/UI接口冒充浏览器。P0只验证图表/Worker方向，没有执行P2游戏闭环。P5仍须真实Chrome/Edge/Firefox/macOS Safari与移动技术检查，P2范围不替代最终兼容范围。
+
 ## 工具依据、许可和复现
+
+canonical键顺序的官方定义参照[ECMAScript OrdinaryOwnPropertyKeys](https://tc39.es/ecma262/multipage/ordinary-and-exotic-objects-behaviours.html#sec-ordinaryownpropertykeys)：数组索引键先数值升序；本协议在普通字符串键的创建顺序前先做UTF-16排序，所以非索引键也与输入插入顺序无关。0.3.1明确现有实现字节，而非另换编码器；新增数字样式键、非规范数字键和嵌套边界黄金。
 
 实际锁：React/react-dom19.3.0 MIT，TypeScript7.0.2 Apache-2.0，Vite8.3.2 MIT，@vitejs/plugin-react6.1.1 MIT，KLineChart9.8.12 Apache-2.0。Node26.7.0、npm12.0.2是本机runtime而非随游戏分发。许可文件由锁定npm包核验；P6随构建保留适用LICENSE/NOTICE。测试采用Node内置assert，P0浏览器试验复用已配置Playwright依赖控制真实Chrome，不加入游戏运行依赖。
 
@@ -80,9 +84,9 @@ KLineChart选9.8.12是固定稳定9.x API的能力验证，非自动追最新10.
 | D02 | 保留0.2两日甲特别开盘、乙8/16/32/64/特别；补无交叉复位和重开无成交行为；拒绝无供需自动移动参考 | 规则6.2，A13/A14/PR-*，P1-AC4/P3 |
 | D03 | 完整受限流配额、精确最大余数钱包；拒绝100股截断或超标签 | world-*.json、verify:p0，P2-AC1/P4-AC1 |
 | D04 | 20日公开版本替换/失效，长链中间更新；拒绝跨季永久叠加旧预期 | cross-season、规则7/8，A15/A25..28，P3/P4 |
-| D05 | BigInt钱、Q9模型、固定math/rng/编码；拒绝浮点账务与seed+平台log/exp即承诺 | numeric.ts与黄金，NUM-01、P1/P5 |
+| D05 | BigInt钱、Q9模型、固定math/rng/编码，索引键数值序/普通键UTF-16序；拒绝浮点账务与seed+平台log/exp即承诺 | numeric.ts与黄金，NUM-01/NUM-KEY-ORDER-01、P1/P5 |
 | D06 | 同core、publicDecision/settled安全点、命令幂等/版本、暂存后原子替换；拒绝中间清算档与NPC抢跑 | contracts.ts、projection、SNAP-*，A12/P1-AC6/P4 |
-| D07 | 预登记各组、逐种子市场硬线、默认静态池与分开计时；拒绝漂亮种子/只测首屏/动态降线 | seeds/protocol/设备，START-01/P2/P3/P5/P6 |
-| D08 | 正式24/6，代表8/2明确子集、符号分支不暗增 | content-registry，P3-AC1/P4-AC2 |
+| D07 | 预登记各组、逐种子市场硬线、默认静态池与分开计时、P2真实Windows Chrome范围；拒绝漂亮种子/只测首屏/动态降线 | seeds/protocol/设备/baseline-v1，BASELINE-STYLE-01、START-01/P2/P3/P5/P6 |
+| D08 | 正式24/6，代表8/2按event-v1冻结分布/作用/重大/文本/分支，符号分支不暗增 | content-registry/event-content-contract/representative-events，P3-AC1/P4-AC2 |
 
-冻结规则0.3.0、内容0.3.0、schema1、math fixed-q9-v1、rng-v1。任何后续行为修改提升对应版本、列受影响案例并重跑；P0独立验收前状态为待验收，G1–G4与完整G0均不在本阶段声明通过。
+冻结规则0.3.1、内容0.3.1、schema1、math fixed-q9-v1、rng-v1。任何后续行为修改提升对应版本、列受影响案例并重跑；P0独立验收前状态为待验收，G1–G4与完整G0均不在本阶段声明通过。

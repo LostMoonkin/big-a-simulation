@@ -1,5 +1,5 @@
 {
-  "rulesVersion":"0.3.0",
+  "rulesVersion":"0.3.1",
   "clock":"worldDay = playerDay + 249; tick = worldDay*16+batch",
   "caseId":"TIME-CROSS-01",
   "chainId":"C02-long-example",

@@ -1,5 +1,5 @@
 {
-  "rulesVersion":"0.3.0",
+  "rulesVersion":"0.3.1",
   "cases":[
     {"id":"PR-BOUNDARY-A","reference":1000,"low":900,"high":1100,"orders":[{"owner":"buyer","side":"buy","limit":1500,"quantity":100,"cash":"150075"},{"owner":"seller","side":"sell","limit":1100,"quantity":100,"sellable":100}],"expectedPrice":1100,"expectedQuantity":100,"action":"real boundary trade; do not classify as blocked or schedule reopening"},
     {"id":"PR-BOUNDARY-B","reference":1000,"low":920,"high":1080,"orders":[{"owner":"buyer","side":"buy","limit":1080,"quantity":100,"cash":"108054"},{"owner":"seller","side":"sell","limit":1000,"quantity":100,"sellable":100}],"expectedPrice":1000,"expectedQuantity":100,"action":"real in-band trade restores 8% around actual price"},

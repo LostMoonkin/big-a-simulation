@@ -105,6 +105,7 @@ export function normalQ(seed: number, purpose: string, entity: string, tick: num
 
 export type ExactValue = null | boolean | number | string | bigint | ExactValue[] | { [key: string]: ExactValue };
 
+/** JSON key order: array indices ascending, remaining string keys in UTF-16 order. */
 export function encodeExact(value: ExactValue): string {
   function encode(v: ExactValue): unknown {
     if (typeof v === 'bigint') return { $bigint: v.toString() };

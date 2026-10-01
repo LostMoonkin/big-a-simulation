@@ -1,6 +1,6 @@
 # P0 实施计划
 
-状态：实施交付、待独立验收。对应[spec](spec.md)与[tasks](tasks.md)。实际设计/技术试验见[P0交付报告](../../verification/p0-baseline.md)，下列步骤保留作为实施与验收依据，不因实现自行宣布阶段通过。
+状态：实施交付、待第2轮独立验收。对应[spec](spec.md)与[tasks](tasks.md)。实际设计/技术试验见[P0首次交付](../../verification/p0-baseline.md)与[B01–B04修复记录](../../verification/p0-repair-round-1.md)，下列步骤保留作为实施与验收依据，不因实现自行宣布阶段通过。
 
 ## 1. 进入条件与交付边界
 

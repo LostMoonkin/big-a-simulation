@@ -23,6 +23,9 @@ export function runNumericProbe() {
     log: logInputs.map(x => [x.toString(), logQ(x).toString()]),
     random: keys.map(key => ({ key, u32: randomU32(...key), normalQ: normalQ(...key).toString() })),
     encoded, roundTripEqual: encoded === encodeExact(decoded),
+    // Integer-index keys retain ECMAScript numeric priority; other keys sort UTF-16.
+    keyOrderEncoding: encodeExact({ '10': 1, '2': 2, '02': 3, z: 4, a: 5,
+      nested: { '4294967295': 1, '4294967294': 2, '-1': 3 } }),
     boundaryProduct: (BigInt(MAX_PRICE) * BigInt(MAX_SHARES)).toString(),
   };
 }

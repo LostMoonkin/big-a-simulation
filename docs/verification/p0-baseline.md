@@ -1,6 +1,6 @@
 # P0 设计与工程交付记录
 
-2026-10-01；**实施已交付、待独立验收**。本报告记录实际设计/算例/技术试验，不自行宣布P0独立通过，也不宣布G1–G4或完整G0通过。冻结规则/玩法0.3.0、内容0.3.0、schema1、math fixed-q9-v1、rng-v1；spec1.0的8项门槛未降低。
+2026-10-01；本页保留**0.3.0首次实施交付记录**。第1轮独立验收已在[p0-independent-round-1.md](p0-independent-round-1.md)报告fail；当前0.3.1最小修复见[p0-repair-round-1.md](p0-repair-round-1.md)，状态为待第2轮独立验收。本页以下表格与命令均为首次交付历史，不代替当前签收结论。schema1、math fixed-q9-v1、rng-v1及spec1.0的8项门槛保留。
 
 交付包含[市场特色](../design/market-identities.md)、[工程基线](../design/engineering-baseline.md)、修订后的[规则](../design/market-model-rules.md)/[验证](../design/model-validation.md)、核心数值与接口类型、完整40/200股和26钱包样本、保护/跨季/投影/内容/种子夹具，以及可复现技术试验。P0-T1/T2/T3均待独立签收。
 

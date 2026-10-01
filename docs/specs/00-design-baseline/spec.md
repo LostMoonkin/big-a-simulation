@@ -1,6 +1,6 @@
 # P0 设计与工程基线
 
-状态：实施交付、待独立验收。规格版本：1.0（验收门槛未改）。冻结规则/玩法0.3.0，初始依据为0.2及其研究。证据见[P0交付报告](../../verification/p0-baseline.md)。实施细节见[plan](plan.md)，具体任务见[tasks](tasks.md)。
+状态：实施交付、待第2轮独立验收。规格版本：1.0（验收门槛未改）。冻结规则/玩法0.3.1，初始依据为0.2及其研究。证据见[P0首次交付](../../verification/p0-baseline.md)与[B01–B04修复记录](../../verification/p0-repair-round-1.md)。实施细节见[plan](plan.md)，具体任务见[tasks](tasks.md)。
 
 ## Goal
 

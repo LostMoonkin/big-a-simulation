@@ -1,7 +1,7 @@
 {
   "schemaVersion":1,
-  "rulesVersion":"0.3.0",
-  "contentVersion":"0.3.0",
+  "rulesVersion":"0.3.1",
+  "contentVersion":"0.3.1",
   "mathVersion":"fixed-q9-v1",
   "public":{"clock":{"worldDay":503,"batch":0},"phase":"publicDecision","publicVersion":83,"stateVersion":102,"companies":[{"id":"A001","lastPrice":1000,"lastTradeAt":{"worldDay":502,"batch":15},"reports":[{"publishedAt":{"worldDay":500,"batch":0},"operatingIndexQ":"100000000000"}]}],"messages":[{"id":"C02-long-example","revision":2,"publishedAt":{"worldDay":503,"batch":0},"expectationQ":"60000000","expiresAt":{"worldDay":523,"batch":0},"status":"active"}],"player":{"cash":"100000000","reservedCash":"10005335","holdings":[{"stockId":"A001","total":100,"sellable":100,"reserved":0}]}},
   "private":{"clock":{"worldDay":503,"batch":0},"phase":"publicDecision","preparationAppliedTick":8048,"publicVersion":83,"stateVersion":102,"hiddenEvents":[{"id":"C02-long-example","resultQ":"50000000","publishAt":{"worldDay":511,"batch":8},"branch":"confirmed","effectsApplied":[]}],"actualOperating":{"A001":"102000000000"},"npcMemory":{"A:longValue":{"targetShares":{"A001":5000},"nextReviewWorldDay":520,"lastReviewPublicVersion":80,"hourCapacityUsed":12}},"rng":{"version":"rng-v1","stateless":true,"seed":20261001},"commands":{"cmd-7":{"canonicalBody":"same body returns cached acceptance before stale checks","receipt":{"accepted":true,"duplicate":false}}},"playerInjected":true,"orders":[{"id":"plan-7","remainingQuantity":1000,"limitPrice":10000,"reservedCash":"10005335","endAt":{"worldDay":523,"batch":15}}],"serviceCash":"2500","seasonScores":[{"season":1,"key":"career-1:1"}],"milestoneStreak":5,"exhaustionStreak":0,"protection":{"A001":{"state":"normal","reference":1000,"zeroDays":0}},"indicators":{"dailyCount":504,"hourlyRetentionDays":120},"publicPrefix":"same as public projection above"},

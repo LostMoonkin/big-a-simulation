@@ -84,7 +84,7 @@ function world(size,matrix,targets) {
     delete s.tagCapacity;
   }
   for(const w of wallets) w.cash=(w.holdings.reduce((sum,h)=>sum+BigInt(h.quantity)*1_000n,0n)/4n).toString();
-  return {rulesVersion:'0.3.0',contentVersion:'0.3.0',seed:20261001,size,industrySizeMatrix:matrix,conceptTargets:Object.fromEntries(concepts.map((c,i)=>[c,targets[i]])),stocks,wallets,serviceCash:'0',playerInjected:false};
+  return {rulesVersion:'0.3.1',contentVersion:'0.3.1',seed:20261001,size,industrySizeMatrix:matrix,conceptTargets:Object.fromEntries(concepts.map((c,i)=>[c,targets[i]])),stocks,wallets,serviceCash:'0',playerInjected:false};
 }
 
 mkdirSync('tests/scenarios/p0',{recursive:true});

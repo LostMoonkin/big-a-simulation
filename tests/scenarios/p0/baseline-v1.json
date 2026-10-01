@@ -1,0 +1,17 @@
+{
+  "preset": "baseline-v1",
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "accountCount": 26,
+  "unchanged": ["account IDs", "wallets", "shares", "initial style shares", "baseline weights", "alpha", "temperature", "stock fraction", "persistent noise", "target clipping", "lambda", "review phase", "inventory target", "sellability", "hour capacity", "resource limits", "fees"],
+  "disabled": {"betaQ":"0", "gammaQ":"0", "kTQ":"0", "kHQ":"0", "themeHQ":"0", "technicalSignals":false, "majorEvents":false, "policyChains":false, "shapeLabels":false},
+  "styles": {
+    "value":{"alphaQ":"900000000", "temperatureQ":"800000000", "stockFractionQ":"700000000", "beliefSigmaQ":"2000000", "scoreNoiseMultiplier":1, "hourCapacityQ":"40000000"},
+    "trend":{"alphaQ":"150000000", "temperatureQ":"600000000", "stockFractionQ":"600000000", "beliefSigmaQ":"4000000", "scoreNoiseMultiplier":2, "hourCapacityQ":"100000000"},
+    "theme":{"alphaQ":"150000000", "temperatureQ":"600000000", "stockFractionQ":"600000000", "beliefSigmaQ":"5000000", "scoreNoiseMultiplier":2, "hourCapacityQ":"100000000"},
+    "noise":{"alphaQ":"200000000", "temperatureQ":"1000000000", "stockFractionQ":"550000000", "beliefSigmaQ":"8000000", "scoreNoiseMultiplier":5, "hourCapacityQ":"60000000"},
+    "crossMarket":{"alphaQ":"750000000", "temperatureQ":"1000000000", "stockFractionQ":"700000000", "beliefSigmaQ":"2000000", "scoreNoiseMultiplier":1, "hourCapacityQ":"40000000"},
+    "inventory":{"targetKind":"shares", "beliefSigmaQ":"2000000", "hourCapacityQ":"100000000", "dailyPersistenceQ":"800000000", "dailySigmaQ":"10000000", "zetaLimitQ":"100000000"}
+  },
+  "contract":"Each role retains its original style parameters and review lifecycle. Disabling technical/theme inputs never converts trend/theme/cross-market wallets to value wallets. Public reports can still trigger the existing 5% major-change review."
+}

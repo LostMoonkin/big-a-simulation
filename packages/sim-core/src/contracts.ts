@@ -1,6 +1,6 @@
 /** P0 interface capability contract; implementation starts in P1. */
-export const RULES_VERSION = '0.3.0';
-export const CONTENT_VERSION = '0.3.0';
+export const RULES_VERSION = '0.3.1';
+export const CONTENT_VERSION = '0.3.1';
 export const SNAPSHOT_VERSION = 1;
 export type MarketId = 'A' | 'B';
 export type Clock = { worldDay: number; batch: number };

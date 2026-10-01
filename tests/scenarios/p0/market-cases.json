@@ -1,5 +1,5 @@
 {
-  "rulesVersion": "0.3.0",
+  "rulesVersion": "0.3.1",
   "cases": [
     {"id":"MI-A01","market":"A","kind":"favorable","source":"S01/O01","publicAt":{"playerDay":10,"batch":0},"resultAt":{"playerDay":18,"batch":4},"exposureQ":"600000000","priorQ":"80000000","resultQ":"100000000","cash":"1000000","sellable":1000,"expected":"event contribution 48000000 -> 60000000; funded buy intent may rise"},
     {"id":"MI-A02","market":"A","kind":"favorable","source":"S01/O01","publicAt":{"playerDay":30,"batch":0},"resultAt":{"playerDay":35,"batch":0},"shockQ":"80000000","beneficiaryExposureQ":"600000000","substituteExposureQ":"-300000000","cash":"1000000","sellable":1000,"expected":"contributions +48000000/-24000000; one shared budget"},
