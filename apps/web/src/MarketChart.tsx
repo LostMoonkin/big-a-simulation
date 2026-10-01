@@ -1,433 +1,70 @@
-import { useLayoutEffect, useMemo, useRef, useState } from "react";
-import type { KeyboardEvent, PointerEvent } from "react";
-import { candlesFor } from "./market-demo";
-import type { Stock } from "./market-demo";
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { ActionType, IndicatorSeries, dispose, init, registerIndicator, registerOverlay } from 'klinecharts';
+import type { Chart, Crosshair, Indicator, KLineData } from 'klinecharts';
+import type { AppearanceColors } from './AppearanceSettings';
 
-type MarketChartProps = {
-  stock: Stock;
-  period: "day" | "hour";
-  showAverage: boolean;
-};
+/** Display-only projection. Prices arrive from the core as integer cents. */
+export type ChartBar={timestamp:number;worldDay:number;hour:number|null;open:number;high:number;low:number;close:number;volume:number;completed:boolean;noTrade:boolean;referenceOnly:boolean};
+type MovingAverages=Record<string,number>;
+registerOverlay({name:'TERMINAL_STATUS',totalStep:1,needDefaultPointFigure:false,needDefaultXAxisFigure:false,needDefaultYAxisFigure:false,
+  createPointFigures:({coordinates,overlay})=>coordinates[0]?[{type:'text',attrs:{x:coordinates[0].x,y:coordinates[0].y-12,text:overlay.extendData,align:'center',baseline:'bottom'},styles:{color:'#aeb8c5',size:9,backgroundColor:'transparent'},ignoreEvent:true}]:[]});
+registerIndicator<MovingAverages>({name:'TERMINAL_MA',shortName:'MA',series:IndicatorSeries.Price,precision:2,calcParams:[5,20],
+  figures:[5,20].map(n=>({key:`ma${n}`,title:`MA${n}: `,type:'line'})),
+  createTooltipDataSource:({indicator,crosshair,kLineDataList})=>{
+    const i=crosshair.dataIndex??kLineDataList.length-1,result=indicator.result[i];
+    return {name:'MA',calcParamsText:'(5,20)',icons:[],values:[5,20].map(n=>({title:`MA${n}: `,value:result?.[`ma${n}`]===undefined?'—':result[`ma${n}`]!.toFixed(2)}))};
+  },
+  calc:(data:KLineData[],indicator:Indicator<MovingAverages>)=>data.map((bar,i)=>{
+    const result:MovingAverages={};if(bar.completed!==true)return result;
+    for(const p of indicator.calcParams){const n=Number(p);if(i+1<n)continue;const window=data.slice(i+1-n,i+1);if(window.some(b=>b.completed!==true))continue;result[`ma${n}`]=window.reduce((sum,b)=>sum+b.close,0)/n;}
+    return result;
+  }),
+});
 
-const LEFT = 14;
-const TOP = 26;
-const gridColor = "#1c232b";
-const mutedColor = "#677481";
-
-export function MarketChart({ stock, period, showAverage }: MarketChartProps) {
-  const hostRef = useRef<HTMLDivElement>(null);
-  const [chartWidth, setChartWidth] = useState(1000);
-  const WIDTH = chartWidth;
-  const HEIGHT = Math.round(Math.max(300, Math.min(426, WIDTH * 0.43)));
-  const RIGHT = WIDTH - 65;
-  const PRICE_BOTTOM = HEIGHT - 118;
-  const VOLUME_TOP = HEIGHT - 91;
-  const VOLUME_BOTTOM = HEIGHT - 33;
-  const timeTicks = WIDTH < 550 ? [0, 29, 59] : [0, 12, 24, 36, 48, 59];
-  const candles = useMemo(() => candlesFor(stock, period), [stock, period]);
-  const [inspection, setInspection] = useState<{
-    stockId: string;
-    period: string;
-    index: number;
-    y: number;
-  } | null>(null);
-  useLayoutEffect(() => {
-    const host = hostRef.current;
-    if (!host) return;
-    const observer = new ResizeObserver(([entry]) => {
-      if (!entry) return;
-      setChartWidth(Math.max(300, Math.min(1000, Math.round(entry.contentRect.width))));
-    });
-    observer.observe(host);
-    return () => observer.disconnect();
-  }, []);
-  const active =
-    inspection?.stockId === stock.id && inspection.period === period
-      ? inspection
-      : null;
-  const inspectionY = Math.max(TOP, Math.min(PRICE_BOTTOM, active?.y ?? TOP));
-  const selectedIndex = active?.index ?? candles.length - 1;
-  const candle = candles[selectedIndex]!;
-  const latest = candles[candles.length - 1]!;
-  const latestPrevious = candles[candles.length - 2]!;
-  const latestDirection =
-    latest.close >= latestPrevious.close ? "var(--up)" : "var(--down)";
-  const high = Math.max(...candles.map((point) => point.high));
-  const low = Math.min(...candles.map((point) => point.low));
-  const padding = (high - low) * 0.14;
-  const topPrice = high + padding;
-  const bottomPrice = low - padding;
-  const maxVolume = Math.max(...candles.map((point) => point.volume));
-  const step = (RIGHT - LEFT) / candles.length;
-  const xFor = (index: number) => LEFT + (index + 0.5) * step;
-  const yFor = (price: number) =>
-    TOP +
-    ((topPrice - price) / (topPrice - bottomPrice)) * (PRICE_BOTTOM - TOP);
-  const priceAt = (y: number) =>
-    topPrice - ((y - TOP) / (PRICE_BOTTOM - TOP)) * (topPrice - bottomPrice);
-  const averageFor = (index: number, length: number) =>
-    index < length - 1 || !candles[index]?.completed
-      ? null
-      : candles
-          .slice(index - length + 1, index + 1)
-          .reduce((sum, point) => sum + point.close, 0) / length;
-  const averagePath = (length: number) =>
-    candles
-      .flatMap((_, index) => {
-        const average = averageFor(index, length);
-        return average === null
-          ? []
-          : [
-              `${index === length - 1 ? "M" : "L"}${xFor(index).toFixed(2)},${yFor(average).toFixed(2)}`,
-            ];
-      })
-      .join(" ");
-  const previousClose = candles[selectedIndex - 1]?.close ?? candle.open;
-  const change = ((candle.close - previousClose) / previousClose) * 100;
-  const changeColor =
-    change > 0 ? "var(--up)" : change < 0 ? "var(--down)" : "#84919d";
-  const direction = candle.close >= candle.open ? "var(--up)" : "var(--down)";
-  const averageIndex = candle.completed ? selectedIndex : selectedIndex - 1;
-  const ma5 = averageFor(averageIndex, 5);
-  const ma20 = averageFor(averageIndex, 20);
-
-  const inspectPointer = (event: PointerEvent<SVGSVGElement>) => {
-    const matrix = event.currentTarget.getScreenCTM();
-    if (!matrix) return;
-    const point = new DOMPoint(event.clientX, event.clientY).matrixTransform(
-      matrix.inverse(),
-    );
-    const index = Math.max(
-      0,
-      Math.min(candles.length - 1, Math.floor((point.x - LEFT) / step)),
-    );
-    setInspection({
-      stockId: stock.id,
-      period,
-      index,
-      y: Math.max(TOP, Math.min(PRICE_BOTTOM, point.y)),
-    });
-  };
-
-  const inspectKeyboard = (event: KeyboardEvent<SVGSVGElement>) => {
-    if (event.key === "Escape") {
-      setInspection(null);
-      return;
-    }
-    if (event.key !== "ArrowLeft" && event.key !== "ArrowRight") return;
-    event.preventDefault();
-    const index = Math.max(
-      0,
-      Math.min(
-        candles.length - 1,
-        selectedIndex + (event.key === "ArrowLeft" ? -1 : 1),
-      ),
-    );
-    setInspection({
-      stockId: stock.id,
-      period,
-      index,
-      y: yFor(candles[index]!.close),
-    });
-  };
-
-  return (
-    <div className="market-chart" ref={hostRef}>
-      <div
-        className="chart-inspection"
-        style={{
-          display: "flex",
-          flexWrap: "wrap",
-          alignItems: "center",
-          gap: "5px 14px",
-          minHeight: 23,
-          fontSize: 11,
-          fontVariantNumeric: "tabular-nums",
-          color: "#84919d",
-        }}
-      >
-        <span style={{ color: "#a8b4be" }}>{candle.label}</span>
-        {period === "day" && (
-          <span style={{ color: "#677481" }}>已完成日线</span>
-        )}
-        {period === "hour" && !candle.completed && showAverage && WIDTH < 550 && (
-          <span style={{ color: "#677481" }}>均线：已完成小时</span>
-        )}
-        <span>
-          开{" "}
-          <b style={{ color: "#c5ced5", fontWeight: 500 }}>
-            {candle.open.toFixed(2)}
-          </b>
-        </span>
-        <span>
-          高{" "}
-          <b style={{ color: "#c5ced5", fontWeight: 500 }}>
-            {candle.high.toFixed(2)}
-          </b>
-        </span>
-        <span>
-          低{" "}
-          <b style={{ color: "#c5ced5", fontWeight: 500 }}>
-            {candle.low.toFixed(2)}
-          </b>
-        </span>
-        <span>
-          收{" "}
-          <b style={{ color: direction, fontWeight: 500 }}>
-            {candle.close.toFixed(2)}
-          </b>
-        </span>
-        <span style={{ color: changeColor }}>
-          {change >= 0 ? "+" : ""}
-          {change.toFixed(2)}%
-        </span>
-      </div>
-      <svg
-        viewBox={`0 0 ${WIDTH} ${HEIGHT}`}
-        role="img"
-        aria-label={`${stock.name}${period === "day" ? "日" : "小时"} K 线演示图，60 根蜡烛。左右方向键查看，Escape 退出查看。`}
-        tabIndex={0}
-        onPointerMove={inspectPointer}
-        onPointerLeave={() => setInspection(null)}
-        onKeyDown={inspectKeyboard}
-        onBlur={() => setInspection(null)}
-        style={{
-          display: "block",
-          width: "100%",
-          height: "auto",
-          overflow: "visible",
-          cursor: "crosshair",
-        }}
-      >
-        <title>{stock.name} · 固定示例行情</title>
-        <g
-          fontFamily="inherit"
-          fontSize="11"
-          fill={mutedColor}
-          style={{ fontVariantNumeric: "tabular-nums" }}
-        >
-          {Array.from({ length: 5 }, (_, index) => {
-            const y = TOP + (index * (PRICE_BOTTOM - TOP)) / 4;
-            return (
-              <g key={`price-${index}`}>
-                <line
-                  x1={LEFT}
-                  y1={y}
-                  x2={RIGHT}
-                  y2={y}
-                  stroke={gridColor}
-                  strokeDasharray="3 5"
-                />
-                <text x={RIGHT + 13} y={y + 4}>
-                  {priceAt(y).toFixed(2)}
-                </text>
-              </g>
-            );
-          })}
-          {timeTicks.map((index) => (
-            <g key={`time-${index}`}>
-              <line
-                x1={xFor(index)}
-                y1={TOP}
-                x2={xFor(index)}
-                y2={VOLUME_BOTTOM}
-                stroke={gridColor}
-                strokeDasharray="3 5"
-              />
-              <text
-                x={xFor(index)}
-                y={HEIGHT - 11}
-                textAnchor={
-                  index === 0 ? "start" : index === 59 ? "end" : "middle"
-                }
-              >
-                {candles[index]!.shortLabel}
-              </text>
-            </g>
-          ))}
-          <line
-            x1={LEFT}
-            y1={VOLUME_TOP - 9}
-            x2={RIGHT}
-            y2={VOLUME_TOP - 9}
-            stroke={gridColor}
-          />
-          <text x={LEFT} y={VOLUME_TOP + 8}>
-            VOL
-          </text>
-          <text x={LEFT + 32} y={VOLUME_TOP + 8} fill={direction}>
-            {(candle.volume / 10000).toFixed(1)}万
-          </text>
-          <text x={RIGHT + 13} y={VOLUME_TOP + 8}>
-            {(maxVolume / 10000).toFixed(0)}万
-          </text>
-          <text x={RIGHT + 13} y={VOLUME_BOTTOM}>
-            0
-          </text>
-          <text x={RIGHT + 13} y={HEIGHT - 11}>
-            世界日
-          </text>
-        </g>
-        {candles.map((point, index) => {
-          const x = xFor(index);
-          const color = point.close >= point.open ? "var(--up)" : "var(--down)";
-          const bodyTop = yFor(Math.max(point.open, point.close));
-          const bodyHeight = Math.max(
-            1.5,
-            Math.abs(yFor(point.open) - yFor(point.close)),
-          );
-          const volumeHeight =
-            (point.volume / maxVolume) * (VOLUME_BOTTOM - VOLUME_TOP - 13);
-          return (
-            <g key={index}>
-              <line
-                x1={x}
-                y1={yFor(point.high)}
-                x2={x}
-                y2={yFor(point.low)}
-                stroke={color}
-                strokeWidth="1.2"
-              />
-              <rect
-                x={x - step * 0.28}
-                y={bodyTop}
-                width={step * 0.56}
-                height={bodyHeight}
-                fill={color}
-              />
-              <rect
-                x={x - step * 0.28}
-                y={VOLUME_BOTTOM - volumeHeight}
-                width={step * 0.56}
-                height={volumeHeight}
-                fill={color}
-                opacity="0.52"
-              />
-            </g>
-          );
-        })}
-        {showAverage && (
-          <g
-            fill="none"
-            strokeWidth="1.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-          >
-            <path d={averagePath(5)} stroke="#e0ba72" />
-            <path d={averagePath(20)} stroke="#7d91dc" />
-          </g>
-        )}
-        {showAverage && (
-          <g
-            fontFamily="inherit"
-            fontSize="11"
-            style={{ fontVariantNumeric: "tabular-nums" }}
-          >
-            <text x={LEFT} y={12} fill="#e0ba72">
-              MA5 {ma5 === null ? "历史不足" : ma5.toFixed(2)}
-            </text>
-            <text x={LEFT + 118} y={12} fill="#7d91dc">
-              MA20 {ma20 === null ? "历史不足" : ma20.toFixed(2)}
-            </text>
-            {!candle.completed && WIDTH >= 550 && (
-              <text x={LEFT + 248} y={12} fill={mutedColor}>
-                均线截至已完成小时
-              </text>
-            )}
-          </g>
-        )}
-        <line
-          x1={LEFT}
-          y1={yFor(latest.close)}
-          x2={RIGHT}
-          y2={yFor(latest.close)}
-          stroke={latestDirection}
-          opacity="0.5"
-          strokeDasharray="5 5"
-        />
-        <rect
-          x={RIGHT + 1}
-          y={yFor(latest.close) - 10}
-          width="64"
-          height="21"
-          rx="2"
-          fill={latestDirection}
-        />
-        <text
-          x={RIGHT + 33}
-          y={yFor(latest.close) + 4}
-          textAnchor="middle"
-          fontSize="11"
-          fontFamily="inherit"
-          fontWeight="600"
-          fill="#07100c"
-        >
-          {latest.close.toFixed(2)}
-        </text>
-        {active && (
-          <g pointerEvents="none">
-            <line
-              x1={xFor(selectedIndex)}
-              y1={TOP}
-              x2={xFor(selectedIndex)}
-              y2={VOLUME_BOTTOM}
-              stroke="#8b99a6"
-              strokeDasharray="4 4"
-            />
-            <line
-              x1={LEFT}
-              y1={inspectionY}
-              x2={RIGHT}
-              y2={inspectionY}
-              stroke="#8b99a6"
-              strokeDasharray="4 4"
-            />
-            <rect
-              x={RIGHT + 1}
-              y={inspectionY - 10}
-              width="64"
-              height="21"
-              rx="2"
-              fill="#d4dde4"
-            />
-            <text
-              x={RIGHT + 33}
-              y={inspectionY + 4}
-              textAnchor="middle"
-              fontFamily="inherit"
-              fontSize="11"
-              fill="#10151a"
-            >
-              {priceAt(inspectionY).toFixed(2)}
-            </text>
-            <rect
-              x={Math.max(
-                LEFT,
-                Math.min(RIGHT - 109, xFor(selectedIndex) - 54),
-              )}
-              y={HEIGHT - 28}
-              width="109"
-              height="23"
-              rx="2"
-              fill="#25313d"
-            />
-            <text
-              x={Math.max(LEFT + 54, Math.min(RIGHT - 55, xFor(selectedIndex)))}
-              y={HEIGHT - 12}
-              textAnchor="middle"
-              fontFamily="inherit"
-              fontSize="11"
-              fill="#e0e6ed"
-            >
-              {period === "day"
-                ? `世界日 ${candle.shortLabel}`
-                : candle.shortLabel}
-            </text>
-          </g>
-        )}
-      </svg>
+export function MarketChart({stockId,bars,scale,showAverage,colors}:{stockId:string;bars:ChartBar[];scale:'day'|'hour';showAverage:boolean;colors:AppearanceColors}){
+  const host=useRef<HTMLDivElement>(null),chart=useRef<Chart|null>(null),current=useRef(bars);
+  const [inspection,setInspection]=useState<number|null>(null);
+  current.current=bars;
+  useLayoutEffect(()=>{
+    const node=host.current;if(!node)return;const instance=init(node);if(!instance)return;
+    chart.current=instance;instance.setStyles('dark');instance.setTimezone('UTC');instance.setPriceVolumePrecision(2,0);
+    instance.setBarSpace(10);instance.setOffsetRightDistance(52);instance.createIndicator('VOL',false,{height:92});
+    instance.setPaneOptions({id:'candle_pane',gap:{top:0.22,bottom:0.10}});
+    instance.setCustomApi({formatDate:(_formatter,timestamp)=>{
+      const source=current.current;const bar=source.find(b=>b.timestamp===timestamp)??[...source].reverse().find(b=>b.timestamp<timestamp)??source[0];
+      return bar?`${bar.worldDay}${bar.hour===null?'':` / ${bar.hour+1}时`}`:'';
+    }});
+    const crosshair=(value?:unknown)=>{const selected=(value as Crosshair|undefined)?.dataIndex;setInspection(typeof selected==='number'?selected:null);};
+    instance.subscribeAction(ActionType.OnCrosshairChange,crosshair);
+    const observer=new ResizeObserver(()=>instance.resize());observer.observe(node);
+    return()=>{observer.disconnect();instance.unsubscribeAction(ActionType.OnCrosshairChange,crosshair);dispose(node);chart.current=null;};
+  },[]);
+  useEffect(()=>{
+    const instance=chart.current;if(!instance)return;
+    instance.applyNewData(bars.map(bar=>({timestamp:bar.timestamp,open:bar.open/100,high:bar.high/100,low:bar.low/100,close:bar.close/100,volume:bar.volume,completed:bar.completed})),false);
+    instance.removeOverlay({groupId:'terminal-status'});
+    for(const bar of bars.filter(b=>b.noTrade||!b.completed))instance.createOverlay({id:`${stockId}-${scale}-${bar.timestamp}`,groupId:'terminal-status',name:'TERMINAL_STATUS',lock:true,
+      points:[{timestamp:bar.timestamp,value:bar.high/100}],extendData:[bar.noTrade?'0':'',!bar.completed?'进行中':''].filter(Boolean).join(' · ')});
+    setInspection(null);
+  },[bars,stockId,scale]);
+  useEffect(()=>{
+    const instance=chart.current;if(!instance)return;
+    instance.setStyles({candle:{bar:{upColor:colors.up,downColor:colors.down,upBorderColor:colors.up,downBorderColor:colors.down,upWickColor:colors.up,downWickColor:colors.down}},indicator:{bars:[{upColor:colors.up,downColor:colors.down,noChangeColor:'#84919d'}]}});
+  },[colors]);
+  useEffect(()=>{
+    const instance=chart.current;if(!instance)return;
+    if(showAverage)instance.createIndicator('TERMINAL_MA',true,{id:'candle_pane'});else instance.removeIndicator('candle_pane','TERMINAL_MA');
+  },[showAverage]);
+  const latest=bars.at(-1),bar=inspection===null?latest:bars[Math.max(0,Math.min(bars.length-1,inspection))]??latest;
+  return <div className="market-chart" data-testid="market-chart" data-stock-id={stockId} data-scale={scale} data-bars={bars.length}>
+    <div className="chart-inspection" aria-live="polite">
+      {bar?<><span>世界日 {bar.worldDay}{bar.hour===null?'':` · 第${bar.hour+1}小时`}</span><span>{bar.completed?'已完成':'进行中'}</span>
+        {bar.noTrade&&<span>无成交 · V=0</span>}{bar.referenceOnly&&<span>发行参考，尚无真实成交</span>}
+        <span>开 {(bar.open/100).toFixed(2)}</span><span>高 {(bar.high/100).toFixed(2)}</span><span>低 {(bar.low/100).toFixed(2)}</span><span>收 {(bar.close/100).toFixed(2)}</span><span>量 {bar.volume.toLocaleString()}</span></>:<span>当前窗口尚未处理竞价批次</span>}
     </div>
-  );
+    <div ref={host} className="canvas-chart" role="img" aria-label={`${stockId}真实${scale==='day'?'日':'小时'}K线及成交量`} />
+    <div className="chart-caption"><span>0 = 无成交 · 可拖动查看真实历史</span><span>均线仅计算已完成窗口</span></div>
+  </div>;
 }
 
 export default MarketChart;

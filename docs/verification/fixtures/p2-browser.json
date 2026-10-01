@@ -1,0 +1,296 @@
+{
+  "format": "p2-browser-checkpoint-v1",
+  "status": "incomplete",
+  "independentAcceptance": "pending",
+  "sourceBinding": "Actual browser run predates submission-reference/resource-preview and driver-report fixes. Final source-bound browser rerun remains required.",
+  "currentBrowserSourceHash": "fad5e9580de5f56470882c9adc47b85e5f17981dc2fdb4129413c30f880c32ca",
+  "currentBrowserFiles": [
+    {
+      "path": "apps/web/index.html",
+      "sha256": "e7a9bf2bb3c1865f1b272bc3b36e402ff2163861ee75a8ead283fb04ca717817"
+    },
+    {
+      "path": "apps/web/package.json",
+      "sha256": "3b264d5ec99ad5a0d81fc94017c771e36cd37491d28a00da77a06fd9b8ea6650"
+    },
+    {
+      "path": "apps/web/src/App.tsx",
+      "sha256": "ec81e807920b414a45543eeb2dc0cc66fbf8746ea4d172faae0e65f3791686ed"
+    },
+    {
+      "path": "apps/web/src/AppearanceSettings.tsx",
+      "sha256": "88c50a08d64b59a836514d23b7b7ae31faa2f521e9215b8fe423d742fd6622a4"
+    },
+    {
+      "path": "apps/web/src/MarketChart.tsx",
+      "sha256": "993d177453555eec807ee9364742a5fa7e04187f59dfc7829c49c07394d7adad"
+    },
+    {
+      "path": "apps/web/src/TradingPanels.tsx",
+      "sha256": "51dd4156ac3fcf942ca51f9dc98b8b6c54907fc18b9b6db294eccfcc66db012a"
+    },
+    {
+      "path": "apps/web/src/main.tsx",
+      "sha256": "597e0a1cba8e59367258bcdede36c1a20ec94944b47c5822587d85df81835ce1"
+    },
+    {
+      "path": "apps/web/src/market-demo.ts",
+      "sha256": "3d57ef445d94adc795f4ccd8d1b432d730773244a443bfd5b0776ce4dbf045cb"
+    },
+    {
+      "path": "apps/web/src/market-protocol.ts",
+      "sha256": "443292bbb540bf24e12de4484038cc3003af578f48a0391b3bec713e29e97c78"
+    },
+    {
+      "path": "apps/web/src/market-worker.ts",
+      "sha256": "fcf939d4365ddae8ef4302baeaf31c2669adc659e7729d127342124bc5523be2"
+    },
+    {
+      "path": "apps/web/src/p0-probe.ts",
+      "sha256": "df3d9d403a878cd618e5bdee7b41c71a627198b312e035182732796e1fea6f2a"
+    },
+    {
+      "path": "apps/web/src/p0-worker.ts",
+      "sha256": "0bdded0516f65e1bc37e28fa85ffc281eb8fac3e9b145a5dacc79e6bb56673cb"
+    },
+    {
+      "path": "apps/web/src/p1-probe.ts",
+      "sha256": "63d6035125fc33a5648a8fbeaa6cf1da891f19da1ac7da13808c031a3f3c4f70"
+    },
+    {
+      "path": "apps/web/src/p1-worker.ts",
+      "sha256": "389412997648be035f0be9eb60ae5adc80a7e5d7c5e51d771f96b624eb026314"
+    },
+    {
+      "path": "apps/web/src/styles.css",
+      "sha256": "05ce792b8c144e6239355653e37ded3991fa65a8a846ee6d3aced7f99468a66f"
+    },
+    {
+      "path": "apps/web/src/useMarket.ts",
+      "sha256": "420b73a72b4f646ea18f7680d02204a6ecb87495881a661961ca547c9d9e9d1b"
+    },
+    {
+      "path": "apps/web/tsconfig.json",
+      "sha256": "c04b54afc534267f28f8e3190392cd047bfd6ca2d119c9039a61a9ef90ffcb91"
+    },
+    {
+      "path": "apps/web/vite.config.ts",
+      "sha256": "0efbbf1bb8ac3b7b25920d26dffe483fe35e77be900eeb4680d2fd63a6ed4060"
+    },
+    {
+      "path": "tools/web-checks/README.md",
+      "sha256": "718173824072791b5c3dce46693a1e90718d890287b44b8a8ef0a2bfb2369f46"
+    },
+    {
+      "path": "tools/web-checks/browser-check.mjs",
+      "sha256": "60f8ca52e03739acafd8373e8a92f1c7d9d214881cdf223910f4c1f7d32c2b69"
+    }
+  ],
+  "economicSourceHash": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4",
+  "currentEconomicSourceHash": "cf4b0daba12ac83b18e331fb6d98a0f65a9b3b72dc33f1826829c52580b06244",
+  "testedCompiledArtifacts": [
+    {
+      "path": "apps/web/dist/assets/app-CO3Lm-qu.css",
+      "sha256": "793fc49683c63d81cb2ca1259b80fa9cc53105006579393bf1e14de49cb8c10a"
+    },
+    {
+      "path": "apps/web/dist/assets/app-DoBw8TLg.js",
+      "sha256": "343efea35c384157f5d898aa52be12d42ebadef697badef070d7c5551aab005e"
+    },
+    {
+      "path": "apps/web/dist/assets/index.esm-DwfsheZH.js",
+      "sha256": "2ec7d615e5fe4b269b28952574943b0d86a85c180347ff4cce5a37adbcf1b427"
+    },
+    {
+      "path": "apps/web/dist/assets/market-worker-JZiZF4xq.js",
+      "sha256": "b583bf72c2be4525d974ed107f850726c6ddb3ae5b847b4a453cdb5beeed2c2c"
+    },
+    {
+      "path": "apps/web/dist/assets/modulepreload-polyfill-P2Xu9kJm.js",
+      "sha256": "418c206484b89b68ef5f067277831e583fc9193a62aadf4de269acaaeb12a85f"
+    },
+    {
+      "path": "apps/web/dist/assets/p0-CH6mTTzS.js",
+      "sha256": "7f96a1e56dc7b0d460eadad664765621f8a6550df3507f81e17b0c30a6299a31"
+    },
+    {
+      "path": "apps/web/dist/assets/p0-worker-BBJALURN.js",
+      "sha256": "790e1ecaa20c486d6fd33af939bc8e558b8f0c633380ef89ac7141adc33ef829"
+    },
+    {
+      "path": "apps/web/dist/assets/p1-sZMWlYoQ.js",
+      "sha256": "0b8b68258c09ed729fa78cbda027ee39471507cb3825083ee8b99db846afa79a"
+    },
+    {
+      "path": "apps/web/dist/assets/p1-worker-fA8AVcaz.js",
+      "sha256": "91da9819a4bc1dde6f4b7bd0846ec33e0efe18e32de2d235ce59a860b81fb10a"
+    }
+  ],
+  "environment": {
+    "browserVersion": "154.0.8037.58",
+    "os": "Windows",
+    "url": "http://127.0.0.1:4173/"
+  },
+  "actualCommands": [
+    "npm.cmd run typecheck --workspace @big-a/web",
+    "npm.cmd run build",
+    "node tools/web-checks/browser-check.mjs http://127.0.0.1:4173/ artifacts/verification/p2/browser-full-trades full",
+    "node tools/sim-runner/p2-golden.mjs --input artifacts/verification/p2/browser-full-trades/qualified-checkpoint.json --days 20 --out artifacts/verification/p2/browser-full-trades/node-20-days"
+  ],
+  "checks": [
+    {
+      "id": "P2-AC4",
+      "status": "observed-pass",
+      "description": "Cancelled preheat retry,4000 real batches,40 stocks,both company pages,real hour/day canvas"
+    },
+    {
+      "id": "P2-AC5",
+      "status": "observed-pass",
+      "description": "Immediate/day/plan,cancel,partial,fees,lock and three resource/conflict rejections"
+    },
+    {
+      "id": "P2-AC6",
+      "status": "incomplete",
+      "description": "Actual cancellation and no free UI/background time passed; natural major set empty, fixed-input browser report pause remains required"
+    },
+    {
+      "id": "P2-AC7",
+      "status": "observed-pass",
+      "description": "Real partial plan/frozen cash/locked A checkpoint and 320-batch close/reopen/Node equality; bad imports preserve old world",
+      "data": {
+        "status": "pass",
+        "initialChecksum": "834e192bdec22bd1302e25eb5c8510eed4749591b8fbfbd9e359ae618a6c0952",
+        "finalChecksum": "358a9df841a862f077310b70baca1be07885a74d1bf102f6e4b8e4ac68f8e8b5",
+        "phase": "settled",
+        "clock": {
+          "batch": 15,
+          "worldDay": 279
+        },
+        "targetClock": {
+          "worldDay": 279,
+          "batch": 15
+        },
+        "days": 20,
+        "completedBatches": 320,
+        "economicSourceHash": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4",
+        "economicSourceAtEnd": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4"
+      }
+    },
+    {
+      "id": "P2-AC8",
+      "status": "observed-pass",
+      "description": "Actual world309/15 settled,read-only60-day summary,core ended=false,no liquidation/reward"
+    }
+  ],
+  "saved": [
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/initial-snapshot.json",
+      "checksum": "73f7befdc6530ec3092ebe8b76ef9f304795d85f49ce3741b7ba9afa94530f72",
+      "clock": {
+        "batch": 0,
+        "worldDay": 250
+      },
+      "phase": "publicDecision"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/first-trades.json",
+      "checksum": "6b84f01eb376600ff4a19109b30249536df84d2a84c294a57d47e017daf103a9",
+      "clock": {
+        "batch": 3,
+        "worldDay": 250
+      },
+      "phase": "settled"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/cancelled-stable.json",
+      "checksum": "401f0c37db2d8f5f3bd5d2af35f6f9f7abfd18d4ecfe1f9d6b1b1cd495aa3c6b",
+      "clock": {
+        "batch": 3,
+        "worldDay": 251
+      },
+      "phase": "settled"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/qualified-checkpoint.json",
+      "checksum": "834e192bdec22bd1302e25eb5c8510eed4749591b8fbfbd9e359ae618a6c0952",
+      "clock": {
+        "batch": 15,
+        "worldDay": 259
+      },
+      "phase": "settled"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/after-bad-version.json",
+      "checksum": "834e192bdec22bd1302e25eb5c8510eed4749591b8fbfbd9e359ae618a6c0952",
+      "clock": {
+        "batch": 15,
+        "worldDay": 259
+      },
+      "phase": "settled"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/after-corrupt.json",
+      "checksum": "834e192bdec22bd1302e25eb5c8510eed4749591b8fbfbd9e359ae618a6c0952",
+      "clock": {
+        "batch": 15,
+        "worldDay": 259
+      },
+      "phase": "settled"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/uninterrupted-20-days.json",
+      "checksum": "358a9df841a862f077310b70baca1be07885a74d1bf102f6e4b8e4ac68f8e8b5",
+      "clock": {
+        "batch": 15,
+        "worldDay": 279
+      },
+      "phase": "settled"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/reopened-20-days.json",
+      "checksum": "358a9df841a862f077310b70baca1be07885a74d1bf102f6e4b8e4ac68f8e8b5",
+      "clock": {
+        "batch": 15,
+        "worldDay": 279
+      },
+      "phase": "settled"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades/prototype-60-days.json",
+      "checksum": "6500667ec970d9e1685561e67b209290a3fd97a5b60f565f575657dcb670eba2",
+      "clock": {
+        "batch": 15,
+        "worldDay": 309
+      },
+      "phase": "settled"
+    }
+  ],
+  "evidence": {
+    "screenshots": [
+      "artifacts/verification/p2/browser-full-trades/terminal.png",
+      "artifacts/verification/p2/browser-full-trades/summary-60-days.png"
+    ],
+    "uiLog": "artifacts/verification/p2/browser-full-trades/before-close-ui-log.json",
+    "nodeResults": "artifacts/verification/p2/browser-full-trades/node-20-days/results.json"
+  },
+  "failures": [
+    {
+      "path": "artifacts/verification/p2/browser-static-smoke/results.json",
+      "reason": "Chart forwarded bigint turnover; fixed by projecting only chart numeric fields and reran smoke pass"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-initial/results.json",
+      "reason": "Default seed yielded no natural >=5% report in required interval; never passed an empty report set"
+    },
+    {
+      "path": "artifacts/verification/p2/browser-full-trades",
+      "reason": "Full natural UI/continuation/60-day actions completed; mandatory major scenario absent, then old failure writer threw BigInt JSON TypeError. Failure writer fixed, original files retained."
+    }
+  ],
+  "remaining": [
+    "Legitimate fixed-input AC6 browser pause/export/import case",
+    "Final initialization version and economic source binding",
+    "Final browser rerun and independent acceptance",
+    "P2 economy AC1–3 is owned by core/CLI and is not signed off here"
+  ]
+}

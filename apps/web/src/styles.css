@@ -2355,3 +2355,46 @@ h1 > span {
     scroll-behavior: auto !important;
   }
 }
+
+/* P2 real-world controls retain the terminal's established black surfaces. */
+.simulation-controls { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+.step-controls, .file-controls { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.step-controls .button { min-height: 32px; font-size: 11px; padding: 6px 10px; }
+.step-controls > input { width: 52px; padding: 5px 8px; }
+.file-controls { gap: 16px; }
+input[hidden] { display: none; }
+.new-world-panel { max-width: 520px; margin: 38px auto 65px; padding: 28px; border: 1px solid var(--line); border-radius: 8px; background: var(--surface); }
+.new-world-panel > h2 { font-size: 22px; margin: 8px 0 12px; }
+.new-world-panel form { margin-top: 24px; }
+.new-world-panel .button.full-width { margin-top: 22px; }
+.new-world-panel .section-note { margin: 22px 0 0; }
+.warmup-progress { display: grid; gap: 10px; margin-top: 22px; }
+.warmup-progress progress { width: 100%; accent-color: var(--accent); }
+.session-notice, .run-progress, .prototype-summary { padding: 13px 16px; background: #161d14; border: 1px solid #354730; color: #cbdbc3; border-radius: 6px; margin-bottom: 14px; }
+.error-notice { background: #271619; border-color: #603139; color: #edabb3; }
+.major-notice { background: #262217; border-color: #63572f; color: #e9d697; }
+.export-status { color: #8b9688; font-size: 11px; margin: -4px 0 12px; }
+.prototype-summary h2 { margin: 6px 0; font-size: 20px; }
+.prototype-summary p { margin-top: 6px; }
+.filter-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; padding: 0 15px 14px; }
+.filter-fields select { padding: 7px 4px; font-size: 10px; }
+.canvas-chart { width: 100%; height: 405px; }
+.chart-inspection { display: flex; flex-wrap: wrap; gap: 5px 12px; color: #929caa; font-size: 10px; padding: 10px 16px 3px; min-height: 40px; }
+.chart-inspection span { white-space: nowrap; }
+.chart-caption { font-size: 10px; display: flex; justify-content: space-between; gap: 8px; color: #737f8b; padding: 8px 16px 12px; }
+.quote-metrics dd { font-size: 10px; }
+.plan-end-fields select { margin-top: 7px; }
+.holdings-table td small { display: block; font: 10px 'Segoe UI', sans-serif; color: #7d8897; max-width: 240px; white-space: normal; }
+.holdings-table td .order-id { max-width: 120px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.report-list { max-height: 220px; overflow: auto; margin-top: 12px; }
+.report-list p { display: flex; justify-content: space-between; gap: 15px; padding: 8px 0; border-bottom: 1px solid var(--line); font-size: 11px; }
+.company-detail > p { margin: 12px 0 18px; color: #a4afb9; line-height: 1.9; }
+.order-panel .order-summary > div { display: flex; justify-content: space-between; gap: 8px; }
+.order-panel .field-label { margin-top: 13px; }
+.order-panel .order-hint { margin-top: 13px; }
+.news-item h3 { font-size: 11px; line-height: 1.8; }
+@media (max-width: 1100px) { .world-clock { flex-wrap: wrap; max-width: 420px; } .simulation-controls { align-items: flex-start; } .terminal-grid { grid-template-columns: 210px minmax(0, 1fr) 250px; } }
+.stock-list { max-height: 680px; overflow-y: auto; }
+.main-quote { font-size: 34px; font-weight: 500; line-height: 1.15; }
+.quote-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px 16px; }
+.quote-metrics > div { flex-direction: column; align-items: flex-start; gap: 5px; white-space: normal; }
