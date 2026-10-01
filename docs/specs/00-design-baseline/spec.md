@@ -1,6 +1,6 @@
 # P0 设计与工程基线
 
-状态：未开始。规格版本：1.0。前置：[玩法设计0.2](../../design/gameplay-market-model.md)及其研究。实施细节见[plan](plan.md)，具体任务见[tasks](tasks.md)。
+状态：实施交付、待独立验收。规格版本：1.0（验收门槛未改）。冻结规则/玩法0.3.0，初始依据为0.2及其研究。证据见[P0交付报告](../../verification/p0-baseline.md)。实施细节见[plan](plan.md)，具体任务见[tasks](tasks.md)。
 
 ## Goal
 

@@ -1,0 +1,26 @@
+{
+  "rulesVersion":"0.3.0",
+  "clock":"worldDay = playerDay + 249; tick = worldDay*16+batch",
+  "caseId":"TIME-CROSS-01",
+  "chainId":"C02-long-example",
+  "timeline":[
+    {"playerDay":240,"worldDay":489,"batch":4,"action":"I01 public clue rev1, expected log effect .10, expires player260 batch4; hidden branch/result inaccessible"},
+    {"playerDay":248,"worldDay":497,"batch":15,"action":"cash milestone first qualifying close; same original capital denominator"},
+    {"playerDay":250,"worldDay":499,"batch":8,"action":"A buy100: unlock world500 batch0; plan quantity300 end world501 batch15 (=player252); retain actual remaining reservation"},
+    {"playerDay":250,"worldDay":499,"batch":15,"action":"clear->book->expire day orders->finish candle/metrics->freeze season1 score once->save settled->pause; milestone count3; no event resampling/unlock"},
+    {"playerDay":251,"worldDay":500,"batch":0,"action":"continue: unlock A, redistribute accrued service cash (worldDay%20=0), publish scheduled reports and macro, regular5/20-day reviews; plan original ID/reservation unchanged"},
+    {"playerDay":252,"worldDay":501,"batch":15,"action":"milestone count5 triggers once; finish/expire cross-season plan, release remaining funds once"},
+    {"playerDay":254,"worldDay":503,"batch":0,"action":"I02 public rev2 updates expectation .06; supersedes rev1, new expires player274 batch0; not add .10+.06"},
+    {"playerDay":260,"worldDay":509,"batch":4,"action":"rev1 old expiry cannot erase rev2; season2 view still sees no hidden final result"},
+    {"playerDay":262,"worldDay":511,"batch":8,"action":"O02 result rev3 log .05 applied once, plus daily .001 from world512..522 exclusive; publish replacement of .06 expectation with realized and remaining parts"},
+    {"playerDay":265,"worldDay":514,"batch":0,"action":"A015 report phase14: report includes .05 and2 completed growth days .002; remove covered .052; future8 days .008 remain; subtract .052 before estimating historical g"},
+    {"playerDay":273,"worldDay":522,"batch":0,"action":"continuous effect ended, no new growth; next report covers last realized contribution and retires pending remainder"}
+  ],
+  "expiryCounterexample":{"publicAtPlayerDay":240,"noUpdateByPlayerDay":260,"atBatch":4,"result":"mark rev1 expired before decisions; forecast contribution0; archived direction decays for5 days, old expiry not applied twice"},
+  "warmup":{"worldDays":[0,249],"playerEntryWorldDay":250,"phase":"settled after world249 batch15 -> prepare world250 batch0 publicDecision","completedDailyBars":250,"completedHourlyBars":1000,"retainedHourlyDays":120,"publicDailyMomentumNeeds":121,"MA200Needs":200,"playerCapitalInjections":1},
+  "safeSnapshots":[
+    {"id":"SNAP-PUBLIC-01","phase":"publicDecision","publishedEffects":["C02-long-example:rev2"],"npcOrdersGenerated":false,"restore":"resume decisions once; do not republish rev2, reapply effects, or advance before input"},
+    {"id":"SNAP-SETTLED-01","phase":"settled","batchFullyCommitted":true,"restore":"next preparation once; pending plans/frozen funds/score IDs retained"}
+  ],
+  "unsafeSnapshot":"clearing/bookkeeping intermediates are private scratch and cannot be exported"
+}

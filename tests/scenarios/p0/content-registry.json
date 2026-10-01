@@ -1,0 +1,20 @@
+{
+  "version":"0.3.0",
+  "templates": {
+    "operating": ["O01 procurement result","O02 capacity ramp","O03 product acceptance","O04 quality setback","O05 efficiency gain","O06 input loss","O07 guidance revision","O08 contract cancellation","O09 research milestone","O10 restructuring delay"],
+    "sector": ["S01 policy allocation","S02 financing constraint","S03 substitution demand","S04 supply shortage","S05 standard adoption","S06 transport interruption"],
+    "macro": ["M01 financing outlook","M02 demand shift","M03 financing tightening","M04 risk climate"],
+    "information": ["I01 rumor or advance notice","I02 verification or guidance","I03 disputed interpretation","I04 withdrawal or expiry"]
+  },
+  "chains": {
+    "C01":["I01","S01","O01","I02"],
+    "C02":["M01","S02","I02","O02"],
+    "C03":["O09","I03","O03","O04"],
+    "C04":["S04","O06","O05","I04"],
+    "C05":["M02","S03","O07","O08"],
+    "C06":["S05","O10","S06","I02"]
+  },
+  "p3Templates":["O01","O02","S01","S02","M01","M02","I01","I02"],
+  "p3Chains":["C01","C02"],
+  "contract":"Node references are allowed branches, not all nodes obligatorily applied. Each active contribution has unique effect ID and one primary channel. Negative branches use the same template."
+}

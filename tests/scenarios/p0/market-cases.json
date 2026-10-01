@@ -1,0 +1,13 @@
+{
+  "rulesVersion": "0.3.0",
+  "cases": [
+    {"id":"MI-A01","market":"A","kind":"favorable","source":"S01/O01","publicAt":{"playerDay":10,"batch":0},"resultAt":{"playerDay":18,"batch":4},"exposureQ":"600000000","priorQ":"80000000","resultQ":"100000000","cash":"1000000","sellable":1000,"expected":"event contribution 48000000 -> 60000000; funded buy intent may rise"},
+    {"id":"MI-A02","market":"A","kind":"favorable","source":"S01/O01","publicAt":{"playerDay":30,"batch":0},"resultAt":{"playerDay":35,"batch":0},"shockQ":"80000000","beneficiaryExposureQ":"600000000","substituteExposureQ":"-300000000","cash":"1000000","sellable":1000,"expected":"contributions +48000000/-24000000; one shared budget"},
+    {"id":"MI-A03","market":"A","kind":"failure","source":"I01/O01","publicAt":{"playerDay":50,"batch":0},"resultAt":{"playerDay":55,"batch":8},"priorOperatingIndex":110,"resultOperatingIndex":105,"cash":"1000000","sellable":0,"expected":"E rises but public forecast falls relative to prior version; A bought today remains locked"},
+    {"id":"MI-A04","market":"A","kind":"failure","source":"S01","publicAt":{"playerDay":70,"batch":4},"cash":"0","sellable":0,"buyLimit":1100,"sellLimit":1400,"expected":"funded buy quantity 0, no cross, no price update"},
+    {"id":"MI-B01","market":"B","kind":"favorable","source":"M01/S02","publicAt":{"playerDay":10,"batch":0},"effectiveAt":{"playerDay":15,"batch":0},"rateOutlookQ":"500000000","durationQ":"800000000","leverageQ":"400000000","cash":"1000000","sellable":1000,"expected":"B valuation log +64000000 vs A +16000000; operating g +40000 only after effectiveAt"},
+    {"id":"MI-B02","market":"B","kind":"favorable","source":"I02/O02","publicAt":{"playerDay":30,"batch":0},"resultAt":{"playerDay":38,"batch":0},"throughPlayerDay":58,"oneOffQ":"80000000","dailyGrowthQ":"400000","cash":"1000000","sellable":1000,"expected":"reported realized part removed; future part retained, periodic phase unchanged"},
+    {"id":"MI-B03","market":"B","kind":"failure","source":"M01 negative branch (M03 at P4)","publicAt":{"playerDay":50,"batch":0},"effectiveAt":{"playerDay":55,"batch":0},"rateOutlookQ":"-500000000","highDurationQ":"800000000","lowDurationQ":"200000000","cash":"1000000","sellable":1000,"expected":"valuation log -64000000/-16000000; only funded sell intent, no guaranteed exit"},
+    {"id":"MI-B04","market":"B","kind":"failure","source":"I01/I02","publicAt":{"playerDay":70,"batch":0},"expiresAt":{"playerDay":90,"batch":0},"rateOutlookQ":"500000000","cash":"1000000","sellable":1000,"expected":"expectation contribution expires to 0; no actual operating effect"}
+  ]
+}

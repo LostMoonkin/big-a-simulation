@@ -1,0 +1,3876 @@
+{
+  "rulesVersion": "0.3.0",
+  "contentVersion": "0.3.0",
+  "seed": 20261001,
+  "size": "prototype",
+  "industrySizeMatrix": {
+    "A": [
+      [
+        1,
+        2,
+        2
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1
+      ]
+    ],
+    "B": [
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        1
+      ],
+      [
+        0,
+        1,
+        1
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        1,
+        2
+      ],
+      [
+        1,
+        2,
+        2
+      ]
+    ]
+  },
+  "conceptTargets": {
+    "storage": 5,
+    "compute": 5,
+    "autonomy": 5,
+    "renewal": 5,
+    "automation": 5,
+    "recycling": 5,
+    "longevity": 4,
+    "crossborder": 4
+  },
+  "stocks": [
+    {
+      "id": "A001",
+      "name": "岚序A001",
+      "market": "A",
+      "sector": "energy",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 0,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "storage",
+          "exposureQ": 600000000,
+          "business": "储能组件与配套服务：energy"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "A002",
+      "name": "岚序A002",
+      "market": "A",
+      "sector": "energy",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 1,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "storage",
+          "exposureQ": 400000000,
+          "business": "储能组件与配套服务：energy"
+        },
+        {
+          "id": "crossborder",
+          "exposureQ": 400000000,
+          "business": "跨境物流与供货通道：energy"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "A003",
+      "name": "岚序A003",
+      "market": "A",
+      "sector": "energy",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 2,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "storage",
+          "exposureQ": 600000000,
+          "business": "储能组件与配套服务：energy"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "A004",
+      "name": "岚序A004",
+      "market": "A",
+      "sector": "energy",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 3,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "crossborder",
+          "exposureQ": 600000000,
+          "business": "跨境物流与供货通道：energy"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A005",
+      "name": "岚序A005",
+      "market": "A",
+      "sector": "energy",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 4,
+      "durationSensitivityQ": 400000000,
+      "concepts": [],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A006",
+      "name": "岚序A006",
+      "market": "A",
+      "sector": "industry",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 5,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "autonomy",
+          "exposureQ": 600000000,
+          "business": "自主生产与诊断工艺：industry"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "A007",
+      "name": "岚序A007",
+      "market": "A",
+      "sector": "industry",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 6,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "renewal",
+          "exposureQ": 400000000,
+          "business": "城市设施更新与运营：industry"
+        },
+        {
+          "id": "automation",
+          "exposureQ": 400000000,
+          "business": "自动作业设备与应用：industry"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "A008",
+      "name": "岚序A008",
+      "market": "A",
+      "sector": "industry",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 7,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "recycling",
+          "exposureQ": 600000000,
+          "business": "循环材料加工与回收：industry"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A009",
+      "name": "岚序A009",
+      "market": "A",
+      "sector": "industry",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 8,
+      "durationSensitivityQ": 400000000,
+      "concepts": [],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A010",
+      "name": "岚序A010",
+      "market": "A",
+      "sector": "consumer",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 9,
+      "durationSensitivityQ": 200000000,
+      "concepts": [
+        {
+          "id": "renewal",
+          "exposureQ": 600000000,
+          "business": "城市设施更新与运营：consumer"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "A011",
+      "name": "岚序A011",
+      "market": "A",
+      "sector": "consumer",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 10,
+      "durationSensitivityQ": 200000000,
+      "concepts": [
+        {
+          "id": "automation",
+          "exposureQ": 600000000,
+          "business": "自动作业设备与应用：consumer"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "A012",
+      "name": "岚序A012",
+      "market": "A",
+      "sector": "consumer",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 11,
+      "durationSensitivityQ": 200000000,
+      "concepts": [
+        {
+          "id": "recycling",
+          "exposureQ": 400000000,
+          "business": "循环材料加工与回收：consumer"
+        },
+        {
+          "id": "crossborder",
+          "exposureQ": 400000000,
+          "business": "跨境物流与供货通道：consumer"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A013",
+      "name": "岚序A013",
+      "market": "A",
+      "sector": "consumer",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 12,
+      "durationSensitivityQ": 200000000,
+      "concepts": [],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A014",
+      "name": "岚序A014",
+      "market": "A",
+      "sector": "infrastructure",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 13,
+      "durationSensitivityQ": 600000000,
+      "concepts": [
+        {
+          "id": "storage",
+          "exposureQ": 600000000,
+          "business": "储能组件与配套服务：infrastructure"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "A015",
+      "name": "岚序A015",
+      "market": "A",
+      "sector": "infrastructure",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 14,
+      "durationSensitivityQ": 600000000,
+      "concepts": [
+        {
+          "id": "compute",
+          "exposureQ": 600000000,
+          "business": "算能设备与供电扩建：infrastructure"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "A016",
+      "name": "岚序A016",
+      "market": "A",
+      "sector": "infrastructure",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 15,
+      "durationSensitivityQ": 600000000,
+      "concepts": [
+        {
+          "id": "storage",
+          "exposureQ": 600000000,
+          "business": "储能组件与配套服务：infrastructure"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A017",
+      "name": "岚序A017",
+      "market": "A",
+      "sector": "digital",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 16,
+      "durationSensitivityQ": 800000000,
+      "concepts": [],
+      "founderShares": 300000000
+    },
+    {
+      "id": "A018",
+      "name": "岚序A018",
+      "market": "A",
+      "sector": "digital",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 17,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "autonomy",
+          "exposureQ": 600000000,
+          "business": "自主生产与诊断工艺：digital"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "A019",
+      "name": "岚序A019",
+      "market": "A",
+      "sector": "health",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 18,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "autonomy",
+          "exposureQ": 400000000,
+          "business": "自主生产与诊断工艺：health"
+        },
+        {
+          "id": "longevity",
+          "exposureQ": 400000000,
+          "business": "长寿产品与数字诊疗：health"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "A020",
+      "name": "岚序A020",
+      "market": "A",
+      "sector": "health",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 19,
+      "durationSensitivityQ": 800000000,
+      "concepts": [],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B001",
+      "name": "岚序B001",
+      "market": "B",
+      "sector": "energy",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 0,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "recycling",
+          "exposureQ": 600000000,
+          "business": "循环材料加工与回收：energy"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "B002",
+      "name": "岚序B002",
+      "market": "B",
+      "sector": "energy",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 1,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "recycling",
+          "exposureQ": 400000000,
+          "business": "循环材料加工与回收：energy"
+        },
+        {
+          "id": "crossborder",
+          "exposureQ": 400000000,
+          "business": "跨境物流与供货通道：energy"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B003",
+      "name": "岚序B003",
+      "market": "B",
+      "sector": "industry",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 2,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "renewal",
+          "exposureQ": 600000000,
+          "business": "城市设施更新与运营：industry"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "B004",
+      "name": "岚序B004",
+      "market": "B",
+      "sector": "industry",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 3,
+      "durationSensitivityQ": 400000000,
+      "concepts": [
+        {
+          "id": "automation",
+          "exposureQ": 600000000,
+          "business": "自动作业设备与应用：industry"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "B005",
+      "name": "岚序B005",
+      "market": "B",
+      "sector": "industry",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 4,
+      "durationSensitivityQ": 400000000,
+      "concepts": [],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B006",
+      "name": "岚序B006",
+      "market": "B",
+      "sector": "consumer",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 5,
+      "durationSensitivityQ": 200000000,
+      "concepts": [
+        {
+          "id": "renewal",
+          "exposureQ": 600000000,
+          "business": "城市设施更新与运营：consumer"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "B007",
+      "name": "岚序B007",
+      "market": "B",
+      "sector": "consumer",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 6,
+      "durationSensitivityQ": 200000000,
+      "concepts": [
+        {
+          "id": "automation",
+          "exposureQ": 400000000,
+          "business": "自动作业设备与应用：consumer"
+        },
+        {
+          "id": "recycling",
+          "exposureQ": 400000000,
+          "business": "循环材料加工与回收：consumer"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B008",
+      "name": "岚序B008",
+      "market": "B",
+      "sector": "infrastructure",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 7,
+      "durationSensitivityQ": 600000000,
+      "concepts": [
+        {
+          "id": "compute",
+          "exposureQ": 600000000,
+          "business": "算能设备与供电扩建：infrastructure"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "B009",
+      "name": "岚序B009",
+      "market": "B",
+      "sector": "infrastructure",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 8,
+      "durationSensitivityQ": 600000000,
+      "concepts": [],
+      "founderShares": 300000000
+    },
+    {
+      "id": "B010",
+      "name": "岚序B010",
+      "market": "B",
+      "sector": "infrastructure",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 9,
+      "durationSensitivityQ": 600000000,
+      "concepts": [
+        {
+          "id": "compute",
+          "exposureQ": 600000000,
+          "business": "算能设备与供电扩建：infrastructure"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B011",
+      "name": "岚序B011",
+      "market": "B",
+      "sector": "infrastructure",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 10,
+      "durationSensitivityQ": 600000000,
+      "concepts": [
+        {
+          "id": "renewal",
+          "exposureQ": 600000000,
+          "business": "城市设施更新与运营：infrastructure"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B012",
+      "name": "岚序B012",
+      "market": "B",
+      "sector": "digital",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 11,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "compute",
+          "exposureQ": 400000000,
+          "business": "算能设备与供电扩建：digital"
+        },
+        {
+          "id": "automation",
+          "exposureQ": 400000000,
+          "business": "自动作业设备与应用：digital"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "B013",
+      "name": "岚序B013",
+      "market": "B",
+      "sector": "digital",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 12,
+      "durationSensitivityQ": 800000000,
+      "concepts": [],
+      "founderShares": 300000000
+    },
+    {
+      "id": "B014",
+      "name": "岚序B014",
+      "market": "B",
+      "sector": "digital",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 13,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "longevity",
+          "exposureQ": 600000000,
+          "business": "长寿产品与数字诊疗：digital"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B015",
+      "name": "岚序B015",
+      "market": "B",
+      "sector": "digital",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 14,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "compute",
+          "exposureQ": 600000000,
+          "business": "算能设备与供电扩建：digital"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B016",
+      "name": "岚序B016",
+      "market": "B",
+      "sector": "health",
+      "tier": "large",
+      "initialPrice": 1000,
+      "totalShares": 1200000000,
+      "floatShares": 480000000,
+      "reportPhase": 15,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "longevity",
+          "exposureQ": 600000000,
+          "business": "长寿产品与数字诊疗：health"
+        }
+      ],
+      "founderShares": 720000000
+    },
+    {
+      "id": "B017",
+      "name": "岚序B017",
+      "market": "B",
+      "sector": "health",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 16,
+      "durationSensitivityQ": 800000000,
+      "concepts": [],
+      "founderShares": 300000000
+    },
+    {
+      "id": "B018",
+      "name": "岚序B018",
+      "market": "B",
+      "sector": "health",
+      "tier": "medium",
+      "initialPrice": 1000,
+      "totalShares": 500000000,
+      "floatShares": 200000000,
+      "reportPhase": 17,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "autonomy",
+          "exposureQ": 600000000,
+          "business": "自主生产与诊断工艺：health"
+        }
+      ],
+      "founderShares": 300000000
+    },
+    {
+      "id": "B019",
+      "name": "岚序B019",
+      "market": "B",
+      "sector": "health",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 18,
+      "durationSensitivityQ": 800000000,
+      "concepts": [
+        {
+          "id": "autonomy",
+          "exposureQ": 400000000,
+          "business": "自主生产与诊断工艺：health"
+        },
+        {
+          "id": "longevity",
+          "exposureQ": 400000000,
+          "business": "长寿产品与数字诊疗：health"
+        }
+      ],
+      "founderShares": 48000000
+    },
+    {
+      "id": "B020",
+      "name": "岚序B020",
+      "market": "B",
+      "sector": "health",
+      "tier": "small",
+      "initialPrice": 1000,
+      "totalShares": 80000000,
+      "floatShares": 32000000,
+      "reportPhase": 19,
+      "durationSensitivityQ": 800000000,
+      "concepts": [],
+      "founderShares": 48000000
+    }
+  ],
+  "wallets": [
+    {
+      "id": "A:repairValue",
+      "market": "A",
+      "role": "repairValue",
+      "cash": "76293440750",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 41797069,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 16811614,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 17622018,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2683683,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2643753,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 39932051,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 17110204,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2607787,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2712799,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 41853694,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 17170170,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2600763,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2592290,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 38062935,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 17232904,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2693588,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 16649851,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2698147,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 16935179,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2763264,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:allocationValue",
+      "market": "A",
+      "role": "allocationValue",
+      "cash": "75621561750",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 40998654,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 16654822,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 16457493,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2668140,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2632691,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 40774837,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 16212245,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2733338,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2566663,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 39068829,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 16913898,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2704357,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2733146,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 40907638,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 16816650,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2688000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 17116981,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2692612,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 16562085,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2583168,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:longValue",
+      "market": "A",
+      "role": "longValue",
+      "cash": "75388997500",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 38164277,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 16933564,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 16320489,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2712177,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2787556,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 40253112,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 17077551,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2722875,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2784538,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 40037477,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 16315932,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2758880,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2738564,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 41989427,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 16350446,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2682412,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 16633168,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2673241,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 16902736,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2717568,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:shortTrend",
+      "market": "A",
+      "role": "shortTrend",
+      "cash": "72674060250",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 38899087,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 16317904,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 16134146,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2548112,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2512895,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 38019477,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 16080472,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2530730,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2559475,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 38991724,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 16134280,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2677280,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2548292,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 38346314,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 16122414,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2680199,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 15955382,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2569275,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 16518898,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2549885,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:swingTrend",
+      "market": "A",
+      "role": "swingTrend",
+      "cash": "73449939750",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 38860913,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 16082096,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 16265854,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2635888,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2671105,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 39740523,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 16319528,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2653270,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2624525,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 38768276,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 16265720,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2506720,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2635708,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 39413686,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 16277586,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2503801,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 16444618,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2614725,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 15881102,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2634115,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:eventTheme",
+      "market": "A",
+      "role": "eventTheme",
+      "cash": "81297479250",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 42703944,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 17865067,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 17751234,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2984833,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2953412,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 43730604,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 18457478,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2840587,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2839396,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 43372627,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 17620029,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2896842,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2856450,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 43623945,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 17868613,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2814867,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 18171773,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2943108,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 18017910,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2877198,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:allocationTheme",
+      "market": "A",
+      "role": "allocationTheme",
+      "cash": "81062520750",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 43696056,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 18134933,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 18248766,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2775167,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2806588,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 42669396,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 17542522,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2919413,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2920604,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 43027373,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 18379971,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2863158,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2903550,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 42776055,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 18131387,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2945133,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 17828227,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2816892,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 17982090,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2882802,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:inventory1",
+      "market": "A",
+      "role": "inventory1",
+      "cash": "52557712250",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 29025267,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 12126363,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 11605645,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 1926640,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 1817225,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 27763567,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 11864458,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 1871537,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 1829994,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 27775685,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 11262780,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 1812981,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 1849177,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 27837633,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 11734718,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 1855016,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 11243243,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 1769589,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 11395406,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 1863925,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:inventory2",
+      "market": "A",
+      "role": "inventory2",
+      "cash": "53380129000",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 29053069,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 11514753,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 11617439,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 1917457,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 1811702,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 28451465,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 11829217,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 1917817,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 1886611,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 28992946,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 11402691,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 1901509,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 1880255,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 28308518,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 11213947,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 1968242,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 12133334,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 1933816,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 11980704,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 1805024,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:inventory3",
+      "market": "A",
+      "role": "inventory3",
+      "cash": "52785546750",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 26995723,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 11761749,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 11853327,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 1827461,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 1925854,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 28864204,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 11535542,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 1840067,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 1910353,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 27886345,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 12055605,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 1849868,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 1893852,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 28557810,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 12116617,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 1870113,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 11243243,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 1874768,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 11383461,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 1896225,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:inventory4",
+      "market": "A",
+      "role": "inventory4",
+      "cash": "52344612000",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 27245941,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 11397135,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 11723589,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 1816442,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 1933219,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 27240764,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 11570783,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 1858579,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 1861042,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 27665024,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 12078924,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 1923642,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 1864716,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 27616039,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 11734718,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 1794629,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 12180180,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 1909827,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 12040429,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 1922826,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "A:noise",
+      "market": "A",
+      "role": "noise",
+      "cash": "64944000000",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 34560000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 14400000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 14400000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 34560000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 14400000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 34560000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 14400000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 34560000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 14400000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 14400000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 2304000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 14400000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 2304000,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:repairValue",
+      "market": "B",
+      "role": "repairValue",
+      "cash": "109231930750",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 22857518,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 3757714,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 57099653,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 24064429,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 3951783,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 24326214,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 3911459,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 58950595,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 23703506,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 3809980,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 3833559,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 59878854,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 24207516,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 3832320,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 3897508,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 59344880,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 24234264,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 23416638,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 3893351,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 3955982,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:allocationValue",
+      "market": "B",
+      "role": "allocationValue",
+      "cash": "108603845250",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 24393959,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 3992816,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 58000278,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 23774497,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 3696460,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 23766990,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 3892654,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 56782034,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 24352588,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 3841305,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 3895391,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 56519509,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 24566678,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 3997440,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 3803404,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 59060388,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 23701111,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 24649093,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 3863573,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 3865213,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:longValue",
+      "market": "B",
+      "role": "longValue",
+      "cash": "106884224000",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 24748523,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 3769470,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 57700069,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 24161074,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 3871757,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 23906796,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 3715887,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 57067371,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 23943906,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 3868715,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 3791050,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 56401637,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 23225806,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 3690240,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 3819088,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 54394732,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 24064625,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 23934269,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 3763076,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 3698805,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:shortTrend",
+      "market": "B",
+      "role": "shortTrend",
+      "cash": "65131422500",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 13686843,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 2258690,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 33937752,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 14929096,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 2279124,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 14677766,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 2247195,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 34760930,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 14591607,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 2308840,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 2289600,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 35405505,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 14330636,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 2276241,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 2221024,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 34370583,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 14464897,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 14738650,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 2364878,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 2385833,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:swingTrend",
+      "market": "B",
+      "role": "swingTrend",
+      "cash": "64756577500",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 15113157,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 2349310,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 35182248,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 13870904,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 2328876,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 14122234,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 2360805,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 34359070,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 14208393,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 2299160,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 2318400,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 33714495,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 14469364,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 2331759,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 2386976,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 34749417,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 14335103,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 14061350,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 2243122,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 2222167,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:eventTheme",
+      "market": "B",
+      "role": "eventTheme",
+      "cash": "49223139250",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 11061818,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1685128,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 26322484,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 10914672,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1772741,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1744134,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 27019950,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 10862428,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1704800,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1653398,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 26206553,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 10746482,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1708118,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1757583,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 26433920,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 10514344,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 10507810,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1733028,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1743166,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:allocationTheme",
+      "market": "B",
+      "role": "allocationTheme",
+      "cash": "48192860750",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 10538182,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1770872,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 25517516,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 10685328,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1683259,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1711866,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 24820050,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 10737572,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1751200,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1802602,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 25633447,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 10853518,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1747882,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1698417,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 25406080,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 11085656,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 11092190,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1722972,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1712834,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:inventory1",
+      "market": "B",
+      "role": "inventory1",
+      "cash": "52423400000",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 11494330,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1810998,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 27940020,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 12040217,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1909605,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 11477922,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1928613,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 27930978,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 12262726,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1836329,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1852432,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 26631429,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 11935731,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1881105,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1821048,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 27937324,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 11736074,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 11440260,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1889907,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1936552,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:inventory2",
+      "market": "B",
+      "role": "inventory2",
+      "cash": "53121479500",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 11123545,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1870094,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 27940020,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 12040217,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1808713,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 12132468,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1834258,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 28441911,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 11254509,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1930833,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1913931,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 28887857,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 11935731,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1842864,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1856903,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 28236264,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 11615827,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 12070641,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1911947,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1837385,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:inventory3",
+      "market": "B",
+      "role": "inventory3",
+      "cash": "52888887000",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 12131617,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1912032,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 28387956,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 11255988,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1904102,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 11209091,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1845581,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 28555451,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 11606212,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1840036,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1820751,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 28191428,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 11494108,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1899315,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1841807,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 28290617,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 11603803,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 12105662,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1787055,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1872936,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:inventory4",
+      "market": "B",
+      "role": "inventory4",
+      "cash": "52634233500",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 12050508,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1894876,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 28052004,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 11463578,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1865580,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 11980519,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1879548,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 27391660,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 11676553,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1880802,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1900886,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 28609286,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 11434430,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1864716,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1968242,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 27855795,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 11844296,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 11183437,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1899091,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1841127,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "B:noise",
+      "market": "B",
+      "role": "noise",
+      "cash": "48708000000",
+      "holdings": [
+        {
+          "stockId": "B001",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 25920000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 25920000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 25920000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 25920000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 10800000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1728000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1728000,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "cross:swing",
+      "market": "both",
+      "role": "crossSwing",
+      "cash": "90200000000",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B001",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1600000,
+          "unlockTick": 0
+        }
+      ]
+    },
+    {
+      "id": "cross:long",
+      "market": "both",
+      "role": "crossLong",
+      "cash": "90200000000",
+      "holdings": [
+        {
+          "stockId": "A001",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A002",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A003",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A004",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A005",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A006",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A007",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A008",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A009",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A010",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A011",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A012",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A013",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A014",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A015",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A016",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A017",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A018",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A019",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "A020",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B001",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B002",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B003",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B004",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B005",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B006",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B007",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B008",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B009",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B010",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B011",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B012",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B013",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B014",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B015",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B016",
+          "quantity": 24000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B017",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B018",
+          "quantity": 10000000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B019",
+          "quantity": 1600000,
+          "unlockTick": 0
+        },
+        {
+          "stockId": "B020",
+          "quantity": 1600000,
+          "unlockTick": 0
+        }
+      ]
+    }
+  ],
+  "serviceCash": "0",
+  "playerInjected": false
+}

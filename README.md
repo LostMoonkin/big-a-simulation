@@ -26,13 +26,15 @@ npm run preview
 
 `check`执行全部工作区的类型检查并构建Web；产物在`apps/web/dist/`。`preview`用静态构建在`http://127.0.0.1:4173`预览，需要先构建，不等同于公网部署。
 
-单独的`npm run typecheck`可快速检查类型。已有设计检查用`npm run check:design`执行，需要Python 3标准库。当前没有业务行为测试，也没有`npm test`、`verify:pN`或市场回放命令；这些随对应阶段实现，不用空测试冒充市场验证。
+单独的`npm run typecheck`可快速检查类型。`npm run check:design`需要Python3标准库。P0现已交付数值/接口合同、完整配额样本和独立图表/Worker技术试验，待独立验收：[P0记录](docs/verification/p0-baseline.md)。`npm run verify:p0`用Node与Python Decimal核验设计/数值/样本；`npm run fixtures:p0`可重建配额/种子，`npm run probe:p0`只在有意更新数值协议时重录黄金。静态预览`/p0-probe.html`及`node tools/p0/browser-probe.mjs`提供真实浏览器复现。P0不包含市场模拟；`npm test`与生产回放仍随P1实施。
 
 ## 目录
 
 ```text
 apps/web/                  浏览器应用、样式与Vite配置
-packages/sim-core/         纯TypeScript核心占位，暂无交易API
+packages/sim-core/         纯TypeScript数值/接口合同，P1尚未实施交易
+tools/p0/                 P0配额、数值、浏览器能力试验与核验
+tests/scenarios/p0/        冻结配置、种子和合同场景
 tools/design-checks/       设计算术脚本，不是游戏模拟器
 docs/design/               玩法、精确规则和模型验证
 docs/research/             可行性与技术研究
@@ -43,7 +45,7 @@ AGENTS.md                  后续开发的协作与实现约定
 CONTEXT.md                 领域词汇
 ```
 
-按真实功能需要再增加CLI、Worker、IndexedDB、图表和测试；当前不建立通用插件层、服务端或多个行情实现。生成的依赖、构建、实验大文件和个人存档由`.gitignore`排除；源码、锁文件、规格和可复现证据说明进入版本管理。
+P0试验锁定KLineChart9.8.12和单Dedicated Worker，正式CLI、NPC/交易、IndexedDB随责任阶段实现。生成的依赖、构建、实验大文件和个人存档由`.gitignore`排除；源码、锁文件、规格和必要小证据进入版本管理。
 
 ## 开发入口
 

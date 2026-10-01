@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@big-a/sim-core": "0.0.0",
+    "klinecharts": "9.8.12",
     "react": "19.3.0",
     "react-dom": "19.3.0"
   },
