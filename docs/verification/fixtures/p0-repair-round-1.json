@@ -1,9 +1,9 @@
 {
   "phase": "p0",
   "status": "implementation-fix-awaiting-independent-round-2",
-  "recordedAt": "2026-10-01T14:25:10.420Z",
+  "recordedAt": "2026-10-01T14:30:03.316Z",
   "repairsAcceptanceCommit": "2859420",
-  "testedSourceHash": "fa24f1310d6eeb482b078ad1df21c8881f9669d76c7778709af32a4ca636ca4d",
+  "testedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
   "sourceFiles": [
     "apps/web/p0-probe.html",
     "apps/web/package.json",
@@ -40,7 +40,7 @@
     "tools/p0/verify.mjs",
     "tsconfig.base.json"
   ],
-  "sourceCommitBeforeChecks": "0f23213e8bdb99698bc0428f0cffa54bb595179a",
+  "sourceCommitBeforeChecks": "d23eb5ed852fcf4112cc98e6b797ddee1a6189e2",
   "sourceBinding": "sourceHash binds the actual working source; before-check HEAD is historical, not presented as the tested implementation commit",
   "rulesVersion": "0.3.1",
   "contentVersion": "0.3.1",
@@ -113,6 +113,24 @@
     },
     {
       "command": "node --input-type=module (stdin: recompute final sourceHash binding)",
+      "exitCode": 0
+    },
+    {
+      "command": "node --input-type=module (stdin: compare Git blob sourceHash after implementation commit)",
+      "exitCode": 1,
+      "scope": "source-binding diagnostic; no behavior test failed",
+      "workingSourceHash": "fa24f1310d6eeb482b078ad1df21c8881f9669d76c7778709af32a4ca636ca4d",
+      "committedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
+      "onlyDifference": "tools/p0/browser-probe.mjs had one CRLF byte normalized by repository eol=lf",
+      "resolution": "Working driver bytes normalized to existing committed LF form; no source-content/Git diff. Final verify:p0 rerun and Git blob binding passed."
+    },
+    {
+      "command": "npm run verify:p0 (working bytes aligned with committed LF)",
+      "exitCode": 0,
+      "checks": 19
+    },
+    {
+      "command": "node --input-type=module (stdin: bind final Git blob sourceHash)",
       "exitCode": 0
     }
   ],
@@ -551,5 +569,7 @@
     "P5 final four desktop browsers/mobile/target players/performance"
   ],
   "scope": "Minimal P0 B01-B04 contract fixes and affected numeric/Worker checks only. No production engine, economic, performance or independent phase-pass claim.",
-  "b02ImplementationCommit": "0f23213e8bdb99698bc0428f0cffa54bb595179a"
+  "b02ImplementationCommit": "0f23213e8bdb99698bc0428f0cffa54bb595179a",
+  "committedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
+  "implementationCommit": "d23eb5e"
 }

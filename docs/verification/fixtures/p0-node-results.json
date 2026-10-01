@@ -1,8 +1,8 @@
 {
   "manifest": {
     "phase": "p0",
-    "recordedAt": "2026-10-01T14:25:09.550Z",
-    "testedSourceHash": "fa24f1310d6eeb482b078ad1df21c8881f9669d76c7778709af32a4ca636ca4d",
+    "recordedAt": "2026-10-01T14:30:01.430Z",
+    "testedSourceHash": "aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f",
     "sourceFiles": [
       "apps/web/p0-probe.html",
       "apps/web/package.json",
@@ -39,7 +39,7 @@
       "tools/p0/verify.mjs",
       "tsconfig.base.json"
     ],
-    "baseCommit": "0f23213e8bdb99698bc0428f0cffa54bb595179a",
+    "baseCommit": "d23eb5ed852fcf4112cc98e6b797ddee1a6189e2",
     "rulesVersion": "0.3.1",
     "contentVersion": "0.3.1",
     "schemaVersion": 1,

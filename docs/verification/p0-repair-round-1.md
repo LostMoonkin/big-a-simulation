@@ -19,6 +19,6 @@
 - `node tools/p0/browser-probe.mjs http://127.0.0.1:4173/p0-probe.html "C:/Program Files/Google/Chrome/Application/chrome.exe" artifacts/verification/p0/repair-round-1/browser-release`：真实Chrome154.0.8037.58，11项pass，新黄金与当次Node及真实Worker逐字段一致。
 - `npm run verify:p0`：最终整合后的19项设计/数值/样本自检pass，包含13随机键、6结果draw、5分支与9公开版本，sourceHash见小证据；不作为生产引擎或阶段独立验收。
 
-协作B02两文件提交为 `0f23213e8bdb99698bc0428f0cffa54bb595179a`。首次19项pass后，一次源码绑定诊断检出了协作文件的最后文本/样本修订；没有沿用旧hash。待两文件稳定提交后只重跑受影响的verify:p0，最终19项pass且重新计算hash一致；未重跑无新改动的构建/浏览器。最终受测源码hash为 `fa24f1310d6eeb482b078ad1df21c8881f9669d76c7778709af32a4ca636ca4d`，执行时HEAD仅作为baseCommit记录，不能代表当时尚未提交的整合代码。
+协作B02两文件提交为 `0f23213e8bdb99698bc0428f0cffa54bb595179a`，整合实施提交为 `d23eb5e`。首次19项pass后，一次源码绑定诊断检出了协作文件的最后文本/样本修订；没有沿用旧hash。提交后Git blob绑定又定位到既有browser driver的一个CRLF字节，工作区已按仓库eol=lf与实际提交字节对齐（源码内容/Git diff未变）。只重跑受影响的verify:p0，最终19项pass，工作区和提交源码hash均为 `aad4d9476f6217c8a01b6a5ac17d965b7227edaf5659b19957d6062d5e32905f`；未重跑无新改动的构建/浏览器。诊断exit1和各次结果保存在小证据中；执行时HEAD仍单列为baseCommit。
 
 P1生产账本/恢复、P2自然100+10种子经济与60日游戏、P3事件/策略、P4真实250日预热快照与持久存档、P5最终性能/兼容与目标玩家仍为not_run，并按原阶段责任保留。当前待第2轮独立验收，无新增确认请求。
