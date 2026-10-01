@@ -7,7 +7,7 @@ export default defineConfig({
   base: './',
   build: {
     rolldownOptions: {
-      input: { app: resolve(import.meta.dirname, 'index.html'), p0: resolve(import.meta.dirname, 'p0-probe.html') },
+      input: { app: resolve(import.meta.dirname, 'index.html'), p0: resolve(import.meta.dirname, 'p0-probe.html'), p1: resolve(import.meta.dirname, 'p1-probe.html') },
     },
   },
   server: {

@@ -1,6 +1,6 @@
 # P1 实施计划 — 无界面交易验收包
 
-状态：未开始。范围与验收以 [Spec](./spec.md) 为准，交付顺序见 [Tickets](./tasks.md)。
+状态：已实施，待独立验收。范围与验收以 [Spec](./spec.md) 为准，交付顺序见 [Tickets](./tasks.md)，实际证据见 [实施报告](../../verification/p1-implementation.md)。
 
 ## 进入条件
 
@@ -71,11 +71,12 @@
 
 ## 核验命令与证据
 
-以下为待实现的脚本约定，成功执行前不得标记为已存在或已通过：
+以下脚本已落地；Windows PowerShell 用 `npm.cmd` 转发 `--`。实际执行结果与源码身份见实施报告，命令存在不授予阶段通过：
 
 ```text
 npm run verify:p1 -- --out artifacts/verification/p1/<run-id>
 npm run sim:replay -- --input <fixture-or-snapshot> --commands <commands.json> --out <output-dir>
+npm run sim:replay -- --input tests/scenarios/p1/cases.json --case A01 --out <output-dir>
 ```
 
 每个验收包包含 `manifest.json`（源码/规则/参数版本、运行端、输入种子、命令）、`summary.md`、机器可读场景结果、守恒结果、回放比较、关键输入和快照。大日志按失败种子和代表成功样例保留，摘要必须覆盖所有实际运行用例。

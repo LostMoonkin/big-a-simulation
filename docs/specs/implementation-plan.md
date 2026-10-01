@@ -83,7 +83,7 @@ P2的基准配置保留26个钱包、原有钱股、容量和非技术行为；�
 | `npm ci`、`npm run typecheck`、`npm run build` | 工程初始化已提供 | 安装锁定依赖、检查与构建占位应用；不代表市场实现，网络安装耗时不计游戏启动 |
 | `npm run dev`、`npm run preview` | 工程初始化已提供 | 启动开发页面或预览静态构建；P2再接入真实Web原型 |
 | `npm run check`、`npm run check:design` | 工程初始化已提供 | 前者类型检查并构建；后者单独执行已有Python设计算术核验 |
-| `npm test` | P1，待实现 | 首批实际交易行为测试落地时引入，不用空测试或Python脚本替代 |
+| `npm test` | P1，已落地 | 实际生产核心固定/随机交易、恢复、CLI和已记录Worker证据核验；独立阶段验收另行记录 |
 | `npm run verify:pN -- --out <dir>` | 相应P1–P6 | 执行本阶段验证集合，退出码反映硬性失败或必要证据缺失 |
 | `npm run sim:replay -- --input <file> --commands <file> --out <dir>` | P1 | 固定场景/快照重放及状态hash对照 |
 | `npm run sim:batch -- --manifest <file> --out <dir>` | P2 | 严格按指定种子/版本/时长运行，不挑成功样本 |

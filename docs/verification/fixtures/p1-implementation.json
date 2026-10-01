@@ -1,0 +1,969 @@
+{
+  "format": "p1-implementation-evidence-v1",
+  "stage": "P1",
+  "status": "implementation checks passed; pending first independent acceptance",
+  "recordedAt": "2026-10-01T15:42:49.816Z",
+  "testedHead": "04d30f992fad60810fc70c75ce0500529ad03405",
+  "productionCommits": [
+    "ead43ed",
+    "04d30f9"
+  ],
+  "sourceHash": "e33076dca0eff5591467a35057fe05e0c2385fdc882e8085e31bb9e6010089bd",
+  "sourceAlgorithm": "sha256(sorted path + NUL + raw-byte sha256 + LF)",
+  "sourceFiles": [
+    {
+      "path": "apps/web/p1-probe.html",
+      "sha256": "86ad9fadf0ce0d41d08bf9625ca013a8e7fae80c2d81c48418cb620277d6ce0b"
+    },
+    {
+      "path": "apps/web/src/p1-probe.ts",
+      "sha256": "63d6035125fc33a5648a8fbeaa6cf1da891f19da1ac7da13808c031a3f3c4f70"
+    },
+    {
+      "path": "apps/web/src/p1-worker.ts",
+      "sha256": "389412997648be035f0be9eb60ae5adc80a7e5d7c5e51d771f96b624eb026314"
+    },
+    {
+      "path": "apps/web/vite.config.ts",
+      "sha256": "0efbbf1bb8ac3b7b25920d26dffe483fe35e77be900eeb4680d2fd63a6ed4060"
+    },
+    {
+      "path": "package-lock.json",
+      "sha256": "59a2b33ca44a7f29361d948ec0e0f170a8473d5ee5141fb40df4b00c78691e72"
+    },
+    {
+      "path": "package.json",
+      "sha256": "9b64a7af425b78e16b7f0e0f37dc8e975b8f973f18475643bc0f76d7f2d08c60"
+    },
+    {
+      "path": "packages/sim-core/src/auction.ts",
+      "sha256": "9401950627b9d5c1da34204ef4cb5569eed0556bf7609d022ba542f8e4938289"
+    },
+    {
+      "path": "packages/sim-core/src/contracts.ts",
+      "sha256": "9ee55cfec31b28fac606ae0b9f7544443ef83cabe839f5b13a25f7801dfe2906"
+    },
+    {
+      "path": "packages/sim-core/src/hash.ts",
+      "sha256": "f4d751d6ef9729901b71cd6191c92b893182774b1fbd3fcdadef84808b2406bd"
+    },
+    {
+      "path": "packages/sim-core/src/index.ts",
+      "sha256": "51dcb7fb78e511c69b4163c83be2c8a2c2f3c44cf341ceea8611eb59b541f622"
+    },
+    {
+      "path": "packages/sim-core/src/numeric.ts",
+      "sha256": "8522bd46c06bbbe7aad9374a0df3d3671eb7998588aa13e71467fc70f756c05f"
+    },
+    {
+      "path": "packages/sim-core/src/state.ts",
+      "sha256": "6a7838facf7fedf860d4993dd58c01f28fb0b787d81d99d95cfe5c780986694b"
+    },
+    {
+      "path": "packages/sim-core/src/trading-core.ts",
+      "sha256": "8d48841705be12ad3a66e2ea530badfb6e512d45fcd83494cce474df7a39c88a"
+    },
+    {
+      "path": "packages/sim-core/src/trading-types.ts",
+      "sha256": "f02e9f40ef50a64d1b61582d264e617034e16f1afbbcdc88776c32d22027274b"
+    },
+    {
+      "path": "tests/replays/a06-after-buy.json",
+      "sha256": "88517db22b87346f7cd5577f35bd2f43b97624642011ad718c52c03ad81c244f"
+    },
+    {
+      "path": "tests/replays/a09-reserved.json",
+      "sha256": "086e993880042d8a62cf22205a06ef62c902932efdfccbd79195ff5840794b71"
+    },
+    {
+      "path": "tests/replays/a12-public-decision.json",
+      "sha256": "0b47aba4bf9c6fadc2e7e856bd0861b96513064a02a19c79dd0ad3702374687b"
+    },
+    {
+      "path": "tests/replays/p1-golden.json",
+      "sha256": "b9c5f389067e6f4eec919a11657ea4eee6c9116d4e0963a3b32be78cf913132c"
+    },
+    {
+      "path": "tests/replays/protection-a-empty-pending.json",
+      "sha256": "5c77e1a7441fac5b109adb50e6e6a61f0dc85f3b4d9828d0efbd149221775eee"
+    },
+    {
+      "path": "tests/scenarios/p1/cases.json",
+      "sha256": "88de0c762097e756ed256270fa138d16fb0a65a3aa0fdad084a10947ac6b320f"
+    },
+    {
+      "path": "tests/scenarios/p1/random-seeds.json",
+      "sha256": "49c2f41e0c2a1a2893a1fea21f5f4668cd3607dd5caea4c29d1e879afc826b2f"
+    },
+    {
+      "path": "tools/sim-runner/README.md",
+      "sha256": "02823ea054dc7431ff5c76a1c20b305670f59affc007023e9882e4f5ac41f918"
+    },
+    {
+      "path": "tools/sim-runner/auction-check.mjs",
+      "sha256": "90398ade4fdb5109e70bf7a9f5c005da26cbef0d8159484fd910e99f9bf006a6"
+    },
+    {
+      "path": "tools/sim-runner/browser-probe.mjs",
+      "sha256": "62a4939210a52a57e4ddb0222a3cea4f3ba2f14caa9abd671df0e12ae7a5fd1e"
+    },
+    {
+      "path": "tools/sim-runner/checks.mjs",
+      "sha256": "48e74c920b71b4541253ac3a36bcadacba1b5d68f6fbc9127e7604dc420463f3"
+    },
+    {
+      "path": "tools/sim-runner/cli-check.mjs",
+      "sha256": "b370b80d5834e6a37f33bc0b0f8949454f71992f7806211eed2198611559192d"
+    },
+    {
+      "path": "tools/sim-runner/cli.mjs",
+      "sha256": "8c367a52db0aae7732ea1109968df212101bdd73bafa509118c5fcb645ea42e0"
+    },
+    {
+      "path": "tools/sim-runner/generate-fixtures.mjs",
+      "sha256": "c55dfd39a46a8b5c677665c5541ebfbf21ff6467ff01fdb0fb7d0c1c1b5a6e10"
+    },
+    {
+      "path": "tools/sim-runner/record-browser.mjs",
+      "sha256": "7f39a20084b617382bdcda09b7f78e8fe076828c4a0c53cabb43375a9d83afcb"
+    },
+    {
+      "path": "tools/sim-runner/record-golden.mjs",
+      "sha256": "950f3095d23069e32f53e5aef6e835158427d95906e12dc3fcbb8f491761f615"
+    },
+    {
+      "path": "tools/sim-runner/reference-auction.mjs",
+      "sha256": "8f91c13e868291c5cf3c0808913fa431a842fc321345f458bf06535ff73aed41"
+    },
+    {
+      "path": "tools/sim-runner/replay.ts",
+      "sha256": "63bcdc45b582719924cc23d185b354d5d14fd872893d2155bcf1e8cd26a980a8"
+    },
+    {
+      "path": "tools/sim-runner/runtime.mjs",
+      "sha256": "15f1091022d673f84bf09a28ea91203795c87b694e14c0d037f05bcc9d5adec1"
+    },
+    {
+      "path": "tools/sim-runner/verify.mjs",
+      "sha256": "f306f0949565ad0881cf0a57e4186d5b8da7f9eb021e664cd5ba697c5a8b93be"
+    }
+  ],
+  "versions": {
+    "rules": "0.3.1",
+    "content": "0.3.1",
+    "math": "fixed-q9-v1",
+    "rng": "rng-v1",
+    "schema": 1
+  },
+  "rulesHash": "984643e65e26133e232effdc9e8131aeca0d11fb4073659711991c6a6b33a1d8",
+  "fixturesHash": "88de0c762097e756ed256270fa138d16fb0a65a3aa0fdad084a10947ac6b320f",
+  "seedsHash": "49c2f41e0c2a1a2893a1fea21f5f4668cd3607dd5caea4c29d1e879afc826b2f",
+  "runtime": {
+    "node": "v26.7.0",
+    "platform": "win32",
+    "architecture": "x64"
+  },
+  "actualCommand": "npm.cmd run verify:p1 -- --out artifacts/verification/p1/delivery-node",
+  "exitCode": 0,
+  "groups": [
+    {
+      "id": "auction-reference",
+      "status": "pass"
+    },
+    {
+      "id": "fixed-core-replays",
+      "status": "pass"
+    },
+    {
+      "id": "funded-random-core",
+      "status": "pass"
+    },
+    {
+      "id": "command-and-snapshot-boundaries",
+      "status": "pass"
+    },
+    {
+      "id": "resume-and-granularity",
+      "status": "pass"
+    },
+    {
+      "id": "recorded-node-golden",
+      "status": "pass"
+    },
+    {
+      "id": "saved-snapshot-replays",
+      "status": "pass"
+    },
+    {
+      "id": "cli-success-and-failure",
+      "status": "pass"
+    },
+    {
+      "id": "actual-browser-evidence",
+      "status": "pass"
+    }
+  ],
+  "fixed": {
+    "cases": [
+      {
+        "id": "A01",
+        "ac": [
+          1,
+          2,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "147618e7794ba9058bbe8a4cf4d68012f724dc4251cacf6f47b97c1b11d5dc17",
+        "checksum": "1efc068251159f8983a5ca69b5657781009f7a80e76f2233b122a878754463ab",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A02",
+        "ac": [
+          1,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "241fc1b81637148598ef277b7e125b707052480019fd2eeb5a0dbffdf3bd997d",
+        "checksum": "21998721d9f31c75433089e167f06f32f5b55c65ad5b40a94c1d450aca2d1308",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A03",
+        "ac": [
+          1,
+          4,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "6a30d3a5be75fdab0e6ecaecbc2d1d254e94ffafa76574a7aa0bf86977e8f9cc",
+        "checksum": "6240657968be80e970defa300b98da2519cfde252a9f57e3e6f8e17aa384c979",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A04",
+        "ac": [
+          1,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "c2393d79ce6b6f486d1f12d4ab5b2a057f42dfcde2d402e45296e5cfd408ae40",
+        "checksum": "cd1d73b0ecb431ad48aef000e0ae5d133a1162742a5c9c50e1dfeaebaacb1974",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A05",
+        "ac": [
+          1,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "509623937e71f102a2b27a395871319db2321925b9f337bbc34d436930c316cf",
+        "checksum": "948a5a1b5d8b073fcd15c8ff90d6e7c4ecebcf6fef5e2f57f6cc1146d38b1160",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A06",
+        "ac": [
+          3,
+          5
+        ],
+        "status": "pass",
+        "batches": 16,
+        "stateHash": "403751f9d66fea76081ac0869a6b2046cadf314a11b66918052ff3196100070d",
+        "checksum": "b3f80e818c43f6ea24325ff0bb7a5a3fd2cef6a8aac40e5a0a16aec59484bd04",
+        "checkpointLabels": [
+          "after-buy",
+          "before-open",
+          "after-unlock"
+        ]
+      },
+      {
+        "id": "SETTLEMENT-B",
+        "ac": [
+          3,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "c3856722371717d49243cfb321d0e55446c851845bc4642d1e0259a1c17d63b7",
+        "checksum": "b57b73ae4665ad04e38e5f8815acbf926bddf3f69f19e9896dd09c0b94d1c801",
+        "checkpointLabels": [
+          "after-buy",
+          "after-unlock"
+        ]
+      },
+      {
+        "id": "A07",
+        "ac": [
+          2,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "b9528edd51520bd72a9cbc8da13c8f6cd807beb251b74c477c0547df495c9178",
+        "checksum": "4f90e70d728db349bb78c36843a703a3892c3a55b8c8ffddfffcbb446ce14bc5",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A08",
+        "ac": [
+          2,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "9874a996ba3e7722ce6a14f0d965aacc441d35e41c5e8f5a8001e13d0a49eccb",
+        "checksum": "f64498f777d103f4db50423b553b8d1a8a3b52eba41454bced0dfd1481bb6cad",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A09",
+        "ac": [
+          2,
+          5
+        ],
+        "status": "pass",
+        "batches": 16,
+        "stateHash": "1ba9a629644a2f7ab77dcbe51949fb5c555e44536714501b00b143419ce773e2",
+        "checksum": "484869f881296786cb596f45a652832466738033f6e74a37dd2406373e06c421",
+        "checkpointLabels": [
+          "reserved",
+          "completed"
+        ]
+      },
+      {
+        "id": "A10",
+        "ac": [
+          2,
+          5
+        ],
+        "status": "pass",
+        "batches": 0,
+        "stateHash": "60ab6598fec5d047e82e943b565b2f4b33a15b9ed9bc06c7604a58e704458c3c",
+        "checksum": "3c72557d775c5ff7d1c900534797493c478bc448b6c032b59f0e57eda269ad27",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A11",
+        "ac": [
+          3,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 2,
+        "stateHash": "958ede618d68b6b251bcd99545fd1c151accec8c0b6845325e6d8c29ee60cce4",
+        "checksum": "ab3df1268d8cfe8fae0b0770397f07dbac5dd7fa52504b27729fea0d47611173",
+        "checkpointLabels": [
+          "pending-proceeds"
+        ]
+      },
+      {
+        "id": "A12",
+        "ac": [
+          4,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 2,
+        "stateHash": "24d0b8a474fb37d2b32733038a48705d0415d9a55e7b86637fcb52e3c6f01886",
+        "checksum": "ad9599ee6a3d56f85aed500a2362009e26109ba78386bf8147ee793b62534913",
+        "checkpointLabels": [
+          "public-decision"
+        ]
+      },
+      {
+        "id": "A13",
+        "ac": [
+          4,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 4,
+        "stateHash": "c4c9ea018eb53b458daabccea81dbbffed297b268fd9d353ee517f59375754d3",
+        "checksum": "2141756762bb45f1244414de179064ca0b94a97985c739f004aa945105b06fed",
+        "checkpointLabels": []
+      },
+      {
+        "id": "PROTECTION-B-SPECIAL",
+        "ac": [
+          4,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 5,
+        "stateHash": "d64c6daf97ee2c5dfa75a92991266d18d5079a5126645665965a735a32367e1f",
+        "checksum": "dd6d018fcfad595eed34ab5fc8d1ba330f7682579963c3f1d948173563f50feb",
+        "checkpointLabels": []
+      },
+      {
+        "id": "A14",
+        "ac": [
+          4,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 33,
+        "stateHash": "022ce8d311bc4d6a49e86a62f3938a25b011000868571e1d4f79f3959f5c0d55",
+        "checksum": "c88c792346c00c51420767ffe52fea7de323fa9f066fca7d97107571abb424b1",
+        "checkpointLabels": [
+          "announced"
+        ]
+      },
+      {
+        "id": "PROTECTION-A-EMPTY",
+        "ac": [
+          4,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 49,
+        "stateHash": "b93adbe4ae6eb18da83713408a14cd37b93f3f92cff90d6702197a18e18a31ef",
+        "checksum": "11ed4994e65903abae492fd0c695b1bd404ac88cf8e123c933186e045f444a43",
+        "checkpointLabels": [
+          "announced",
+          "pending",
+          "intraday-suppressed"
+        ]
+      },
+      {
+        "id": "A19",
+        "ac": [
+          2,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "52d2949ee415201240f7b8870a98759ac294400928dc0a1846bebd2216c5967d",
+        "checksum": "0b993129b7d1491798b938a173e7009691df617cb902dc41c6d656b83fd7074e",
+        "checkpointLabels": []
+      },
+      {
+        "id": "LIFECYCLE-IMMEDIATE",
+        "ac": [
+          2,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "2b69c8b92a1f773723bd3fb1e87bb7ea74292115fb15302caca3cc3d1727ccd8",
+        "checksum": "932e682564bf907d7b595613c2387644cb2da736b0174fc83605e2872f0f9c0b",
+        "checkpointLabels": [
+          "created"
+        ]
+      },
+      {
+        "id": "LIFECYCLE-DAY",
+        "ac": [
+          2,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "0c06b2412ccb6d2b644bc67f6baa9e82aaf9e7e6494c19d287218ac7241a648a",
+        "checksum": "74dfa016694e1aeb2821bbff79a593693be704c3b14d3be65df1579db5c31dfe",
+        "checkpointLabels": [
+          "created"
+        ]
+      },
+      {
+        "id": "LIFECYCLE-PLAN",
+        "ac": [
+          2,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "bd908e62ff7f827fe26b785111893273042fc5d8f49fd2f2093d835dceb3413f",
+        "checksum": "82b604037f6fbc020843532243b2be9ce6f7d7c8cf1aefcb65a05703a87a7d97",
+        "checkpointLabels": [
+          "created"
+        ]
+      },
+      {
+        "id": "PARTIAL-DAY",
+        "ac": [
+          2,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "b7de423150cfcd24c4e369c4f0931d0aa29954ce6228f0c549a98718bfbfdbb4",
+        "checksum": "485d6cc5eaae8766049f4c1a7ce676644af6b8c803fdd623c49df0503c0a9e0b",
+        "checkpointLabels": [
+          "partial",
+          "cancelled"
+        ]
+      },
+      {
+        "id": "PARTIAL-PLAN",
+        "ac": [
+          2,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "c77f7a786d85920fa01f858fd271dd48d04c564b9da71d8097d9cff748e571cd",
+        "checksum": "bae153ad2f13b6858e64fb5f3e46aecaa10a1c96002a84b60bfe913074f19f30",
+        "checkpointLabels": [
+          "partial",
+          "cancelled"
+        ]
+      },
+      {
+        "id": "EXPIRY-DAY",
+        "ac": [
+          2,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 16,
+        "stateHash": "92446869dd826772454c17751056afa52dc55f58e786fa72346773cad744c0ca",
+        "checksum": "d6368f889161166419905a41593a742c61d350fa398f5686a8c62499ba05ec15",
+        "checkpointLabels": [
+          "expired"
+        ]
+      },
+      {
+        "id": "EXPIRY-PLAN",
+        "ac": [
+          2,
+          5,
+          6
+        ],
+        "status": "pass",
+        "batches": 4,
+        "stateHash": "8b1935910653a654bec8be49d8dd89ae91c69f1653ff87e3085339772c26491d",
+        "checksum": "2a0c20ea39c4afb92ef8633c751062b6c634cf6388a08e4e23d306c5b0aeaa74",
+        "checkpointLabels": [
+          "expired"
+        ]
+      },
+      {
+        "id": "BOUNDARY-A",
+        "ac": [
+          4,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "39860d76c58f60e7888775cfa6701aa7df116989c43bd900dbbe9b2905172ba6",
+        "checksum": "b42547cb0e1a76aa8242ade6fd906d0519573c84216ef330ab4d2a4b754a0f40",
+        "checkpointLabels": []
+      },
+      {
+        "id": "BOUNDARY-B",
+        "ac": [
+          4,
+          5
+        ],
+        "status": "pass",
+        "batches": 1,
+        "stateHash": "92dbe9b905288f502c4211de37c6d924bcaf1da1739452edb13a2461178c06c9",
+        "checksum": "043589900570298bc5effb61c174105b829b499349806c0a3f4a6fd2e53142c1",
+        "checkpointLabels": []
+      }
+    ],
+    "observedStates": 393,
+    "observedBatches": 163
+  },
+  "auction": {
+    "fixed": [
+      {
+        "id": "A01",
+        "price": 1040,
+        "quantity": 300,
+        "buyAllocations": [
+          {
+            "accountId": "player",
+            "quantity": 300
+          }
+        ],
+        "sellAllocations": [
+          {
+            "accountId": "seller-1",
+            "quantity": 100
+          },
+          {
+            "accountId": "seller-2",
+            "quantity": 100
+          },
+          {
+            "accountId": "seller-3",
+            "quantity": 100
+          }
+        ]
+      },
+      {
+        "id": "A02",
+        "price": 1000,
+        "quantity": 50,
+        "buyAllocations": [
+          {
+            "accountId": "player",
+            "quantity": 50
+          }
+        ],
+        "sellAllocations": [
+          {
+            "accountId": "seller-1",
+            "quantity": 50
+          }
+        ]
+      },
+      {
+        "id": "A03",
+        "price": null,
+        "quantity": 0,
+        "buyAllocations": [],
+        "sellAllocations": []
+      },
+      {
+        "id": "A04",
+        "price": 1050,
+        "quantity": 100,
+        "buyAllocations": [
+          {
+            "accountId": "buyer-2",
+            "quantity": 100
+          }
+        ],
+        "sellAllocations": [
+          {
+            "accountId": "seller-1",
+            "quantity": 100
+          }
+        ]
+      },
+      {
+        "id": "A05",
+        "price": 1000,
+        "quantity": 90,
+        "buyAllocations": [
+          {
+            "accountId": "npc",
+            "quantity": 60
+          },
+          {
+            "accountId": "player",
+            "quantity": 30
+          }
+        ],
+        "sellAllocations": [
+          {
+            "accountId": "seller",
+            "quantity": 90
+          }
+        ]
+      }
+    ],
+    "seeds": 2000,
+    "variantsPerSeed": 3,
+    "zero": 283,
+    "positive": 1717,
+    "nonLimitClearingPrices": 1219,
+    "oracle": "independent exhaustive integer ticks and dual-side BigInt remainder allocation; production candidate/allocator are not imported"
+  },
+  "fundedRandom": {
+    "seeds": 2000,
+    "variantsPerSeed": 3,
+    "actualBatches": 6000,
+    "observedStates": 218372
+  },
+  "boundaries": {
+    "invalidInitialHoldings": [
+      [
+        -1,
+        10
+      ],
+      [
+        0.5,
+        0.5
+      ]
+    ],
+    "duplicateAndRejectionReasons": [
+      "staleView",
+      "notDecisionWindow",
+      "invalidInput",
+      "insufficientCash"
+    ],
+    "malformedSnapshots": [
+      {
+        "name": "checksum",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "schema",
+        "reason": "incompatibleVersion"
+      },
+      {
+        "name": "rules",
+        "reason": "incompatibleVersion"
+      },
+      {
+        "name": "math",
+        "reason": "incompatibleVersion"
+      },
+      {
+        "name": "malformed",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "phase",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "cash",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "negative",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "reserve",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "lot",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "rng",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "duplicateOrder",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "envelopeClock",
+        "reason": "corruptSnapshot"
+      },
+      {
+        "name": "oversize",
+        "reason": "corruptSnapshot"
+      }
+    ],
+    "readCount": 150,
+    "publicPrefixIsolation": true,
+    "externalKeyIsolation": true,
+    "stockAndAccountReorder": [
+      "A07",
+      "A11",
+      "A12",
+      "A14"
+    ]
+  },
+  "resume": {
+    "fixtureCheckpoints": [
+      {
+        "id": "A06",
+        "checkpoint": "after-buy",
+        "phase": "settled",
+        "checksum": "b3f80e818c43f6ea24325ff0bb7a5a3fd2cef6a8aac40e5a0a16aec59484bd04"
+      },
+      {
+        "id": "A06",
+        "checkpoint": "before-open",
+        "phase": "settled",
+        "checksum": "b3f80e818c43f6ea24325ff0bb7a5a3fd2cef6a8aac40e5a0a16aec59484bd04"
+      },
+      {
+        "id": "A06",
+        "checkpoint": "after-unlock",
+        "phase": "publicDecision",
+        "checksum": "b3f80e818c43f6ea24325ff0bb7a5a3fd2cef6a8aac40e5a0a16aec59484bd04"
+      },
+      {
+        "id": "A09",
+        "checkpoint": "reserved",
+        "phase": "publicDecision",
+        "checksum": "484869f881296786cb596f45a652832466738033f6e74a37dd2406373e06c421"
+      },
+      {
+        "id": "A09",
+        "checkpoint": "completed",
+        "phase": "settled",
+        "checksum": "484869f881296786cb596f45a652832466738033f6e74a37dd2406373e06c421"
+      },
+      {
+        "id": "A12",
+        "checkpoint": "public-decision",
+        "phase": "publicDecision",
+        "checksum": "ad9599ee6a3d56f85aed500a2362009e26109ba78386bf8147ee793b62534913"
+      },
+      {
+        "id": "A14",
+        "checkpoint": "announced",
+        "phase": "settled",
+        "checksum": "c88c792346c00c51420767ffe52fea7de323fa9f066fca7d97107571abb424b1"
+      },
+      {
+        "id": "PROTECTION-A-EMPTY",
+        "checkpoint": "announced",
+        "phase": "settled",
+        "checksum": "11ed4994e65903abae492fd0c695b1bd404ac88cf8e123c933186e045f444a43"
+      },
+      {
+        "id": "PROTECTION-A-EMPTY",
+        "checkpoint": "pending",
+        "phase": "settled",
+        "checksum": "11ed4994e65903abae492fd0c695b1bd404ac88cf8e123c933186e045f444a43"
+      },
+      {
+        "id": "PROTECTION-A-EMPTY",
+        "checkpoint": "intraday-suppressed",
+        "phase": "settled",
+        "checksum": "11ed4994e65903abae492fd0c695b1bd404ac88cf8e123c933186e045f444a43"
+      }
+    ],
+    "batchHourDayAndPlanRestoreChecksum": "5605d52a3a95e67073d292d65ca5056dc5bbd2a119a9eabebd7bd2365d1fc5fe",
+    "planBatches": 32
+  },
+  "golden": {
+    "cases": 27,
+    "fullCanonicalOutputsCompared": true
+  },
+  "savedReplays": [
+    {
+      "id": "A09/reserved",
+      "checksum": "484869f881296786cb596f45a652832466738033f6e74a37dd2406373e06c421"
+    },
+    {
+      "id": "A12/public-decision",
+      "checksum": "ad9599ee6a3d56f85aed500a2362009e26109ba78386bf8147ee793b62534913"
+    },
+    {
+      "id": "A06/after-buy",
+      "checksum": "b3f80e818c43f6ea24325ff0bb7a5a3fd2cef6a8aac40e5a0a16aec59484bd04"
+    },
+    {
+      "id": "PROTECTION-A-EMPTY/pending",
+      "checksum": "11ed4994e65903abae492fd0c695b1bd404ac88cf8e123c933186e045f444a43"
+    }
+  ],
+  "cli": {
+    "demonstrations": [
+      {
+        "id": "A01",
+        "status": "pass",
+        "checksum": "1efc068251159f8983a5ca69b5657781009f7a80e76f2233b122a878754463ab"
+      },
+      {
+        "id": "A05",
+        "status": "pass",
+        "checksum": "948a5a1b5d8b073fcd15c8ff90d6e7c4ecebcf6fef5e2f57f6cc1146d38b1160"
+      },
+      {
+        "id": "A07",
+        "status": "pass",
+        "checksum": "4f90e70d728db349bb78c36843a703a3892c3a55b8c8ffddfffcbb446ce14bc5"
+      },
+      {
+        "id": "A06",
+        "status": "pass",
+        "checksum": "b3f80e818c43f6ea24325ff0bb7a5a3fd2cef6a8aac40e5a0a16aec59484bd04"
+      },
+      {
+        "id": "A12",
+        "status": "pass",
+        "checksum": "ad9599ee6a3d56f85aed500a2362009e26109ba78386bf8147ee793b62534913"
+      },
+      {
+        "id": "A14",
+        "status": "pass",
+        "checksum": "c88c792346c00c51420767ffe52fea7de323fa9f066fca7d97107571abb424b1"
+      }
+    ],
+    "savedPublicDecision": "pass",
+    "actualFailureExitCode": 1,
+    "failedInputAndBoundaryPreserved": true
+  },
+  "browser": {
+    "sourceHash": "e33076dca0eff5591467a35057fe05e0c2385fdc882e8085e31bb9e6010089bd",
+    "fixture": "docs/verification/fixtures/p1-browser.json",
+    "environments": [
+      {
+        "url": "http://127.0.0.1:5173/p1-probe.html",
+        "browserVersion": "154.0.8037.58",
+        "checks": 8
+      },
+      {
+        "url": "http://127.0.0.1:4173/p1-probe.html",
+        "browserVersion": "154.0.8037.58",
+        "checks": 8
+      }
+    ]
+  },
+  "preservedFailures": [
+    {
+      "command": "npm test -- --out artifacts/verification/p1/final-node",
+      "exitCode": 1,
+      "reason": "PowerShell npm.ps1 argument forwarding"
+    },
+    {
+      "command": "npm.cmd test -- --out artifacts/verification/p1/final-node",
+      "exitCode": 1,
+      "reason": "stale browser sourceHash after addition of tools README",
+      "resultsPath": "artifacts/verification/p1/final-node/results.json",
+      "resolvedBy": "final source-bound browser evidence and actual verify:p1 exit0"
+    }
+  ],
+  "artifacts": [
+    {
+      "path": "artifacts/verification/p1/delivery-node/manifest.json",
+      "sha256": "44a0e9fa9b90a474c57add2460e3d7bc5fcd1bf369292e5a8a53bff114f24d23"
+    },
+    {
+      "path": "artifacts/verification/p1/delivery-node/results.json",
+      "sha256": "373dce18d9000c98b3ccc4064e70a00becea3f2efc69ab6845ac0496b208592e"
+    },
+    {
+      "path": "artifacts/verification/p1/delivery-node/summary.md",
+      "sha256": "18e2c51f591febc4e590fa4bf57fd9482e47bfce500ea46550ff54dcc23a0470"
+    },
+    {
+      "path": "artifacts/verification/p1/final-node/results.json",
+      "sha256": "505eccbc40ca92cdda5ada8b7fed36512240edbdcb9d3757b158ed81d29406f9"
+    },
+    {
+      "path": "artifacts/verification/p1/browser-dev-delivery/results.json",
+      "sha256": "76ff2bcd1e8d67236775f78fecc1b072d399364ffcf0f785d97e218970cc764c"
+    },
+    {
+      "path": "artifacts/verification/p1/browser-dev-delivery/worker-replay.png",
+      "sha256": "001aebafe796dc4c2c3c7f5f8478197c32f12a0fbfcd70c6c71a4be85f3b37a4"
+    },
+    {
+      "path": "artifacts/verification/p1/browser-static-delivery/results.json",
+      "sha256": "25ddda97dbd5a387f5af7544ac8eba1a339df30915af43852927cd7aa328a590"
+    },
+    {
+      "path": "artifacts/verification/p1/browser-static-delivery/worker-replay.png",
+      "sha256": "001aebafe796dc4c2c3c7f5f8478197c32f12a0fbfcd70c6c71a4be85f3b37a4"
+    }
+  ],
+  "remaining": [
+    "independent P1 acceptance",
+    "P2 autonomous world and NPC economy",
+    "P5 final browser/performance/endurance scope"
+  ]
+}

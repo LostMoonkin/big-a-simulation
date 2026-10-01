@@ -20,7 +20,12 @@
     "check:design": "python tools/design-checks/check_model_arithmetic.py",
     "fixtures:p0": "node tools/p0/generate-fixtures.mjs",
     "verify:p0": "node tools/p0/verify.mjs",
-    "probe:p0": "node tools/p0/record-numeric.mjs"
+    "probe:p0": "node tools/p0/record-numeric.mjs",
+    "test": "node tools/sim-runner/verify.mjs",
+    "fixtures:p1": "node tools/sim-runner/generate-fixtures.mjs",
+    "verify:p1": "node tools/sim-runner/verify.mjs",
+    "sim:replay": "node tools/sim-runner/cli.mjs",
+    "probe:p1": "node tools/sim-runner/record-golden.mjs"
   },
   "devDependencies": {
     "typescript": "7.0.2"

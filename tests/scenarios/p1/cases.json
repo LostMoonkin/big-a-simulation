@@ -1,0 +1,3547 @@
+{
+  "schemaVersion": 1,
+  "rulesVersion": "0.3.1",
+  "contentVersion": "0.3.1",
+  "mathVersion": "fixed-q9-v1",
+  "rngVersion": "rng-v1",
+  "scope": "P1 funded fixed scenarios, no world preheat or autonomous NPC economy",
+  "cases": [
+    {
+      "id": "A01",
+      "ac": [
+        1,
+        2,
+        5
+      ],
+      "description": "大单跨档统一价与50股未完成量",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 300
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "10000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller-1",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          },
+          {
+            "id": "seller-2",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          },
+          {
+            "id": "seller-3",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "seller-1",
+          "id": "s1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-2",
+          "id": "s2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1010
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-3",
+          "id": "s3",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1040
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "p",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 350,
+            "limitPrice": 1050
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": 1040,
+        "quantity": 300,
+        "playerFilled": 300,
+        "unfilled": 50,
+        "serviceCash": {
+          "$bigint": "312"
+        }
+      }
+    },
+    {
+      "id": "A02",
+      "ac": [
+        1,
+        5
+      ],
+      "description": "小单只成交最低档",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 300
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "10000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller-1",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          },
+          {
+            "id": "seller-2",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          },
+          {
+            "id": "seller-3",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "seller-1",
+          "id": "s1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-2",
+          "id": "s2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1010
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-3",
+          "id": "s3",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1040
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "p",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 50,
+            "limitPrice": 1050
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": 1000,
+        "quantity": 50
+      }
+    },
+    {
+      "id": "A03",
+      "ac": [
+        1,
+        4,
+        5
+      ],
+      "description": "无交叉不造中间价",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "s",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 50,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "p",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 50,
+            "limitPrice": 990
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": null,
+        "quantity": 0,
+        "lastPrice": 1000,
+        "lastTradeAt": null
+      }
+    },
+    {
+      "id": "A04",
+      "ac": [
+        1,
+        5
+      ],
+      "description": "清算点1050不是任何订单限价",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1050,
+            "totalShares": 200
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "buyer-2",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller-1",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          },
+          {
+            "id": "seller-2",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "b1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "buyer-2",
+          "id": "b2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1200
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-1",
+          "id": "s1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 900
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-2",
+          "id": "s2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1100
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": 1050,
+        "quantity": 100
+      }
+    },
+    {
+      "id": "A05",
+      "ac": [
+        1,
+        5
+      ],
+      "description": "同价按账户分配与合并费用",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 90
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "npc",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 90
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "p",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 60,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "npc",
+          "id": "n",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 120,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "s",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 90,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": 1000,
+        "quantity": 90,
+        "buyAllocations": [
+          {
+            "accountId": "npc",
+            "quantity": 60
+          },
+          {
+            "accountId": "player",
+            "quantity": 30
+          }
+        ],
+        "serviceCash": {
+          "$bigint": "90"
+        }
+      }
+    },
+    {
+      "id": "A06",
+      "ac": [
+        3,
+        5
+      ],
+      "description": "A旧60股及新买100股的真实解锁时点",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 160
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 60
+              }
+            ]
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "after-buy"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "read",
+          "accountId": "player",
+          "query": {
+            "kind": "portfolio"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "too-much",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 120,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "old-only",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 60,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 15,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "before-open"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "snapshot",
+          "label": "after-unlock"
+        }
+      ],
+      "expected": {
+        "newUnlockTick": 16,
+        "total": 160
+      }
+    },
+    {
+      "id": "SETTLEMENT-B",
+      "ac": [
+        3,
+        5
+      ],
+      "description": "B旧60股及新买100股的真实解锁时点",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "B001",
+            "market": "B",
+            "initialPrice": 1000,
+            "totalShares": 160
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 60
+              }
+            ]
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "after-buy"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "read",
+          "accountId": "player",
+          "query": {
+            "kind": "portfolio"
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "after-unlock"
+        }
+      ],
+      "expected": {
+        "newUnlockTick": 1,
+        "total": 160
+      }
+    },
+    {
+      "id": "A07",
+      "ac": [
+        2,
+        5
+      ],
+      "description": "玩家跨市超额拒绝、NPC全钱包同比缩量",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 20
+          },
+          {
+            "id": "B001",
+            "market": "B",
+            "initialPrice": 1000,
+            "totalShares": 20
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "3000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "npc",
+            "cash": {
+              "$bigint": "3000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller-a",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 20
+              }
+            ]
+          },
+          {
+            "id": "seller-b",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 20
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "intents",
+          "accountId": "npc",
+          "id": "npc-budget",
+          "submit": true,
+          "intents": [
+            {
+              "stockId": "A001",
+              "side": "buy",
+              "quantity": 2,
+              "limitPrice": 1000
+            },
+            {
+              "stockId": "B001",
+              "side": "buy",
+              "quantity": 2,
+              "limitPrice": 1000
+            }
+          ]
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "player-a",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 2,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "player-b",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 2,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-a",
+          "id": "sa",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 20,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-b",
+          "id": "sb",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 20,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "playerRejected": "insufficientCash",
+        "npcQuantities": [
+          1,
+          1
+        ]
+      }
+    },
+    {
+      "id": "A08",
+      "ac": [
+        2,
+        5
+      ],
+      "description": "目标100、原持40、成交10后真实目标缺口50",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 50
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 40
+              }
+            ]
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 10
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "targetGap",
+          "accountId": "player",
+          "stockId": "A001",
+          "targetShares": 100
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "b",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 10,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "s",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 10,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "targetGap",
+          "accountId": "player",
+          "stockId": "A001",
+          "targetShares": 100
+        }
+      ],
+      "expected": {
+        "targetGaps": [
+          60,
+          50
+        ]
+      }
+    },
+    {
+      "id": "A09",
+      "ac": [
+        2,
+        5
+      ],
+      "description": "16批计划逐批1股及16分买费",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 16
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "16023"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 16
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "plan",
+          "body": {
+            "kind": "plan",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 16,
+            "limitPrice": 1000,
+            "endAt": {
+              "worldDay": 0,
+              "batch": 15
+            }
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "s",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 16,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "reserved"
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 16,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "completed"
+        }
+      ],
+      "expected": {
+        "buyFee": {
+          "$bigint": "16"
+        },
+        "reservation": {
+          "$bigint": "16023"
+        },
+        "serviceCash": {
+          "$bigint": "32"
+        },
+        "remainingCash": {
+          "$bigint": "7"
+        }
+      }
+    },
+    {
+      "id": "A10",
+      "ac": [
+        2,
+        5
+      ],
+      "description": "同股反向拒绝、先撤再切换、重复撤销不重释",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 50
+              }
+            ]
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 50
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 10,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "opposite",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 1,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel-buy",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$buy"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel-buy",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$buy"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "sale",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 50,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel-sale",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$sale"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel-again",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$sale"
+          }
+        }
+      ],
+      "expected": {
+        "oppositeReason": "oppositeDirection"
+      }
+    },
+    {
+      "id": "A11",
+      "ac": [
+        3,
+        5,
+        6
+      ],
+      "description": "卖款本批不资助跨市买单，下一批才可用",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 10
+          },
+          {
+            "id": "B001",
+            "market": "B",
+            "initialPrice": 1000,
+            "totalShares": 1
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 10
+              }
+            ]
+          },
+          {
+            "id": "buyer",
+            "cash": {
+              "$bigint": "100000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller-b",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "sale",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 10,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "buyer",
+          "id": "buy-a",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 10,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "too-early",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 1,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "pending-proceeds"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-b",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 1,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-b",
+          "id": "sale-b",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 1,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "earlyReason": "insufficientCash",
+        "boughtB": 1
+      }
+    },
+    {
+      "id": "A12",
+      "ac": [
+        4,
+        5,
+        6
+      ],
+      "description": "公开后清算前暂停、两个参与者使用共同公开版本",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "npc",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ],
+        "publications": [
+          {
+            "message": {
+              "id": "public-guidance",
+              "revision": 1,
+              "publishedAt": {
+                "worldDay": 0,
+                "batch": 1
+              },
+              "expectationQ": {
+                "$bigint": "100000000"
+              },
+              "expiresAt": {
+                "worldDay": 20,
+                "batch": 1
+              },
+              "status": "active",
+              "text": "公开经营指引更新，预期不保证成交"
+            },
+            "major": true,
+            "privateResultQ": {
+              "$bigint": "777000000"
+            }
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "hour",
+            "maxBatches": 4,
+            "pauseOnMajor": true
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "public-decision"
+        },
+        {
+          "op": "participant",
+          "accountId": "player",
+          "id": "player-news",
+          "messageId": "public-guidance",
+          "stockId": "A001",
+          "quantity": 50,
+          "beforePrice": 1000,
+          "afterPrice": 1100
+        },
+        {
+          "op": "participant",
+          "accountId": "npc",
+          "id": "npc-news",
+          "messageId": "public-guidance",
+          "stockId": "A001",
+          "quantity": 50,
+          "beforePrice": 1000,
+          "afterPrice": 1100
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "s",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1050
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "newsTick": 1,
+        "price": 1050,
+        "quantity": 100
+      }
+    },
+    {
+      "id": "A13",
+      "ac": [
+        4,
+        5,
+        6
+      ],
+      "description": "乙8/16/32受阻、64真成交复位8",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "B001",
+            "market": "B",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-0",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-0",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-3",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-3",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "prices": [
+          null,
+          null,
+          null,
+          1400
+        ],
+        "bandsAfter": [
+          16,
+          32,
+          64,
+          8
+        ]
+      }
+    },
+    {
+      "id": "PROTECTION-B-SPECIAL",
+      "ac": [
+        4,
+        5,
+        6
+      ],
+      "description": "乙64仍受阻后特别竞价真实成交",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "B001",
+            "market": "B",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-0",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 3000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-0",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 2500
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 3000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-1",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 2500
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 3000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-2",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 2500
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-3",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 3000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-3",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 2500
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "buy-4",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 3000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sell-4",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 2500
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "prices": [
+          null,
+          null,
+          null,
+          null,
+          2500
+        ]
+      }
+    },
+    {
+      "id": "A14",
+      "ac": [
+        4,
+        5,
+        6
+      ],
+      "description": "甲两整日末批受阻、第三日真实特别开盘",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "day-0-buy",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "day-0-sell",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 16,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "day-1-buy",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "day-1-sell",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 16,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "announced"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "special-buy",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "special-sell",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "tradesBeforeSpecial": 0,
+        "price": 1400,
+        "quantity": 100,
+        "reference": 1400,
+        "low": 1260,
+        "high": 1540
+      }
+    },
+    {
+      "id": "PROTECTION-A-EMPTY",
+      "ac": [
+        4,
+        5,
+        6
+      ],
+      "description": "甲特别开盘无成交保持待重开、日内有交叉仍无成交",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "day-0-buy",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "day-0-sell",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 16,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "day-1-buy",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "day-1-sell",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 16,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "announced"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "pending"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "intraday-buy",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "intraday-sell",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 15,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "intraday-suppressed"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "retry-buy",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1500
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "retry-sell",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1400
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": 1400,
+        "quantity": 100,
+        "lastTradeWorldDay": 3
+      }
+    },
+    {
+      "id": "A19",
+      "ac": [
+        2,
+        5
+      ],
+      "description": "同比各1股仍差一分，按低评分继续减量",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 20
+          },
+          {
+            "id": "B001",
+            "market": "B",
+            "initialPrice": 1000,
+            "totalShares": 20
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "2001"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller-a",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 20
+              }
+            ]
+          },
+          {
+            "id": "seller-b",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 20
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "intents",
+          "accountId": "player",
+          "id": "rounding",
+          "submit": true,
+          "intents": [
+            {
+              "stockId": "A001",
+              "side": "buy",
+              "quantity": 2,
+              "limitPrice": 1000,
+              "scoreQ": {
+                "$bigint": "0"
+              }
+            },
+            {
+              "stockId": "B001",
+              "side": "buy",
+              "quantity": 2,
+              "limitPrice": 1000,
+              "scoreQ": {
+                "$bigint": "1"
+              }
+            }
+          ]
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-a",
+          "id": "sa",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 20,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller-b",
+          "id": "sb",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 20,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "quantities": [
+          0,
+          1
+        ],
+        "maxCost": {
+          "$bigint": "2001"
+        }
+      }
+    },
+    {
+      "id": "LIFECYCLE-IMMEDIATE",
+      "ac": [
+        2,
+        5,
+        6
+      ],
+      "description": "immediate取消、重复取消、资源拒绝",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "order",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 10,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "created"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cash-reject",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 8000000000,
+            "limitPrice": 100000000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sale-reject",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 101,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "cancelled": true
+      }
+    },
+    {
+      "id": "LIFECYCLE-DAY",
+      "ac": [
+        2,
+        5,
+        6
+      ],
+      "description": "day取消、重复取消、资源拒绝",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "order",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 10,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "created"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cash-reject",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 8000000000,
+            "limitPrice": 100000000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sale-reject",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 101,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "cancelled": true
+      }
+    },
+    {
+      "id": "LIFECYCLE-PLAN",
+      "ac": [
+        2,
+        5,
+        6
+      ],
+      "description": "plan取消、重复取消、资源拒绝",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "order",
+          "body": {
+            "kind": "plan",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 10,
+            "limitPrice": 1000,
+            "endAt": {
+              "worldDay": 0,
+              "batch": 3
+            }
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "created"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cash-reject",
+          "body": {
+            "kind": "plan",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 8000000000,
+            "limitPrice": 100000000,
+            "endAt": {
+              "worldDay": 0,
+              "batch": 3
+            }
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sale-reject",
+          "body": {
+            "kind": "plan",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 101,
+            "limitPrice": 1000,
+            "endAt": {
+              "worldDay": 0,
+              "batch": 3
+            }
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "cancelled": true
+      }
+    },
+    {
+      "id": "PARTIAL-DAY",
+      "ac": [
+        2,
+        5,
+        6
+      ],
+      "description": "day部分成交后撤销剩余",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 5
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 5
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "order",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 20,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sale",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 5,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "partial"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "cancelled"
+        }
+      ],
+      "expected": {
+        "filled": 5,
+        "cancelled": true
+      }
+    },
+    {
+      "id": "PARTIAL-PLAN",
+      "ac": [
+        2,
+        5,
+        6
+      ],
+      "description": "plan部分成交后撤销剩余",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 5
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 5
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "order",
+          "body": {
+            "kind": "plan",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 20,
+            "limitPrice": 1000,
+            "endAt": {
+              "worldDay": 0,
+              "batch": 3
+            }
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sale",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 5,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "partial"
+        },
+        {
+          "op": "prepare"
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "cancel",
+          "body": {
+            "kind": "cancel",
+            "orderId": "$order"
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "cancelled"
+        }
+      ],
+      "expected": {
+        "filled": 5,
+        "cancelled": true
+      }
+    },
+    {
+      "id": "EXPIRY-DAY",
+      "ac": [
+        2,
+        5,
+        6
+      ],
+      "description": "day部分成交后时限结束释放余量",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 1
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "order",
+          "body": {
+            "kind": "day",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 20,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sale",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 1,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "day",
+            "maxBatches": 16,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "expired"
+        }
+      ],
+      "expected": {
+        "filled": 1,
+        "expired": true
+      }
+    },
+    {
+      "id": "EXPIRY-PLAN",
+      "ac": [
+        2,
+        5,
+        6
+      ],
+      "description": "plan部分成交后时限结束释放余量",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 1
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 1
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "order",
+          "body": {
+            "kind": "plan",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 20,
+            "limitPrice": 1000,
+            "endAt": {
+              "worldDay": 0,
+              "batch": 3
+            }
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "sale",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 1,
+            "limitPrice": 1000
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "hour",
+            "maxBatches": 4,
+            "pauseOnMajor": false
+          }
+        },
+        {
+          "op": "snapshot",
+          "label": "expired"
+        }
+      ],
+      "expected": {
+        "filled": 1,
+        "expired": true
+      }
+    },
+    {
+      "id": "BOUNDARY-A",
+      "ac": [
+        4,
+        5
+      ],
+      "description": "A上边界能成交不能误判受阻",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "A001",
+            "market": "A",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "A001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "b",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1100
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "s",
+          "body": {
+            "kind": "immediate",
+            "stockId": "A001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1100
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": 1100,
+        "quantity": 100
+      }
+    },
+    {
+      "id": "BOUNDARY-B",
+      "ac": [
+        4,
+        5
+      ],
+      "description": "B上边界能成交不能误判受阻",
+      "input": {
+        "seed": 42,
+        "clock": {
+          "worldDay": 0,
+          "batch": 0
+        },
+        "phase": "publicDecision",
+        "playerAccountId": "player",
+        "stocks": [
+          {
+            "id": "B001",
+            "market": "B",
+            "initialPrice": 1000,
+            "totalShares": 100
+          }
+        ],
+        "accounts": [
+          {
+            "id": "player",
+            "cash": {
+              "$bigint": "1000000"
+            },
+            "holdings": []
+          },
+          {
+            "id": "seller",
+            "cash": {
+              "$bigint": "0"
+            },
+            "holdings": [
+              {
+                "stockId": "B001",
+                "quantity": 100
+              }
+            ]
+          }
+        ]
+      },
+      "commands": [
+        {
+          "op": "submit",
+          "accountId": "player",
+          "id": "b",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "buy",
+            "quantity": 100,
+            "limitPrice": 1080
+          }
+        },
+        {
+          "op": "submit",
+          "accountId": "seller",
+          "id": "s",
+          "body": {
+            "kind": "immediate",
+            "stockId": "B001",
+            "side": "sell",
+            "quantity": 100,
+            "limitPrice": 1080
+          }
+        },
+        {
+          "op": "advance",
+          "request": {
+            "stop": "batch",
+            "maxBatches": 1,
+            "pauseOnMajor": false
+          }
+        }
+      ],
+      "expected": {
+        "price": 1080,
+        "quantity": 100
+      }
+    }
+  ]
+}
