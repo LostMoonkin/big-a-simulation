@@ -112,6 +112,8 @@ export function initialState(input: ScenarioInput): TradingState {
   assert(input&&typeof input==='object'&&validInteger(input.seed,0,0xffff_ffff),'invalid scenario seed');
   assert(Array.isArray(input.stocks)&&Array.isArray(input.accounts),'invalid scenario entities');
   const clock=clone(input.clock??{worldDay:0,batch:0});const at=tick(clock);
+  for(const account of input.accounts){assert(Array.isArray(account.holdings),'invalid initial holdings');
+    for(const lot of account.holdings)assert(lot&&validInteger(lot.quantity,0,MAX_SHARES),'initial shares must be nonnegative integers');}
   const accounts=input.accounts.map(a=>({id:a.id,canTrade:a.canTrade??true,cash:a.cash,reservedCash:0n,
     pendingProceeds:[],lots:a.holdings.map(l=>({stockId:l.stockId,quantity:l.quantity,unlockTick:l.unlockAt?tick(l.unlockAt):0})),
     feeWeight:a.feeWeight??(a.id===input.playerAccountId||a.canTrade===false?0n:a.cash)}));
