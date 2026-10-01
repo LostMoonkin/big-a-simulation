@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { CONTENT_VERSION, RULES_VERSION, createMarketCore, decodeExact, encodeExact } from '../../packages/sim-core/src/index.ts';
 import { identity, p2Identity, p2Manifest, writeJson } from '../sim-runner/p2-runtime.mjs';
 
-const [url = 'http://127.0.0.1:5173/', outputArg = 'artifacts/verification/p2/browser-full', mode = 'full'] = process.argv.slice(2);
+const [url = 'http://127.0.0.1:5173/', outputArg = 'artifacts/verification/p2/browser-full', mode = 'full', fixtureInput] = process.argv.slice(2);
 const output = resolve(outputArg); await mkdir(output, { recursive: true });
 const browserPaths = ['apps/web/src', 'apps/web/index.html', 'apps/web/vite.config.ts', 'apps/web/package.json', 'apps/web/tsconfig.json', 'tools/web-checks'];
 const sourceAtStart = p2Identity(), browserAtStart = identity(browserPaths);
@@ -108,10 +108,37 @@ async function continueTo(worldDay) {
   }
   return pauses;
 }
+async function fixedReportCase(checkpointPath) {
+  const nodeOut=resolve(output,'fixed-report-node');
+  execFileSync(process.execPath,['tools/sim-runner/p2-major-fixture.mjs','--input',checkpointPath,'--out',nodeOut],{stdio:'pipe',windowsHide:true});
+  const fixtureResult=decodeExact(await readFile(resolve(nodeOut,'results.json'),'utf8'));
+  assert.equal(fixtureResult.status,'pass'); assert.equal(fixtureResult.naturalEconomicEvidence,false);
+  const inputPath=resolve(nodeOut,'major-input-snapshot.json'),input=decodeExact(await readFile(inputPath,'utf8'));
+  await importFile(inputPath); reference=createMarketCore(); assert.equal(reference.restoreSnapshot(input).restored,true);
+  const reply=await fast(2); assert.equal(reply.advance.reason,'majorMessage'); assert.equal(reply.advance.completedBatches,0);
+  assert.deepEqual(reply.view.clock,fixtureResult.clock); assert.equal(reply.view.phase,'publicDecision');
+  assert.ok(reply.view.messages.some(message=>message.id==='report:A002'&&message.text.includes('变动至少5%')));
+  const paused=await compare('fixed-report-public-window'); assert.equal(paused.snapshot.checksum,fixtureResult.pausedChecksum);
+  await page.screenshot({path:resolve(output,'fixed-report-paused.png'),fullPage:true});
+  const publicVersion=reply.view.publicVersion,reportCount=reply.view.messages.length;
+  await importFile(paused.path); assert.equal((await read()).publicVersion,publicVersion); assert.equal((await read()).messages.length,reportCount);
+  assert.equal((await compare('fixed-report-restored-window')).snapshot.checksum,paused.snapshot.checksum);
+  // After restore, first click acknowledges the existing decision-window report;
+  // the second explicit continuation clears exactly one batch.
+  const first=await step(); assert.equal(first.advance.reason,'majorMessage'); assert.equal(first.advance.completedBatches,0);
+  const next=await step(); assert.equal(next.advance.completedBatches,1); assert.equal(next.view.phase,'settled');
+  await compare('fixed-report-after-explicit-continue');
+  evidence.fixedMajor={scope:'fixed-hidden-input-only',naturalEconomicEvidence:false,input:checkpointPath,nodeResult:resolve(nodeOut,'results.json'),inputChecksum:fixtureResult.inputChecksum,pausedChecksum:paused.snapshot.checksum,clock:fixtureResult.clock,phase:'publicDecision',restoredPublicVersion:publicVersion,clearingBatchesBeforePause:0,duplicatesAfterRestore:0};
+  check('fixed-held-report-before-npc-clear-and-public-window-restore','P2-AC6/7',evidence.fixedMajor);
+}
 try {
   await page.goto(url);
   await page.getByTestId('create-world').waitFor();
   assert.equal(await page.getByTestId('market-app').getAttribute('data-phase'), 'empty');
+  if(mode==='major-only'){
+    assert.ok(fixtureInput,'major-only requires an actual browser checkpoint path');
+    await fixedReportCase(fixtureInput);
+  }else{
   if (mode === 'full') {
     const first = await page.evaluate(() => window.__p2.requests.length);
     await page.getByTestId('create-world').click(); await page.getByTestId('warmup-progress').waitFor();
@@ -141,6 +168,15 @@ try {
     assert.equal(reference.warmup({ maxBatches: 4000 }).reason, 'complete'); reference.prepareNextBatch();
     const initial = await compare('initial-snapshot');
     check('node-worker-preheat', 'P2-AC4', { checksum: initial.snapshot.checksum });
+    const tempo={};
+    for(const kind of ['hour','day','fast']){
+      await importFile(initial.path); assert.equal(reference.restoreSnapshot(initial.snapshot).restored,true);
+      if(kind==='hour')for(let i=0;i<4;i++)await step('step-hour');else if(kind==='day')await step('step-day');else await fast(1);
+      tempo[kind]=(await compare(`tempo-${kind}`)).snapshot.checksum;
+    }
+    assert.equal(new Set(Object.values(tempo)).size,1);
+    await importFile(initial.path); assert.equal(reference.restoreSnapshot(initial.snapshot).restored,true);
+    check('hour-day-fast-ui-same-fixed-stream','P2-AC6',tempo);
     for (const id of ['A001', 'B001']) {
       await selectStock(id); await page.getByRole('button', { name: '公司', exact: true }).click();
       assert.ok((await page.getByTestId('company-detail').innerText()).includes('已公布经营简报'));
@@ -247,7 +283,8 @@ try {
     evidence.summary = { checksum: final.snapshot.checksum, clock: final.snapshot.clock, phase: final.snapshot.phase, coreEnded: finalState.ended, player: (await read()).player, executions: (await read()).executions.length };
     await page.screenshot({ path: resolve(output, 'summary-60-days.png'), fullPage: true });
     check('60-day-readonly-no-liquidation-or-reward', 'P2-AC8', { checksum: final.snapshot.checksum, coreEnded: false });
-    assert.ok(evidence.majorPause,'held-major-report scenario remains required; an empty natural report set does not pass');
+    await fixedReportCase(checkpoint.path);
+  }
   }
   assert.deepEqual(errors, []);
   const browserSource = identity(browserPaths);

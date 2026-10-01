@@ -3,7 +3,7 @@
   "status": "incomplete",
   "independentAcceptance": "pending",
   "sourceBinding": "Actual browser run predates submission-reference/resource-preview and driver-report fixes. Final source-bound browser rerun remains required.",
-  "currentBrowserSourceHash": "fad5e9580de5f56470882c9adc47b85e5f17981dc2fdb4129413c30f880c32ca",
+  "currentBrowserSourceHash": "96f12bcb3725df2e6f76dd35e806e957fc3b7efb1ca795758f51ce2019f6b72c",
   "currentBrowserFiles": [
     {
       "path": "apps/web/index.html",
@@ -79,11 +79,11 @@
     },
     {
       "path": "tools/web-checks/README.md",
-      "sha256": "718173824072791b5c3dce46693a1e90718d890287b44b8a8ef0a2bfb2369f46"
+      "sha256": "49623c17aeb868fa736d4a7e0fb7e5835d6f5e83191cd091f9a72734e463b200"
     },
     {
       "path": "tools/web-checks/browser-check.mjs",
-      "sha256": "60f8ca52e03739acafd8373e8a92f1c7d9d214881cdf223910f4c1f7d32c2b69"
+      "sha256": "aed51d62e9ed5b9058707cfd86f196e303c0974a031c525b5fdf026e649b36e8"
     }
   ],
   "economicSourceHash": "c8c6a74c3527824e94f37a852616e29527cc3cd55b8dfba8e63ab5af4d4d3bf4",
@@ -135,7 +135,8 @@
     "npm.cmd run typecheck --workspace @big-a/web",
     "npm.cmd run build",
     "node tools/web-checks/browser-check.mjs http://127.0.0.1:4173/ artifacts/verification/p2/browser-full-trades full",
-    "node tools/sim-runner/p2-golden.mjs --input artifacts/verification/p2/browser-full-trades/qualified-checkpoint.json --days 20 --out artifacts/verification/p2/browser-full-trades/node-20-days"
+    "node tools/sim-runner/p2-golden.mjs --input artifacts/verification/p2/browser-full-trades/qualified-checkpoint.json --days 20 --out artifacts/verification/p2/browser-full-trades/node-20-days",
+    "node tools/web-checks/browser-check.mjs http://127.0.0.1:4173/ artifacts/verification/p2/browser-major-only major-only artifacts/verification/p2/browser-full-trades/qualified-checkpoint.json"
   ],
   "checks": [
     {
@@ -151,7 +152,7 @@
     {
       "id": "P2-AC6",
       "status": "incomplete",
-      "description": "Actual cancellation and no free UI/background time passed; natural major set empty, fixed-input browser report pause remains required"
+      "description": "Actual cancellation/no free UI time and separate fixed-only pre-clearing report pause/export/import passed; exact hour/day/fast UI replay on final source remains required"
     },
     {
       "id": "P2-AC7",
@@ -288,9 +289,64 @@
     }
   ],
   "remaining": [
-    "Legitimate fixed-input AC6 browser pause/export/import case",
     "Final initialization version and economic source binding",
     "Final browser rerun and independent acceptance",
-    "P2 economy AC1–3 is owned by core/CLI and is not signed off here"
-  ]
+    "P2 economy AC1–3 is owned by core/CLI and is not signed off here",
+    "Final complete driver includes hour/day/fast UI equality and the now-passed fixed-only report case"
+  ],
+  "majorOnly": {
+    "status": "pass",
+    "economicSourceHash": "9ac1c6634a1d13e2179cf48dfd511bc29b5bba6385a5e8481760f7bd16a2aa19",
+    "browserSourceHash": "ab1bbdaea13349fc8cc528cca2875303c777decb93efd6b0235cc22e71c6cc59",
+    "mode": "major-only",
+    "environment": {
+      "browserVersion": "154.0.8037.58",
+      "executable": "C:/Program Files/Google/Chrome/Application/chrome.exe",
+      "url": "http://127.0.0.1:4173/",
+      "playwrightRuntime": "C:/Users/ymbn0/.cache/codex-runtimes/codex-primary-runtime/dependencies/node/node_modules/playwright/index.mjs"
+    },
+    "sourceBinding": "Source hashes are the actual completed major-only run; later README text is not retroactively assigned to it.",
+    "checks": [
+      {
+        "id": "fixed-held-report-before-npc-clear-and-public-window-restore",
+        "ac": "P2-AC6/7",
+        "status": "pass",
+        "data": {
+          "scope": "fixed-hidden-input-only",
+          "naturalEconomicEvidence": false,
+          "input": "artifacts/verification/p2/browser-full-trades/qualified-checkpoint.json",
+          "nodeResult": "D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-major-only\\fixed-report-node\\results.json",
+          "inputChecksum": "db6e6ccf704a15a54aa9f9d80a0c74dea93f256ddcdbdb4810e70663ad270401",
+          "pausedChecksum": "5f31f1486a2767608b5541f811dcaf45d32e6e2858701fd062fecd192d58afbe",
+          "clock": {
+            "batch": 0,
+            "worldDay": 261
+          },
+          "phase": "publicDecision",
+          "restoredPublicVersion": 4208,
+          "clearingBatchesBeforePause": 0,
+          "duplicatesAfterRestore": 0
+        }
+      }
+    ],
+    "evidence": {
+      "fixedMajor": {
+        "scope": "fixed-hidden-input-only",
+        "naturalEconomicEvidence": false,
+        "input": "artifacts/verification/p2/browser-full-trades/qualified-checkpoint.json",
+        "nodeResult": "D:\\Workspace\\big-a-simulation\\artifacts\\verification\\p2\\browser-major-only\\fixed-report-node\\results.json",
+        "inputChecksum": "db6e6ccf704a15a54aa9f9d80a0c74dea93f256ddcdbdb4810e70663ad270401",
+        "pausedChecksum": "5f31f1486a2767608b5541f811dcaf45d32e6e2858701fd062fecd192d58afbe",
+        "clock": {
+          "batch": 0,
+          "worldDay": 261
+        },
+        "phase": "publicDecision",
+        "restoredPublicVersion": 4208,
+        "clearingBatchesBeforePause": 0,
+        "duplicatesAfterRestore": 0
+      }
+    },
+    "screenshot": "artifacts/verification/p2/browser-major-only/fixed-report-paused.png"
+  }
 }
