@@ -28,6 +28,7 @@ export function validateWorldBalances(state:TradingState):void {
 }
 export function validateWorld(state:TradingState):void {
   const w=state.world;assert(w&&['world-v1','world-v2-style-cash'].includes(w.generationVersion)&&w.preset==='baseline-v1','invalid world version');
+  assert(w.npcQuoteVersion===undefined||w.npcQuoteVersion==='npc-quote-v1'||w.npcQuoteVersion==='npc-quote-v2-target-gap','invalid NPC quote version');
   const c=w.config;assert(c&&c.seed===state.seed&&c.size==='prototype'&&c.mode==='baseline'&&c.rulesVersion===RULES_VERSION&&c.contentVersion===CONTENT_VERSION&&typeof c.playerCapital==='bigint'&&c.playerCapital>=10_000_000n&&c.playerCapital<=1_000_000_000n,'invalid world configuration');
   assert(state.stocks.length===40&&Array.isArray(w.stocks)&&w.stocks.length===40&&Array.isArray(w.npcs)&&w.npcs.length===26,'invalid generated dimensions');
   assert(state.accounts.length===(state.playerInjected?28:27)&&state.playerAccountId===(state.playerInjected?'player':null),'invalid world player entry');

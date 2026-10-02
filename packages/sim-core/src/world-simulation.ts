@@ -2,7 +2,7 @@ import { SCALE, MAX_PRICE, ceilDiv, divQ, expQ, integerSqrt, logQ, mulQ, normalQ
 import { active, assert, availableCash, sellableShares, tick, totalShares } from './state.ts';
 import type { Intent, TradingState } from './trading-types.ts';
 import type { Candle, NpcState, SectorId, WorldState } from './world-types.ts';
-import { BASELINE_REVIEW, BASELINE_STYLE, capWeights, clipQ, emptyCandle, SECTORS, splitInteger } from './world-generation.ts';
+import { BASELINE_REVIEW, BASELINE_STYLE, capWeights, clipQ, emptyCandle, NPC_QUOTE_GAP_LIMIT_Q, NPC_QUOTE_VERSION, SECTORS, splitInteger } from './world-generation.ts';
 import { compareId } from './auction.ts';
 
 /** Mutable current resources are copied; immutable completed bars/reports are shared until append. */
@@ -124,7 +124,9 @@ export function generateNpcOrders(state:TradingState):void {
       const capacity=Math.max(0,a.hourCapacity-a.hourUsed),wanted=Math.min(Math.abs(gap),capacity);
       const quantity=Math.min(capacity,Number(ceilDiv(BigInt(wanted),BigInt(4-state.clock.batch%4))));if(quantity===0)return;
       const side=gap>0?'buy':'sell',width=2_000_000n+mulQ(8_000_000n,e.riskQ),parts=splitInteger(BigInt(quantity),[2n,3n,5n],['0','1','2']);
-      [0n,width,width*3n].forEach((spread,level)=>{const rawPrice=mulQ(a.referenceQ,side==='buy'?SCALE-spread:SCALE+spread),price=Number(side==='buy'?rawPrice/SCALE:ceilDiv(rawPrice,SCALE));
+      // Old snapshots omit this version and retain their original valuation-only quotes.
+      const reservation=w.npcQuoteVersion===NPC_QUOTE_VERSION?mulQ(a.referenceQ,expQ(clipQ(BigInt(gap)*SCALE/BigInt(a.initialShares),-NPC_QUOTE_GAP_LIMIT_Q,NPC_QUOTE_GAP_LIMIT_Q))):a.referenceQ;
+      [0n,width,width*3n].forEach((spread,level)=>{const rawPrice=mulQ(reservation,side==='buy'?SCALE-spread:SCALE+spread),price=Number(side==='buy'?rawPrice/SCALE:ceilDiv(rawPrice,SCALE));
         if(parts[level]!>0n&&price>=1&&price<=MAX_PRICE)intents.push({stockId:a.stockId,side,quantity:Number(parts[level]),limitPrice:price,scoreQ:a.scoreQ,level});});
     });
     for(const intent of convert(state,npc.accountId,intents)){const reservedCash=intent.side==='buy'?reserve(intent.limitPrice,intent.quantity,1):0n;

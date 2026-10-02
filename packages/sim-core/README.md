@@ -2,6 +2,10 @@
 
 P1 使用显式、资金与股份齐全的场景。规则/内容版本 0.3.1、快照 schema 1、fixed-q9-v1、rng-v1。源码是纯 TypeScript，不依赖 DOM、存储、系统时间或非固定随机数；CLI 与 Worker 均从 `src/index.ts` 调用同一实现。
 
+P2第1轮失败后的单一报价候选为 `NPC_QUOTE_VERSION='npc-quote-v2-target-gap'`。新世界的私有 `world.npcQuoteVersion`、公开progress/diagnostics的有效版本、configHash和`exportBaselinePreset()`均绑定它。按本人风险限制后的剩余需求g与固定initialShares计算 `clip(g*Q9/initialShares,±120000000)`，仅对三档的保留价格乘expQ；评分用referenceQ、持续目标、数量/资源、费用与保护不变。缺字段旧world-v1/v2档有效版本为npc-quote-v1，保持原报价及canonical字节，未知值恢复失败且保留当前世界；不会迁移旧档或加钱。具体合同见[规则5.2](../../docs/design/market-model-rules.md)。
+
+`node packages/sim-core/check-npc-quote.mjs --out artifacts/verification/p2/<new-run-id>`使用保留的diagnostic-02/03完整输入和[NPC-QUOTE-01](../../tests/scenarios/p0/npc-quote-candidate.json)执行生产固定报价/有限资源清算、版本绑定、旧档及冻结旧源码后续对照。隔离旧源码只写ignored运行目录；该回归需要此前保留输入，不生成或替代新的250日预热/100+10长期经济。新候选的自主经济由CLI从头重跑，P2仍未通过。
+
 ```ts
 import { createScenario } from '@big-a/sim-core';
 

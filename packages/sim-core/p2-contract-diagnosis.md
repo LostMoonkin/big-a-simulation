@@ -2,6 +2,8 @@
 
 2026-10-02；实现检查点 f632812，合同差异修复 3443852。状态：诊断发现阻塞，未独立验收通过；本文不将 5 日小样本冒充 100 种子长期闸门。
 
+后续记录：world-v2-style-cash初现金候选真实250+5仍失败（3572871866甲6/乙11、1866980507甲7/乙4达到4/5成交日），[P2第1轮独立报告](../../docs/verification/p2-independent-round-1.md)确认1280个真实原簿中880个买卖价无交叉，52,284报价与原公式无差。单一 `npc-quote-v2-target-gap` 候选仅让本人剩余需求/固定初始股数以±.12有界对数响应影响保留价格，原R评分/目标/风格/资源/保护/硬线不改；规则先由4158cbd提交。实际P0 20项、核心typecheck和四组[生产定向回归](../../docs/verification/p2-quote-repair-round-1.md)已通过，旧v1/v2真实档字节与各16批旧未来路径保持。固定A001/A003旧Q0分别变为p5084/Q25063和p4505/Q245，不代表新的250+5或100+10自主经济通过；新世界必须显式报价版本并重新从头预热。以下历史表格/49项与旧诊断保持其原版本意义。
+
 生产 `exportBaselinePreset()` 与 [P0 baseline-v1](../../tests/scenarios/p0/baseline-v1.json) 的 49 项版本、关闭项和风格标量逐项比较，差异为 0。实际检查命令为 `node --input-type=module -e` 调用生产导出并按 fixture 字段逐项比较（BigInt 与规范十进制统一为字符串）；输出 checked=49、differences=[]。包 typecheck 通过。下面对照 [规则](../../docs/design/market-model-rules.md) 第 3–5 节与实际源文件；不是对未来性能或完整模型作证明。
 
 | 合同项 | 生产计算与状态 | 核对结果 |

@@ -17,6 +17,8 @@ const MATRIX = { A:[[1,2,2],[1,1,2],[1,1,2],[1,1,1],[0,1,1],[0,1,1]], B:[[0,1,1]
 const TAGS = [1,2,1,1,0,1,2,1,0,1,1,2,0,1,1,1,0,1,2,0];
 const ROLES: NpcRole[] = ['repairValue','allocationValue','longValue','shortTrend','swingTrend','eventTheme','allocationTheme','inventory1','inventory2','inventory3','inventory4','noise'];
 export const INITIALIZATION_VERSION = 'world-v2-style-cash';
+export const NPC_QUOTE_VERSION = 'npc-quote-v2-target-gap';
+export const NPC_QUOTE_GAP_LIMIT_Q = 120_000_000n;
 export const BASELINE_STYLE = {
   value:{alphaQ:900_000_000n,temperatureQ:800_000_000n,stockFractionQ:700_000_000n,beliefSigmaQ:2_000_000n,scoreNoiseMultiplier:1,hourCapacityQ:40_000_000n},
   trend:{alphaQ:150_000_000n,temperatureQ:600_000_000n,stockFractionQ:600_000_000n,beliefSigmaQ:4_000_000n,scoreNoiseMultiplier:2,hourCapacityQ:100_000_000n},
@@ -34,6 +36,7 @@ export const BASELINE_REVIEW:Record<NpcRole,{period:'hour'|number;lambdaQ:bigint
 export function exportBaselinePreset(){const p=BASELINE_STYLE.inventory;
   return {preset:'baseline-v1',rulesVersion:RULES_VERSION,contentVersion:CONTENT_VERSION,accountCount:26,
     initializationVersion:INITIALIZATION_VERSION,
+    npcQuoteVersion:NPC_QUOTE_VERSION,quote:{gapScale:'initialShares',maxLogShiftQ:NPC_QUOTE_GAP_LIMIT_Q},
     disabled:{betaQ:0n,gammaQ:0n,kTQ:0n,kHQ:0n,themeHQ:0n,technicalSignals:false,majorEvents:false,policyChains:false,shapeLabels:false},
     styles:{value:{...BASELINE_STYLE.value},trend:{...BASELINE_STYLE.trend},theme:{...BASELINE_STYLE.theme},noise:{...BASELINE_STYLE.noise},crossMarket:{...BASELINE_STYLE.crossMarket},
       inventory:{targetKind:p.targetKind,beliefSigmaQ:p.beliefSigmaQ,hourCapacityQ:p.hourCapacityQ,dailyPersistenceQ:p.dailyPersistenceQ,dailySigmaQ:p.dailySigmaQ,zetaLimitQ:p.zetaLimitQ}},
@@ -147,9 +150,9 @@ export function generateWorld(config:WorldConfig):TradingState {
         previousWeightQ:weights[i]!,targetShares:style==='inventory'?totalShares(a,s.id):Number(nav*weights[i]!/(SCALE*BigInt(stocks.find(x=>x.id===s.id)!.initialPrice))),
         biasQ:-120_000_000n+mulQ(uniformQ(seed,'account-bias',`${a.id}:${s.id}`,0,0),240_000_001n),beliefNoiseQ:0n,inventoryZetaQ:0n,scoreQ:0n,referenceQ:BigInt(stocks.find(x=>x.id===s.id)!.initialPrice)*SCALE,hourCapacity:0,hourUsed:0}))};
   });
-  state.world={generationVersion:INITIALIZATION_VERSION,config:{...config},preset:'baseline-v1',regime:randomU32(seed,'regime-initial','world',0,0)%4,
+  state.world={generationVersion:INITIALIZATION_VERSION,npcQuoteVersion:NPC_QUOTE_VERSION,config:{...config},preset:'baseline-v1',regime:randomU32(seed,'regime-initial','world',0,0)%4,
     regimeExpiresDay:20+randomU32(seed,'regime-duration','world',0,0)%41,macro:{demandQ:0n,financingQ:0n,riskAppetiteQ:0n},
     sectors:(['A','B'] as MarketId[]).flatMap(market=>SECTORS.map(sector=>({market,sector,outlookQ:0n}))),stocks:economy,npcs,executions:[],majorStockIds:[],lastSettledTick:-1};
-  state.configHash=sha256(encodeExact({generationVersion:INITIALIZATION_VERSION,preset:'baseline-v1',config,initialStocks:stocks,initialAccounts:accounts}));
+  state.configHash=sha256(encodeExact({generationVersion:INITIALIZATION_VERSION,npcQuoteVersion:NPC_QUOTE_VERSION,preset:'baseline-v1',config,initialStocks:stocks,initialAccounts:accounts}));
   return state;
 }

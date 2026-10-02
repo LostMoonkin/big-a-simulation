@@ -1,0 +1,334 @@
+{
+  "format": "p2-quote-repair-v1",
+  "status": "pass",
+  "scope": "Production fixed quote/compatibility regression; P2 stage acceptance and economic gate remain pending",
+  "checks": [
+    {
+      "id": "NPC-QUOTE-01-PRODUCTION",
+      "status": "pass",
+      "metrics": [
+        {
+          "id": "NPC-QUOTE-A001",
+          "legacyQuantity": 0,
+          "candidateQuantity": 25063,
+          "candidatePrice": 5084,
+          "buyerTop": 5500,
+          "sellerTop": 5043,
+          "boundedLogShift": true,
+          "unchangedQuantities": true,
+          "lockedSellQuantity": 0,
+          "inputSnapshot": "5dedb0fa48b4acf80aa2d374ddf95ebac2dd79843f80f1d666ec7b8cc6d68192",
+          "scope": "Controlled fixed participant inputs; not new autonomous economic coverage"
+        },
+        {
+          "id": "NPC-QUOTE-A003",
+          "legacyQuantity": 0,
+          "candidateQuantity": 245,
+          "candidatePrice": 4505,
+          "buyerTop": 4837,
+          "sellerTop": 4479,
+          "boundedLogShift": true,
+          "unchangedQuantities": true,
+          "lockedSellQuantity": 0,
+          "inputSnapshot": "cc1a482b5fbd6a05cf7540b6a415188eb225fbbbb840cf652ac24efe73d334ef",
+          "scope": "Controlled fixed participant inputs; not new autonomous economic coverage"
+        }
+      ]
+    },
+    {
+      "id": "NPC-QUOTE-VERSION-NEW-WORLD",
+      "status": "pass",
+      "metrics": {
+        "newConfigHash": "5daf97f032821ee4e984961a0cac59efab9b238fdd7c8f97971944d822f04070",
+        "legacyConfigHash": "90b1f1a489e93573d730aa3b2bd844ebd9b67ea97cda5a1d254f5e2c2fad8654",
+        "onlyGenerationDifferences": [
+          "npcQuoteVersion",
+          "configHash"
+        ],
+        "unknownVersionRetainsWorld": true,
+        "presetQuoteVersion": "npc-quote-v2-target-gap"
+      }
+    },
+    {
+      "id": "NPC-QUOTE-LEGACY-CANONICAL-AND-FUTURE",
+      "status": "pass",
+      "metrics": [
+        {
+          "input": "artifacts/verification/p2/diagnostic-02/seeds/3572871866/baseline-end-snapshot.json",
+          "initializationVersion": "world-v1",
+          "inputChecksum": "a2e55f42ff1a5e4bc1b66ab2db11af037776be2ee31ea44491a7f82348d83195",
+          "canonicalBytesPreserved": true,
+          "continuedBatches": 16,
+          "frozenLegacyCommit": "9dfc69ffb1ee314d6d2a90b8fdad6d2a5f873548",
+          "continuedChecksum": "9cbc35995cd3bfbba557f1e3a6b740873f36bbeaa989545c0214c087aaeb680b"
+        },
+        {
+          "input": "artifacts/verification/p2/diagnostic-03/seeds/3572871866/baseline-end-snapshot.json",
+          "initializationVersion": "world-v2-style-cash",
+          "inputChecksum": "5dedb0fa48b4acf80aa2d374ddf95ebac2dd79843f80f1d666ec7b8cc6d68192",
+          "canonicalBytesPreserved": true,
+          "continuedBatches": 16,
+          "frozenLegacyCommit": "9dfc69ffb1ee314d6d2a90b8fdad6d2a5f873548",
+          "continuedChecksum": "7ddfdc3d6a218ac02085d89b864ac7a7ed4bd8adc4270bbf91fc045657b19708"
+        },
+        {
+          "input": "artifacts/verification/p2/diagnostic-03/seeds/1866980507/baseline-end-snapshot.json",
+          "initializationVersion": "world-v2-style-cash",
+          "inputChecksum": "cc1a482b5fbd6a05cf7540b6a415188eb225fbbbb840cf652ac24efe73d334ef",
+          "canonicalBytesPreserved": true,
+          "continuedBatches": 16,
+          "frozenLegacyCommit": "9dfc69ffb1ee314d6d2a90b8fdad6d2a5f873548",
+          "continuedChecksum": "1688fa807ece472450118a8126c7af529e632f021786e206ed4cc945c279cacf"
+        }
+      ]
+    },
+    {
+      "id": "NPC-QUOTE-SOURCE-UNCHANGED",
+      "status": "pass",
+      "metrics": {
+        "economicSourceHash": "e7b429c102d774bea3bf90fd60d69e66645f86ab8f85952e1731387055cfa58f"
+      }
+    }
+  ],
+  "manifest": {
+    "format": "p2-verification-v1",
+    "stage": "P2",
+    "independentAcceptance": "pending",
+    "recordedAt": "2026-10-01T23:58:03.043Z",
+    "headAtExecution": "8375e713fa714c657da316e294506618f1c1a6f4",
+    "economicSourceHash": "e7b429c102d774bea3bf90fd60d69e66645f86ab8f85952e1731387055cfa58f",
+    "economicFiles": [
+      {
+        "path": "docs/design/market-identities.md",
+        "sha256": "c9760607a4e0885453a5fee9d31a05f8c85073ed727ea9f47dcb3d96dc84496a"
+      },
+      {
+        "path": "docs/design/market-model-rules.md",
+        "sha256": "f92c43f7f81eb43b89dbac6186dc90b64c6ab0f0637e555232eda068ce2852d7"
+      },
+      {
+        "path": "packages/sim-core/src/auction.ts",
+        "sha256": "9401950627b9d5c1da34204ef4cb5569eed0556bf7609d022ba542f8e4938289"
+      },
+      {
+        "path": "packages/sim-core/src/contracts.ts",
+        "sha256": "9ee55cfec31b28fac606ae0b9f7544443ef83cabe839f5b13a25f7801dfe2906"
+      },
+      {
+        "path": "packages/sim-core/src/hash.ts",
+        "sha256": "f4d751d6ef9729901b71cd6191c92b893182774b1fbd3fcdadef84808b2406bd"
+      },
+      {
+        "path": "packages/sim-core/src/index.ts",
+        "sha256": "ee04120ed1761685fce05ebc2f8aeceb8d96c7c64692d26e38406de2e764b8e7"
+      },
+      {
+        "path": "packages/sim-core/src/numeric.ts",
+        "sha256": "8522bd46c06bbbe7aad9374a0df3d3671eb7998588aa13e71467fc70f756c05f"
+      },
+      {
+        "path": "packages/sim-core/src/state.ts",
+        "sha256": "1d86d1f4749fc6a22c3702861742de99b9851913001f64b300f704741d39c5a0"
+      },
+      {
+        "path": "packages/sim-core/src/trading-core.ts",
+        "sha256": "70c508287b41d4b72a1640f59d75cbf4be36234b6edb1e02a46cf71e646bf291"
+      },
+      {
+        "path": "packages/sim-core/src/trading-types.ts",
+        "sha256": "b1c27dc7111018d089206f5cccde36545feb7b58a4f31f6525f9416b5e08bc9e"
+      },
+      {
+        "path": "packages/sim-core/src/world-generation.ts",
+        "sha256": "e33211937439bda220a86516f15ed78c3ad5e9ce391cdf09c6da070f1f2324fc"
+      },
+      {
+        "path": "packages/sim-core/src/world-simulation.ts",
+        "sha256": "af3e42c5bff0171c4f217700b36811d74474bd8f5e46590cbeffd6c2e4805623"
+      },
+      {
+        "path": "packages/sim-core/src/world-types.ts",
+        "sha256": "091462c259dc20346fad026ce5bd4290698345ebcd3592838c37c58b0fc861b7"
+      },
+      {
+        "path": "packages/sim-core/src/world-validation.ts",
+        "sha256": "0b8b968cd69c0f7068fab28159419662ddcde3682873b652eba9338008ff3a3e"
+      },
+      {
+        "path": "tests/scenarios/p0/baseline-v1.json",
+        "sha256": "606059d6034f644c2f780ae70ccc60e0b7aff66607d345f1b1231fd1ad7e024d"
+      }
+    ],
+    "runnerSourceHash": "610db2c94404bc35f1754943a37e9096bd3794d8e4b5b039506aab0c2cdcd2e4",
+    "runnerFiles": [
+      {
+        "path": "package-lock.json",
+        "sha256": "59a2b33ca44a7f29361d948ec0e0f170a8473d5ee5141fb40df4b00c78691e72"
+      },
+      {
+        "path": "package.json",
+        "sha256": "8bcc3324e18127f7bad35d0a6a11eb8b6be8dec0239aecfa0a320dd3a92c5565"
+      },
+      {
+        "path": "tests/scenarios/p2/baseline-manifest.json",
+        "sha256": "d44929cdb1f35258df4bb1812e0a2b8a623a4e33c166b63530e7e1ab23f15d51"
+      },
+      {
+        "path": "tests/scenarios/p2/behavior.json",
+        "sha256": "6b28e5ccb752809b1cf4d23e0ec3da0e2064460390e6e0516d057c90235e46b1"
+      },
+      {
+        "path": "tests/scenarios/p2/benchmark-profile.json",
+        "sha256": "005881eda81a0ded2374b5e7b0d532f3b56a28d431ac7f921dba0d254a10b68a"
+      },
+      {
+        "path": "tests/scenarios/p2/diagnostic-manifest.json",
+        "sha256": "d4c9ce3c2a23aec677ffac434e43c9ec7c50bf51fded581e6237bb0ef4ae10ca"
+      },
+      {
+        "path": "tests/scenarios/p2/major-report-fixture.json",
+        "sha256": "a2aeea5777551ed41f3618a77978fae1b2ae7424d6bd851ed9fc7b329ac1d097"
+      },
+      {
+        "path": "tools/sim-runner/README.md",
+        "sha256": "e337619c98251edc1de6429306bf7a08955444267674cc76e73a522a5c007490"
+      },
+      {
+        "path": "tools/sim-runner/auction-check.mjs",
+        "sha256": "90398ade4fdb5109e70bf7a9f5c005da26cbef0d8159484fd910e99f9bf006a6"
+      },
+      {
+        "path": "tools/sim-runner/browser-probe.mjs",
+        "sha256": "62a4939210a52a57e4ddb0222a3cea4f3ba2f14caa9abd671df0e12ae7a5fd1e"
+      },
+      {
+        "path": "tools/sim-runner/checks.mjs",
+        "sha256": "48e74c920b71b4541253ac3a36bcadacba1b5d68f6fbc9127e7604dc420463f3"
+      },
+      {
+        "path": "tools/sim-runner/cli-check.mjs",
+        "sha256": "b370b80d5834e6a37f33bc0b0f8949454f71992f7806211eed2198611559192d"
+      },
+      {
+        "path": "tools/sim-runner/cli.mjs",
+        "sha256": "8c367a52db0aae7732ea1109968df212101bdd73bafa509118c5fcb645ea42e0"
+      },
+      {
+        "path": "tools/sim-runner/generate-fixtures.mjs",
+        "sha256": "c55dfd39a46a8b5c677665c5541ebfbf21ff6467ff01fdb0fb7d0c1c1b5a6e10"
+      },
+      {
+        "path": "tools/sim-runner/p2-batch.mjs",
+        "sha256": "587bcc62cfddcd49be3438cf61c7a3259590b450e4e03b78303df4ce817cbf54"
+      },
+      {
+        "path": "tools/sim-runner/p2-benchmark.mjs",
+        "sha256": "46b89a0963aaca9725ed5e2a552798e29f26260fc89ee19df5371f959284d396"
+      },
+      {
+        "path": "tools/sim-runner/p2-checks.mjs",
+        "sha256": "b2a88b2d846acf9d7aa51e2782240e52d0ad9974dea903a6a41412c058a4147c"
+      },
+      {
+        "path": "tools/sim-runner/p2-fixtures.mjs",
+        "sha256": "d965461ffd5cea370a871ed746c40a04cc81b9a4b3e63841a74fc125243fdc7f"
+      },
+      {
+        "path": "tools/sim-runner/p2-golden.mjs",
+        "sha256": "de2960c47f4a5aaebf612bcb028a133d18a1427f133766353952121026c52969"
+      },
+      {
+        "path": "tools/sim-runner/p2-major-fixture.mjs",
+        "sha256": "8e28ba5a0d5a4dfa0aa94ffd20fc74f86188db0084bd19a3a5a50d23a4fb3a7e"
+      },
+      {
+        "path": "tools/sim-runner/p2-metrics.mjs",
+        "sha256": "2c2844fffafbe97d7a8c75398f858e3407ed688b971f4d4575dd677aabe26a2a"
+      },
+      {
+        "path": "tools/sim-runner/p2-runtime.mjs",
+        "sha256": "fb4db4641af035f0348ff7d48c068b4c948a9fca6e6801e39892a8443052af1b"
+      },
+      {
+        "path": "tools/sim-runner/p2-seed.mjs",
+        "sha256": "069d41434b64a4f06b99f11ebe45159d01561e5bd94a9f16511807a36891aa7a"
+      },
+      {
+        "path": "tools/sim-runner/p2-verify.mjs",
+        "sha256": "f9c97087b1b0b7d134a5dfdeaa8cdca78ec056139e50f2e0948e2da4e94e79e6"
+      },
+      {
+        "path": "tools/sim-runner/p2-world-run.mjs",
+        "sha256": "60b1dad874491c35bce271d14556d502ecac7708c66e7c9c265dd1962c33ec9a"
+      },
+      {
+        "path": "tools/sim-runner/record-browser.mjs",
+        "sha256": "7f39a20084b617382bdcda09b7f78e8fe076828c4a0c53cabb43375a9d83afcb"
+      },
+      {
+        "path": "tools/sim-runner/record-golden.mjs",
+        "sha256": "950f3095d23069e32f53e5aef6e835158427d95906e12dc3fcbb8f491761f615"
+      },
+      {
+        "path": "tools/sim-runner/reference-auction.mjs",
+        "sha256": "8f91c13e868291c5cf3c0808913fa431a842fc321345f458bf06535ff73aed41"
+      },
+      {
+        "path": "tools/sim-runner/replay.ts",
+        "sha256": "63bcdc45b582719924cc23d185b354d5d14fd872893d2155bcf1e8cd26a980a8"
+      },
+      {
+        "path": "tools/sim-runner/runtime.mjs",
+        "sha256": "15f1091022d673f84bf09a28ea91203795c87b694e14c0d037f05bcc9d5adec1"
+      },
+      {
+        "path": "tools/sim-runner/verify.mjs",
+        "sha256": "f306f0949565ad0881cf0a57e4186d5b8da7f9eb021e664cd5ba697c5a8b93be"
+      }
+    ],
+    "sourceHash": "56dabcc31345a93e99a89c461dee1dd414273ad87e132a01a31ec9bc56e7ecd9",
+    "rulesVersion": "0.3.1",
+    "contentVersion": "0.3.1",
+    "mathVersion": "fixed-q9-v1",
+    "rngVersion": "rng-v1",
+    "schemaVersion": 1,
+    "currentInitializationVersion": "world-v2-style-cash",
+    "currentNpcQuoteVersion": "npc-quote-v2-target-gap",
+    "baselinePresetHash": "606059d6034f644c2f780ae70ccc60e0b7aff66607d345f1b1231fd1ad7e024d",
+    "seedListHash": "fd21606f097a53b388609f3cd3d0791ecbef2c75d5917c0e65072267cbd6e136",
+    "environment": {
+      "node": "v26.7.0",
+      "platform": "win32",
+      "architecture": "x64",
+      "os": "Windows 11 Pro",
+      "cpu": "AMD Ryzen 7 9700X 8-Core Processor",
+      "logicalProcessors": 16,
+      "memoryBytes": 33409036288
+    },
+    "command": "node D:\\Workspace\\big-a-simulation\\packages\\sim-core\\check-npc-quote.mjs --out artifacts/verification/p2/quote-candidate-04",
+    "inputs": {
+      "fixture": "tests/scenarios/p0/npc-quote-candidate.json",
+      "fixtureHash": "f49270892355a8e903c22f271af99baec0e9036119dc4e4e83e0962204540ba1",
+      "legacyCommit": "9dfc69ffb1ee314d6d2a90b8fdad6d2a5f873548"
+    }
+  },
+  "checkerSourceHash": "0390cf246b2bcfb7bfe2edd5bb0d83c2805db09bececeff9fa76838e9b53d37a",
+  "contractCheck": {
+    "commit": "4158cbd",
+    "command": "npm.cmd run verify:p0",
+    "status": "pass",
+    "groups": 20,
+    "evidence": "docs/verification/fixtures/p0-node-results-world-v2-style-cash-npc-quote-v2-target-gap.json",
+    "scope": "Contract/numeric arithmetic only"
+  },
+  "typecheck": {
+    "command": "npm.cmd run typecheck --workspace @big-a/sim-core",
+    "exitCode": 0,
+    "status": "pass"
+  },
+  "stageAcceptance": "pending",
+  "newAutonomousEconomicRuns": {
+    "diagnostic04": "not_run",
+    "baseline100Plus10": "not_run"
+  }
+}

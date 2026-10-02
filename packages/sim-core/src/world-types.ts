@@ -3,6 +3,7 @@ import type { AuditSummary, BatchTrace, OrderState, ProtectionState, PublicTradi
 
 export type SectorId = 'energy' | 'industry' | 'consumer' | 'infrastructure' | 'digital' | 'health';
 export type InitializationVersion = 'world-v1' | 'world-v2-style-cash';
+export type NpcQuoteVersion = 'npc-quote-v1' | 'npc-quote-v2-target-gap';
 export type CompanyTier = 'large' | 'medium' | 'small';
 export type ConceptId = 'storage' | 'compute' | 'autonomy' | 'renewal' | 'automation' | 'recycling' | 'longevity' | 'crossborder';
 export type ConceptExposure = { id: ConceptId; name: string; exposureQ: bigint; business: string };
@@ -23,6 +24,7 @@ export type WorldPlayerView = Omit<PublicAccount, 'holdings'> & { holdings: (Pub
   locked: number; lots: { quantity: number; unlockAt: Clock }[] })[]; netAssetValue: bigint };
 export type WorldProgress = { seed: number; size: 'prototype'; mode: 'baseline'; preset: 'baseline-v1';
   initializationVersion: InitializationVersion;
+  npcQuoteVersion: NpcQuoteVersion;
   warmupCompletedBatches: number; warmupTotalBatches: 4000; preheated: boolean;
   playerInjected: boolean; playerDay: number | null; originalCapital: bigint; prototypeDayLimit: 60 };
 /** Public preparation has finished in publicDecision; NPC orders do not exist until advance clears it. */
@@ -64,7 +66,7 @@ export type WorldStockState = { id: string; name: string; market: MarketId; sect
   publicGrowthQ: bigint; forecastQ: bigint; publicValueQ: bigint; riskQ: bigint;
   currentDay: Candle; currentHour: Candle; days: Candle[]; hours: Candle[] };
 /** Only present on generated worlds. P1 explicit scenarios keep their original canonical payload. */
-export type WorldState = { generationVersion: InitializationVersion; config: WorldConfig; preset: 'baseline-v1';
+export type WorldState = { generationVersion: InitializationVersion; npcQuoteVersion?: NpcQuoteVersion; config: WorldConfig; preset: 'baseline-v1';
   regime: number; regimeExpiresDay: number; macro: { demandQ: bigint; financingQ: bigint; riskAppetiteQ: bigint };
   sectors: { market: MarketId; sector: SectorId; outlookQ: bigint }[];
   stocks: WorldStockState[]; npcs: NpcState[]; executions: PlayerExecution[];
