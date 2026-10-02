@@ -1,0 +1,8 @@
+{
+  "seed": 1866980507,
+  "stage": "warmup",
+  "observedBatches": 1024,
+  "worldDay": 63,
+  "elapsedMs": 39209.3069,
+  "millisecondsPerBatch": 38.290344042968755
+}

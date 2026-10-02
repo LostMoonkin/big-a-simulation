@@ -1,0 +1,128 @@
+{
+  "kind": "interrupted-diagnostic-evidence-inventory",
+  "recordedDate": "2026-10-02",
+  "timezone": "Asia/Shanghai",
+  "sourceDirectory": "artifacts/verification/p2/diagnostic-04",
+  "codeCommit": "f5a1dfc1863fc7b8eb200e6522deb5669060e1ef",
+  "status": "interrupted",
+  "completedSeeds": 1,
+  "expectedSeeds": 2,
+  "formalAcceptanceRound2": "not_run",
+  "note": "Unmodified evidence copies; omitted snapshots remain local. running progress is stale, not a live process. No final aggregate results exist.",
+  "files": [
+    {
+      "path": "batch-manifest.json",
+      "bytes": 1088,
+      "sha256": "d4c9ce3c2a23aec677ffac434e43c9ec7c50bf51fded581e6237bb0ef4ae10ca",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "manifest.json",
+      "bytes": 8536,
+      "sha256": "07111721f9f59c2ee5a4a2e6836e0abf7086de59de00a70b8363d44e856e87be",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "progress.json",
+      "bytes": 119,
+      "sha256": "49fa8eae948a9f4c10e630a857945adc647b81d5d4a8262e8f0ea404153bed43",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "seeds/1866980507/daily.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/1866980507/initial-snapshot.json",
+      "bytes": 347964,
+      "sha256": "86ebe1fa0488488c7a55189c7266034346e146dbca2ac256d40d9b11e6638bad",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/1866980507/initial-wallets.json",
+      "bytes": 290260,
+      "sha256": "17dd07386595752b7d5b2f4ed7114cb69b9d6875fba790361bf5c8d691ac931e",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/1866980507/progress.json",
+      "bytes": 164,
+      "sha256": "5b5310a54f39aa37cc6ca25f252a1dfcf55d7643864cee04b477a1d52d0540be",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "seeds/3572871866/baseline-end-snapshot.json",
+      "bytes": 20491995,
+      "sha256": "b1e0ee607e6c180b8f6534cb0f8e5da859d70b80b36c16888983cb526c67163d",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/3572871866/baseline-end-wallets.json",
+      "bytes": 295764,
+      "sha256": "88632966dc1cc9c7f014d58ac4caa5d45b4eb7fce5ec7e6633eb1ee443330b80",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/3572871866/daily.jsonl",
+      "bytes": 4762,
+      "sha256": "7612488eac08904ba4e0e0ceee6a864ff98476ea72ebb6947149f091a6760da5",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "seeds/3572871866/initial-snapshot.json",
+      "bytes": 348015,
+      "sha256": "089d2316035001f9f971647190b40a0cf17f3f9eb36653c24be7660a9a3cc370",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/3572871866/initial-wallets.json",
+      "bytes": 290340,
+      "sha256": "903c67350877be7ad3bbbe1893393c2fc632925ef48e3f38bd65e7d318fec6a3",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/3572871866/player-entry-snapshot.json",
+      "bytes": 20281717,
+      "sha256": "01c40523776ffc21089a62020e3f5aaa36484cfb63fa4978f8dda490e0d592e2",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/3572871866/player-entry-wallets.json",
+      "bytes": 294979,
+      "sha256": "24ffeab6a3b30131c73776048035d877ae3366d0b15febc8304ecb28db0a591c",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/3572871866/progress.json",
+      "bytes": 165,
+      "sha256": "c3b7971c4cdca3cf7838f84924fa7af85478ff7d0ddb8cf60a598f6d91120a4c",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "seeds/3572871866/results.json",
+      "bytes": 343571,
+      "sha256": "40ca8ba13bc28e0d86786577da4f0126842cd8d5c272d7cba9854e07e2948ad6",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "seeds/3572871866/summary.md",
+      "bytes": 228,
+      "sha256": "d3e063e7c6ae8d6c52e703c6cfddf81e46e6118084fe17de957cec937f9b1b99",
+      "includedInGitEvidence": true
+    },
+    {
+      "path": "seeds/3572871866/warmup-snapshot.json",
+      "bytes": 20292695,
+      "sha256": "d531ab23e60116d4a3b179e3ee61f474711164bb54e809f4e3a56a5ff13151ca",
+      "includedInGitEvidence": false
+    },
+    {
+      "path": "seeds/3572871866/warmup-wallets.json",
+      "bytes": 290881,
+      "sha256": "0bb7c888de905d1cabfaa6ffcf7c937cc8bbb84013ea8fb2f4576ab7dce5b771",
+      "includedInGitEvidence": false
+    }
+  ]
+}
